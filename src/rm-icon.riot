@@ -1,0 +1,23 @@
+<rm-icon>
+    <slot />
+
+    <style>
+        :host { font-size: 24px; }
+    </style>
+
+    <script type="ts">
+        import module = require("module");
+
+        let elevationCSS: string = (module as any).uri.split("/").slice(0, -1).join("/") + "/lib/material/icons/material-icons.css";
+        let linkEl: HTMLLinkElement = document.createElement("link");
+        linkEl.rel = "stylesheet";
+        linkEl.href = elevationCSS;
+        document.head.appendChild(linkEl);
+
+        export default {
+            onMounted() {
+                this.root.classList.add("material-icons");
+            }
+        }
+    </script>
+</rm-icon>

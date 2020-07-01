@@ -1,0 +1,441 @@
+<rm-textarea>
+    <div ref="outlined-margin-top"></div>
+    <div ref="container">
+        <div ref="border"></div>
+        <div ref="textarea-container">
+            <div ref="mirror">&amp;nbsp;</div>
+            <div ref="label">{ props.label }</div>
+            <textarea placeholder={ props.placeholder } name={ props.name }></textarea>
+        </div>
+        <div ref="basic-underline"></div>
+        <div ref="underline"></div>
+    </div>
+    <div style="height: 1.25em;">
+        <div style="font-size: .75em;">{ props.helperText }</div>
+    </div>
+
+    <style>
+        :host {
+            display: block;
+            font: message-box;
+            font-size: 16px;
+        }
+
+        [ref=container] {
+            display: block;
+            position: relative;
+            cursor: text;
+            font-size: inherit;
+            box-sizing: border-box;
+            padding: 1em 0 .5em 0;
+            
+            background: rgb(245, 245, 245);
+            background: rgb(var(--color-background, 245, 245, 245));
+        }
+        /* :host:not([variant="outlined"]) [ref=container] {
+            border: none !important;
+        } */
+        .rm-black-surface :host [ref=container] {
+            background: rgb(0, 0, 0);
+            background: rgb(var(--color-black-surface, 0, 0, 0));
+        }
+        .rm-dark-surface :host [ref=container] {
+            background: rgb(10, 10, 10);
+            background: rgb(var(--color-dark-surface, 10, 10, 10));
+        }
+        .rm-light-surface :host [ref=container] {
+            background: rgb(250, 250, 250);
+            background: rgb(var(--color-light-surface, 250, 250, 250));
+        }
+        .rm-white-surface :host [ref=container] {
+            background: rgb(255, 255, 255);
+            background: rgb(var(--color-white-surface, 255, 255, 255));
+        }
+
+        [ref=mirror] {
+            word-break: break-word;
+            visibility: hidden;
+        }
+
+        /* variant FILLED */
+        :host[variant="filled"] [ref=container] {
+            padding: 1.25em 12px 1em 12px;
+        }
+        :host[variant="filled"] [ref=container] {
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12));
+            border-radius: 4px 4px 0 0;
+        }
+        .rm-black-surface :host[variant="filled"] [ref=container] {
+            background: rgba(255, 255, 255, .12);
+            background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12));
+        }
+        .rm-dark-surface :host[variant="filled"] [ref=container] {
+            background: rgba(255, 255, 255, .12);
+            background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12));
+        }
+        .rm-light-surface :host[variant="filled"] [ref=container] {
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12));
+        }
+        .rm-white-surface :host[variant="filled"] [ref=container] {
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12));
+        }
+
+        /* variant OUTLINED*/
+        :host[variant="outlined"] [ref=container] {
+            padding: .5em 12px;
+            transition: border-color linear 150ms;
+            border-radius: 4px;
+        }
+        :host[variant="outlined"] [ref=container] [ref=border] {
+            border: rgba(0, 0, 0, .42) 1px solid;
+            border: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)) 1px solid;
+            border-radius: inherit;
+            transition: border-width 150ms linear;
+            position: absolute;
+            top: 0; right: 0;
+            bottom: 0; left: 0;
+        }
+        .rm-black-surface :host[variant="outlined"] [ref=container] [ref=border] {
+            border-color: rgba(255, 255, 255, .42);
+            border-color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42));
+        }
+        .rm-dark-surface :host[variant="outlined"] [ref=container] [ref=border] {
+            border-color: rgba(255, 255, 255, .42);
+            border-color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42));
+        }
+        .rm-light-surface :host[variant="outlined"] [ref=container] [ref=border] {
+            border-color: rgba(0, 0, 0, .42);
+            border-color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42));
+        }
+        .rm-white-surface :host[variant="outlined"] [ref=container] [ref=border] {
+            border-color: rgba(0, 0, 0, .42);
+            border-color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42));
+        }
+        /* border if focused */
+        :host[variant="outlined"] [ref=container].rm-focused [ref=border] {
+            border: rgb(139, 0, 139) 2px solid;
+            border: rgb(var(--color-primary, 139, 0, 139)) 2px solid;
+        }
+        .rm-black-surface :host[variant="outlined"] [ref=container].rm-focused [ref=border] {
+            border: rgb(238, 130, 238) 2px solid;
+            border: rgb(var(--color-primary-on-black, 238, 130, 238)) 2px solid;
+        }
+        .rm-dark-surface :host[variant="outlined"] [ref=container].rm-focused [ref=border] {
+            border: rgb(238, 130, 238) 2px solid;
+            border: rgb(var(--color-primary-on-dark, 238, 130, 238)) 2px solid;
+        }
+        .rm-light-surface :host[variant="outlined"] [ref=container].rm-focused [ref=border] {
+            border: rgb(139, 0, 139) 2px solid;
+            border: rgb(var(--color-primary-on-light, 139, 0, 139)) 2px solid;
+        }
+        .rm-white-surface :host[variant="outlined"] [ref=container].rm-focused [ref=border] {
+            border: rgb(139, 0, 139) 2px solid;
+            border: rgb(var(--color-primary-on-white, 139, 0, 139)) 2px solid;
+        }
+        /* container if focused */
+        :host[variant="outlined"] [ref=container].rm-focused {
+            border-color: rgb(139, 0, 139);
+            border-color: rgb(var(--color-primary, 139, 0, 139));
+        }
+        .rm-black-surface :host[variant="outlined"] [ref=container].rm-focused {
+            border-color: rgb(238, 130, 238);
+            border-color: rgb(var(--color-primary-on-black, 238, 130, 238));
+        }
+        .rm-dark-surface :host[variant="outlined"] [ref=container].rm-focused {
+            border-color: rgb(238, 130, 238);
+            border-color: rgb(var(--color-primary-on-dark, 238, 130, 238));
+        }
+        .rm-light-surface :host[variant="outlined"] [ref=container].rm-focused {
+            border-color: rgb(139, 0, 139);
+            border-color: rgb(var(--color-primary-on-light, 139, 0, 139));
+        }
+        .rm-white-surface :host[variant="outlined"] [ref=container].rm-focused {
+            border-color: rgb(139, 0, 139);
+            border-color: rgb(var(--color-primary-on-white, 139, 0, 139));
+        }
+        
+        /* textarea input */
+        textarea {
+            width: 100%;
+            border: none;
+            font-size: inherit;
+            font-family: inherit;
+            position: relative;
+            background: transparent;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            resize: none;
+            outline: none;
+            /* https://stackoverflow.com/a/21003770/9228492 */
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            color: rgb(0, 0, 0);
+            color: rgb(var(--color-on-background, 0, 0, 0));
+        }
+        .rm-black-surface :host textarea {
+            color: rgb(255, 255, 255);
+            color: rgb(var(--color-on-black, 255, 255, 255));
+        }
+        .rm-dark-surface :host textarea {
+            color: rgb(255, 255, 255);
+            color: rgb(var(--color-on-dark, 255, 255, 255));
+        }
+        .rm-light-surface :host textarea {
+            color: rgb(0, 0, 0);
+            color: rgb(var(--color-on-light, 0, 0, 0));
+        }
+        .rm-white-surface :host textarea {
+            color: rgb(0, 0, 0);
+            color: rgb(var(--color-on-white, 0, 0, 0));
+        }
+        textarea::placeholder {
+            color: transparent;
+        }
+
+        /* label */
+        [ref=label] {
+            position: absolute;
+            top: 0; left: -4px;
+            font-size: inherit;
+            transition: transform linear 150ms, color linear 150ms;
+            transform-origin: 6px bottom;
+            padding: 0 8px 0 4px;
+            color: rgba(0, 0, 0, .6);
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .rm-black-surface :host [ref=label] {
+            color: rgba(255, 255, 255, .6);
+            color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-primary, .6));
+        }
+        .rm-dark-surface :host [ref=label] {
+            color: rgba(255, 255, 255, .6);
+            color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-primary, .6));
+        }
+        .rm-light-surface :host [ref=label] {
+            color: rgba(0, 0, 0, .6);
+            color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-primary, .6));
+        }
+        .rm-white-surface :host [ref=label] {
+            color: rgba(0, 0, 0, .6);
+            color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-primary, .6));
+        }
+        /* if activated or focused */
+        [ref=container].rm-activated [ref=label],
+        [ref=container].rm-focused [ref=label]/* ,
+        [ref=container].rm-label-should-float [ref=label] */ {
+            transform: translateY(-100%) scale(.761905);
+        }
+        /* if focused*/
+        [ref=container].rm-focused [ref=label] {
+            color: rgb(139, 0, 139);
+            color: rgb(var(--color-primary, 139, 0, 139));
+        }
+        .rm-black-surface :host [ref=container].rm-focused [ref=label] {
+            color: rgb(238, 130, 238);
+            color: rgb(var(--color-primary-on-black, 238, 130, 238));
+        }
+        .rm-dark-surface :host [ref=container].rm-focused [ref=label] {
+            color: rgb(238, 130, 238);
+            color: rgb(var(--color-primary-on-dark, 238, 130, 238));
+        }
+        .rm-light-surface :host [ref=container].rm-focused [ref=label] {
+            color: rgb(139, 0, 139);
+            color: rgb(var(--color-primary-on-light, 139, 0, 139));
+        }
+        .rm-white-surface :host [ref=container].rm-focused [ref=label] {
+            color: rgb(139, 0, 139);
+            color: rgb(var(--color-primary-on-white, 139, 0, 139));
+        }
+
+        /* basic underline */
+        [ref=basic-underline] {
+            position: absolute;
+            background: rgba(0, 0, 0, .42);
+            background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42));
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+        }
+        .rm-black-surface :host [ref=basic-underline] {
+            background: rgba(255, 255, 255, .42);
+            background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42));
+        }
+        .rm-dark-surface :host [ref=basic-underline] {
+            background: rgba(255, 255, 255, .42);
+            background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42));
+        }
+        .rm-light-surface :host [ref=basic-underline] {
+            background: rgba(0, 0, 0, .42);
+            background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42));
+        }
+        .rm-white-surface :host [ref=basic-underline] {
+            background: rgba(0, 0, 0, .42);
+            background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42));
+        }
+
+        /* underline */
+        [ref=underline] {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform linear 150ms, opacity linear 150ms;
+            background: rgb(139, 0, 139);
+            background: rgb(var(--color-primary, 139, 0, 139));
+        }
+        .rm-black-surface :host [ref=underline] {
+            background: rgb(238, 130, 238);
+            background: rgb(var(--color-primary-on-black, 238, 130, 238));
+        }
+        .rm-dark-surface :host [ref=underline] {
+            background: rgb(238, 130, 238);
+            background: rgb(var(--color-primary-on-dark, 238, 130, 238));
+        }
+        .rm-light-surface :host [ref=underline] {
+            background: rgb(139, 0, 139);
+            background: rgb(var(--color-primary-on-light, 139, 0, 139));
+        }
+        .rm-white-surface :host [ref=underline] {
+            background: rgb(139, 0, 139);
+            background: rgb(var(--color-primary-on-white, 139, 0, 139));
+        }
+        /* if focused */
+        [ref=container].rm-focused [ref=underline] {
+            transform: scale(1) !important;
+            opacity: 1 !important;
+        }
+        [ref=container].rm-focused [ref=underline] {
+            transform: scaleX(1);
+        }
+
+        :host[variant="outlined"] [ref="textarea-container"],
+        :host[variant="outlined"] [ref=label] {
+            background: inherit;
+        }
+        :host[variant="outlined"] [ref=container] [ref=underline],
+        :host[variant="outlined"] [ref=container] [ref=basic-underline] {
+            display: none;
+        }
+        [ref=container].rm-focused textarea::placeholder/* ,
+        [ref=container].rm-label-should-float textarea::placeholder */ {
+            color: initial;
+        }
+        [ref="textarea-container"] {
+            position: relative;
+        }
+        [ref="outlined-margin-top"] {
+            height: 0;
+        }
+        :host[variant="outlined"] [ref="outlined-margin-top"] {
+            height: 8px;
+        }
+    </style>
+
+    <script type="ts">
+        export default {
+            onMounted: function () {
+                let textarea = this.root.querySelector("textarea");
+                let container = this.root.querySelector("[ref=container]");
+                let mirror = this.root.querySelector("[ref=mirror"]);
+
+                textarea.addEventListener("input", () => {
+                    // set mirror text same as the textarea
+                    mirror.innerText = mirror.textContent = textarea.value.replace(/^\h*$/, "\u00A0").replace(/\n$/, "\n\u00A0");
+                    if (textarea.value) {
+                        container.classList.add("rm-activated");
+                    } else {
+                        container.classList.remove("rm-activated");
+                    }
+                });
+
+                let wasTextareaFocused = false;
+                textarea.addEventListener("focus", () => {
+                    wasTextareaFocused = true;
+                    pointerdownOnTextarea = false;
+                    container.classList.add("rm-focused");
+                });
+
+                let pointerdownOnTextarea = false;
+                textarea.addEventListener("blur", () => {
+                    container.classList.remove("rm-focused");
+                    if (pointerdownOnTextarea) {
+                        setTimeout(() => {
+                            if (!this.root.isConnected) {
+                                return;
+                            }
+                            textarea.focus();
+                        }, 0);
+                    } else {
+                        wasTextareaFocused = false;
+                    }
+                });
+                container.addEventListener("pointerdown", (event) => {
+                    pointerdownOnTextarea = event.target !== textarea;
+                    if (wasTextareaFocused) {
+                        textarea.focus();
+                    }
+                });
+                container.addEventListener("click", () => {
+                    if (wasTextareaFocused) {
+                        return;
+                    }
+                    textarea.focus();
+                });
+
+                Object.defineProperty(this.root, "value", {
+                    get() {
+                        return textarea.value;
+                    }
+                    set(value) {
+                        // set mirror text same as the textarea
+                        mirror.innerText = mirror.textContent = (textarea.value = value = value != null ? value.toString() : "")
+                            .replace(/^\h*$/, "\u00A0").replace(/\n$/, "\n\u00A0")
+                        ;
+                        if (value) {
+                            container.classList.add("rm-activated");
+                        } else {
+                            container.classList.remove("rm-activated");
+                        }
+                    }
+                });
+
+                this.root.focus = () => {
+                    textarea.focus();
+                };
+                
+                if (this.props.value) {
+                    this.root.value = this.props.value;
+                }
+                this._lastPropsValue = this.root.value;
+            },
+            _lastPropsValue: "",
+            onBeforeUpdate() {
+                if (this.props.value !== this._lastPropsValue) {
+                    this._lastPropsValue = this.root.value = this.props.value;
+                }
+            },
+            onUpdated() {
+                if (this.isDisabled()) {
+                    this.root.querySelector("[ref=container]").classList.remove("rm-focused");
+                }
+            },
+            isDisabled() {
+                return typeof this.props.disabled === "string" ?
+                    this.props.disabled !== "false" :
+                    this.props.disabled == null ? false : !!this.props.disabled;
+            }
+        }
+</script>
+</rm-textarea>

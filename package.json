@@ -1,0 +1,21 @@
+{
+  "name": "riot-template",
+  "version": "1.1.0",
+  "description": "",
+  "dependencies": {
+    "@riotjs/compiler": "^4.8.5",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "requirejs": "^2.3.6",
+    "rimraf": "^3.0.2",
+    "riot": "^4.12.4",
+    "typescript": "^3.9.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "compile": "node ./compile.js",
+    "compile:watch": "node ./compile.js -w"
+  },
+  "author": "Giuliano Collacchioni",
+  "license": "MIT"
+}

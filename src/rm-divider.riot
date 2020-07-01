@@ -1,0 +1,36 @@
+<rm-divider>
+    <style>
+        :host {
+            display: block;
+            padding: 8px 0;
+        }
+        :host::after {
+            content: "";
+            top: 8px; height: 1px;
+            left: 0; right: 0;
+            display: block;
+            margin-bottom: -1px;
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12));
+        }
+        .rm-black-surface :host::after {
+            background: rgba(255, 255, 255, .12);
+            background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12));
+        }
+        .rm-dark-surface :host::after {
+            background: rgba(255, 255, 255, .12);
+            background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12));
+        }
+        .rm-light-surface :host::after {
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12));
+        }
+        .rm-white-surface :host::after {
+            background: rgba(0, 0, 0, .12);
+            background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12));
+        }
+        :host[inset]:not([inset="false"])::after {
+            left: 72px;
+        }
+    </style>
+</rm-divider>

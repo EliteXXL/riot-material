@@ -1,0 +1,53 @@
+:root {
+    /* main */
+    --color-background: 245, 245, 245; /* #f5f5f5 */
+    --color-primary: 139, 0, 139; /* darkmagenta */
+    --color-accent: 0, 0, 255; /* blue */
+    --color-warn: 255, 0, 0; /* red */
+
+    --color-on-background: 0, 0, 0;
+    --color-on-primary: 255, 255, 255;
+    --color-on-accent: 255, 255, 255;
+    --color-on-warn: 255, 255, 255;
+
+    --color-opacity-primary: .6;
+    --color-opacity-secondary: .42;
+    --color-opacity-tertiary: .12;
+
+    /* surfaces */
+    --color-black-surface: 0, 0, 0;
+    --color-on-black: 255, 255, 255;
+    --color-primary-on-black: 238, 130, 238; /* violet */
+    --color-accent-on-black: 30, 144, 255; /* dodgerblue */
+    --color-warn-on-black: 255, 69, 0; /* orangered */
+    --color-on-primary-on-black: 255, 255, 255;
+    --color-on-accent-on-black: 255, 255, 255;
+    --color-on-warn-on-black: 255, 255, 255;
+    
+    --color-dark-surface : 10, 10, 10; /* #0a0a0a */
+    --color-on-dark: 255, 255, 255;
+    --color-primary-on-dark: 238, 130, 238; /* violet */
+    --color-accent-on-dark: 30, 144, 255; /* dodgerblue */
+    --color-warn-on-dark: 255, 69, 0; /* orangered */
+    --color-on-primary-on-dark: 255, 255, 255;
+    --color-on-accent-on-dark: 255, 255, 255;
+    --color-on-warn-on-dark: 255, 255, 255;
+    
+    --color-light-surface: 250, 250, 250; /* #fafafa */
+    --color-on-light: 0, 0, 0;
+    --color-primary-on-light: 139, 0, 139; /* darkmagenta */
+    --color-accent-on-light: 0, 0, 255; /* blue */
+    --color-warn-on-light: 255, 0, 0; /* red */
+    --color-on-primary-on-light: 255, 255, 255;
+    --color-on-accent-on-light: 255, 255, 255;
+    --color-on-warn-on-light: 255, 255, 255;
+    
+    --color-white-surface: 255, 255, 255;
+    --color-on-white: 0, 0, 0;
+    --color-primary-on-white: 139, 0, 139;
+    --color-accent-on-white: 0, 0, 255;
+    --color-warn-on-white: 255, 0, 0;
+    --color-on-primary-on-white: 255, 255, 255;
+    --color-on-accent-on-white: 255, 255, 255;
+    --color-on-warn-on-white: 255, 255, 255;
+}
