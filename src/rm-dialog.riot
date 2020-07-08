@@ -56,7 +56,7 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         export default {
             state: {
                 clickedContainer: false
@@ -113,22 +113,22 @@
                         }
                     }
                 });
-            }
+            },
             onUnmounted() {
                 window.removeEventListener("resize", this._onresize);
-            }
+            },
             _oncontainerclick() {
                 this.state.clickedContainer = true;
                 setTimeout(() => {
                     this.state.clickedContainer = false;
                 }, 0);
-            }
+            },
             shouldUpdate() {
                 return this.root.style.display !== "none";
-            }
+            },
             onUpdated() {
                 this.root.querySelector("[ref=content]").style.maxHeight = this.getContentMaxHeight() + "px";
-            }
+            },
             _result: 0,
             dismiss(result) {
                 if (this.root.style.display === "none") {
@@ -137,7 +137,7 @@
                 this._result = result || 0;
                 this.root.style.display = "none";
                 this.root.dispatchEvent(new CustomEvent("dismiss", { bubbles: true, detail: { result: this.root.result } }));
-            }
+            },
             open(...detail) {
                 if (this.root.style.display !== "none") {
                     return;
@@ -145,14 +145,14 @@
                 this.root.style.display = "";
                 this.update();
                 this.root.dispatchEvent(new CustomEvent("open", { bubbles: true, detail }));
-            }
+            },
             getContentMaxHeight() {
                 return (
                     this.root.querySelector("[ref=aligner]").getBoundingClientRect().height -
                     this.root.querySelector("[ref=title]").getBoundingClientRect().height -
                     this.root.querySelector("[ref=actions]").getBoundingClientRect().height
                 );
-            }
+            },
             getSurface() {
                 if (this.props.surface == null || ![
                     "black",

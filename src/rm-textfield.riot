@@ -347,7 +347,7 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         export default {
             onMounted: function () {
                 let input = this.root.querySelector("input");
@@ -400,7 +400,7 @@
                 Object.defineProperty(this.root, "value", {
                     get() {
                         return input.value;
-                    }
+                    },
                     set(value) {
                         if (input.value = (value || "").toString()) {
                             container.classList.add("rm-activated");
@@ -424,12 +424,12 @@
                 if (this.props.value !== this._lastPropsValue) {
                     this._lastPropsValue = this.root.value = this.props.value;
                 }
-            }
+            },
             onUpdated() {
                 if (this.isDisabled()) {
                     this.root.querySelector("[ref=container]").classList.remove("rm-focused");
                 }
-            }
+            },
             getType() {
                 // TODO: color
                 // TODO: search => add clear icon

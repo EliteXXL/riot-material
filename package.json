@@ -3,19 +3,30 @@
   "version": "1.1.0",
   "description": "",
   "dependencies": {
+    "@material/elevation": "^7.0.0",
+    "material-design-icons-iconfont": "^5.0.1",
+    "postcss-url": "^8.0.0",
+    "riot": "^4.12.4"
+  },
+  "devDependencies": {
+    "@atomico/rollup-plugin-import-css": "^1.0.3",
     "@riotjs/compiler": "^4.8.5",
-    "fs": "^0.0.1-security",
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@rollup/plugin-typescript": "^5.0.1",
+    "@rollup/plugin-url": "^5.0.1",
+    "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "requirejs": "^2.3.6",
-    "rimraf": "^3.0.2",
-    "riot": "^4.12.4",
+    "rollup": "^2.19.0",
+    "rollup-plugin-copy-assets-to": "^1.0.0",
+    "rollup-plugin-multi-input": "^1.1.1",
+    "rollup-plugin-postcss": "^3.1.2",
+    "rollup-plugin-riot": "^4.0.2",
+    "tslib": "^2.0.0",
     "typescript": "^3.9.3"
   },
-  "devDependencies": {},
-  "scripts": {
-    "compile": "node ./compile.js",
-    "compile:watch": "node ./compile.js -w"
-  },
+  "scripts": {},
   "author": "Giuliano Collacchioni",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "dist/cjs/index.js"
 }

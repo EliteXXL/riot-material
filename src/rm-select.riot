@@ -25,7 +25,7 @@
             <div
                 value="" label="" skip-filter onpointerenter={ _onoptionpointerenter } onclick={ _onoptionclick }
                 class="{ state.value === '' ? 'rm-selected ' : '' }" ref="option"
-            >&amp;nbsp;</div>
+            >&nbsp;</div>
             <div each={ option in getOptions() } ref="option"
                 value={ option.value } label={ option.label } skip-filter={
                     option.getAttribute("skip-filter") != null && option.getAttribute("skip-filter") !== "false"
@@ -468,7 +468,7 @@
         }
     </style>
     
-    <script type="ts">
+    <script>
         export default {
             state: {
                 filter: null,
@@ -504,7 +504,7 @@
                     return "";
                 }
                 return target.getAttribute("value") || "";
-            }
+            },
             _onoptionpointerenter(event) {
                 this._highlight(this.getValueFromTarget(event.target));
             },
@@ -906,7 +906,7 @@
                     return option.label;
                 }
                 return "";
-            }
+            },
             isFocused() {
                 let input = this.root.querySelector("[ref=input]");
                 if (input) {

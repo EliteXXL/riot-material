@@ -29,9 +29,7 @@ style.innerHTML = `
 
 document.head.appendChild(style);
 
-export = {
-    black: "rm-black-surface",
-    dark : "rm-dark-surface" ,
-    light: "rm-light-surface",
-    white: "rm-white-surface"
-};
+export const black: string = "rm-black-surface";
+export const dark: string = "rm-dark-surface";
+export const light: string = "rm-light-surface";
+export const white: string = "rm-white-surface";

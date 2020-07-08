@@ -11,6 +11,4 @@ style.innerHTML = `
 
 document.head.appendChild(style);
 
-export = {
-    background: "rm-background"
-};
+export const background: string = "rm-background";

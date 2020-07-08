@@ -78,8 +78,8 @@
         }
     </style>
 
-    <script type="ts">
-        import utils = require("./app-bar-utils");
+    <script>
+        import * as utils from "./app-bar-utils";
         import { elevation } from "./elevation";
 
         export default {
@@ -136,8 +136,8 @@
                     margin = this._scrollTarget.getBoundingClientRect().width - this._scrollTarget.scrollWidth;
                 }
                 this.root.querySelector("[ref=bar]").style.marginRight = margin + "px";
-            }
-            setScrollTarget(element: HTMLElement | window) {
+            },
+            setScrollTarget(element) {
                 if (element === this._scrollTarget) {
                     return;
                 }
@@ -151,7 +151,7 @@
                 }
                 this._recalculateScrollbar();
                 this._onscoll();
-            }
+            },
             getSurface() {
                 if (this.props.lightSurface != null && this.props.lightSurface !== "false") {
                     return "rm-light-surface";
@@ -160,7 +160,7 @@
                     return "rm-dark-surface";
                 }
                 return "";
-            }
+            },
             hasPassedElevationThreshold() {
                 let elevationThreshold = 0;
                 if (this.props.elevationThreshold != null) {
@@ -172,7 +172,7 @@
                 return (
                     this._scrollTarget instanceof Window ? this._scrollTarget.scrollY : this._scrollTarget.scrollTop
                 ) > elevationThreshold;
-            }
+            },
             hasPassedBackgroundThreshold() {
                 if (this.props.unelevatedBackground == null) {
                     return true;

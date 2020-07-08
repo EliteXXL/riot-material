@@ -350,9 +350,9 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         import { ripple } from "./ripple";
-        import riot = require("riot");
+        import * as riot from "riot";
 
         export default {
             onMounted() {
@@ -395,7 +395,7 @@
                     rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" : floatValue;
                 });
                 let rippleObj = ripple(button, rippleOptions);
-                let shouldBeClick: boolean = false;
+                let shouldBeClick = false;
                 button.addEventListener("keydown", event => {
                     if (event.keyCode === 13) {
                         shouldBeClick = true;
@@ -430,7 +430,7 @@
                         }
                     });
                 }
-            }
+            },
             onUpdated() {
                 let button = this.root.querySelector("button");
                 if (this.isRaised()) {
@@ -442,26 +442,26 @@
                     // button.classList.remove("mdc-elevation--z"+ (this.state.pressed ? 8: 2));
                     // button.classList.remove("mdc-elevation--z"+ (this.state.pressed ? 2: 8));
                 }
-            }
+            },
             isText() {
                 return this.props.variant || this.props.variant === "text";
-            }
+            },
             isRaised() {
                 return this.props.variant != null && this.props.variant === "raised";
-            }
+            },
             isOutlined() {
                 return this.props.variant != null && this.props.variant === "outlined";
-            }
+            },
             isUnelevated() {
                 return this.props.variant != null && this.props.variant === "unelevated";
-            }
+            },
             isIcon() {
                 return this.props.variant != null && this.props.variant === "icon";
-            }
+            },
             isDisabled() {
                 let disabled = this.props.disabled;
                 return disabled != null && (typeof disabled === "string" ? disabled !== "false" : !!disabled);
-            }
+            },
             setDisabled(disabled) {
                 if (disabled) {
                     this.root.setAttribute("disabled", "");

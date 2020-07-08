@@ -152,7 +152,7 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         import { ripple } from "./ripple";
 
         export default {
@@ -209,7 +209,7 @@
                 input.addEventListener("change", refresh);
                 input.addEventListener("unchecked", refreshUI);
                 refresh();
-            }
+            },
             getName() {
                 let name = this.props.name;
                 return typeof name === "string" && !name.match(/^\s*$/) ? name : null;

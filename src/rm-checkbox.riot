@@ -224,7 +224,7 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         import { ripple } from "./ripple";
 
         export default {
@@ -253,7 +253,7 @@
                 Object.defineProperty(this.root, "checked", {
                     get() {
                         return input.checked;
-                    }
+                    },
                     set(checked) {
                         input.checked = checked;
                         refresh();

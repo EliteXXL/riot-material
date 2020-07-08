@@ -1,11 +1,12 @@
-// @ts-ignore
-import module = require("module");
+/// <use asset="@material/elevation/dist/mdc.elevation.min.css" />
 
-let elevationCSS: string = (module as any).uri.split("/").slice(0, -1).join("/") + "/lib/material/elevation/mdc.elevation.min.css";
-let linkEl: HTMLLinkElement = document.createElement("link");
-linkEl.rel = "stylesheet";
-linkEl.href = elevationCSS;
-document.head.appendChild(linkEl);
+import "@material/elevation/dist/mdc.elevation.css";
+
+// let elevationCSS: string = (import.meta as any).url.split("/").slice(0, -1).join("/") + "/assets/mdc.elevation.min.css";
+// let linkEl: HTMLLinkElement = document.createElement("link");
+// linkEl.rel = "stylesheet";
+// linkEl.href = elevationCSS;
+// document.head.appendChild(linkEl);
 
 export function elevation(element: HTMLElement, elevation: number | null): void {
     for (let i: number = 0; i <= 24; i++) {

@@ -3,7 +3,7 @@
     <div ref="container">
         <div ref="border"></div>
         <div ref="textarea-container">
-            <div ref="mirror">&amp;nbsp;</div>
+            <div ref="mirror">&nbsp;</div>
             <div ref="label">{ props.label }</div>
             <textarea placeholder={ props.placeholder } name={ props.name }></textarea>
         </div>
@@ -343,12 +343,12 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         export default {
             onMounted: function () {
                 let textarea = this.root.querySelector("textarea");
                 let container = this.root.querySelector("[ref=container]");
-                let mirror = this.root.querySelector("[ref=mirror"]);
+                let mirror = this.root.querySelector("[ref=mirror]");
 
                 textarea.addEventListener("input", () => {
                     // set mirror text same as the textarea
@@ -397,7 +397,7 @@
                 Object.defineProperty(this.root, "value", {
                     get() {
                         return textarea.value;
-                    }
+                    },
                     set(value) {
                         // set mirror text same as the textarea
                         mirror.innerText = mirror.textContent = (textarea.value = value = value != null ? value.toString() : "")
@@ -437,5 +437,5 @@
                     this.props.disabled == null ? false : !!this.props.disabled;
             }
         }
-</script>
+    </script>
 </rm-textarea>

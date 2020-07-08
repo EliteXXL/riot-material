@@ -72,7 +72,7 @@
         }
     </style>
 
-    <script type="ts">
+    <script>
         import { ripple } from "./ripple";
 
         export default {
@@ -87,13 +87,13 @@
                     return this.props.tabs;
                 }
                 return typeof this.props === "string" ? this.props.split("\n") : null;
-            }
+            },
             onBeforeMount() {
                 this.onBeforeUpdate();
-            }
+            },
             onMounted() {
                 this.onUpdated();
-            }
+            },
             _lastValue: null,
             onBeforeUpdate() {
                 if (this._lastValue != null && this.props.value === this._lastValue) {
@@ -122,7 +122,7 @@
                     tabsEl.style.overflow = "";
                     tabsEl.style.marginBottom = `-${h}px`;
                 }
-            }
+            },
             getIndicatorLeft() {
                 if (!this.props.tabs) {
                     return 0;
@@ -132,13 +132,13 @@
                 return tabs.children[index].getBoundingClientRect().left - 
                     this.root.getBoundingClientRect().left +
                     this.root.firstElementChild.scrollLeft;
-            }
+            },
             getIndicatorWidth() {
                 if (!this.props.tabs) {
                     return 0;
                 }
                 return this.root.querySelector("[ref=tabs]").children[this.getTabs().indexOf(this.state.value)].getBoundingClientRect().width;
-            }
+            },
             selecttab(index) {
                 let tabs = this.getTabs();
                 if (tabs == null || index >= tabs.length) {

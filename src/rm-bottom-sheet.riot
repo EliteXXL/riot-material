@@ -30,21 +30,23 @@
         }
     </style>
 
-    <script type="ts">
-        enum STATE {
-            DISMISSED =   0b0000001,
-            OPENED =      0b0000010,
-            FULL_OPENED = 0b0000100,
-            DISMISSING =  0b0001000,
-            OPENING =     0b0010000,
-            SCROLLING =   0b0100000,
-            MOVING =      0b1000000
-        }
+    <script>
+        /* as `enum STATE` for TS */
+        var STATE;
+        (function (STATE) {
+            STATE[STATE["DISMISSED"] = 1] = "DISMISSED";
+            STATE[STATE["OPENED"] = 2] = "OPENED";
+            STATE[STATE["FULL_OPENED"] = 4] = "FULL_OPENED";
+            STATE[STATE["DISMISSING"] = 8] = "DISMISSING";
+            STATE[STATE["OPENING"] = 16] = "OPENING";
+            STATE[STATE["SCROLLING"] = 32] = "SCROLLING";
+            STATE[STATE["MOVING"] = 64] = "MOVING";
+        })(STATE || (STATE = {}));
         const CONTENT_STYLE = Symbol("content-style");
 
         export default {
             onMounted() {
-                let content = this.root.querySelector("[ref=content"]);
+                let content = this.root.querySelector("[ref=content]");
                 let computedStyle = this[CONTENT_STYLE] = window.getComputedStyle(content);
                 this.state.view = STATE.DISMISSED;
                 this.root.style.display = "none";
@@ -229,14 +231,14 @@
                     }
                     event.preventDefault();
                 });
-            }
+            },
             dismiss() {
                 let actualState = this.state.view;
                 if (actualState & (STATE.DISMISSED | STATE.DISMISSING)) {
                     return;
                 }
-                let content = this.root.querySelector("[ref=content"]);
-                let dimmer = this.root.querySelector("[ref=dimmer"]);
+                let content = this.root.querySelector("[ref=content]");
+                let dimmer = this.root.querySelector("[ref=dimmer]");
                 this.state.view = STATE.DISMISSING | (actualState & STATE.FULL_OPENED ? STATE.FULL_OPENED : 0);
                 let height = parseInt(this[CONTENT_STYLE].height) + content.scrollTop;
                 let opacity = 1;
@@ -266,14 +268,14 @@
                     }
                 };
                 requestAnimationFrame(frame);
-            }
+            },
             open() {
                 let isDismiss_ = this.state.view & (STATE.DISMISSED | STATE.DISMISSING);
                 if (!isDismiss_ && (this.state.view & STATE.FULL_OPENED)) {
                     return;
                 }
-                let content = this.root.querySelector("[ref=content"]);
-                let dimmer = this.root.querySelector("[ref=dimmer"]);
+                let content = this.root.querySelector("[ref=content]");
+                let dimmer = this.root.querySelector("[ref=dimmer]");
                 let finalHeight = isDismiss_? 300: window.innerHeight;
                 this.state.view = STATE.OPENING;
                 this.root.style.display = "";

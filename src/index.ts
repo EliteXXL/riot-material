@@ -1,36 +1,23 @@
-// @ts-ignore
-import AppBarComponent from "./rm-app-bar";
-// @ts-ignore
-import BottomSheetComponent from "./rm-bottom-sheet";
-// @ts-ignore
-import ButtonComponent from "./rm-button";
-// @ts-ignore
-import CheckboxComponent from "./rm-checkbox";
-// @ts-ignore
-import DialogComponent from "./rm-dialog";
-// @ts-ignore
-import DividerComponent from "./rm-divider";
-// @ts-ignore
-import IconComponent from "./rm-icon";
-// @ts-ignore
-import RadioComponent from "./rm-radio";
-// @ts-ignore
-import RippleComponent from "./rm-ripple";
-// @ts-ignore
-import SelectComponent from "./rm-select";
-// @ts-ignore
-import TabsComponent from "./rm-tabs";
-// @ts-ignore
-import TextareaComponent from "./rm-textarea";
-// @ts-ignore
-import TextfieldComponent from "./rm-textfield";
+import AppBarComponent from "./rm-app-bar.riot";
+import BottomSheetComponent from "./rm-bottom-sheet.riot";
+import ButtonComponent from "./rm-button.riot";
+import CheckboxComponent from "./rm-checkbox.riot";
+import DialogComponent from "./rm-dialog.riot";
+import DividerComponent from "./rm-divider.riot";
+import IconComponent from "./rm-icon.riot";
+import RadioComponent from "./rm-radio.riot";
+import RippleComponent from "./rm-ripple.riot";
+import SelectComponent from "./rm-select.riot";
+import TabsComponent from "./rm-tabs.riot";
+import TextareaComponent from "./rm-textarea.riot";
+import TextfieldComponent from "./rm-textfield.riot";
 
-import "./elevation";
+export * as elevation from "./elevation";
 
-import "./background";
-import "./surfaces";
+export * as background from "./background";
+export * as surfaces from "./surfaces";
 
-import riot = require("riot");
+import * as riot from "riot";
 
 riot.register("rm-app-bar", AppBarComponent);
 riot.register("rm-bottom-sheet", BottomSheetComponent);
@@ -45,3 +32,19 @@ riot.register("rm-select", SelectComponent);
 riot.register("rm-tabs", TabsComponent);
 riot.register("rm-textarea", TextareaComponent);
 riot.register("rm-textfield", TextfieldComponent);
+
+export {
+    AppBarComponent,
+    BottomSheetComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    DialogComponent,
+    DividerComponent,
+    IconComponent,
+    RadioComponent,
+    RippleComponent,
+    SelectComponent,
+    TabsComponent,
+    TextareaComponent,
+    TextfieldComponent
+};
