@@ -1,0 +1,16 @@
+<custom-tab>
+    <div>
+        <slot></slot>
+    </div>
+    
+    <script>
+        export default {
+            onMounted() {
+                console.log("mounted rm-tab");
+            },
+            onUnmounted() {
+                console.log("unmounted rm-tab");
+            }
+        }
+    </script>
+</custom-tab>

@@ -8,6 +8,7 @@ import IconComponent from "./rm-icon.riot";
 import RadioComponent from "./rm-radio.riot";
 import RippleComponent from "./rm-ripple.riot";
 import SelectComponent from "./rm-select.riot";
+import TabbedPagesComponent from "./rm-tabbed-pages.riot";
 import TabsComponent from "./rm-tabs.riot";
 import TextareaComponent from "./rm-textarea.riot";
 import TextfieldComponent from "./rm-textfield.riot";
@@ -29,6 +30,7 @@ riot.register("rm-icon", IconComponent);
 riot.register("rm-radio", RadioComponent);
 riot.register("rm-ripple", RippleComponent);
 riot.register("rm-select", SelectComponent);
+riot.register("rm-tabbed-pages", TabbedPagesComponent);
 riot.register("rm-tabs", TabsComponent);
 riot.register("rm-textarea", TextareaComponent);
 riot.register("rm-textfield", TextfieldComponent);
@@ -44,6 +46,7 @@ export {
     RadioComponent,
     RippleComponent,
     SelectComponent,
+    TabbedPagesComponent,
     TabsComponent,
     TextareaComponent,
     TextfieldComponent

@@ -89,24 +89,24 @@ var rmTabs = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<div expr103="expr103"></div>', [{
+    return template('<div expr121="expr121"></div>', [{
       'type': bindingTypes.IF,
 
       'evaluate': function(scope) {
         return scope.props.tabs;
       },
 
-      'redundantAttribute': 'expr103',
-      'selector': '[expr103]',
+      'redundantAttribute': 'expr121',
+      'selector': '[expr121]',
 
       'template': template(
-        '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr104="expr104" ref="tab"></div></div><div expr106="expr106" ref="indicator"></div>',
+        '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr122="expr122" ref="tab"></div></div><div expr124="expr124" ref="indicator"></div>',
         [{
           'type': bindingTypes.EACH,
           'getKey': null,
           'condition': null,
 
-          'template': template('<div expr105="expr105" style="display: inline-block;"> </div>', [{
+          'template': template('<div expr123="expr123" style="display: inline-block;"> </div>', [{
             'expressions': [{
               'type': expressionTypes.EVENT,
               'name': 'onclick',
@@ -123,8 +123,8 @@ var rmTabs = {
               }
             }]
           }, {
-            'redundantAttribute': 'expr105',
-            'selector': '[expr105]',
+            'redundantAttribute': 'expr123',
+            'selector': '[expr123]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -136,8 +136,8 @@ var rmTabs = {
             }]
           }]),
 
-          'redundantAttribute': 'expr104',
-          'selector': '[expr104]',
+          'redundantAttribute': 'expr122',
+          'selector': '[expr122]',
           'itemName': 'tab',
           'indexName': 'index',
 
@@ -145,8 +145,8 @@ var rmTabs = {
             return scope.getTabs();
           }
         }, {
-          'redundantAttribute': 'expr106',
-          'selector': '[expr106]',
+          'redundantAttribute': 'expr124',
+          'selector': '[expr124]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,

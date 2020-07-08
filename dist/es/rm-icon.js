@@ -8,7 +8,7 @@ var rmIcon = {
   'exports': {},
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr140="expr140"></slot>', [{
+    return template('<slot expr149="expr149"></slot>', [{
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
         'name': 'class',
@@ -21,8 +21,8 @@ var rmIcon = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr140',
-      'selector': '[expr140]'
+      'redundantAttribute': 'expr149',
+      'selector': '[expr149]'
     }]);
   },
 

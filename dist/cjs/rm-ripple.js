@@ -23,12 +23,12 @@ var rmRipple = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr100="expr100"></slot>', [{
+    return template('<slot expr108="expr108"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr100',
-      'selector': '[expr100]'
+      'redundantAttribute': 'expr108',
+      'selector': '[expr108]'
     }]);
   },
 

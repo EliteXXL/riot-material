@@ -126,17 +126,17 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr3="expr3"></button><button expr5="expr5"></button>', [{
+        return template('<button expr12="expr12"></button><button expr14="expr14"></button>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return !scope.isIcon();
           },
 
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]',
+          'redundantAttribute': 'expr12',
+          'selector': '[expr12]',
 
-          'template': template('<slot expr4="expr4"></slot>', [{
+          'template': template('<slot expr13="expr13"></slot>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'style',
@@ -163,8 +163,8 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr4',
-            'selector': '[expr4]'
+            'redundantAttribute': 'expr13',
+            'selector': '[expr13]'
           }])
         }, {
           'type': bindingTypes.IF,
@@ -173,10 +173,10 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
             return scope.isIcon();
           },
 
-          'redundantAttribute': 'expr5',
-          'selector': '[expr5]',
+          'redundantAttribute': 'expr14',
+          'selector': '[expr14]',
 
-          'template': template('<rm-icon expr6="expr6"></rm-icon>', [{
+          'template': template('<rm-icon expr15="expr15"></rm-icon>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'disabled',
@@ -202,14 +202,14 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr7="expr7"></slot>',
+              'html': '<slot expr16="expr16"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr7',
-                'selector': '[expr7]'
+                'redundantAttribute': 'expr16',
+                'selector': '[expr16]'
               }]
             }],
 
@@ -222,8 +222,8 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr6',
-            'selector': '[expr6]'
+            'redundantAttribute': 'expr15',
+            'selector': '[expr15]'
           }])
         }]);
       },

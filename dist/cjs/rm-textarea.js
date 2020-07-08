@@ -103,10 +103,10 @@ var rmTextarea = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr107="expr107" ref="label"> </div><textarea expr108="expr108"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr109="expr109" style="font-size: .75em;"> </div></div>',
+      '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr125="expr125" ref="label"> </div><textarea expr126="expr126"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr127="expr127" style="font-size: .75em;"> </div></div>',
       [{
-        'redundantAttribute': 'expr107',
-        'selector': '[expr107]',
+        'redundantAttribute': 'expr125',
+        'selector': '[expr125]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,
@@ -117,8 +117,8 @@ var rmTextarea = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr108',
-        'selector': '[expr108]',
+        'redundantAttribute': 'expr126',
+        'selector': '[expr126]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -136,8 +136,8 @@ var rmTextarea = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr109',
-        'selector': '[expr109]',
+        'redundantAttribute': 'expr127',
+        'selector': '[expr127]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,

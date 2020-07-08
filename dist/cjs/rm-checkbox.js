@@ -43,10 +43,10 @@ var rmCheckbox = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<label><input expr82="expr82" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr83="expr83" style="vertical-align: middle; display: inline-block;"> </div></label>',
+      '<label><input expr96="expr96" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr97="expr97" style="vertical-align: middle; display: inline-block;"> </div></label>',
       [{
-        'redundantAttribute': 'expr82',
-        'selector': '[expr82]',
+        'redundantAttribute': 'expr96',
+        'selector': '[expr96]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -64,8 +64,8 @@ var rmCheckbox = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr83',
-        'selector': '[expr83]',
+        'redundantAttribute': 'expr97',
+        'selector': '[expr97]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,
