@@ -243,10 +243,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr168="expr168" ref="bar"><slot expr169="expr169"></slot></div>',
+          '<div expr164="expr164" ref="bar"><slot expr165="expr165"></slot></div>',
           [{
-            'redundantAttribute': 'expr168',
-            'selector': '[expr168]',
+            'redundantAttribute': 'expr164',
+            'selector': '[expr164]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -274,8 +274,8 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr169',
-            'selector': '[expr169]'
+            'redundantAttribute': 'expr165',
+            'selector': '[expr165]'
           }]
         );
       },
@@ -561,13 +561,13 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr170="expr170"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr166="expr166"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr170',
-            'selector': '[expr170]'
+            'redundantAttribute': 'expr166',
+            'selector': '[expr166]'
           }]
         );
       },
@@ -957,7 +957,7 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr181="expr181"></button><button expr183="expr183"></button>',
+          '<button expr167="expr167"></button><button expr169="expr169"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -965,10 +965,10 @@
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr181',
-            'selector': '[expr181]',
+            'redundantAttribute': 'expr167',
+            'selector': '[expr167]',
 
-            'template': template('<slot expr182="expr182"></slot>', [{
+            'template': template('<slot expr168="expr168"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -995,8 +995,8 @@
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr182',
-              'selector': '[expr182]'
+              'redundantAttribute': 'expr168',
+              'selector': '[expr168]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -1005,10 +1005,10 @@
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr183',
-            'selector': '[expr183]',
+            'redundantAttribute': 'expr169',
+            'selector': '[expr169]',
 
-            'template': template('<rm-icon expr184="expr184"></rm-icon>', [{
+            'template': template('<rm-icon expr170="expr170"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -1034,14 +1034,14 @@
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr185="expr185"></slot>',
+                'html': '<slot expr171="expr171"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr185',
-                  'selector': '[expr185]'
+                  'redundantAttribute': 'expr171',
+                  'selector': '[expr171]'
                 }]
               }],
 
@@ -1054,8 +1054,8 @@
                 }
               }],
 
-              'redundantAttribute': 'expr184',
-              'selector': '[expr184]'
+              'redundantAttribute': 'expr170',
+              'selector': '[expr170]'
             }])
           }]
         );
@@ -1105,10 +1105,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr179="expr179" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr180="expr180" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr172="expr172" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr173="expr173" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr179',
-            'selector': '[expr179]',
+            'redundantAttribute': 'expr172',
+            'selector': '[expr172]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1126,8 +1126,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr180',
-            'selector': '[expr180]',
+            'redundantAttribute': 'expr173',
+            'selector': '[expr173]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1268,10 +1268,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr172="expr172" class="mdc-elevation--z24" ref="container"><div expr173="expr173" ref="title"><slot expr174="expr174" name="title"></slot></div><div expr175="expr175" ref="content"><slot expr176="expr176" name="content"></slot></div><div expr177="expr177" ref="actions"><slot expr178="expr178" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr174="expr174" class="mdc-elevation--z24" ref="container"><div expr175="expr175" ref="title"><slot expr176="expr176" name="title"></slot></div><div expr177="expr177" ref="content"><slot expr178="expr178" name="content"></slot></div><div expr179="expr179" ref="actions"><slot expr180="expr180" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr172',
-            'selector': '[expr172]',
+            'redundantAttribute': 'expr174',
+            'selector': '[expr174]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1281,24 +1281,6 @@
                 return scope._oncontainerclick;
               }
             }]
-          }, {
-            'redundantAttribute': 'expr173',
-            'selector': '[expr173]',
-
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'class',
-
-              'evaluate': function(scope) {
-                return ['rm-', scope.getSurface(), '-surface'].join('');
-              }
-            }]
-          }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'title',
-            'redundantAttribute': 'expr174',
-            'selector': '[expr174]'
           }, {
             'redundantAttribute': 'expr175',
             'selector': '[expr175]',
@@ -1314,7 +1296,7 @@
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'content',
+            'name': 'title',
             'redundantAttribute': 'expr176',
             'selector': '[expr176]'
           }, {
@@ -1332,9 +1314,27 @@
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'actions',
+            'name': 'content',
             'redundantAttribute': 'expr178',
             'selector': '[expr178]'
+          }, {
+            'redundantAttribute': 'expr179',
+            'selector': '[expr179]',
+
+            'expressions': [{
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'class',
+
+              'evaluate': function(scope) {
+                return ['rm-', scope.getSurface(), '-surface'].join('');
+              }
+            }]
+          }, {
+            'type': bindingTypes.SLOT,
+            'attributes': [],
+            'name': 'actions',
+            'redundantAttribute': 'expr180',
+            'selector': '[expr180]'
           }]
         );
       },
@@ -1357,7 +1357,7 @@
       'exports': {},
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr171="expr171"></slot>', [{
+        return template('<slot expr183="expr183"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'class',
@@ -1370,8 +1370,8 @@
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr171',
-          'selector': '[expr171]'
+          'redundantAttribute': 'expr183',
+          'selector': '[expr183]'
         }]);
       },
 
@@ -1445,10 +1445,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr187="expr187" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr188="expr188" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr181="expr181" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr182="expr182" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr187',
-            'selector': '[expr187]',
+            'redundantAttribute': 'expr181',
+            'selector': '[expr181]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -1465,8 +1465,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr188',
-            'selector': '[expr188]',
+            'redundantAttribute': 'expr182',
+            'selector': '[expr182]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1504,12 +1504,12 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr186="expr186"></slot>', [{
+        return template('<slot expr184="expr184"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr186',
-          'selector': '[expr186]'
+          'redundantAttribute': 'expr184',
+          'selector': '[expr184]'
         }]);
       },
 
@@ -1957,16 +1957,16 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="raw_options"><slot expr193="expr193"></slot></div><select expr194="expr194" ref="form-element" tabindex="-1"><option value></option><option expr195="expr195"></option></select><div ref="outlined-margin-top"></div><div expr196="expr196" ref="container"><div ref="border"></div><div ref="input-container"><div expr197="expr197" ref="label"> </div><input expr198="expr198" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr199="expr199" value label skip-filter ref="option">&nbsp;</div><div expr200="expr200" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr201="expr201" style="font-size: .75em;"> </div></div>',
+          '<div ref="raw_options"><slot expr185="expr185"></slot></div><select expr186="expr186" ref="form-element" tabindex="-1"><option value></option><option expr187="expr187"></option></select><div ref="outlined-margin-top"></div><div expr188="expr188" ref="container"><div ref="border"></div><div ref="input-container"><div expr189="expr189" ref="label"> </div><input expr190="expr190" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr191="expr191" value label skip-filter ref="option">&nbsp;</div><div expr192="expr192" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr193="expr193" style="font-size: .75em;"> </div></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr193',
-            'selector': '[expr193]'
+            'redundantAttribute': 'expr185',
+            'selector': '[expr185]'
           }, {
-            'redundantAttribute': 'expr194',
-            'selector': '[expr194]',
+            'redundantAttribute': 'expr186',
+            'selector': '[expr186]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1999,8 +1999,8 @@
               }]
             }]),
 
-            'redundantAttribute': 'expr195',
-            'selector': '[expr195]',
+            'redundantAttribute': 'expr187',
+            'selector': '[expr187]',
             'itemName': 'option',
             'indexName': null,
 
@@ -2008,8 +2008,8 @@
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr196',
-            'selector': '[expr196]',
+            'redundantAttribute': 'expr188',
+            'selector': '[expr188]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2024,8 +2024,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr197',
-            'selector': '[expr197]',
+            'redundantAttribute': 'expr189',
+            'selector': '[expr189]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2036,8 +2036,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr198',
-            'selector': '[expr198]',
+            'redundantAttribute': 'expr190',
+            'selector': '[expr190]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2054,8 +2054,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr199',
-            'selector': '[expr199]',
+            'redundantAttribute': 'expr191',
+            'selector': '[expr191]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2148,8 +2148,8 @@
               }]
             }]),
 
-            'redundantAttribute': 'expr200',
-            'selector': '[expr200]',
+            'redundantAttribute': 'expr192',
+            'selector': '[expr192]',
             'itemName': 'option',
             'indexName': null,
 
@@ -2157,8 +2157,8 @@
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr201',
-            'selector': '[expr201]',
+            'redundantAttribute': 'expr193',
+            'selector': '[expr193]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2174,6 +2174,131 @@
 
       'name': 'rm-select'
     };
+
+    var MOTION_CONTROLLER = Symbol("motion-controller");
+    function motionController(element) {
+        var existingMotionController = element[MOTION_CONTROLLER];
+        if (existingMotionController != null) {
+            return existingMotionController;
+        }
+        var self;
+        var eventTarget = new EventTarget();
+        var length = 0;
+        var getLength = function () {
+            return length;
+        };
+        var setLength = function (l) {
+            length = l;
+            return self;
+        };
+        var index = 0;
+        var getSelectedIndex = function () {
+            return index;
+        };
+        var setSelectedIndex = function (i) {
+            if (i < 0) {
+                i = 0;
+            }
+            if (i >= length) {
+                i = length - 1;
+            }
+            index = i;
+            return self;
+        };
+        var motion = 0;
+        var getMotion = function () {
+            var m = parseFloat(motion);
+            if (isNaN(m)) {
+                return 0;
+            }
+            m = Math.max(Math.min(1, m), -1);
+            var index = getSelectedIndex();
+            if (index === 0 && m < 0 || index === getLength() - 1 && m > 0) {
+                return 0;
+            }
+            return m;
+        };
+        var _touchIdentifier = null;
+        var startMotion = function (event) {
+            if (_touchIdentifier != null) {
+                return;
+            }
+            var touch = event.targetTouches[0];
+            var identifier = _touchIdentifier = touch.identifier;
+            var startX = touch.clientX;
+            var lastDirection = null;
+            var updateMotion = function (event) {
+                var index;
+                if (!Array.from(event.changedTouches).some(function (touch, i) {
+                    index = i;
+                    return touch.identifier === identifier;
+                })) {
+                    return;
+                }
+                var lastMotion = getMotion();
+                var touch = event.changedTouches[index];
+                var endX = touch.clientX;
+                var delta = endX - startX;
+                motion = -delta / element.getBoundingClientRect().width;
+                var newMotion = getMotion();
+                if (newMotion !== lastMotion) {
+                    lastDirection = newMotion > lastMotion ? 1 : -1;
+                }
+                eventTarget.dispatchEvent(new CustomEvent("motionchanged", { detail: { motion: newMotion } }));
+            };
+            var endMotion = function (event) {
+                if (!Array.from(event.changedTouches).some(function (touch) {
+                    return touch.identifier === identifier;
+                })) {
+                    return;
+                }
+                if (lastDirection != null) {
+                    var m = getMotion();
+                    motion = 0;
+                    var newM = void 0;
+                    if (m < 0) {
+                        newM = lastDirection < 0 ? -1 : 0;
+                    }
+                    else {
+                        newM = lastDirection > 0 ? 1 : 0;
+                    }
+                    lastDirection = null;
+                    var roundedMotion = Math.round(newM);
+                    var previousIndex = getSelectedIndex();
+                    if (roundedMotion !== 0) {
+                        setSelectedIndex(previousIndex + roundedMotion);
+                    }
+                    eventTarget.dispatchEvent(new CustomEvent("motionapplied", { detail: {
+                            previousIndex: previousIndex,
+                            currentIndex: getSelectedIndex()
+                        } }));
+                }
+                _touchIdentifier = null;
+                element.removeEventListener("touchend", endMotion);
+                element.removeEventListener("touchcancel", endMotion);
+                element.removeEventListener("touchmove", updateMotion);
+            };
+            element.addEventListener("touchend", endMotion);
+            element.addEventListener("touchcancel", endMotion);
+            element.addEventListener("touchmove", updateMotion);
+        };
+        element.addEventListener("touchstart", startMotion);
+        return element[MOTION_CONTROLLER] = self = {
+            getMotion: getMotion,
+            getSelectedIndex: getSelectedIndex,
+            setSelectedIndex: setSelectedIndex,
+            getLength: getLength,
+            setLength: setLength,
+            on: function (type, callback) {
+                eventTarget.addEventListener(type, callback);
+                return self;
+            },
+            off: function (type, callback) {
+                eventTarget.removeEventListener(type, callback);
+                return self;
+            }
+        };
+    }
 
     const PAGE_INDEX = Symbol("page-index");
 
@@ -2196,6 +2321,17 @@
                 window.requestAnimationFrame(frame);
             };
             window.requestAnimationFrame(frame);
+            motionController(this.root.children[1])
+            .setSelectedIndex(this.getSelectedIndex())
+            .on("motionchanged", event => this.update({ motion: event.detail.motion, instant: true }))
+            .on("motionapplied", event => {
+                delete this.state.motion;
+                if (event.detail.currentIndex === event.detail.previousIndex) {
+                    this.update();
+                } else {
+                    this.setSelectedIndex(event.detail.currentIndex);
+                }
+            });
         },
 
         onBeforeUpdate() {
@@ -2303,6 +2439,9 @@
                 pageContainer.removeChild(page);
             }
 
+            // update motionController length
+            motionController(this.root.children[1]).setLength(this.getLength());
+
             // set indicator to correct position and size
             this._updateIndicator(!update || this.state.instant);
 
@@ -2355,69 +2494,6 @@
             return index;
         },
 
-        _applyMotion() {
-            let motion = Math.round(this.getMotion());
-            delete this.state.motion;
-            if (motion === 0) {
-                this.update();
-                return;
-            }
-            this.setSelectedIndex(this.getSelectedIndex() + motion);
-        },
-
-        _touchIdentifier: null,
-
-        _startMotion(event) {
-            if (this._touchIdentifier != null) {
-                return;
-            }
-            const touch = event.targetTouches[0];
-            const identifier = this._touchIdentifier = touch.identifier;
-            const startX = touch.clientX;
-            let lastDirection = null;
-            const updateMotion = event => {
-                let index;
-                if (!Array.from(event.changedTouches).some((touch, i) => {
-                    index = i;
-                    return touch.identifier === identifier;
-                })) {
-                    return;
-                }
-                const lastMotion = this.getMotion();
-                const touch = event.changedTouches[index];
-                const endX = touch.clientX;
-                const delta = endX - startX;
-                this.update({ motion: -delta / this.root.getBoundingClientRect().width, instant: true });
-                const newMotion = this.getMotion();
-                if (newMotion !== lastMotion) {
-                    lastDirection = newMotion > lastMotion ? 1 : -1;
-                }
-            };
-            const endMotion = event => {
-                if (!Array.from(event.changedTouches).some((touch, i) => {
-                    return touch.identifier === identifier;
-                })) {
-                    return;
-                }
-                if (lastDirection != null) {
-                    const motion = this.getMotion();
-                    if (motion < 0) {
-                        this.state.motion = lastDirection < 0 ? -1 : 0;
-                    } else {
-                        this.state.motion = lastDirection > 0 ? 1 : 0;
-                    }
-                    this._applyMotion();
-                }
-                this._touchIdentifier = null;
-                this.root.removeEventListener("touchend", endMotion);
-                this.root.removeEventListener("touchcancel", endMotion);
-                this.root.removeEventListener("touchmove", updateMotion);
-            };
-            this.root.addEventListener("touchend", endMotion);
-            this.root.addEventListener("touchcancel", endMotion);
-            this.root.addEventListener("touchmove", updateMotion);
-        },
-
         getSlotAt(index) {
             return this.slots[this._getRawIndexOf(index)];
         },
@@ -2452,6 +2528,7 @@
                 return;
             }
             this.update({ selectedIndex: index });
+            motionController(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
         },
 
         getIndicatorLeft() {
@@ -2516,38 +2593,14 @@
         },
 
         getMotion() {
-            if (this.state.motion == null) {
-                return 0;
-            }
-            let motion = parseFloat(this.state.motion, 10);
-            if (isNaN(motion)) {
-                return 0;
-            }
-            motion = Math.max(Math.min(1, motion), -1);
-            const index = this.getSelectedIndex();
-            if (index === 0 && motion < 0 || index === this.getLength() - 1 && motion > 0) {
-                return 0;
-            }
-            return motion;
+            return motionController(this.root.children[1]).getMotion();
         }
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div expr206="expr206"></div>',
-          [{
-            'redundantAttribute': 'expr206',
-            'selector': '[expr206]',
-
-            'expressions': [{
-              'type': expressionTypes.EVENT,
-              'name': 'ontouchstart',
-
-              'evaluate': function(scope) {
-                return scope._startMotion;
-              }
-            }]
-          }]
+          '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div></div>',
+          []
         );
       },
 
@@ -2641,24 +2694,24 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr202="expr202"></div>', [{
+        return template('<div expr194="expr194"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr202',
-          'selector': '[expr202]',
+          'redundantAttribute': 'expr194',
+          'selector': '[expr194]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr203="expr203" ref="tab"></div></div><div expr205="expr205" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr195="expr195" ref="tab"></div></div><div expr197="expr197" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr204="expr204" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr196="expr196" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -2675,8 +2728,8 @@
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr204',
-                'selector': '[expr204]',
+                'redundantAttribute': 'expr196',
+                'selector': '[expr196]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -2688,8 +2741,8 @@
                 }]
               }]),
 
-              'redundantAttribute': 'expr203',
-              'selector': '[expr203]',
+              'redundantAttribute': 'expr195',
+              'selector': '[expr195]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -2697,8 +2750,8 @@
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr205',
-              'selector': '[expr205]',
+              'redundantAttribute': 'expr197',
+              'selector': '[expr197]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -2825,10 +2878,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr207="expr207" ref="label"> </div><textarea expr208="expr208"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr209="expr209" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr202="expr202" ref="label"> </div><textarea expr203="expr203"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr204="expr204" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr207',
-            'selector': '[expr207]',
+            'redundantAttribute': 'expr202',
+            'selector': '[expr202]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2839,8 +2892,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr208',
-            'selector': '[expr208]',
+            'redundantAttribute': 'expr203',
+            'selector': '[expr203]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2858,8 +2911,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr209',
-            'selector': '[expr209]',
+            'redundantAttribute': 'expr204',
+            'selector': '[expr204]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2993,10 +3046,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr189="expr189" ref="label"> </div><input expr190="expr190"/><div expr191="expr191" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr192="expr192" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr198="expr198" ref="label"> </div><input expr199="expr199"/><div expr200="expr200" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr201="expr201" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr189',
-            'selector': '[expr189]',
+            'redundantAttribute': 'expr198',
+            'selector': '[expr198]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3007,8 +3060,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr190',
-            'selector': '[expr190]',
+            'redundantAttribute': 'expr199',
+            'selector': '[expr199]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3046,8 +3099,8 @@
               return scope.isDisabled();
             },
 
-            'redundantAttribute': 'expr191',
-            'selector': '[expr191]',
+            'redundantAttribute': 'expr200',
+            'selector': '[expr200]',
 
             'template': template(' ', [{
               'expressions': [{
@@ -3060,8 +3113,8 @@
               }]
             }])
           }, {
-            'redundantAttribute': 'expr192',
-            'selector': '[expr192]',
+            'redundantAttribute': 'expr201',
+            'selector': '[expr201]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

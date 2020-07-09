@@ -5,7 +5,7 @@
             <div></div> <!-- INDICATOR -->
         </div> <!-- HEADER -->
     </div> <!-- SCROLLBAR HIDER -->
-    <div ontouchstart={ _startMotion } /> <!-- PAGE CONTAINER -->
+    <div /> <!-- PAGE CONTAINER -->
 
     <style>
         :host {
@@ -77,6 +77,7 @@
 
     <script>
         import * as riot from "riot";
+        import { motionController } from "./motionController";
 
         const PAGE_INDEX = Symbol("page-index");
 
@@ -96,6 +97,17 @@
                     window.requestAnimationFrame(frame);
                 };
                 window.requestAnimationFrame(frame);
+                motionController(this.root.children[1])
+                .setSelectedIndex(this.getSelectedIndex())
+                .on("motionchanged", event => this.update({ motion: event.detail.motion, instant: true }))
+                .on("motionapplied", event => {
+                    delete this.state.motion;
+                    if (event.detail.currentIndex === event.detail.previousIndex) {
+                        this.update();
+                    } else {
+                        this.setSelectedIndex(event.detail.currentIndex);
+                    }
+                });
             },
             onBeforeUpdate() {
                 if (this.state.selectedIndex != null) {
@@ -198,6 +210,9 @@
                     pageContainer.removeChild(page);
                 }
 
+                // update motionController length
+                motionController(this.root.children[1]).setLength(this.getLength());
+
                 // set indicator to correct position and size
                 this._updateIndicator(!update || this.state.instant);
 
@@ -246,68 +261,6 @@
                 });
                 return index;
             },
-            _applyMotion() {
-                let motion = Math.round(this.getMotion());
-                delete this.state.motion;
-                if (motion === 0) {
-                    this.update();
-                    return;
-                }
-                this.setSelectedIndex(this.getSelectedIndex() + motion);
-            },
-            _touchIdentifier: null,
-            _startMotion(event) {
-                if (this._touchIdentifier != null) {
-                    return;
-                }
-                const touch = event.targetTouches[0];
-                const identifier = this._touchIdentifier = touch.identifier;
-                const startX = touch.clientX;
-                let lastDirection = null;
-                const updateMotion = event => {
-                    let index;
-                    if (!Array.from(event.changedTouches).some((touch, i) => {
-                        index = i;
-                        return touch.identifier === identifier;
-                    })) {
-                        return;
-                    }
-                    const lastMotion = this.getMotion();
-                    const touch = event.changedTouches[index];
-                    const endX = touch.clientX;
-                    const delta = endX - startX;
-                    this.update({ motion: -delta / this.root.getBoundingClientRect().width, instant: true });
-                    const newMotion = this.getMotion();
-                    if (newMotion !== lastMotion) {
-                        lastDirection = newMotion > lastMotion ? 1 : -1;
-                    }
-                };
-                const endMotion = event => {
-                    let index;
-                    if (!Array.from(event.changedTouches).some((touch, i) => {
-                        index = i;
-                        return touch.identifier === identifier;
-                    })) {
-                        return;
-                    }
-                    if (lastDirection != null) {
-                        const motion = this.getMotion();
-                        if (motion < 0) {
-                            this.state.motion = lastDirection < 0 ? -1 : 0;
-                        } else {
-                            this.state.motion = lastDirection > 0 ? 1 : 0;
-                        }
-                        this._applyMotion();
-                    }
-                    this._touchIdentifier = null;
-                    this.root.removeEventListener("touchend", endMotion);
-                    this.root.removeEventListener("touchcancel", endMotion);
-                    this.root.removeEventListener("touchmove", updateMotion);
-                };
-                this.root.addEventListener("touchend", endMotion);
-                this.root.addEventListener("touchcancel", endMotion);
-                this.root.addEventListener("touchmove", updateMotion);
-            },
             getSlotAt(index) {
                 return this.slots[this._getRawIndexOf(index)];
             },
@@ -338,6 +291,7 @@
                     return;
                 }
                 this.update({ selectedIndex: index });
+                motionController(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
             },
             getIndicatorLeft() {
                 const selectedIndex = this.getSelectedIndex();
@@ -399,19 +353,7 @@
                 return width;
             },
             getMotion() {
-                if (this.state.motion == null) {
-                    return 0;
-                }
-                let motion = parseFloat(this.state.motion, 10);
-                if (isNaN(motion)) {
-                    return 0;
-                }
-                motion = Math.max(Math.min(1, motion), -1);
-                const index = this.getSelectedIndex();
-                if (index === 0 && motion < 0 || index === this.getLength() - 1 && motion > 0) {
-                    return 0;
-                }
-                return motion;
+                return motionController(this.root.children[1]).getMotion();
             }
         }
     </script>
