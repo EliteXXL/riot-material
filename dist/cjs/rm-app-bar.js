@@ -115,9 +115,9 @@ var rmAppBar = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<div expr82="expr82" ref="bar"><slot expr83="expr83"></slot></div>', [{
-      'redundantAttribute': 'expr82',
-      'selector': '[expr82]',
+    return template('<div expr99="expr99" ref="bar"><slot expr100="expr100"></slot></div>', [{
+      'redundantAttribute': 'expr99',
+      'selector': '[expr99]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -145,8 +145,8 @@ var rmAppBar = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr83',
-      'selector': '[expr83]'
+      'redundantAttribute': 'expr100',
+      'selector': '[expr100]'
     }]);
   },
 

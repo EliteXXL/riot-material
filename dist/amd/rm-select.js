@@ -441,16 +441,16 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="raw_options"><slot expr62="expr62"></slot></div><select expr63="expr63" ref="form-element" tabindex="-1"><option value></option><option expr64="expr64"></option></select><div ref="outlined-margin-top"></div><div expr65="expr65" ref="container"><div ref="border"></div><div ref="input-container"><div expr66="expr66" ref="label"> </div><input expr67="expr67" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr68="expr68" value label skip-filter ref="option">&nbsp;</div><div expr69="expr69" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr70="expr70" style="font-size: .75em;"> </div></div>',
+          '<div ref="raw_options"><slot expr64="expr64"></slot></div><select expr65="expr65" ref="form-element" tabindex="-1"><option value></option><option expr66="expr66"></option></select><div ref="outlined-margin-top"></div><div expr67="expr67" ref="container"><div ref="border"></div><div ref="input-container"><div expr68="expr68" ref="label"> </div><input expr69="expr69" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr70="expr70" value label skip-filter ref="option">&nbsp;</div><div expr71="expr71" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr72="expr72" style="font-size: .75em;"> </div></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr62',
-            'selector': '[expr62]'
+            'redundantAttribute': 'expr64',
+            'selector': '[expr64]'
           }, {
-            'redundantAttribute': 'expr63',
-            'selector': '[expr63]',
+            'redundantAttribute': 'expr65',
+            'selector': '[expr65]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -483,8 +483,8 @@ define(function () { 'use strict';
               }]
             }]),
 
-            'redundantAttribute': 'expr64',
-            'selector': '[expr64]',
+            'redundantAttribute': 'expr66',
+            'selector': '[expr66]',
             'itemName': 'option',
             'indexName': null,
 
@@ -492,8 +492,8 @@ define(function () { 'use strict';
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr65',
-            'selector': '[expr65]',
+            'redundantAttribute': 'expr67',
+            'selector': '[expr67]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -508,8 +508,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr66',
-            'selector': '[expr66]',
+            'redundantAttribute': 'expr68',
+            'selector': '[expr68]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -520,8 +520,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr67',
-            'selector': '[expr67]',
+            'redundantAttribute': 'expr69',
+            'selector': '[expr69]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -538,8 +538,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr68',
-            'selector': '[expr68]',
+            'redundantAttribute': 'expr70',
+            'selector': '[expr70]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -632,8 +632,8 @@ define(function () { 'use strict';
               }]
             }]),
 
-            'redundantAttribute': 'expr69',
-            'selector': '[expr69]',
+            'redundantAttribute': 'expr71',
+            'selector': '[expr71]',
             'itemName': 'option',
             'indexName': null,
 
@@ -641,8 +641,8 @@ define(function () { 'use strict';
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr70',
-            'selector': '[expr70]',
+            'redundantAttribute': 'expr72',
+            'selector': '[expr72]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

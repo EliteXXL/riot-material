@@ -10,7 +10,7 @@ define(['../node_modules/style-inject/dist/style-inject.es'], function (styleInj
     'exports': {},
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
-      return template('<slot expr51="expr51"></slot>', [{
+      return template('<slot expr58="expr58"></slot>', [{
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
           'name': 'class',
@@ -23,8 +23,8 @@ define(['../node_modules/style-inject/dist/style-inject.es'], function (styleInj
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr51',
-        'selector': '[expr51]'
+        'redundantAttribute': 'expr58',
+        'selector': '[expr58]'
       }]);
     },
 

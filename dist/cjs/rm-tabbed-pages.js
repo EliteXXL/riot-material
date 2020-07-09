@@ -5,11 +5,33 @@ var riot = require('riot');
 const PAGE_INDEX = Symbol("page-index");
 
 var rmTabbedPages = {
-  'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; transition: transform ease-in-out 200ms; font-size: initial; }`,
+  'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; height: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; height: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; }`,
 
   'exports': {
     onMounted() {
         this._manipulate();
+        let width = this.root.getBoundingClientRect().width;
+        const frame = () => {
+            if (!this.root.isConnected) {
+                return;
+            }
+            const newWidth = this.root.getBoundingClientRect().width;
+            if (newWidth !== width) {
+                this._updateIndicator(true);
+                width = newWidth;
+            }
+            window.requestAnimationFrame(frame);
+        };
+        window.requestAnimationFrame(frame);
+    },
+
+    onBeforeUpdate() {
+        if (this.state.selectedIndex != null) {
+            this.state.selectedIndex = Math.round(this.state.selectedIndex);
+        }
+        if (isNaN(this.state.selectedIndex)) {
+            delete this.state.selectedIndex;
+        }
     },
 
     onUpdated() {
@@ -79,7 +101,8 @@ var rmTabbedPages = {
                 tabButton = tabContainer.insertBefore(document.createElement("div"), tabContainer.children[index]);
             }
             // scroll to selected index
-            page.style.transform = "translateX(-" + (this.getSelectedIndex() * 100) + "%)";
+            page.style.transition = this.state.instant ? "none" : "";
+            page.style.transform = "translateX(-" + ((this.getSelectedIndex() + this.getMotion()) * 100) + "%)";
             if (tabButton != null) {
                 tabButton.addEventListener("click", () => {
                     this.setSelectedIndex(index);
@@ -107,13 +130,8 @@ var rmTabbedPages = {
             pageContainer.removeChild(page);
         }
 
-        // set display to correct position and size
-        this.root
-            .firstElementChild // SCROLLBAR HIDER
-            .firstElementChild // HEADER
-            .children[1]       // INDICATOR
-            .style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`
-        ;
+        // set indicator to correct position and size
+        this._updateIndicator(!update || this.state.instant);
 
         // hide scrollbar, if visible
         const header = this.root
@@ -123,17 +141,30 @@ var rmTabbedPages = {
         const rect = header.getBoundingClientRect();
         header.style.marginBottom = header.clientHeight - rect.height + "px";
 
-        const selectedIndex = this.getSelectedIndex();
-        const slot = this.getSlotAt(selectedIndex);
-        const el = pageContainer.children[selectedIndex];
-        let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-        if (instance == null) {
-            instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
-            instance.mount(el);
+        if (!this.state.instant) {
+            const selectedIndex = this.getSelectedIndex();
+            const slot = this.getSlotAt(selectedIndex);
+            const el = pageContainer.children[selectedIndex];
+            let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+            if (instance == null) {
+                instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
+                instance.mount(el);
+            }
+            if (update) {
+                instance.update();
+            }
         }
-        if (update) {
-            instance.update();
-        }
+        delete this.state.instant;
+    },
+
+    _updateIndicator(instant = false) {
+        const indicator = this.root
+            .firstElementChild // SCROLLBAR HIDER
+            .firstElementChild // HEADER
+            .children[1]       // INDICATOR
+        ;
+        indicator.style.transition = instant ? "none" : "";
+        indicator.style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`;
     },
 
     _getUpdatedIndexOf(index) {
@@ -151,6 +182,69 @@ var rmTabbedPages = {
         return index;
     },
 
+    _applyMotion() {
+        let motion = Math.round(this.getMotion());
+        delete this.state.motion;
+        if (motion === 0) {
+            this.update();
+            return;
+        }
+        this.setSelectedIndex(this.getSelectedIndex() + motion);
+    },
+
+    _touchIdentifier: null,
+
+    _startMotion(event) {
+        if (this._touchIdentifier != null) {
+            return;
+        }
+        const touch = event.targetTouches[0];
+        const identifier = this._touchIdentifier = touch.identifier;
+        const startX = touch.clientX;
+        let lastDirection = null;
+        const updateMotion = event => {
+            let index;
+            if (!Array.from(event.changedTouches).some((touch, i) => {
+                index = i;
+                return touch.identifier === identifier;
+            })) {
+                return;
+            }
+            const lastMotion = this.getMotion();
+            const touch = event.changedTouches[index];
+            const endX = touch.clientX;
+            const delta = endX - startX;
+            this.update({ motion: -delta / this.root.getBoundingClientRect().width, instant: true });
+            const newMotion = this.getMotion();
+            if (newMotion !== lastMotion) {
+                lastDirection = newMotion > lastMotion ? 1 : -1;
+            }
+        };
+        const endMotion = event => {
+            if (!Array.from(event.changedTouches).some((touch, i) => {
+                return touch.identifier === identifier;
+            })) {
+                return;
+            }
+            if (lastDirection != null) {
+                const motion = this.getMotion();
+                if (motion < 0) {
+                    this.state.motion = lastDirection < 0 ? -1 : 0;
+                } else {
+                    this.state.motion = lastDirection > 0 ? 1 : 0;
+                }
+                this._applyMotion();
+            }
+            this._touchIdentifier = null;
+            this.root.removeEventListener("touchend", endMotion);
+            this.root.removeEventListener("touchcancel", endMotion);
+            this.root.removeEventListener("touchmove", updateMotion);
+        };
+        this.root.addEventListener("touchend", endMotion);
+        this.root.addEventListener("touchcancel", endMotion);
+        this.root.addEventListener("touchmove", updateMotion);
+    },
+
     getSlotAt(index) {
         return this.slots[this._getRawIndexOf(index)];
     },
@@ -162,7 +256,6 @@ var rmTabbedPages = {
     _lastSelectedIndexPropValue: undefined,
 
     getSelectedIndex() {
-        // this._updateIndices();
         if (this.props.selectedIndex !== this._lastSelectedIndexPropValue) {
             this._lastSelectedIndexPropValue = this.props.selectedIndex;
             const selectedIndex = parseInt(this.props.selectedIndex, 10);
@@ -200,13 +293,26 @@ var rmTabbedPages = {
             .children[selectedIndex] // TAB BUTTON
             .getBoundingClientRect()
         ;
-        return rect.left - 
-            this.root.getBoundingClientRect().left +
+        const delta =  this.root.getBoundingClientRect().left +
             this.root
             .firstElementChild // SCROLLBAR HIDER
             .firstElementChild // HEADER
             .scrollLeft
         ;
+        let left = rect.left - delta;
+        const motion = this.getMotion();
+        if (motion !== 0) {
+            const index = selectedIndex + (motion > 0 ? 1 : -1);
+            const rect = this.root
+                .firstElementChild // SCROLLBAR HIDER
+                .firstElementChild // HEADER
+                .firstElementChild // TAB CONTAINER
+                .children[index] // TAB BUTTON
+                .getBoundingClientRect()
+            ;
+            left += (((rect.left - delta) - left) * Math.abs(motion));
+        }
+        return left;
     },
 
     getIndicatorWidth() {
@@ -214,20 +320,61 @@ var rmTabbedPages = {
         if (selectedIndex == null) {
             return 0;
         }
-        return this.root
+        let width = this.root
             .firstElementChild // SCROLLBAR HIDER
             .firstElementChild // HEADER
             .firstElementChild // TAB CONTAINER
             .children[selectedIndex] // TAB BUTTON
             .getBoundingClientRect().width
         ;
+        const motion = this.getMotion();
+        if (motion !== 0) {
+            const index = selectedIndex + (motion > 0 ? 1 : -1);
+            const rect = this.root
+                .firstElementChild // SCROLLBAR HIDER
+                .firstElementChild // HEADER
+                .firstElementChild // TAB CONTAINER
+                .children[index] // TAB BUTTON
+                .getBoundingClientRect()
+            ;
+            width += ((rect.width - width) * Math.abs(motion));
+        }
+        return width;
+    },
+
+    getMotion() {
+        if (this.state.motion == null) {
+            return 0;
+        }
+        let motion = parseFloat(this.state.motion, 10);
+        if (isNaN(motion)) {
+            return 0;
+        }
+        motion = Math.max(Math.min(1, motion), -1);
+        const index = this.getSelectedIndex();
+        if (index === 0 && motion < 0 || index === this.getLength() - 1 && motion > 0) {
+            return 0;
+        }
+        return motion;
     }
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div></div>',
-      []
+      '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div expr118="expr118"></div>',
+      [{
+        'redundantAttribute': 'expr118',
+        'selector': '[expr118]',
+
+        'expressions': [{
+          'type': expressionTypes.EVENT,
+          'name': 'ontouchstart',
+
+          'evaluate': function(scope) {
+            return scope._startMotion;
+          }
+        }]
+      }]
     );
   },
 

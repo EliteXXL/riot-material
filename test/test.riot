@@ -3,7 +3,7 @@
         <custom-tab slot="Page 1">
             <div style="padding: 8px;">PAGE 1 - { Date.now() }</div>
         </custom-tab>
-        <div slot="Page 2">
+        <div slot="Page LONG TITLE 2">
             <div style="padding: 8px;">PAGE 2</div>
         </div>
         <custom-tab slot="Page 3">
@@ -17,12 +17,12 @@
                 hide: true
             },
             onMounted() {
-                setTimeout(() => {
-                    this.update({ hide: false });
-                    setTimeout(() => {
-                        this.update({ hide: true });
-                    }, 2000);
-                }, 2000);
+                // setTimeout(() => {
+                //     this.update({ hide: false });
+                //     setTimeout(() => {
+                //         this.update({ hide: true });
+                //     }, 2000);
+                // }, 2000);
             }
         }
     </script>

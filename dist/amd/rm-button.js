@@ -126,17 +126,17 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr46="expr46"></button><button expr48="expr48"></button>', [{
+        return template('<button expr53="expr53"></button><button expr55="expr55"></button>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return !scope.isIcon();
           },
 
-          'redundantAttribute': 'expr46',
-          'selector': '[expr46]',
+          'redundantAttribute': 'expr53',
+          'selector': '[expr53]',
 
-          'template': template('<slot expr47="expr47"></slot>', [{
+          'template': template('<slot expr54="expr54"></slot>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'style',
@@ -163,8 +163,8 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr47',
-            'selector': '[expr47]'
+            'redundantAttribute': 'expr54',
+            'selector': '[expr54]'
           }])
         }, {
           'type': bindingTypes.IF,
@@ -173,10 +173,10 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
             return scope.isIcon();
           },
 
-          'redundantAttribute': 'expr48',
-          'selector': '[expr48]',
+          'redundantAttribute': 'expr55',
+          'selector': '[expr55]',
 
-          'template': template('<rm-icon expr49="expr49"></rm-icon>', [{
+          'template': template('<rm-icon expr56="expr56"></rm-icon>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'disabled',
@@ -202,14 +202,14 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr50="expr50"></slot>',
+              'html': '<slot expr57="expr57"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr50',
-                'selector': '[expr50]'
+                'redundantAttribute': 'expr57',
+                'selector': '[expr57]'
               }]
             }],
 
@@ -222,8 +222,8 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr49',
-            'selector': '[expr49]'
+            'redundantAttribute': 'expr56',
+            'selector': '[expr56]'
           }])
         }]);
       },

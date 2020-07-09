@@ -239,10 +239,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr164="expr164" ref="bar"><slot expr165="expr165"></slot></div>',
+          '<div expr168="expr168" ref="bar"><slot expr169="expr169"></slot></div>',
           [{
-            'redundantAttribute': 'expr164',
-            'selector': '[expr164]',
+            'redundantAttribute': 'expr168',
+            'selector': '[expr168]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -270,8 +270,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr165',
-            'selector': '[expr165]'
+            'redundantAttribute': 'expr169',
+            'selector': '[expr169]'
           }]
         );
       },
@@ -557,13 +557,13 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr166="expr166"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr170="expr170"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr166',
-            'selector': '[expr166]'
+            'redundantAttribute': 'expr170',
+            'selector': '[expr170]'
           }]
         );
       },
@@ -953,7 +953,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr169="expr169"></button><button expr171="expr171"></button>',
+          '<button expr181="expr181"></button><button expr183="expr183"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -961,10 +961,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr169',
-            'selector': '[expr169]',
+            'redundantAttribute': 'expr181',
+            'selector': '[expr181]',
 
-            'template': template('<slot expr170="expr170"></slot>', [{
+            'template': template('<slot expr182="expr182"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -991,8 +991,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr170',
-              'selector': '[expr170]'
+              'redundantAttribute': 'expr182',
+              'selector': '[expr182]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -1001,10 +1001,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr171',
-            'selector': '[expr171]',
+            'redundantAttribute': 'expr183',
+            'selector': '[expr183]',
 
-            'template': template('<rm-icon expr172="expr172"></rm-icon>', [{
+            'template': template('<rm-icon expr184="expr184"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -1030,14 +1030,14 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr173="expr173"></slot>',
+                'html': '<slot expr185="expr185"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr173',
-                  'selector': '[expr173]'
+                  'redundantAttribute': 'expr185',
+                  'selector': '[expr185]'
                 }]
               }],
 
@@ -1050,8 +1050,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }
               }],
 
-              'redundantAttribute': 'expr172',
-              'selector': '[expr172]'
+              'redundantAttribute': 'expr184',
+              'selector': '[expr184]'
             }])
           }]
         );
@@ -1101,10 +1101,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr167="expr167" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr168="expr168" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr179="expr179" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr180="expr180" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr167',
-            'selector': '[expr167]',
+            'redundantAttribute': 'expr179',
+            'selector': '[expr179]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1122,8 +1122,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr168',
-            'selector': '[expr168]',
+            'redundantAttribute': 'expr180',
+            'selector': '[expr180]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1264,10 +1264,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr174="expr174" class="mdc-elevation--z24" ref="container"><div expr175="expr175" ref="title"><slot expr176="expr176" name="title"></slot></div><div expr177="expr177" ref="content"><slot expr178="expr178" name="content"></slot></div><div expr179="expr179" ref="actions"><slot expr180="expr180" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr172="expr172" class="mdc-elevation--z24" ref="container"><div expr173="expr173" ref="title"><slot expr174="expr174" name="title"></slot></div><div expr175="expr175" ref="content"><slot expr176="expr176" name="content"></slot></div><div expr177="expr177" ref="actions"><slot expr178="expr178" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr174',
-            'selector': '[expr174]',
+            'redundantAttribute': 'expr172',
+            'selector': '[expr172]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1277,6 +1277,24 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope._oncontainerclick;
               }
             }]
+          }, {
+            'redundantAttribute': 'expr173',
+            'selector': '[expr173]',
+
+            'expressions': [{
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'class',
+
+              'evaluate': function(scope) {
+                return ['rm-', scope.getSurface(), '-surface'].join('');
+              }
+            }]
+          }, {
+            'type': bindingTypes.SLOT,
+            'attributes': [],
+            'name': 'title',
+            'redundantAttribute': 'expr174',
+            'selector': '[expr174]'
           }, {
             'redundantAttribute': 'expr175',
             'selector': '[expr175]',
@@ -1292,7 +1310,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'title',
+            'name': 'content',
             'redundantAttribute': 'expr176',
             'selector': '[expr176]'
           }, {
@@ -1310,27 +1328,9 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'content',
+            'name': 'actions',
             'redundantAttribute': 'expr178',
             'selector': '[expr178]'
-          }, {
-            'redundantAttribute': 'expr179',
-            'selector': '[expr179]',
-
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'class',
-
-              'evaluate': function(scope) {
-                return ['rm-', scope.getSurface(), '-surface'].join('');
-              }
-            }]
-          }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'actions',
-            'redundantAttribute': 'expr180',
-            'selector': '[expr180]'
           }]
         );
       },
@@ -1353,7 +1353,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       'exports': {},
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr181="expr181"></slot>', [{
+        return template('<slot expr171="expr171"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'class',
@@ -1366,8 +1366,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr181',
-          'selector': '[expr181]'
+          'redundantAttribute': 'expr171',
+          'selector': '[expr171]'
         }]);
       },
 
@@ -1441,10 +1441,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr194="expr194" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr195="expr195" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr187="expr187" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr188="expr188" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr194',
-            'selector': '[expr194]',
+            'redundantAttribute': 'expr187',
+            'selector': '[expr187]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -1461,8 +1461,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr195',
-            'selector': '[expr195]',
+            'redundantAttribute': 'expr188',
+            'selector': '[expr188]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1500,12 +1500,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr196="expr196"></slot>', [{
+        return template('<slot expr186="expr186"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr196',
-          'selector': '[expr196]'
+          'redundantAttribute': 'expr186',
+          'selector': '[expr186]'
         }]);
       },
 
@@ -1953,16 +1953,16 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="raw_options"><slot expr182="expr182"></slot></div><select expr183="expr183" ref="form-element" tabindex="-1"><option value></option><option expr184="expr184"></option></select><div ref="outlined-margin-top"></div><div expr185="expr185" ref="container"><div ref="border"></div><div ref="input-container"><div expr186="expr186" ref="label"> </div><input expr187="expr187" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr188="expr188" value label skip-filter ref="option">&nbsp;</div><div expr189="expr189" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr190="expr190" style="font-size: .75em;"> </div></div>',
+          '<div ref="raw_options"><slot expr193="expr193"></slot></div><select expr194="expr194" ref="form-element" tabindex="-1"><option value></option><option expr195="expr195"></option></select><div ref="outlined-margin-top"></div><div expr196="expr196" ref="container"><div ref="border"></div><div ref="input-container"><div expr197="expr197" ref="label"> </div><input expr198="expr198" ref="input" type="text"/><div ref="value"></div></div><div ref="basic-underline"></div><div ref="underline"></div><div ref="menu" class="mdc-elevation--z8"><div expr199="expr199" value label skip-filter ref="option">&nbsp;</div><div expr200="expr200" ref="option"></div></div><div ref="arrow"></div></div><div style="height: 1.25em;"><div expr201="expr201" style="font-size: .75em;"> </div></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr182',
-            'selector': '[expr182]'
+            'redundantAttribute': 'expr193',
+            'selector': '[expr193]'
           }, {
-            'redundantAttribute': 'expr183',
-            'selector': '[expr183]',
+            'redundantAttribute': 'expr194',
+            'selector': '[expr194]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1995,8 +1995,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }]
             }]),
 
-            'redundantAttribute': 'expr184',
-            'selector': '[expr184]',
+            'redundantAttribute': 'expr195',
+            'selector': '[expr195]',
             'itemName': 'option',
             'indexName': null,
 
@@ -2004,8 +2004,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr185',
-            'selector': '[expr185]',
+            'redundantAttribute': 'expr196',
+            'selector': '[expr196]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2020,8 +2020,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr186',
-            'selector': '[expr186]',
+            'redundantAttribute': 'expr197',
+            'selector': '[expr197]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2032,8 +2032,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr187',
-            'selector': '[expr187]',
+            'redundantAttribute': 'expr198',
+            'selector': '[expr198]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2050,8 +2050,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr188',
-            'selector': '[expr188]',
+            'redundantAttribute': 'expr199',
+            'selector': '[expr199]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2144,8 +2144,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }]
             }]),
 
-            'redundantAttribute': 'expr189',
-            'selector': '[expr189]',
+            'redundantAttribute': 'expr200',
+            'selector': '[expr200]',
             'itemName': 'option',
             'indexName': null,
 
@@ -2153,8 +2153,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.getOptions();
             }
           }, {
-            'redundantAttribute': 'expr190',
-            'selector': '[expr190]',
+            'redundantAttribute': 'expr201',
+            'selector': '[expr201]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2174,11 +2174,33 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
     const PAGE_INDEX = Symbol("page-index");
 
     var TabbedPagesComponent = {
-      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; transition: transform ease-in-out 200ms; font-size: initial; }`,
+      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; height: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; height: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; }`,
 
       'exports': {
         onMounted() {
             this._manipulate();
+            let width = this.root.getBoundingClientRect().width;
+            const frame = () => {
+                if (!this.root.isConnected) {
+                    return;
+                }
+                const newWidth = this.root.getBoundingClientRect().width;
+                if (newWidth !== width) {
+                    this._updateIndicator(true);
+                    width = newWidth;
+                }
+                window.requestAnimationFrame(frame);
+            };
+            window.requestAnimationFrame(frame);
+        },
+
+        onBeforeUpdate() {
+            if (this.state.selectedIndex != null) {
+                this.state.selectedIndex = Math.round(this.state.selectedIndex);
+            }
+            if (isNaN(this.state.selectedIndex)) {
+                delete this.state.selectedIndex;
+            }
         },
 
         onUpdated() {
@@ -2248,7 +2270,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                     tabButton = tabContainer.insertBefore(document.createElement("div"), tabContainer.children[index]);
                 }
                 // scroll to selected index
-                page.style.transform = "translateX(-" + (this.getSelectedIndex() * 100) + "%)";
+                page.style.transition = this.state.instant ? "none" : "";
+                page.style.transform = "translateX(-" + ((this.getSelectedIndex() + this.getMotion()) * 100) + "%)";
                 if (tabButton != null) {
                     tabButton.addEventListener("click", () => {
                         this.setSelectedIndex(index);
@@ -2276,13 +2299,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 pageContainer.removeChild(page);
             }
 
-            // set display to correct position and size
-            this.root
-                .firstElementChild // SCROLLBAR HIDER
-                .firstElementChild // HEADER
-                .children[1]       // INDICATOR
-                .style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`
-            ;
+            // set indicator to correct position and size
+            this._updateIndicator(!update || this.state.instant);
 
             // hide scrollbar, if visible
             const header = this.root
@@ -2292,17 +2310,30 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             const rect = header.getBoundingClientRect();
             header.style.marginBottom = header.clientHeight - rect.height + "px";
 
-            const selectedIndex = this.getSelectedIndex();
-            const slot = this.getSlotAt(selectedIndex);
-            const el = pageContainer.children[selectedIndex];
-            let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-            if (instance == null) {
-                instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
-                instance.mount(el);
+            if (!this.state.instant) {
+                const selectedIndex = this.getSelectedIndex();
+                const slot = this.getSlotAt(selectedIndex);
+                const el = pageContainer.children[selectedIndex];
+                let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                if (instance == null) {
+                    instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
+                    instance.mount(el);
+                }
+                if (update) {
+                    instance.update();
+                }
             }
-            if (update) {
-                instance.update();
-            }
+            delete this.state.instant;
+        },
+
+        _updateIndicator(instant = false) {
+            const indicator = this.root
+                .firstElementChild // SCROLLBAR HIDER
+                .firstElementChild // HEADER
+                .children[1]       // INDICATOR
+            ;
+            indicator.style.transition = instant ? "none" : "";
+            indicator.style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`;
         },
 
         _getUpdatedIndexOf(index) {
@@ -2320,6 +2351,69 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             return index;
         },
 
+        _applyMotion() {
+            let motion = Math.round(this.getMotion());
+            delete this.state.motion;
+            if (motion === 0) {
+                this.update();
+                return;
+            }
+            this.setSelectedIndex(this.getSelectedIndex() + motion);
+        },
+
+        _touchIdentifier: null,
+
+        _startMotion(event) {
+            if (this._touchIdentifier != null) {
+                return;
+            }
+            const touch = event.targetTouches[0];
+            const identifier = this._touchIdentifier = touch.identifier;
+            const startX = touch.clientX;
+            let lastDirection = null;
+            const updateMotion = event => {
+                let index;
+                if (!Array.from(event.changedTouches).some((touch, i) => {
+                    index = i;
+                    return touch.identifier === identifier;
+                })) {
+                    return;
+                }
+                const lastMotion = this.getMotion();
+                const touch = event.changedTouches[index];
+                const endX = touch.clientX;
+                const delta = endX - startX;
+                this.update({ motion: -delta / this.root.getBoundingClientRect().width, instant: true });
+                const newMotion = this.getMotion();
+                if (newMotion !== lastMotion) {
+                    lastDirection = newMotion > lastMotion ? 1 : -1;
+                }
+            };
+            const endMotion = event => {
+                if (!Array.from(event.changedTouches).some((touch, i) => {
+                    return touch.identifier === identifier;
+                })) {
+                    return;
+                }
+                if (lastDirection != null) {
+                    const motion = this.getMotion();
+                    if (motion < 0) {
+                        this.state.motion = lastDirection < 0 ? -1 : 0;
+                    } else {
+                        this.state.motion = lastDirection > 0 ? 1 : 0;
+                    }
+                    this._applyMotion();
+                }
+                this._touchIdentifier = null;
+                this.root.removeEventListener("touchend", endMotion);
+                this.root.removeEventListener("touchcancel", endMotion);
+                this.root.removeEventListener("touchmove", updateMotion);
+            };
+            this.root.addEventListener("touchend", endMotion);
+            this.root.addEventListener("touchcancel", endMotion);
+            this.root.addEventListener("touchmove", updateMotion);
+        },
+
         getSlotAt(index) {
             return this.slots[this._getRawIndexOf(index)];
         },
@@ -2331,7 +2425,6 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
         _lastSelectedIndexPropValue: undefined,
 
         getSelectedIndex() {
-            // this._updateIndices();
             if (this.props.selectedIndex !== this._lastSelectedIndexPropValue) {
                 this._lastSelectedIndexPropValue = this.props.selectedIndex;
                 const selectedIndex = parseInt(this.props.selectedIndex, 10);
@@ -2369,13 +2462,26 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 .children[selectedIndex] // TAB BUTTON
                 .getBoundingClientRect()
             ;
-            return rect.left - 
-                this.root.getBoundingClientRect().left +
+            const delta =  this.root.getBoundingClientRect().left +
                 this.root
                 .firstElementChild // SCROLLBAR HIDER
                 .firstElementChild // HEADER
                 .scrollLeft
             ;
+            let left = rect.left - delta;
+            const motion = this.getMotion();
+            if (motion !== 0) {
+                const index = selectedIndex + (motion > 0 ? 1 : -1);
+                const rect = this.root
+                    .firstElementChild // SCROLLBAR HIDER
+                    .firstElementChild // HEADER
+                    .firstElementChild // TAB CONTAINER
+                    .children[index] // TAB BUTTON
+                    .getBoundingClientRect()
+                ;
+                left += (((rect.left - delta) - left) * Math.abs(motion));
+            }
+            return left;
         },
 
         getIndicatorWidth() {
@@ -2383,20 +2489,61 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             if (selectedIndex == null) {
                 return 0;
             }
-            return this.root
+            let width = this.root
                 .firstElementChild // SCROLLBAR HIDER
                 .firstElementChild // HEADER
                 .firstElementChild // TAB CONTAINER
                 .children[selectedIndex] // TAB BUTTON
                 .getBoundingClientRect().width
             ;
+            const motion = this.getMotion();
+            if (motion !== 0) {
+                const index = selectedIndex + (motion > 0 ? 1 : -1);
+                const rect = this.root
+                    .firstElementChild // SCROLLBAR HIDER
+                    .firstElementChild // HEADER
+                    .firstElementChild // TAB CONTAINER
+                    .children[index] // TAB BUTTON
+                    .getBoundingClientRect()
+                ;
+                width += ((rect.width - width) * Math.abs(motion));
+            }
+            return width;
+        },
+
+        getMotion() {
+            if (this.state.motion == null) {
+                return 0;
+            }
+            let motion = parseFloat(this.state.motion, 10);
+            if (isNaN(motion)) {
+                return 0;
+            }
+            motion = Math.max(Math.min(1, motion), -1);
+            const index = this.getSelectedIndex();
+            if (index === 0 && motion < 0 || index === this.getLength() - 1 && motion > 0) {
+                return 0;
+            }
+            return motion;
         }
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div></div>',
-          []
+          '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div expr206="expr206"></div>',
+          [{
+            'redundantAttribute': 'expr206',
+            'selector': '[expr206]',
+
+            'expressions': [{
+              'type': expressionTypes.EVENT,
+              'name': 'ontouchstart',
+
+              'evaluate': function(scope) {
+                return scope._startMotion;
+              }
+            }]
+          }]
         );
       },
 
@@ -2490,24 +2637,24 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr197="expr197"></div>', [{
+        return template('<div expr202="expr202"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr197',
-          'selector': '[expr197]',
+          'redundantAttribute': 'expr202',
+          'selector': '[expr202]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr198="expr198" ref="tab"></div></div><div expr200="expr200" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr203="expr203" ref="tab"></div></div><div expr205="expr205" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr199="expr199" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr204="expr204" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -2524,8 +2671,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr199',
-                'selector': '[expr199]',
+                'redundantAttribute': 'expr204',
+                'selector': '[expr204]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -2537,8 +2684,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr198',
-              'selector': '[expr198]',
+              'redundantAttribute': 'expr203',
+              'selector': '[expr203]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -2546,8 +2693,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr200',
-              'selector': '[expr200]',
+              'redundantAttribute': 'expr205',
+              'selector': '[expr205]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -2674,10 +2821,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr191="expr191" ref="label"> </div><textarea expr192="expr192"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr193="expr193" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr207="expr207" ref="label"> </div><textarea expr208="expr208"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr209="expr209" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr191',
-            'selector': '[expr191]',
+            'redundantAttribute': 'expr207',
+            'selector': '[expr207]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2688,8 +2835,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr192',
-            'selector': '[expr192]',
+            'redundantAttribute': 'expr208',
+            'selector': '[expr208]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2707,8 +2854,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr193',
-            'selector': '[expr193]',
+            'redundantAttribute': 'expr209',
+            'selector': '[expr209]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2842,10 +2989,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr201="expr201" ref="label"> </div><input expr202="expr202"/><div expr203="expr203" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr204="expr204" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr189="expr189" ref="label"> </div><input expr190="expr190"/><div expr191="expr191" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr192="expr192" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr201',
-            'selector': '[expr201]',
+            'redundantAttribute': 'expr189',
+            'selector': '[expr189]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2856,8 +3003,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr202',
-            'selector': '[expr202]',
+            'redundantAttribute': 'expr190',
+            'selector': '[expr190]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -2895,8 +3042,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.isDisabled();
             },
 
-            'redundantAttribute': 'expr203',
-            'selector': '[expr203]',
+            'redundantAttribute': 'expr191',
+            'selector': '[expr191]',
 
             'template': template(' ', [{
               'expressions': [{
@@ -2909,8 +3056,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }]
             }])
           }, {
-            'redundantAttribute': 'expr204',
-            'selector': '[expr204]',
+            'redundantAttribute': 'expr192',
+            'selector': '[expr192]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
