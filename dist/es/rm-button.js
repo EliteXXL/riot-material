@@ -128,7 +128,7 @@ var rmButton = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<button expr132="expr132"></button><button expr134="expr134"></button>',
+      '<button expr124="expr124"></button><button expr126="expr126"></button>',
       [{
         'type': bindingTypes.IF,
 
@@ -136,10 +136,10 @@ var rmButton = {
           return !scope.isIcon();
         },
 
-        'redundantAttribute': 'expr132',
-        'selector': '[expr132]',
+        'redundantAttribute': 'expr124',
+        'selector': '[expr124]',
 
-        'template': template('<slot expr133="expr133"></slot>', [{
+        'template': template('<slot expr125="expr125"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'style',
@@ -166,8 +166,8 @@ var rmButton = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr133',
-          'selector': '[expr133]'
+          'redundantAttribute': 'expr125',
+          'selector': '[expr125]'
         }])
       }, {
         'type': bindingTypes.IF,
@@ -176,10 +176,10 @@ var rmButton = {
           return scope.isIcon();
         },
 
-        'redundantAttribute': 'expr134',
-        'selector': '[expr134]',
+        'redundantAttribute': 'expr126',
+        'selector': '[expr126]',
 
-        'template': template('<rm-icon expr135="expr135"></rm-icon>', [{
+        'template': template('<rm-icon expr127="expr127"></rm-icon>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'disabled',
@@ -205,14 +205,14 @@ var rmButton = {
 
           'slots': [{
             'id': 'default',
-            'html': '<slot expr136="expr136"></slot>',
+            'html': '<slot expr128="expr128"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr136',
-              'selector': '[expr136]'
+              'redundantAttribute': 'expr128',
+              'selector': '[expr128]'
             }]
           }],
 
@@ -225,8 +225,8 @@ var rmButton = {
             }
           }],
 
-          'redundantAttribute': 'expr135',
-          'selector': '[expr135]'
+          'redundantAttribute': 'expr127',
+          'selector': '[expr127]'
         }])
       }]
     );

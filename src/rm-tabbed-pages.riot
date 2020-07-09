@@ -1,17 +1,11 @@
 <rm-tabbed-pages>
-    <div> <!-- SCROLLBAR HIDER -->
+    <div style="transform: scaleY(1);"> <!-- SCROLLBAR HIDER -->
         <div> <!-- HEADER -->
-            <div> <!-- TAB CONTAINER -->
-                <div each={ (slot, index) in slots } onclick={ setSelectedIndex.bind(this, _getUpdatedIndexOf(index)) }>{
-                    slot.id
-                }</div> <!-- TAB BUTTON -->
-            </div> <!-- TAB CONTAINER -->
-            <div ref="indicator" style="transform: translateX({ getIndicatorLeft() }px) scaleX({ getIndicatorWidth() });"></div>
+            <div /> <!-- TAB CONTAINER -->
+            <div></div> <!-- INDICATOR -->
         </div> <!-- HEADER -->
     </div> <!-- SCROLLBAR HIDER -->
-    <span name={ slot.id } each={ slot in slots }
-        style="transform: translateX(-{ getSelectedIndex() * 100 }%);"
-    /> <!-- PAGE -->
+    <div /> <!-- PAGE CONTAINER -->
 
     <style>
         :host {
@@ -20,6 +14,7 @@
             width: 100%;
             display: block;
             font-size: 0;
+            transform: scaleY(1);
         }
 
         /* SCROLLBAR HIDER */
@@ -59,7 +54,7 @@
         }
         
         /* INDICATOR */
-        :host > div:first-child > div:first-child > [ref=indicator] {
+        :host > div:first-child > div:first-child > div:nth-child(2) {
             position: absolute;
             bottom: 0; left: 0;
             height: 2px; width: 1px;
@@ -70,7 +65,7 @@
         }
 
         /* PAGE */
-        :host > span {
+        :host > div:nth-child(2) > * {
             display: inline-block;
             width: 100%;
             transition: transform ease-in-out 200ms;
@@ -81,33 +76,11 @@
     <script>
         import * as riot from "riot";
 
+        const PAGE_INDEX = Symbol("page-index");
+
         export default {
             onMounted() {
                 this._manipulate();
-            },
-            onBeforeUpdate() {
-                const tabContainer = this.root
-                    .firstElementChild // SCROLLBAR HIDER
-                    .firstElementChild // HEADER
-                    .firstElementChild // TAB CONTAINER
-                ;
-                const hiddenTabs = this.getHiddenTabs();
-                for (let i = hiddenTabs.length - 1; i >= 0; i--) {
-                    const index = hiddenTabs[i];
-                    if (index >= this.slots.length) {
-                        continue;
-                    }
-                    // removing tab button at hidden index
-                    tabContainer.removeChild(tabContainer.children[index]);
-                    // unmount page at hidden index
-                    const page = this.root.children[index + 1];
-                    const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-                    if (instance != null) {
-                        instance.unmount();
-                    }
-                    // removing page at hidden index
-                    this.root.removeChild(page);
-                }
             },
             onUpdated() {
                 this._manipulate(true);
@@ -116,6 +89,7 @@
             _hiddenTabs: [],
             getHiddenTabs() {
                 if (this.props.hiddenTabs !== this._lastHiddenTabsPropValue) {
+                    let newHiddenTabs = [];
                     switch (typeof this.props.hiddenTabs) {
                         case "string": {
                             if (/^(\W*(\d+)\W*)+$/.test(this.props.hiddenTabs)) {
@@ -128,55 +102,87 @@
                                     }
                                     hiddenTabs.push(parseInt(match[0], 10));
                                 }
-                                this._hiddenTabs = hiddenTabs.filter(a => a >= 0).sort((a, b) => a > b);
-                            } else {
-                                this._hiddenTabs = [];
+                                newHiddenTabs = hiddenTabs.filter(a => a >= 0).sort((a, b) => a > b);
                             }
                             break;
                         }
                         case "number": {
-                            this._hiddenTabs = [ this.props.hiddenTabs ];
+                            newHiddenTabs = [ this.props.hiddenTabs ];
                             break;
                         }
                         case "object": {
                             if (Array.isArray(this.props.hiddenTabs)) {
-                                this._hiddenTabs = this.props.hiddenTabs.filter(item => {
+                                newHiddenTabs = this.props.hiddenTabs.filter(item => {
                                     return typeof item === "number" && item >= 0;
                                 }).sort((a, b) => a > b);
-                            } else {
-                                this._hiddenTabs = [];
                             }
                             break;
                         }
-                        default: {
-                            this._hiddenTabs = [];
-                        }
                     }
+                    this._hiddenTabs = newHiddenTabs;
                 }
                 return this._hiddenTabs;
             },
             _manipulate(update = false) {
-                // const tabContainer = this.root
-                //     .firstElementChild // SCROLLBAR HIDER
-                //     .firstElementChild // HEADER
-                //     .firstElementChild // TAB CONTAINER
-                // ;
-                // const hiddenTabs = this.getHiddenTabs();
-                // for (let i = hiddenTabs.length - 1; i >= 0; i++) {
-                //     const index = hiddenTabs[i];
-                //     if (index >= this.slots.length) {
-                //         continue;
-                //     }
-                //     console.log("hiding", index, tabContainer.children[index], this.root.children[index + 1]);
-                //     tabContainer.removeChild(tabContainer.children[index]);
-                //     const page = this.root.children[index + 1];
-                //     const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-                //     if (instance != null) {
-                //         instance.unmount();
-                //     }
-                //     this.root.removeChild(page);
-                // }
+                const tabContainer = this.root
+                    .firstElementChild // SCROLLBAR HIDER
+                    .firstElementChild // HEADER
+                    .firstElementChild // TAB CONTAINER
+                ;
+                const pageContainer = this.root.children[1];
 
+                // restore hidden tabs and set correct view
+                this.slots.forEach((slot, index) => {
+                    let tabButton = null;
+                    let page;
+                    if (index >= pageContainer.children.length) {
+                        page = pageContainer.appendChild(document.createElement("div"));
+                        page[PAGE_INDEX] = index;
+                        tabButton = tabContainer.appendChild(document.createElement("div"));
+                        index = this._getUpdatedIndexOf(index);
+                    } else if (index !== (page = pageContainer.children[index])[PAGE_INDEX]) {
+                        page = pageContainer.insertBefore(document.createElement("div"), pageContainer.children[index]);
+                        page[PAGE_INDEX] = index;
+                        tabButton = tabContainer.insertBefore(document.createElement("div"), tabContainer.children[index]);
+                    }
+                    // scroll to selected index
+                    page.style.transform = "translateX(-" + (this.getSelectedIndex() * 100) + "%)";
+                    if (tabButton != null) {
+                        tabButton.addEventListener("click", () => {
+                            this.setSelectedIndex(index);
+                        });
+                        tabButton.innerText = slot.id;
+                    }
+                });
+
+                // hide desired tabs
+                const hiddenTabs = this.getHiddenTabs();
+                for (let i = hiddenTabs.length - 1; i >= 0; i--) {
+                    const index = hiddenTabs[i];
+                    if (index >= this.slots.length) {
+                        continue;
+                    }
+                    // removing tab button at hidden index
+                    tabContainer.removeChild(tabContainer.children[index]);
+                    // unmount page at hidden index
+                    const page = pageContainer.children[index];
+                    const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                    if (instance != null) {
+                        instance.unmount();
+                    }
+                    // removing page at hidden index
+                    pageContainer.removeChild(page);
+                }
+
+                // set display to correct position and size
+                this.root
+                    .firstElementChild // SCROLLBAR HIDER
+                    .firstElementChild // HEADER
+                    .children[1]       // INDICATOR
+                    .style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`
+                ;
+
+                // hide scrollbar, if visible
                 const header = this.root
                     .firstElementChild // SCROLLBAR HIDER
                     .firstElementChild // HEADER
@@ -186,7 +192,7 @@
 
                 const selectedIndex = this.getSelectedIndex();
                 const slot = this.getSlotAt(selectedIndex);
-                const el = this.root.querySelector(`[name="${slot.id}"]`);
+                const el = pageContainer.children[selectedIndex];
                 let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                 if (instance == null) {
                     instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
@@ -217,6 +223,7 @@
             },
             _lastSelectedIndexPropValue: undefined,
             getSelectedIndex() {
+                // this._updateIndices();
                 if (this.props.selectedIndex !== this._lastSelectedIndexPropValue) {
                     this._lastSelectedIndexPropValue = this.props.selectedIndex;
                     const selectedIndex = parseInt(this.props.selectedIndex, 10);
@@ -272,17 +279,7 @@
                     .children[selectedIndex] // TAB BUTTON
                     .getBoundingClientRect().width
                 ;
-            }// ,
-            // getScrollbarHeight() {
-            //     const div = document.body.appendChild(document.createElement("div"));
-            //     div.style.width = div.style.height = "100px";
-            //     div.style.overflow = "scroll";
-            //     const rect = div.getBoundingClientRect();
-            //     const scrollbarHeight = rect.height - div.clientHeight;
-            //     const scrollbarWidth = rect.width - div.clientWidth;
-            //     document.body.removeChild(div);
-            //     return scrollbarHeight;
-            // }
+            }
         }
     </script>
 </rm-tabbed-pages>

@@ -1,36 +1,13 @@
 import { __ } from 'riot';
 
+const PAGE_INDEX = Symbol("page-index");
+
 var rmTabbedPages = {
-  'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > [ref=indicator],[is="rm-tabbed-pages"] > div:first-child > div:first-child > [ref=indicator]{ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > span,[is="rm-tabbed-pages"] > span{ display: inline-block; width: 100%; transition: transform ease-in-out 200ms; font-size: initial; }`,
+  'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; transition: transform ease-in-out 200ms; font-size: initial; }`,
 
   'exports': {
     onMounted() {
         this._manipulate();
-    },
-
-    onBeforeUpdate() {
-        const tabContainer = this.root
-            .firstElementChild // SCROLLBAR HIDER
-            .firstElementChild // HEADER
-            .firstElementChild // TAB CONTAINER
-        ;
-        const hiddenTabs = this.getHiddenTabs();
-        for (let i = hiddenTabs.length - 1; i >= 0; i--) {
-            const index = hiddenTabs[i];
-            if (index >= this.slots.length) {
-                continue;
-            }
-            // removing tab button at hidden index
-            tabContainer.removeChild(tabContainer.children[index]);
-            // unmount page at hidden index
-            const page = this.root.children[index + 1];
-            const instance = page[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-            if (instance != null) {
-                instance.unmount();
-            }
-            // removing page at hidden index
-            this.root.removeChild(page);
-        }
     },
 
     onUpdated() {
@@ -42,6 +19,7 @@ var rmTabbedPages = {
 
     getHiddenTabs() {
         if (this.props.hiddenTabs !== this._lastHiddenTabsPropValue) {
+            let newHiddenTabs = [];
             switch (typeof this.props.hiddenTabs) {
                 case "string": {
                     if (/^(\W*(\d+)\W*)+$/.test(this.props.hiddenTabs)) {
@@ -54,56 +32,88 @@ var rmTabbedPages = {
                             }
                             hiddenTabs.push(parseInt(match[0], 10));
                         }
-                        this._hiddenTabs = hiddenTabs.filter(a => a >= 0).sort((a, b) => a > b);
-                    } else {
-                        this._hiddenTabs = [];
+                        newHiddenTabs = hiddenTabs.filter(a => a >= 0).sort((a, b) => a > b);
                     }
                     break;
                 }
                 case "number": {
-                    this._hiddenTabs = [ this.props.hiddenTabs ];
+                    newHiddenTabs = [ this.props.hiddenTabs ];
                     break;
                 }
                 case "object": {
                     if (Array.isArray(this.props.hiddenTabs)) {
-                        this._hiddenTabs = this.props.hiddenTabs.filter(item => {
+                        newHiddenTabs = this.props.hiddenTabs.filter(item => {
                             return typeof item === "number" && item >= 0;
                         }).sort((a, b) => a > b);
-                    } else {
-                        this._hiddenTabs = [];
                     }
                     break;
                 }
-                default: {
-                    this._hiddenTabs = [];
-                }
             }
+            this._hiddenTabs = newHiddenTabs;
         }
         return this._hiddenTabs;
     },
 
     _manipulate(update = false) {
-        // const tabContainer = this.root
-        //     .firstElementChild // SCROLLBAR HIDER
-        //     .firstElementChild // HEADER
-        //     .firstElementChild // TAB CONTAINER
-        // ;
-        // const hiddenTabs = this.getHiddenTabs();
-        // for (let i = hiddenTabs.length - 1; i >= 0; i++) {
-        //     const index = hiddenTabs[i];
-        //     if (index >= this.slots.length) {
-        //         continue;
-        //     }
-        //     console.log("hiding", index, tabContainer.children[index], this.root.children[index + 1]);
-        //     tabContainer.removeChild(tabContainer.children[index]);
-        //     const page = this.root.children[index + 1];
-        //     const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-        //     if (instance != null) {
-        //         instance.unmount();
-        //     }
-        //     this.root.removeChild(page);
-        // }
+        const tabContainer = this.root
+            .firstElementChild // SCROLLBAR HIDER
+            .firstElementChild // HEADER
+            .firstElementChild // TAB CONTAINER
+        ;
+        const pageContainer = this.root.children[1];
 
+        // restore hidden tabs and set correct view
+        this.slots.forEach((slot, index) => {
+            let tabButton = null;
+            let page;
+            if (index >= pageContainer.children.length) {
+                page = pageContainer.appendChild(document.createElement("div"));
+                page[PAGE_INDEX] = index;
+                tabButton = tabContainer.appendChild(document.createElement("div"));
+                index = this._getUpdatedIndexOf(index);
+            } else if (index !== (page = pageContainer.children[index])[PAGE_INDEX]) {
+                page = pageContainer.insertBefore(document.createElement("div"), pageContainer.children[index]);
+                page[PAGE_INDEX] = index;
+                tabButton = tabContainer.insertBefore(document.createElement("div"), tabContainer.children[index]);
+            }
+            // scroll to selected index
+            page.style.transform = "translateX(-" + (this.getSelectedIndex() * 100) + "%)";
+            if (tabButton != null) {
+                tabButton.addEventListener("click", () => {
+                    this.setSelectedIndex(index);
+                });
+                tabButton.innerText = slot.id;
+            }
+        });
+
+        // hide desired tabs
+        const hiddenTabs = this.getHiddenTabs();
+        for (let i = hiddenTabs.length - 1; i >= 0; i--) {
+            const index = hiddenTabs[i];
+            if (index >= this.slots.length) {
+                continue;
+            }
+            // removing tab button at hidden index
+            tabContainer.removeChild(tabContainer.children[index]);
+            // unmount page at hidden index
+            const page = pageContainer.children[index];
+            const instance = page[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+            if (instance != null) {
+                instance.unmount();
+            }
+            // removing page at hidden index
+            pageContainer.removeChild(page);
+        }
+
+        // set display to correct position and size
+        this.root
+            .firstElementChild // SCROLLBAR HIDER
+            .firstElementChild // HEADER
+            .children[1]       // INDICATOR
+            .style.transform = `translateX(${ this.getIndicatorLeft() }px) scaleX(${ this.getIndicatorWidth() })`
+        ;
+
+        // hide scrollbar, if visible
         const header = this.root
             .firstElementChild // SCROLLBAR HIDER
             .firstElementChild // HEADER
@@ -113,7 +123,7 @@ var rmTabbedPages = {
 
         const selectedIndex = this.getSelectedIndex();
         const slot = this.getSlotAt(selectedIndex);
-        const el = this.root.querySelector(`[name="${slot.id}"]`);
+        const el = pageContainer.children[selectedIndex];
         let instance = el[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
         if (instance == null) {
             instance = el[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = __.DOMBindings.template(slot.html, slot.bindings);
@@ -150,6 +160,7 @@ var rmTabbedPages = {
     _lastSelectedIndexPropValue: undefined,
 
     getSelectedIndex() {
+        // this._updateIndices();
         if (this.props.selectedIndex !== this._lastSelectedIndexPropValue) {
             this._lastSelectedIndexPropValue = this.props.selectedIndex;
             const selectedIndex = parseInt(this.props.selectedIndex, 10);
@@ -196,17 +207,6 @@ var rmTabbedPages = {
         ;
     },
 
-    // ,
-    // getScrollbarHeight() {
-    //     const div = document.body.appendChild(document.createElement("div"));
-    //     div.style.width = div.style.height = "100px";
-    //     div.style.overflow = "scroll";
-    //     const rect = div.getBoundingClientRect();
-    //     const scrollbarHeight = rect.height - div.clientHeight;
-    //     const scrollbarWidth = rect.width - div.clientWidth;
-    //     document.body.removeChild(div);
-    //     return scrollbarHeight;
-    // }
     getIndicatorWidth() {
         const selectedIndex = this.getSelectedIndex();
         if (selectedIndex == null) {
@@ -224,88 +224,8 @@ var rmTabbedPages = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div><div><div><div expr162="expr162"></div></div><div expr163="expr163" ref="indicator"></div></div></div><span expr164="expr164"></span>',
-      [{
-        'type': bindingTypes.EACH,
-        'getKey': null,
-        'condition': null,
-
-        'template': template(' ', [{
-          'expressions': [{
-            'type': expressionTypes.TEXT,
-            'childNodeIndex': 0,
-
-            'evaluate': function(scope) {
-              return scope.slot.id;
-            }
-          }, {
-            'type': expressionTypes.EVENT,
-            'name': 'onclick',
-
-            'evaluate': function(scope) {
-              return scope.setSelectedIndex.bind(scope, scope._getUpdatedIndexOf(scope.index));
-            }
-          }]
-        }]),
-
-        'redundantAttribute': 'expr162',
-        'selector': '[expr162]',
-        'itemName': 'slot',
-        'indexName': 'index',
-
-        'evaluate': function(scope) {
-          return scope.slots;
-        }
-      }, {
-        'redundantAttribute': 'expr163',
-        'selector': '[expr163]',
-
-        'expressions': [{
-          'type': expressionTypes.ATTRIBUTE,
-          'name': 'style',
-
-          'evaluate': function(scope) {
-            return [
-              'transform: translateX(',
-              scope.getIndicatorLeft(),
-              'px) scaleX(',
-              scope.getIndicatorWidth(),
-              ');'
-            ].join('');
-          }
-        }]
-      }, {
-        'type': bindingTypes.EACH,
-        'getKey': null,
-        'condition': null,
-
-        'template': template(null, [{
-          'expressions': [{
-            'type': expressionTypes.ATTRIBUTE,
-            'name': 'name',
-
-            'evaluate': function(scope) {
-              return scope.slot.id;
-            }
-          }, {
-            'type': expressionTypes.ATTRIBUTE,
-            'name': 'style',
-
-            'evaluate': function(scope) {
-              return ['transform: translateX(-', scope.getSelectedIndex() * 100, '%);'].join('');
-            }
-          }]
-        }]),
-
-        'redundantAttribute': 'expr164',
-        'selector': '[expr164]',
-        'itemName': 'slot',
-        'indexName': null,
-
-        'evaluate': function(scope) {
-          return scope.slots;
-        }
-      }]
+      '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div></div>',
+      []
     );
   },
 

@@ -87,24 +87,24 @@ define(['./ripple'], function (ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr33="expr33"></div>', [{
+        return template('<div expr30="expr30"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr33',
-          'selector': '[expr33]',
+          'redundantAttribute': 'expr30',
+          'selector': '[expr30]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr34="expr34" ref="tab"></div></div><div expr36="expr36" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr31="expr31" ref="tab"></div></div><div expr33="expr33" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr35="expr35" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr32="expr32" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -121,8 +121,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr35',
-                'selector': '[expr35]',
+                'redundantAttribute': 'expr32',
+                'selector': '[expr32]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -134,8 +134,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr34',
-              'selector': '[expr34]',
+              'redundantAttribute': 'expr31',
+              'selector': '[expr31]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -143,8 +143,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr36',
-              'selector': '[expr36]',
+              'redundantAttribute': 'expr33',
+              'selector': '[expr33]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,

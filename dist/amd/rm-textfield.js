@@ -117,10 +117,10 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr81="expr81" ref="label"> </div><input expr82="expr82"/><div expr83="expr83" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr84="expr84" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="input-container"><div expr71="expr71" ref="label"> </div><input expr72="expr72"/><div expr73="expr73" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"></div></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em; margin-bottom: -1.25em; pointer-events: none;"><div expr74="expr74" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr81',
-            'selector': '[expr81]',
+            'redundantAttribute': 'expr71',
+            'selector': '[expr71]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -131,8 +131,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr82',
-            'selector': '[expr82]',
+            'redundantAttribute': 'expr72',
+            'selector': '[expr72]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -170,8 +170,8 @@ define(function () { 'use strict';
               return scope.isDisabled();
             },
 
-            'redundantAttribute': 'expr83',
-            'selector': '[expr83]',
+            'redundantAttribute': 'expr73',
+            'selector': '[expr73]',
 
             'template': template(' ', [{
               'expressions': [{
@@ -184,8 +184,8 @@ define(function () { 'use strict';
               }]
             }])
           }, {
-            'redundantAttribute': 'expr84',
-            'selector': '[expr84]',
+            'redundantAttribute': 'expr74',
+            'selector': '[expr74]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
