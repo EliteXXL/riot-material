@@ -1,8 +1,10 @@
 <rm-button>
-    <button if={ !isIcon() } style={ props.buttonStyle } disabled={ isDisabled() } type={ props.type }><slot /></button>
-    <button if={ isIcon() } disabled={ isDisabled() } type={ props.type }>
-        <rm-icon style={ props.iconStyle }><slot /></rm-icon>
-    </button>
+    <button if={ !isIcon() } style={ props.buttonStyle } disabled={ isDisabled() }
+        type={ props.type } tabindex={ props.tabindex }
+    ><slot /></button>
+    <button if={ isIcon() } disabled={ isDisabled() }
+        type={ props.type } tabindex={ props.tabindex }
+    ><rm-icon style={ props.iconStyle }><slot /></rm-icon></button>
 
     <!--  https://material.angular.io/components/button/examples  -->
     <style>
@@ -46,14 +48,20 @@
         button::-moz-focus-inner {
             border: none;
         }
-        :host[variant="icon"] {
+        :host[variant=icon] {
             border-radius: 50%;
         }
-        :host[variant="icon"] button {
-            padding: 8px;
+        :host[variant=icon] button {
+            padding: 0.5714285714285714em;
+            height: 2.857142857142857em;
+            width: 2.857142857142857em;
         }
-        :host[variant="icon"] {
-            height: 2.8571em;
+        :host[variant=icon] button rm-icon {
+            font-size: 1.7142857142857142em;
+        }
+        :host[variant=icon] {
+            /* height: 2.8571em; */
+            height: unset;
         }
         :host[variant="unelevated"],
         :host[variant="raised"] {
@@ -348,11 +356,26 @@
             box-shadow: none;
             cursor: initial;
         }
+
+        :host[variant=icon][dense] {
+            margin-right: 0.2857142857142857em;
+        }
+        :host[variant=icon][dense] button {
+            height: unset;
+            width: unset;
+            padding: 0;
+        }
+        
+        :host[variant]:last-child,
+        :host:last-child {
+            margin-right: 0;
+        }
     </style>
 
     <script>
         import { ripple } from "./ripple";
         import * as riot from "riot";
+        import IconComponent from "./rm-icon.riot";
 
         export default {
             onMounted() {
@@ -377,7 +400,7 @@
                     button.classList.add("mdc-elevation-transition");
                     button.classList.add("mdc-elevation--z2");
                 }
-                let rippleOptions = this.isIcon() ? { centered: true, unbounded: true, radius: 20 } : {};
+                let rippleOptions = this.isIcon() ? { centered: true } : {};
                 if (!this.isRaised() && !this.isUnelevated()) {
                     rippleOptions.highlight = true;
                 }
@@ -392,8 +415,9 @@
                     let rippleKey = rippleKeyMatch[1];
                     rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
                     let floatValue = parseFloat(value);
-                    rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" : floatValue;
+                    rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;
                 });
+                rippleOptions.detectLabel = false;
                 let rippleObj = ripple(button, rippleOptions);
                 let shouldBeClick = false;
                 button.addEventListener("keydown", event => {
@@ -469,6 +493,9 @@
                     this.root.removeAttribute("disabled");
                 }
                 this.update();
+            },
+            components: {
+                "rm-icon": IconComponent
             }
         }
     </script>

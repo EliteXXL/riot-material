@@ -5,24 +5,20 @@ styleInject(css_248z);
 
 var rmIcon = {
   'css': `rm-icon,[is="rm-icon"]{ font-size: 24px; }`,
-  'exports': {},
+
+  'exports': {
+    onMounted() {
+        this.root.classList.add("material-icons");
+    }
+  },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr136="expr136"></slot>', [{
-      'expressions': [{
-        'type': expressionTypes.ATTRIBUTE,
-        'name': 'class',
-
-        'evaluate': function(scope) {
-          return 'material-icons';
-        }
-      }]
-    }, {
+    return template('<slot expr188="expr188"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr136',
-      'selector': '[expr136]'
+      'redundantAttribute': 'expr188',
+      'selector': '[expr188]'
     }]);
   },
 

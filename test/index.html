@@ -8,10 +8,11 @@
     <body class="rm-background" style="margin: 0;">
         <test></test>
         
-        <script src="./riot+compiler.min.js"></script>
+        <script src="../node_modules/riot/riot+compiler.js"></script>
         <script src="../dist/umd.bundled.js"></script>
         <script type="riot" data-src="./test.riot"></script>
         <script type="riot" data-src="./custom-tab.riot"></script>
+        <script type="riot" data-src="./rm-textfield-tests.riot"></script>
 
         <script type="text/javascript">
             riot.compile().then(() => {

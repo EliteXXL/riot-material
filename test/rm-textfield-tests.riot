@@ -1,0 +1,32 @@
+<rm-textfield-tests>
+    <rm-textfield full-width label="Textfield"
+        disabled={ state.textfieldDisabled }
+        clearable={ state.textfieldClearable }
+        variant={ props.variant }
+    >
+        <rm-icon slot="leading" if={ state.textfieldLeading }>account_circle</rm-icon>
+        <span slot="trailing" style="vertical-align: middle;" if={ state.textfieldTrailing }>Kg</span>
+    </rm-textfield>
+    <div />
+    <rm-checkbox label="Disabled" onclick={ _ontextfielddisabled } />
+    <rm-checkbox label="Clearable" onclick={ _ontextfieldclearable } />
+    <rm-checkbox label="Leading" onclick={ _ontextfieldleading } />
+    <rm-checkbox label="Trailing" onclick={ _ontextfieldtrailing } />
+    
+    <script>
+        export default {
+            _ontextfielddisabled(event) {
+                this.update({ textfieldDisabled: event.target.checked });
+            },
+            _ontextfieldclearable(event) {
+                this.update({ textfieldClearable: event.target.checked });
+            },
+            _ontextfieldleading(event) {
+                this.update({ textfieldLeading: event.target.checked });
+            },
+            _ontextfieldtrailing(event) {
+                this.update({ textfieldTrailing: event.target.checked });
+            }
+        }
+    </script>
+</rm-textfield-tests>

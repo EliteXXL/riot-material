@@ -1,10 +1,31 @@
 <test>
-    <rm-tabbed-pages hidden-tabs={ !state.hide ? "1" : "" } selected-index="2">
-        <custom-tab slot="Page 1">
-            <div style="padding: 8px;">PAGE 1 - { Date.now() }</div>
+    <rm-tabbed-pages hidden-tabs={ !state.hide ? "1" : "" } selected-index="0">
+        <custom-tab slot="Inputs">
+            <rm-select label="Variant" onchange={ onchangeVariant } variant={ state.variant }>
+                <rm-menu-item value="flat" selected>Flat</rm-menu-item>
+                <rm-menu-item value="filled">Filled</rm-menu-item>
+                <rm-menu-item value="outlined">Outlined</rm-menu-item>
+            </rm-select>
+            <div />
+            <rm-textfield-tests variant={ state.variant }/>
+            <div />
+            <rm-select label="Select item" variant={ state.variant } disabled={ state.disabled }>
+                <rm-menu-item></rm-menu-item>
+                <rm-menu-item value="0">All</rm-menu-item>
+                <rm-list-subheader>Cars</rm-list-subheader>
+                <rm-menu-item short-inset label="Hyundai" value="1">Hyundai</rm-menu-item>
+                <rm-menu-item short-inset label="Fiat" value="2">Fiat</rm-menu-item>
+                <rm-menu-item short-inset label="BMW" value="3">BMW</rm-menu-item>
+            </rm-select>
+            <rm-select ref="creation" label="Filterable test" variant={ state.variant } filterable oninput={ _update } onchange={ _update } clearable disabled={ state.disabled }>
+                <rm-menu-item />
+                <rm-menu-item value="0">Prova</rm-menu-item>
+                <rm-menu-item value="1">Altro</rm-menu-item>
+                <rm-menu-item value="crea" label={ state.filter } if={ state.filter }>Crea "{ state.filter }"</rm-menu-item>
+            </rm-select>
         </custom-tab>
-        <div slot="Page LONG TITLE 2">
-            <div style="padding: 8px;">PAGE 2</div>
+        <div slot="Buttons">
+            <rm-button>TEST</rm-button>
         </div>
         <custom-tab slot="Page 3">
             <div style="padding: 8px;">PAGE 3</div>
@@ -14,7 +35,9 @@
     <script>
         export default {
             state: {
-                hide: true
+                hide: true,
+                variant: "flat",
+                disabled: false
             },
             onMounted() {
                 // setTimeout(() => {
@@ -23,6 +46,21 @@
                 //         this.update({ hide: true });
                 //     }, 2000);
                 // }, 2000);
+            },
+            onBeforeUpdate() {
+                this.state.filter = this.getFilter();
+            },
+            _update() {
+                this.update();
+            },
+            getFilter() {
+                return this.root.querySelector("[ref=creation]").label;
+            },
+            onchangeVariant(event) {
+                this.update({ variant: event.target.value });
+            },
+            onchangeDisabled(event) {
+                this.update({ disabled: event.target.checked });
             }
         }
     </script>

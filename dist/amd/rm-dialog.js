@@ -124,10 +124,10 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr65="expr65" class="mdc-elevation--z24" ref="container"><div expr66="expr66" ref="title"><slot expr67="expr67" name="title"></slot></div><div expr68="expr68" ref="content"><slot expr69="expr69" name="content"></slot></div><div expr70="expr70" ref="actions"><slot expr71="expr71" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr67="expr67" class="mdc-elevation--z24" ref="container"><div expr68="expr68" ref="title"><slot expr69="expr69" name="title"></slot></div><div expr70="expr70" ref="content"><slot expr71="expr71" name="content"></slot></div><div expr72="expr72" ref="actions"><slot expr73="expr73" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr65',
-            'selector': '[expr65]',
+            'redundantAttribute': 'expr67',
+            'selector': '[expr67]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -137,24 +137,6 @@ define(function () { 'use strict';
                 return scope._oncontainerclick;
               }
             }]
-          }, {
-            'redundantAttribute': 'expr66',
-            'selector': '[expr66]',
-
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'class',
-
-              'evaluate': function(scope) {
-                return ['rm-', scope.getSurface(), '-surface'].join('');
-              }
-            }]
-          }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'title',
-            'redundantAttribute': 'expr67',
-            'selector': '[expr67]'
           }, {
             'redundantAttribute': 'expr68',
             'selector': '[expr68]',
@@ -170,7 +152,7 @@ define(function () { 'use strict';
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'content',
+            'name': 'title',
             'redundantAttribute': 'expr69',
             'selector': '[expr69]'
           }, {
@@ -188,9 +170,27 @@ define(function () { 'use strict';
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
-            'name': 'actions',
+            'name': 'content',
             'redundantAttribute': 'expr71',
             'selector': '[expr71]'
+          }, {
+            'redundantAttribute': 'expr72',
+            'selector': '[expr72]',
+
+            'expressions': [{
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'class',
+
+              'evaluate': function(scope) {
+                return ['rm-', scope.getSurface(), '-surface'].join('');
+              }
+            }]
+          }, {
+            'type': bindingTypes.SLOT,
+            'attributes': [],
+            'name': 'actions',
+            'redundantAttribute': 'expr73',
+            'selector': '[expr73]'
           }]
         );
       },

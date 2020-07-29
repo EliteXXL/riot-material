@@ -112,9 +112,9 @@ define(['./elevation', './app-bar-utils'], function (elevation, utils) { 'use st
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr49="expr49" ref="bar"><slot expr50="expr50"></slot></div>', [{
-          'redundantAttribute': 'expr49',
-          'selector': '[expr49]',
+        return template('<div expr58="expr58" ref="bar"><slot expr59="expr59"></slot></div>', [{
+          'redundantAttribute': 'expr58',
+          'selector': '[expr58]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -142,8 +142,8 @@ define(['./elevation', './app-bar-utils'], function (elevation, utils) { 'use st
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr50',
-          'selector': '[expr50]'
+          'redundantAttribute': 'expr59',
+          'selector': '[expr59]'
         }]);
       },
 

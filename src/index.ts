@@ -5,6 +5,8 @@ import CheckboxComponent from "./rm-checkbox.riot";
 import DialogComponent from "./rm-dialog.riot";
 import DividerComponent from "./rm-divider.riot";
 import IconComponent from "./rm-icon.riot";
+import MenuComponent from "./rm-menu.riot";
+import MenuItemComponent from "./rm-menu-item.riot";
 import RadioComponent from "./rm-radio.riot";
 import RippleComponent from "./rm-ripple.riot";
 import SelectComponent from "./rm-select.riot";
@@ -12,6 +14,7 @@ import TabbedPagesComponent from "./rm-tabbed-pages.riot";
 import TabsComponent from "./rm-tabs.riot";
 import TextareaComponent from "./rm-textarea.riot";
 import TextfieldComponent from "./rm-textfield.riot";
+import TextfieldContainerComponent from "./rm-textfield-container.riot";
 
 export * as elevation from "./elevation";
 
@@ -27,6 +30,8 @@ riot.register("rm-checkbox", CheckboxComponent);
 riot.register("rm-dialog", DialogComponent);
 riot.register("rm-divider", DividerComponent);
 riot.register("rm-icon", IconComponent);
+riot.register("rm-menu", MenuComponent);
+riot.register("rm-menu-item", MenuItemComponent);
 riot.register("rm-radio", RadioComponent);
 riot.register("rm-ripple", RippleComponent);
 riot.register("rm-select", SelectComponent);
@@ -34,6 +39,7 @@ riot.register("rm-tabbed-pages", TabbedPagesComponent);
 riot.register("rm-tabs", TabsComponent);
 riot.register("rm-textarea", TextareaComponent);
 riot.register("rm-textfield", TextfieldComponent);
+riot.register("rm-textfield-container", TextfieldContainerComponent);
 
 export {
     AppBarComponent,
@@ -43,11 +49,14 @@ export {
     DialogComponent,
     DividerComponent,
     IconComponent,
+    MenuComponent,
+    MenuItemComponent,
     RadioComponent,
     RippleComponent,
     SelectComponent,
     TabbedPagesComponent,
     TabsComponent,
     TextareaComponent,
-    TextfieldComponent
+    TextfieldComponent,
+    TextfieldContainerComponent
 };

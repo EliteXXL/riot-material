@@ -1,9 +1,9 @@
-define(['riot', './motionController'], function (riot, motionController) { 'use strict';
+define(['riot', './ripple', './motionController'], function (riot, ripple, motionController) { 'use strict';
 
     const PAGE_INDEX = Symbol("page-index");
 
     var rmTabbedPages = {
-      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; height: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; height: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; }`,
+      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; overflow: hidden; position: relative; width: 1px; height: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div > button,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div > button{ background-color: transparent; border: 0; padding: 12px 16px; font-size: 16px; line-height: 20px; height: 100%; width: 100%; cursor: pointer; outline: none; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; white-space: initial; }`,
 
       'exports': {
         onMounted() {
@@ -27,7 +27,7 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
             .on("motionapplied", event => {
                 delete this.state.motion;
                 if (event.detail.currentIndex === event.detail.previousIndex) {
-                    this.update();
+                    this.update({ skipUpdate: true });
                 } else {
                     this.setSelectedIndex(event.detail.currentIndex);
                 }
@@ -103,7 +103,6 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                     page = pageContainer.appendChild(document.createElement("div"));
                     page[PAGE_INDEX] = index;
                     tabButton = tabContainer.appendChild(document.createElement("div"));
-                    index = this._getUpdatedIndexOf(index);
                 } else if (index !== (page = pageContainer.children[index])[PAGE_INDEX]) {
                     page = pageContainer.insertBefore(document.createElement("div"), pageContainer.children[index]);
                     page[PAGE_INDEX] = index;
@@ -112,11 +111,14 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                 // scroll to selected index
                 page.style.transition = this.state.instant ? "none" : "";
                 page.style.transform = "translateX(-" + ((this.getSelectedIndex() + this.getMotion()) * 100) + "%)";
+                page.style.visibility = this.getSelectedIndex() === this._getUpdatedIndexOf(index) ? "visible" : "hidden";
                 if (tabButton != null) {
-                    tabButton.addEventListener("click", () => {
-                        this.setSelectedIndex(index);
+                    const button = tabButton.appendChild(document.createElement("button"));
+                    button.addEventListener("click", event => {
+                        this.setSelectedIndex(this._getUpdatedIndexOf(index));
                     });
-                    tabButton.innerText = slot.id;
+                    button.innerText = slot.id;
+                    ripple.ripple(button, { detectLabel: false, color: "currentColor" });
                 }
             });
 
@@ -135,6 +137,10 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                 if (instance != null) {
                     instance.unmount();
                 }
+                // if (page.nextElementSibling) {
+                //     console.log("setting page index of", index);
+                //     page.nextElementSibling[PAGE_INDEX] = index;
+                // }
                 // removing page at hidden index
                 pageContainer.removeChild(page);
             }
@@ -160,13 +166,13 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                 let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                 if (instance == null) {
                     instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
-                    instance.mount(el);
-                }
-                if (update) {
+                    instance.mount(el, this[riot.__.globals.PARENT_KEY_SYMBOL], this[riot.__.globals.PARENT_KEY_SYMBOL]);
+                } else if (update && !this.state.skipUpdate) {
                     instance.update();
                 }
             }
             delete this.state.instant;
+            delete this.state.skipUpdate;
         },
 
         _updateIndicator(instant = false) {
@@ -243,13 +249,13 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                 .children[selectedIndex] // TAB BUTTON
                 .getBoundingClientRect()
             ;
-            const delta =  this.root.getBoundingClientRect().left +
-                this.root
+            const delta = this.root
                 .firstElementChild // SCROLLBAR HIDER
                 .firstElementChild // HEADER
-                .scrollLeft
+                .scrollLeft -
+                this.root.getBoundingClientRect().left
             ;
-            let left = rect.left - delta;
+            let left = rect.left + delta;
             const motion = this.getMotion();
             if (motion !== 0) {
                 const index = selectedIndex + (motion > 0 ? 1 : -1);
@@ -260,7 +266,7 @@ define(['riot', './motionController'], function (riot, motionController) { 'use 
                     .children[index] // TAB BUTTON
                     .getBoundingClientRect()
                 ;
-                left += (((rect.left - delta) - left) * Math.abs(motion));
+                left += ((rect.left + delta - left) * Math.abs(motion));
             }
             return left;
         },

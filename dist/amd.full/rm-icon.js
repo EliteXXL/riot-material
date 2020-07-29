@@ -7,19 +7,15 @@ define(['./lib/style-inject.es/index'], function (styleInject) { 'use strict';
 
   var rmIcon = {
     'css': `rm-icon,[is="rm-icon"]{ font-size: 24px; }`,
-    'exports': {},
+
+    'exports': {
+      onMounted() {
+          this.root.classList.add("material-icons");
+      }
+    },
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
       return template('<slot expr17="expr17"></slot>', [{
-        'expressions': [{
-          'type': expressionTypes.ATTRIBUTE,
-          'name': 'class',
-
-          'evaluate': function(scope) {
-            return 'material-icons';
-          }
-        }]
-      }, {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',

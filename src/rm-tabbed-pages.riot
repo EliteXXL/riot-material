@@ -12,7 +12,7 @@
             white-space: nowrap;
             overflow: hidden;
             width: 100%;
-            height: 100%;
+            /* height: 100%; */
             display: block;
             font-size: 0;
             transform: scaleY(1);
@@ -48,10 +48,18 @@
 
         /* TAB BUTTON */
         :host > div:first-child > div:first-child > div:first-child > div {
-            display: table-cell; width: 1px;
-            padding: 12px 16px; cursor: pointer;
-            overflow: hidden; position: relative;
+            display: table-cell;
+            overflow: hidden;
+            position: relative;
+            width: 1px;
+            height: 100%;
+        }
+        :host > div:first-child > div:first-child > div:first-child > div > button {
+            background-color: transparent;
+            border: 0; padding: 12px 16px;
             font-size: 16px; line-height: 20px;
+            height: 100%; width: 100%;
+            cursor: pointer; outline: none;
         }
         
         /* INDICATOR */
@@ -68,16 +76,18 @@
         /* PAGE */
         :host > div:nth-child(2) > * {
             display: inline-block;
-            width: 100%; height: 100%;
+            width: 100%; /* height: 100%; */
             vertical-align: top;
             transition: transform ease-in-out 200ms;
             font-size: initial;
+            white-space: initial;
         }
     </style>
 
     <script>
         import * as riot from "riot";
         import { motionController } from "./motionController";
+        import { ripple } from "./ripple";
 
         const PAGE_INDEX = Symbol("page-index");
 
@@ -103,7 +113,7 @@
                 .on("motionapplied", event => {
                     delete this.state.motion;
                     if (event.detail.currentIndex === event.detail.previousIndex) {
-                        this.update();
+                        this.update({ skipUpdate: true });
                     } else {
                         this.setSelectedIndex(event.detail.currentIndex);
                     }
@@ -174,7 +184,6 @@
                         page = pageContainer.appendChild(document.createElement("div"));
                         page[PAGE_INDEX] = index;
                         tabButton = tabContainer.appendChild(document.createElement("div"));
-                        index = this._getUpdatedIndexOf(index);
                     } else if (index !== (page = pageContainer.children[index])[PAGE_INDEX]) {
                         page = pageContainer.insertBefore(document.createElement("div"), pageContainer.children[index]);
                         page[PAGE_INDEX] = index;
@@ -183,11 +192,14 @@
                     // scroll to selected index
                     page.style.transition = this.state.instant ? "none" : "";
                     page.style.transform = "translateX(-" + ((this.getSelectedIndex() + this.getMotion()) * 100) + "%)";
+                    page.style.visibility = this.getSelectedIndex() === this._getUpdatedIndexOf(index) ? "visible" : "hidden";
                     if (tabButton != null) {
-                        tabButton.addEventListener("click", () => {
-                            this.setSelectedIndex(index);
+                        const button = tabButton.appendChild(document.createElement("button"));
+                        button.addEventListener("click", event => {
+                            this.setSelectedIndex(this._getUpdatedIndexOf(index));
                         });
-                        tabButton.innerText = slot.id;
+                        button.innerText = slot.id;
+                        ripple(button, { detectLabel: false, color: "currentColor" });
                     }
                 });
 
@@ -206,6 +218,10 @@
                     if (instance != null) {
                         instance.unmount();
                     }
+                    // if (page.nextElementSibling) {
+                    //     console.log("setting page index of", index);
+                    //     page.nextElementSibling[PAGE_INDEX] = index;
+                    // }
                     // removing page at hidden index
                     pageContainer.removeChild(page);
                 }
@@ -231,13 +247,13 @@
                     let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                     if (instance == null) {
                         instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
-                        instance.mount(el);
-                    }
-                    if (update) {
+                        instance.mount(el, this[riot.__.globals.PARENT_KEY_SYMBOL], this[riot.__.globals.PARENT_KEY_SYMBOL]);
+                    } else if (update && !this.state.skipUpdate) {
                         instance.update();
                     }
                 }
                 delete this.state.instant;
+                delete this.state.skipUpdate;
             },
             _updateIndicator(instant = false) {
                 const indicator = this.root
@@ -305,13 +321,13 @@
                     .children[selectedIndex] // TAB BUTTON
                     .getBoundingClientRect()
                 ;
-                const delta =  this.root.getBoundingClientRect().left +
-                    this.root
+                const delta = this.root
                     .firstElementChild // SCROLLBAR HIDER
                     .firstElementChild // HEADER
-                    .scrollLeft
+                    .scrollLeft -
+                    this.root.getBoundingClientRect().left
                 ;
-                let left = rect.left - delta;
+                let left = rect.left + delta;
                 const motion = this.getMotion();
                 if (motion !== 0) {
                     const index = selectedIndex + (motion > 0 ? 1 : -1);
@@ -322,7 +338,7 @@
                         .children[index] // TAB BUTTON
                         .getBoundingClientRect()
                     ;
-                    left += (((rect.left - delta) - left) * Math.abs(motion));
+                    left += ((rect.left + delta - left) * Math.abs(motion));
                 }
                 return left;
             },
