@@ -133,6 +133,43 @@ var rmMenu = {
             get: () => this.getOptions()
         });
 
+        this.root.open = () => {
+            if (this._time > 0 && this._direction !== -1) {
+                return;
+            }
+            elevation.elevation(child, 4);
+            let toHighlight = null;
+            const selected = this.props.selected || [];
+            Array.prototype.some.call(this.getOptions(), opt => {
+                if (selected.some(value => opt.value === value)) {
+                    if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                        opt = opt.firstElementChild;
+                    }
+                    toHighlight = opt;
+                    return true;
+                }
+                return false;
+            });
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            this._toHighlight = toHighlight;
+            this._direction = 1;
+        };
+        this.root.close = () => {
+            if (this._time < 1 && this._direction !== 1) {
+                return;
+            }
+            elevation.elevation(child, 0);
+            this._toHighlight = null;
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            this._direction = -1;
+        };
+
         this.root.addEventListener("keydown", this._onkeydown = event => {
             switch (event.keyCode) {
                 case 40: {
@@ -249,33 +286,9 @@ var rmMenu = {
         if (opened !== this._lastOpened) {
             const child = this.root.firstElementChild;
             if (this._lastOpened = opened) {
-                elevation.elevation(child, 4);
-                let toHighlight = null;
-                const selected = this.props.selected || [];
-                Array.prototype.some.call(this.getOptions(), opt => {
-                    if (selected.some(value => opt.value === value)) {
-                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                            opt = opt.firstElementChild;
-                        }
-                        toHighlight = opt;
-                        return true;
-                    }
-                    return false;
-                });
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._toHighlight = toHighlight;
-                this._direction = 1;
+                this.root.open();
             } else {
-                elevation.elevation(child, 0);
-                this._toHighlight = null;
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._direction = -1;
+                this.root.close();
             }
         }
     },
@@ -340,10 +353,10 @@ var rmMenu = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr133="expr133"><div expr134="expr134" style="overflow-y: auto;"><slot expr135="expr135"></slot></div></div>',
+      '<div expr135="expr135"><div expr136="expr136" style="overflow-y: auto;"><slot expr137="expr137"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr133',
-        'selector': '[expr133]',
+        'redundantAttribute': 'expr135',
+        'selector': '[expr135]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -354,8 +367,8 @@ var rmMenu = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr134',
-        'selector': '[expr134]',
+        'redundantAttribute': 'expr136',
+        'selector': '[expr136]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -383,8 +396,8 @@ var rmMenu = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr135',
-        'selector': '[expr135]'
+        'redundantAttribute': 'expr137',
+        'selector': '[expr137]'
       }]
     );
   },

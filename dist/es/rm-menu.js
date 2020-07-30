@@ -131,6 +131,43 @@ var rmMenu = {
             get: () => this.getOptions()
         });
 
+        this.root.open = () => {
+            if (this._time > 0 && this._direction !== -1) {
+                return;
+            }
+            elevation(child, 4);
+            let toHighlight = null;
+            const selected = this.props.selected || [];
+            Array.prototype.some.call(this.getOptions(), opt => {
+                if (selected.some(value => opt.value === value)) {
+                    if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                        opt = opt.firstElementChild;
+                    }
+                    toHighlight = opt;
+                    return true;
+                }
+                return false;
+            });
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            this._toHighlight = toHighlight;
+            this._direction = 1;
+        };
+        this.root.close = () => {
+            if (this._time < 1 && this._direction !== 1) {
+                return;
+            }
+            elevation(child, 0);
+            this._toHighlight = null;
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            this._direction = -1;
+        };
+
         this.root.addEventListener("keydown", this._onkeydown = event => {
             switch (event.keyCode) {
                 case 40: {
@@ -247,33 +284,9 @@ var rmMenu = {
         if (opened !== this._lastOpened) {
             const child = this.root.firstElementChild;
             if (this._lastOpened = opened) {
-                elevation(child, 4);
-                let toHighlight = null;
-                const selected = this.props.selected || [];
-                Array.prototype.some.call(this.getOptions(), opt => {
-                    if (selected.some(value => opt.value === value)) {
-                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                            opt = opt.firstElementChild;
-                        }
-                        toHighlight = opt;
-                        return true;
-                    }
-                    return false;
-                });
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._toHighlight = toHighlight;
-                this._direction = 1;
+                this.root.open();
             } else {
-                elevation(child, 0);
-                this._toHighlight = null;
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._direction = -1;
+                this.root.close();
             }
         }
     },
@@ -338,10 +351,10 @@ var rmMenu = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr192="expr192"><div expr193="expr193" style="overflow-y: auto;"><slot expr194="expr194"></slot></div></div>',
+      '<div expr187="expr187"><div expr188="expr188" style="overflow-y: auto;"><slot expr189="expr189"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr192',
-        'selector': '[expr192]',
+        'redundantAttribute': 'expr187',
+        'selector': '[expr187]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -352,8 +365,8 @@ var rmMenu = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr193',
-        'selector': '[expr193]',
+        'redundantAttribute': 'expr188',
+        'selector': '[expr188]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -381,8 +394,8 @@ var rmMenu = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr194',
-        'selector': '[expr194]'
+        'redundantAttribute': 'expr189',
+        'selector': '[expr189]'
       }]
     );
   },

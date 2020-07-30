@@ -71,7 +71,7 @@ var rmTextfield = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<rm-textfield-container expr211="expr211"></rm-textfield-container>', [{
+    return template('<rm-textfield-container expr214="expr214"></rm-textfield-container>', [{
       'type': bindingTypes.TAG,
       'getComponent': getComponent,
 
@@ -81,11 +81,11 @@ var rmTextfield = {
 
       'slots': [{
         'id': 'input',
-        'html': '<input expr212="expr212" slot="input"/>',
+        'html': '<input expr215="expr215" slot="input"/>',
 
         'bindings': [{
-          'redundantAttribute': 'expr212',
-          'selector': '[expr212]',
+          'redundantAttribute': 'expr215',
+          'selector': '[expr215]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -132,18 +132,18 @@ var rmTextfield = {
         }]
       }, {
         'id': 'leading',
-        'html': '<slot expr213="expr213" name="leading" slot="leading"></slot>',
+        'html': '<slot expr216="expr216" name="leading" slot="leading"></slot>',
 
         'bindings': [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'leading',
-          'redundantAttribute': 'expr213',
-          'selector': '[expr213]'
+          'redundantAttribute': 'expr216',
+          'selector': '[expr216]'
         }]
       }, {
         'id': 'trailing',
-        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr214="expr214" variant="icon" dense></rm-button><slot expr215="expr215" name="trailing"></slot></span>',
+        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr217="expr217" variant="icon" dense></rm-button><slot expr218="expr218" name="trailing"></slot></span>',
 
         'bindings': [{
           'type': bindingTypes.IF,
@@ -152,8 +152,8 @@ var rmTextfield = {
             return scope.isClearable() && scope.root.value;
           },
 
-          'redundantAttribute': 'expr214',
-          'selector': '[expr214]',
+          'redundantAttribute': 'expr217',
+          'selector': '[expr217]',
 
           'template': template(null, [{
             'type': bindingTypes.TAG,
@@ -189,8 +189,8 @@ var rmTextfield = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'trailing',
-          'redundantAttribute': 'expr215',
-          'selector': '[expr215]'
+          'redundantAttribute': 'expr218',
+          'selector': '[expr218]'
         }]
       }],
 
@@ -238,8 +238,8 @@ var rmTextfield = {
         }
       }],
 
-      'redundantAttribute': 'expr211',
-      'selector': '[expr211]'
+      'redundantAttribute': 'expr214',
+      'selector': '[expr214]'
     }]);
   },
 

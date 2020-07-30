@@ -13,12 +13,12 @@ var rmIcon = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr188="expr188"></slot>', [{
+    return template('<slot expr190="expr190"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr188',
-      'selector': '[expr188]'
+      'redundantAttribute': 'expr190',
+      'selector': '[expr190]'
     }]);
   },
 

@@ -92,10 +92,10 @@ define(['./rm-button'], function (ButtonComponent) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr92="expr92" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr93="expr93" name="leading"></slot></div><div expr94="expr94" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr95="expr95" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr96="expr96"></template><slot expr98="expr98" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr99="expr99" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr100="expr100" style="font-size: .75em;"> </div></div>',
+          '<label expr100="expr100" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr101="expr101" name="leading"></slot></div><div expr102="expr102" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr103="expr103" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr104="expr104"></template><slot expr106="expr106" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr107="expr107" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr108="expr108" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr92',
-            'selector': '[expr92]',
+            'redundantAttribute': 'expr100',
+            'selector': '[expr100]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -109,11 +109,11 @@ define(['./rm-button'], function (ButtonComponent) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr93',
-            'selector': '[expr93]'
+            'redundantAttribute': 'expr101',
+            'selector': '[expr101]'
           }, {
-            'redundantAttribute': 'expr94',
-            'selector': '[expr94]',
+            'redundantAttribute': 'expr102',
+            'selector': '[expr102]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -124,8 +124,8 @@ define(['./rm-button'], function (ButtonComponent) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr95',
-            'selector': '[expr95]',
+            'redundantAttribute': 'expr103',
+            'selector': '[expr103]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -142,31 +142,31 @@ define(['./rm-button'], function (ButtonComponent) { 'use strict';
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr96',
-            'selector': '[expr96]',
+            'redundantAttribute': 'expr104',
+            'selector': '[expr104]',
 
-            'template': template('<slot expr97="expr97"></slot>', [{
+            'template': template('<slot expr105="expr105"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr97',
-              'selector': '[expr97]'
+              'redundantAttribute': 'expr105',
+              'selector': '[expr105]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr98',
-            'selector': '[expr98]'
+            'redundantAttribute': 'expr106',
+            'selector': '[expr106]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr99',
-            'selector': '[expr99]'
+            'redundantAttribute': 'expr107',
+            'selector': '[expr107]'
           }, {
-            'redundantAttribute': 'expr100',
-            'selector': '[expr100]',
+            'redundantAttribute': 'expr108',
+            'selector': '[expr108]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

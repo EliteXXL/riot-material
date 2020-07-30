@@ -194,6 +194,43 @@
                     get: () => this.getOptions()
                 });
 
+                this.root.open = () => {
+                    if (this._time > 0 && this._direction !== -1) {
+                        return;
+                    }
+                    elevation(child, 4);
+                    let toHighlight = null;
+                    const selected = this.props.selected || [];
+                    Array.prototype.some.call(this.getOptions(), opt => {
+                        if (selected.some(value => opt.value === value)) {
+                            if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                                opt = opt.firstElementChild;
+                            }
+                            toHighlight = opt;
+                            return true;
+                        }
+                        return false;
+                    });
+                    if (this._currentHighlighted) {
+                        this._currentHighlighted.end();
+                        this._currentHighlighted = null;
+                    }
+                    this._toHighlight = toHighlight;
+                    this._direction = 1;
+                };
+                this.root.close = () => {
+                    if (this._time < 1 && this._direction !== 1) {
+                        return;
+                    }
+                    elevation(child, 0);
+                    this._toHighlight = null;
+                    if (this._currentHighlighted) {
+                        this._currentHighlighted.end();
+                        this._currentHighlighted = null;
+                    }
+                    this._direction = -1;
+                };
+
                 this.root.addEventListener("keydown", this._onkeydown = event => {
                     switch (event.keyCode) {
                         case 40: {
@@ -306,33 +343,9 @@
                 if (opened !== this._lastOpened) {
                     const child = this.root.firstElementChild;
                     if (this._lastOpened = opened) {
-                        elevation(child, 4);
-                        let toHighlight = null;
-                        const selected = this.props.selected || [];
-                        Array.prototype.some.call(this.getOptions(), opt => {
-                            if (selected.some(value => opt.value === value)) {
-                                if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                                    opt = opt.firstElementChild;
-                                }
-                                toHighlight = opt;
-                                return true;
-                            }
-                            return false;
-                        });
-                        if (this._currentHighlighted) {
-                            this._currentHighlighted.end();
-                            this._currentHighlighted = null;
-                        }
-                        this._toHighlight = toHighlight;
-                        this._direction = 1;
+                        this.root.open();
                     } else {
-                        elevation(child, 0);
-                        this._toHighlight = null;
-                        if (this._currentHighlighted) {
-                            this._currentHighlighted.end();
-                            this._currentHighlighted = null;
-                        }
-                        this._direction = -1;
+                        this.root.close();
                     }
                 }
             },

@@ -100,9 +100,9 @@ var rmMenuItem = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr136="expr136"><slot expr137="expr137"></slot></button>', [{
-      'redundantAttribute': 'expr136',
-      'selector': '[expr136]',
+    return template('<button expr133="expr133"><slot expr134="expr134"></slot></button>', [{
+      'redundantAttribute': 'expr133',
+      'selector': '[expr133]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -123,8 +123,8 @@ var rmMenuItem = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr137',
-      'selector': '[expr137]'
+      'redundantAttribute': 'expr134',
+      'selector': '[expr134]'
     }]);
   },
 

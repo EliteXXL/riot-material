@@ -124,10 +124,10 @@ var rmDialog = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="aligner"></div><div expr118="expr118" class="mdc-elevation--z24" ref="container"><div expr119="expr119" ref="title"><slot expr120="expr120" name="title"></slot></div><div expr121="expr121" ref="content"><slot expr122="expr122" name="content"></slot></div><div expr123="expr123" ref="actions"><slot expr124="expr124" name="actions"></slot></div></div>',
+      '<div ref="aligner"></div><div expr124="expr124" class="mdc-elevation--z24" ref="container"><div expr125="expr125" ref="title"><slot expr126="expr126" name="title"></slot></div><div expr127="expr127" ref="content"><slot expr128="expr128" name="content"></slot></div><div expr129="expr129" ref="actions"><slot expr130="expr130" name="actions"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr118',
-        'selector': '[expr118]',
+        'redundantAttribute': 'expr124',
+        'selector': '[expr124]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -138,8 +138,8 @@ var rmDialog = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr119',
-        'selector': '[expr119]',
+        'redundantAttribute': 'expr125',
+        'selector': '[expr125]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -153,11 +153,11 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'title',
-        'redundantAttribute': 'expr120',
-        'selector': '[expr120]'
+        'redundantAttribute': 'expr126',
+        'selector': '[expr126]'
       }, {
-        'redundantAttribute': 'expr121',
-        'selector': '[expr121]',
+        'redundantAttribute': 'expr127',
+        'selector': '[expr127]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -171,11 +171,11 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'content',
-        'redundantAttribute': 'expr122',
-        'selector': '[expr122]'
+        'redundantAttribute': 'expr128',
+        'selector': '[expr128]'
       }, {
-        'redundantAttribute': 'expr123',
-        'selector': '[expr123]',
+        'redundantAttribute': 'expr129',
+        'selector': '[expr129]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -189,8 +189,8 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'actions',
-        'redundantAttribute': 'expr124',
-        'selector': '[expr124]'
+        'redundantAttribute': 'expr130',
+        'selector': '[expr130]'
       }]
     );
   },

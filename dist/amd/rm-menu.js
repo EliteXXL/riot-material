@@ -130,6 +130,43 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
                 get: () => this.getOptions()
             });
 
+            this.root.open = () => {
+                if (this._time > 0 && this._direction !== -1) {
+                    return;
+                }
+                elevation.elevation(child, 4);
+                let toHighlight = null;
+                const selected = this.props.selected || [];
+                Array.prototype.some.call(this.getOptions(), opt => {
+                    if (selected.some(value => opt.value === value)) {
+                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                            opt = opt.firstElementChild;
+                        }
+                        toHighlight = opt;
+                        return true;
+                    }
+                    return false;
+                });
+                if (this._currentHighlighted) {
+                    this._currentHighlighted.end();
+                    this._currentHighlighted = null;
+                }
+                this._toHighlight = toHighlight;
+                this._direction = 1;
+            };
+            this.root.close = () => {
+                if (this._time < 1 && this._direction !== 1) {
+                    return;
+                }
+                elevation.elevation(child, 0);
+                this._toHighlight = null;
+                if (this._currentHighlighted) {
+                    this._currentHighlighted.end();
+                    this._currentHighlighted = null;
+                }
+                this._direction = -1;
+            };
+
             this.root.addEventListener("keydown", this._onkeydown = event => {
                 switch (event.keyCode) {
                     case 40: {
@@ -246,33 +283,9 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
             if (opened !== this._lastOpened) {
                 const child = this.root.firstElementChild;
                 if (this._lastOpened = opened) {
-                    elevation.elevation(child, 4);
-                    let toHighlight = null;
-                    const selected = this.props.selected || [];
-                    Array.prototype.some.call(this.getOptions(), opt => {
-                        if (selected.some(value => opt.value === value)) {
-                            if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                                opt = opt.firstElementChild;
-                            }
-                            toHighlight = opt;
-                            return true;
-                        }
-                        return false;
-                    });
-                    if (this._currentHighlighted) {
-                        this._currentHighlighted.end();
-                        this._currentHighlighted = null;
-                    }
-                    this._toHighlight = toHighlight;
-                    this._direction = 1;
+                    this.root.open();
                 } else {
-                    elevation.elevation(child, 0);
-                    this._toHighlight = null;
-                    if (this._currentHighlighted) {
-                        this._currentHighlighted.end();
-                        this._currentHighlighted = null;
-                    }
-                    this._direction = -1;
+                    this.root.close();
                 }
             }
         },
@@ -337,10 +350,10 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr79="expr79"><div expr80="expr80" style="overflow-y: auto;"><slot expr81="expr81"></slot></div></div>',
+          '<div expr78="expr78"><div expr79="expr79" style="overflow-y: auto;"><slot expr80="expr80"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr79',
-            'selector': '[expr79]',
+            'redundantAttribute': 'expr78',
+            'selector': '[expr78]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -351,8 +364,8 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr80',
-            'selector': '[expr80]',
+            'redundantAttribute': 'expr79',
+            'selector': '[expr79]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -380,8 +393,8 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr81',
-            'selector': '[expr81]'
+            'redundantAttribute': 'expr80',
+            'selector': '[expr80]'
           }]
         );
       },

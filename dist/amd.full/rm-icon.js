@@ -15,12 +15,12 @@ define(['./lib/style-inject.es/index'], function (styleInject) { 'use strict';
     },
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
-      return template('<slot expr17="expr17"></slot>', [{
+      return template('<slot expr13="expr13"></slot>', [{
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr17',
-        'selector': '[expr17]'
+        'redundantAttribute': 'expr13',
+        'selector': '[expr13]'
       }]);
     },
 

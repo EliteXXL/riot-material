@@ -5,12 +5,12 @@ define(function () { 'use strict';
       'exports': null,
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr76="expr76"></slot>', [{
+        return template('<slot expr75="expr75"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr76',
-          'selector': '[expr76]'
+          'redundantAttribute': 'expr75',
+          'selector': '[expr75]'
         }]);
       },
 

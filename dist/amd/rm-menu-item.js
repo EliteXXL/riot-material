@@ -97,9 +97,9 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr74="expr74"><slot expr75="expr75"></slot></button>', [{
-          'redundantAttribute': 'expr74',
-          'selector': '[expr74]',
+        return template('<button expr76="expr76"><slot expr77="expr77"></slot></button>', [{
+          'redundantAttribute': 'expr76',
+          'selector': '[expr76]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -120,8 +120,8 @@ define(['riot', './ripple'], function (riot, ripple) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr75',
-          'selector': '[expr75]'
+          'redundantAttribute': 'expr77',
+          'selector': '[expr77]'
         }]);
       },
 

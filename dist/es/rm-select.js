@@ -273,7 +273,7 @@ var rmSelect = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<rm-menu expr198="expr198" prevent-focus></rm-menu><rm-textfield-container expr200="expr200"></rm-textfield-container>',
+      '<rm-menu expr202="expr202" prevent-focus></rm-menu><rm-textfield-container expr204="expr204"></rm-textfield-container>',
       [{
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -284,14 +284,14 @@ var rmSelect = {
 
         'slots': [{
           'id': 'default',
-          'html': '<slot expr199="expr199"></slot>',
+          'html': '<slot expr203="expr203"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr199',
-            'selector': '[expr199]'
+            'redundantAttribute': 'expr203',
+            'selector': '[expr203]'
           }]
         }],
 
@@ -325,8 +325,8 @@ var rmSelect = {
           }
         }],
 
-        'redundantAttribute': 'expr198',
-        'selector': '[expr198]'
+        'redundantAttribute': 'expr202',
+        'selector': '[expr202]'
       }, {
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -337,11 +337,11 @@ var rmSelect = {
 
         'slots': [{
           'id': 'input',
-          'html': '<span slot="input"><input expr201="expr201" class="rm-select--input"/><div expr202="expr202" class="rm-select--label"> </div></span>',
+          'html': '<span slot="input"><input expr205="expr205" class="rm-select--input"/><div expr206="expr206" class="rm-select--label"> </div></span>',
 
           'bindings': [{
-            'redundantAttribute': 'expr201',
-            'selector': '[expr201]',
+            'redundantAttribute': 'expr205',
+            'selector': '[expr205]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -380,8 +380,8 @@ var rmSelect = {
               }
             }]
           }, {
-            'redundantAttribute': 'expr202',
-            'selector': '[expr202]',
+            'redundantAttribute': 'expr206',
+            'selector': '[expr206]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -394,18 +394,18 @@ var rmSelect = {
           }]
         }, {
           'id': 'leading',
-          'html': '<slot expr203="expr203" name="leading" slot="leading"></slot>',
+          'html': '<slot expr207="expr207" name="leading" slot="leading"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr203',
-            'selector': '[expr203]'
+            'redundantAttribute': 'expr207',
+            'selector': '[expr207]'
           }]
         }, {
           'id': 'trailing',
-          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr204="expr204" variant="icon" class="rm-select--clear" dense></rm-button><slot expr205="expr205" name="trailing"></slot><rm-button expr206="expr206" variant="icon" tabindex="-1" dense></rm-button></span>',
+          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr208="expr208" variant="icon" class="rm-select--clear" dense></rm-button><slot expr209="expr209" name="trailing"></slot><rm-button expr210="expr210" variant="icon" tabindex="-1" dense></rm-button></span>',
 
           'bindings': [{
             'type': bindingTypes.IF,
@@ -414,8 +414,8 @@ var rmSelect = {
               return scope.isClearable() && scope.root.value;
             },
 
-            'redundantAttribute': 'expr204',
-            'selector': '[expr204]',
+            'redundantAttribute': 'expr208',
+            'selector': '[expr208]',
 
             'template': template(null, [{
               'type': bindingTypes.TAG,
@@ -451,8 +451,8 @@ var rmSelect = {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr205',
-            'selector': '[expr205]'
+            'redundantAttribute': 'expr209',
+            'selector': '[expr209]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -479,8 +479,8 @@ var rmSelect = {
               }
             }],
 
-            'redundantAttribute': 'expr206',
-            'selector': '[expr206]'
+            'redundantAttribute': 'expr210',
+            'selector': '[expr210]'
           }]
         }],
 
@@ -521,8 +521,8 @@ var rmSelect = {
           }
         }],
 
-        'redundantAttribute': 'expr200',
-        'selector': '[expr200]'
+        'redundantAttribute': 'expr204',
+        'selector': '[expr204]'
       }]
     );
   },

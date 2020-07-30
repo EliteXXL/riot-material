@@ -1,5 +1,5 @@
 <test>
-    <rm-tabbed-pages hidden-tabs={ !state.hide ? "1" : "" } selected-index="0">
+    <rm-tabbed-pages hidden-tabs={ state.variant === "outlined" ? "2" : "" } selected-index="1">
         <custom-tab slot="Inputs">
             <rm-select label="Variant" onchange={ onchangeVariant } variant={ state.variant }>
                 <rm-menu-item value="flat" selected>Flat</rm-menu-item>
@@ -25,7 +25,13 @@
             </rm-select>
         </custom-tab>
         <div slot="Buttons">
-            <rm-button>TEST</rm-button>
+            <rm-button open-overlay="menu-test">TEST</rm-button>
+            <rm-menu id="menu-test">
+                <rm-menu-item>Aggiungi a...</rm-menu-item>
+                <rm-menu-item>Condividi</rm-menu-item>
+                <rm-divider />
+                <rm-menu-item>Disconnetti</rm-menu-item>
+            </rm-menu>
         </div>
         <custom-tab slot="Page 3">
             <div style="padding: 8px;">PAGE 3</div>
