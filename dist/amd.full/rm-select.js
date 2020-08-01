@@ -273,7 +273,7 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr24="expr24" prevent-focus></rm-menu><rm-textfield-container expr26="expr26"></rm-textfield-container>',
+          '<rm-menu expr685="expr685" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr687="expr687"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -284,14 +284,14 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr25="expr25"></slot>',
+              'html': '<slot expr686="expr686"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr25',
-                'selector': '[expr25]'
+                'redundantAttribute': 'expr686',
+                'selector': '[expr686]'
               }]
             }],
 
@@ -325,8 +325,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }
             }],
 
-            'redundantAttribute': 'expr24',
-            'selector': '[expr24]'
+            'redundantAttribute': 'expr685',
+            'selector': '[expr685]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -337,11 +337,11 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr27="expr27" class="rm-select--input"/><div expr28="expr28" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr688="expr688" class="rm-select--input"/><div expr689="expr689" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr27',
-                'selector': '[expr27]',
+                'redundantAttribute': 'expr688',
+                'selector': '[expr688]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -380,8 +380,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr28',
-                'selector': '[expr28]',
+                'redundantAttribute': 'expr689',
+                'selector': '[expr689]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -394,18 +394,18 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr29="expr29" name="leading" slot="leading"></slot>',
+              'html': '<slot expr690="expr690" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr29',
-                'selector': '[expr29]'
+                'redundantAttribute': 'expr690',
+                'selector': '[expr690]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr30="expr30" variant="icon" class="rm-select--clear" dense></rm-button><slot expr31="expr31" name="trailing"></slot><rm-button expr32="expr32" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr691="expr691" variant="icon" class="rm-select--clear" dense></rm-button><slot expr692="expr692" name="trailing"></slot><rm-button expr693="expr693" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -414,8 +414,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr30',
-                'selector': '[expr30]',
+                'redundantAttribute': 'expr691',
+                'selector': '[expr691]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -451,8 +451,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr31',
-                'selector': '[expr31]'
+                'redundantAttribute': 'expr692',
+                'selector': '[expr692]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -479,8 +479,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   }
                 }],
 
-                'redundantAttribute': 'expr32',
-                'selector': '[expr32]'
+                'redundantAttribute': 'expr693',
+                'selector': '[expr693]'
               }]
             }],
 
@@ -521,8 +521,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }
             }],
 
-            'redundantAttribute': 'expr26',
-            'selector': '[expr26]'
+            'redundantAttribute': 'expr687',
+            'selector': '[expr687]'
           }]
         );
       },

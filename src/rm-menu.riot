@@ -19,7 +19,9 @@
             padding-top: 0; margin-top: 0;
             border-radius: 0 0 0.25em 0.25em;
         }
-        :host[variant=outlined][anchor=top], :host[variant=outlined]:not([anchor]) {
+        :host:not([variant])[anchor=top],
+        :host[variant=outlined][anchor=top],
+        :host[variant=outlined]:not([anchor]) {
             border-radius: 0.25em;
         }
         :host[anchor=bottom] {
@@ -49,6 +51,7 @@
     <script>
         import { elevation } from "./elevation";
         import { ripple, isRipple } from "./ripple";
+        import { pointerController } from "./pointerController";
 
         function getMenuStyleAt(time, anchor) {
             // time = 0 : closed
@@ -122,9 +125,9 @@
                     } else {
                         this.root.style.display = "";
                         let anchor = "top";
-                        if (this._bindedElement) {
+                        if (this._anchorElement) {
                             const height = window.innerHeight;
-                            const rect = this._bindedElement.getBoundingClientRect();
+                            const rect = this._anchorElement.getBoundingClientRect();
                             if (rect.bottom < 0) {
                                 this.root.style.top = "0px";
                                 this.root.style.bottom = "";
@@ -157,7 +160,9 @@
                                 }
                             }
                             this.root.style.left = rect.left + "px";
-                            this.root.style.width = rect.width + "px";
+                            if (this.props.inheritWidth != null) {
+                                this.root.style.width = rect.width + "px";
+                            }
                             this.root.setAttribute("anchor", anchor);
                         }
                         const styleAt = getMenuStyleAt(_lastTime = this._time, anchor);
@@ -194,42 +199,8 @@
                     get: () => this.getOptions()
                 });
 
-                this.root.open = () => {
-                    if (this._time > 0 && this._direction !== -1) {
-                        return;
-                    }
-                    elevation(child, 4);
-                    let toHighlight = null;
-                    const selected = this.props.selected || [];
-                    Array.prototype.some.call(this.getOptions(), opt => {
-                        if (selected.some(value => opt.value === value)) {
-                            if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                                opt = opt.firstElementChild;
-                            }
-                            toHighlight = opt;
-                            return true;
-                        }
-                        return false;
-                    });
-                    if (this._currentHighlighted) {
-                        this._currentHighlighted.end();
-                        this._currentHighlighted = null;
-                    }
-                    this._toHighlight = toHighlight;
-                    this._direction = 1;
-                };
-                this.root.close = () => {
-                    if (this._time < 1 && this._direction !== 1) {
-                        return;
-                    }
-                    elevation(child, 0);
-                    this._toHighlight = null;
-                    if (this._currentHighlighted) {
-                        this._currentHighlighted.end();
-                        this._currentHighlighted = null;
-                    }
-                    this._direction = -1;
-                };
+                this.root.open = this.open.bind(this);
+                this.root.close = this.close.bind(this);
 
                 this.root.addEventListener("keydown", this._onkeydown = event => {
                     switch (event.keyCode) {
@@ -310,28 +281,52 @@
                 });
             },
             _onkeydown: null,
-            _bindedElement: null,
             _realParent: null,
+            _anchorElement: null,
+            setAnchorElement(element) {
+                const previousAnchorElement = this._anchorElement;
+                if (element == null) {
+                    this._anchorElement = null;
+                } else if (element instanceof HTMLElement) {
+                    if (this.root.contains(element)) {
+                        throw new Error("element is in menu tree");
+                    } else {
+                        this._anchorElement = element;
+                    }
+                } else {
+                    throw new Error("invalid element");
+                }
+                if (previousAnchorElement) {
+                    document.body.removeChild(this.root);
+                    this._realParent.appendChild(this.root);
+                }
+                if (this._anchorElement) {
+                    (this._realParent = this.root.parentElement).removeChild(this.root);
+                    document.body.appendChild(this.root);
+                    this.root.style.position = "fixed";
+                } else {
+                    this._realParent = null;
+                    this.root.style.top = "";
+                    this.root.style.left = "";
+                    this.root.style.width = "";
+                    this.root.style.position = "";
+                }
+            },
+            getAnchorElement() {
+                return this._anchorElement;
+            },
+            _bindedElement: null,
             _bindTo(element) {
                 if (this._bindedElement !== element) {
                     if (this._bindedElement) {
                         this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                        document.body.removeChild(this.root);
-                        this._realParent.appendChild(this.root);
                         this._bindedElement = null;
                     }
                     if (element && element instanceof HTMLElement) {
-                        this._bindedElement = element;
-                        (this._realParent = this.root.parentElement).removeChild(this.root);
-                        document.body.appendChild(this.root);
-                        this.root.style.position = "fixed";
+                        this.setAnchorElement(this._bindedElement = element);
                         this._bindedElement.addEventListener("keydown", this._onkeydown);
                     } else {
-                        this._realParent = null;
-                        this.root.style.top = "";
-                        this.root.style.left = "";
-                        this.root.style.width = "";
-                        this.root.style.position = "";
+                        this.setAnchorElement(null);
                     }
                 }
             },
@@ -358,6 +353,53 @@
             getOpened() {
                 return this.props.opened != null && this.props.opened !== false;
             },
+            open() {
+                if (this._time > 0 && this._direction !== -1) {
+                    return;
+                }
+                if (this.props.keepHighlight != null) {
+                    let toHighlight = null;
+                    const selected = this.props.selected || [];
+                    Array.prototype.some.call(this.getOptions(), opt => {
+                        if (selected.some(value => opt.value === value)) {
+                            if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                                opt = opt.firstElementChild;
+                            }
+                            toHighlight = opt;
+                            return true;
+                        }
+                        return false;
+                    });
+                    if (this._currentHighlighted) {
+                        this._currentHighlighted.end();
+                        this._currentHighlighted = null;
+                    }
+                    this._toHighlight = toHighlight;
+                }
+                elevation(this.root.firstElementChild, 4);
+                this._direction = 1;
+                if (this.props.preventCloseOnClickOut == null) {
+                    pointerController(document, event => {
+                        if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
+                            return;
+                        }
+                        this.close();
+                    });
+                }
+            },
+            close() {
+                if (this._time < 1 && this._direction !== 1) {
+                    return;
+                }
+                this._toHighlight = null;
+                if (this._currentHighlighted) {
+                    this._currentHighlighted.end();
+                    this._currentHighlighted = null;
+                }
+                elevation(this.root.firstElementChild, 0);
+                this._direction = -1;
+                pointerController(document, null);
+            },
             _onmousedown(event) {
                 if (this.getPreventFocus()) {
                     event.preventDefault();
@@ -371,6 +413,9 @@
                 }
             },
             _setHighlighted(event) {
+                if (this.props.keepHighlight == null) {
+                    return;
+                }
                 let parent = event.target;
                 let rippleElement = null;
                 const container = this.root.firstElementChild.firstElementChild;
@@ -395,7 +440,7 @@
                 }
             },
             _resetHighlighted() {
-                if (!this._currentHighlighted) {
+                if (this.props.keepHighlight != null && !this._currentHighlighted) {
                     this._toHighlight = this._lastHighlighted;
                 }
             }

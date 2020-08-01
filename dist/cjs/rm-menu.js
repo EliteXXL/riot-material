@@ -2,6 +2,7 @@
 
 var elevation = require('./elevation');
 var ripple = require('./ripple');
+var pointerController = require('./pointerController');
 
 function getMenuStyleAt(time, anchor) {
     // time = 0 : closed
@@ -20,7 +21,7 @@ function getMenuStyleAt(time, anchor) {
 }
 
 var rmMenu = {
-  'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
+  'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu:not([variant])[anchor=top],[is="rm-menu"]:not([variant])[anchor=top],rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
 
   'exports': {
     _lastOpened: null,
@@ -61,9 +62,9 @@ var rmMenu = {
             } else {
                 this.root.style.display = "";
                 let anchor = "top";
-                if (this._bindedElement) {
+                if (this._anchorElement) {
                     const height = window.innerHeight;
-                    const rect = this._bindedElement.getBoundingClientRect();
+                    const rect = this._anchorElement.getBoundingClientRect();
                     if (rect.bottom < 0) {
                         this.root.style.top = "0px";
                         this.root.style.bottom = "";
@@ -96,7 +97,9 @@ var rmMenu = {
                         }
                     }
                     this.root.style.left = rect.left + "px";
-                    this.root.style.width = rect.width + "px";
+                    if (this.props.inheritWidth != null) {
+                        this.root.style.width = rect.width + "px";
+                    }
                     this.root.setAttribute("anchor", anchor);
                 }
                 const styleAt = getMenuStyleAt(_lastTime = this._time, anchor);
@@ -133,42 +136,8 @@ var rmMenu = {
             get: () => this.getOptions()
         });
 
-        this.root.open = () => {
-            if (this._time > 0 && this._direction !== -1) {
-                return;
-            }
-            elevation.elevation(child, 4);
-            let toHighlight = null;
-            const selected = this.props.selected || [];
-            Array.prototype.some.call(this.getOptions(), opt => {
-                if (selected.some(value => opt.value === value)) {
-                    if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                        opt = opt.firstElementChild;
-                    }
-                    toHighlight = opt;
-                    return true;
-                }
-                return false;
-            });
-            if (this._currentHighlighted) {
-                this._currentHighlighted.end();
-                this._currentHighlighted = null;
-            }
-            this._toHighlight = toHighlight;
-            this._direction = 1;
-        };
-        this.root.close = () => {
-            if (this._time < 1 && this._direction !== 1) {
-                return;
-            }
-            elevation.elevation(child, 0);
-            this._toHighlight = null;
-            if (this._currentHighlighted) {
-                this._currentHighlighted.end();
-                this._currentHighlighted = null;
-            }
-            this._direction = -1;
-        };
+        this.root.open = this.open.bind(this);
+        this.root.close = this.close.bind(this);
 
         this.root.addEventListener("keydown", this._onkeydown = event => {
             switch (event.keyCode) {
@@ -250,29 +219,56 @@ var rmMenu = {
     },
 
     _onkeydown: null,
-    _bindedElement: null,
     _realParent: null,
+    _anchorElement: null,
+
+    setAnchorElement(element) {
+        const previousAnchorElement = this._anchorElement;
+        if (element == null) {
+            this._anchorElement = null;
+        } else if (element instanceof HTMLElement) {
+            if (this.root.contains(element)) {
+                throw new Error("element is in menu tree");
+            } else {
+                this._anchorElement = element;
+            }
+        } else {
+            throw new Error("invalid element");
+        }
+        if (previousAnchorElement) {
+            document.body.removeChild(this.root);
+            this._realParent.appendChild(this.root);
+        }
+        if (this._anchorElement) {
+            (this._realParent = this.root.parentElement).removeChild(this.root);
+            document.body.appendChild(this.root);
+            this.root.style.position = "fixed";
+        } else {
+            this._realParent = null;
+            this.root.style.top = "";
+            this.root.style.left = "";
+            this.root.style.width = "";
+            this.root.style.position = "";
+        }
+    },
+
+    getAnchorElement() {
+        return this._anchorElement;
+    },
+
+    _bindedElement: null,
 
     _bindTo(element) {
         if (this._bindedElement !== element) {
             if (this._bindedElement) {
                 this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                document.body.removeChild(this.root);
-                this._realParent.appendChild(this.root);
                 this._bindedElement = null;
             }
             if (element && element instanceof HTMLElement) {
-                this._bindedElement = element;
-                (this._realParent = this.root.parentElement).removeChild(this.root);
-                document.body.appendChild(this.root);
-                this.root.style.position = "fixed";
+                this.setAnchorElement(this._bindedElement = element);
                 this._bindedElement.addEventListener("keydown", this._onkeydown);
             } else {
-                this._realParent = null;
-                this.root.style.top = "";
-                this.root.style.left = "";
-                this.root.style.width = "";
-                this.root.style.position = "";
+                this.setAnchorElement(null);
             }
         }
     },
@@ -305,6 +301,55 @@ var rmMenu = {
         return this.props.opened != null && this.props.opened !== false;
     },
 
+    open() {
+        if (this._time > 0 && this._direction !== -1) {
+            return;
+        }
+        if (this.props.keepHighlight != null) {
+            let toHighlight = null;
+            const selected = this.props.selected || [];
+            Array.prototype.some.call(this.getOptions(), opt => {
+                if (selected.some(value => opt.value === value)) {
+                    if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                        opt = opt.firstElementChild;
+                    }
+                    toHighlight = opt;
+                    return true;
+                }
+                return false;
+            });
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            this._toHighlight = toHighlight;
+        }
+        elevation.elevation(this.root.firstElementChild, 4);
+        this._direction = 1;
+        if (this.props.preventCloseOnClickOut == null) {
+            pointerController.pointerController(document, event => {
+                if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
+                    return;
+                }
+                this.close();
+            });
+        }
+    },
+
+    close() {
+        if (this._time < 1 && this._direction !== 1) {
+            return;
+        }
+        this._toHighlight = null;
+        if (this._currentHighlighted) {
+            this._currentHighlighted.end();
+            this._currentHighlighted = null;
+        }
+        elevation.elevation(this.root.firstElementChild, 0);
+        this._direction = -1;
+        pointerController.pointerController(document, null);
+    },
+
     _onmousedown(event) {
         if (this.getPreventFocus()) {
             event.preventDefault();
@@ -320,6 +365,9 @@ var rmMenu = {
     },
 
     _setHighlighted(event) {
+        if (this.props.keepHighlight == null) {
+            return;
+        }
         let parent = event.target;
         let rippleElement = null;
         const container = this.root.firstElementChild.firstElementChild;
@@ -345,7 +393,7 @@ var rmMenu = {
     },
 
     _resetHighlighted() {
-        if (!this._currentHighlighted) {
+        if (this.props.keepHighlight != null && !this._currentHighlighted) {
             this._toHighlight = this._lastHighlighted;
         }
     }
@@ -353,10 +401,10 @@ var rmMenu = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr135="expr135"><div expr136="expr136" style="overflow-y: auto;"><slot expr137="expr137"></slot></div></div>',
+      '<div expr718="expr718"><div expr719="expr719" style="overflow-y: auto;"><slot expr720="expr720"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr135',
-        'selector': '[expr135]',
+        'redundantAttribute': 'expr718',
+        'selector': '[expr718]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -367,8 +415,8 @@ var rmMenu = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr136',
-        'selector': '[expr136]',
+        'redundantAttribute': 'expr719',
+        'selector': '[expr719]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -396,8 +444,8 @@ var rmMenu = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr137',
-        'selector': '[expr137]'
+        'redundantAttribute': 'expr720',
+        'selector': '[expr720]'
       }]
     );
   },

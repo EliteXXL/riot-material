@@ -1,6 +1,6 @@
 <rm-select>
-    <rm-menu onselected={ _onmenuselected } opened={ state.menuopened }
-        prevent-focus variant={ props.variant } selected={ state.selected }
+    <rm-menu onselected={ _onmenuselected } opened={ state.menuopened } inherit-width prevent-close-on-click-out
+        prevent-focus variant={ props.variant } selected={ state.selected } keep-highlight
     ><slot /></rm-menu>
     <rm-textfield-container variant={ props.variant }
         label={ props.label } full-width={ props.fullWidth }

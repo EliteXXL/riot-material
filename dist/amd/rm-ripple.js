@@ -21,12 +21,12 @@ define(['./ripple'], function (ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr83="expr83"></slot>', [{
+        return template('<slot expr90="expr90"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr83',
-          'selector': '[expr83]'
+          'redundantAttribute': 'expr90',
+          'selector': '[expr90]'
         }]);
       },
 

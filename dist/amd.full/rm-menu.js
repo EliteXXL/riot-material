@@ -1,4 +1,4 @@
-define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
+define(['./elevation', './ripple', './pointerController'], function (elevation, ripple, pointerController) { 'use strict';
 
     function getMenuStyleAt(time, anchor) {
         // time = 0 : closed
@@ -17,7 +17,7 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
     }
 
     var rmMenu = {
-      'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
+      'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu:not([variant])[anchor=top],[is="rm-menu"]:not([variant])[anchor=top],rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
 
       'exports': {
         _lastOpened: null,
@@ -58,9 +58,9 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
                 } else {
                     this.root.style.display = "";
                     let anchor = "top";
-                    if (this._bindedElement) {
+                    if (this._anchorElement) {
                         const height = window.innerHeight;
-                        const rect = this._bindedElement.getBoundingClientRect();
+                        const rect = this._anchorElement.getBoundingClientRect();
                         if (rect.bottom < 0) {
                             this.root.style.top = "0px";
                             this.root.style.bottom = "";
@@ -93,7 +93,9 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
                             }
                         }
                         this.root.style.left = rect.left + "px";
-                        this.root.style.width = rect.width + "px";
+                        if (this.props.inheritWidth != null) {
+                            this.root.style.width = rect.width + "px";
+                        }
                         this.root.setAttribute("anchor", anchor);
                     }
                     const styleAt = getMenuStyleAt(_lastTime = this._time, anchor);
@@ -130,42 +132,8 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
                 get: () => this.getOptions()
             });
 
-            this.root.open = () => {
-                if (this._time > 0 && this._direction !== -1) {
-                    return;
-                }
-                elevation.elevation(child, 4);
-                let toHighlight = null;
-                const selected = this.props.selected || [];
-                Array.prototype.some.call(this.getOptions(), opt => {
-                    if (selected.some(value => opt.value === value)) {
-                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                            opt = opt.firstElementChild;
-                        }
-                        toHighlight = opt;
-                        return true;
-                    }
-                    return false;
-                });
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._toHighlight = toHighlight;
-                this._direction = 1;
-            };
-            this.root.close = () => {
-                if (this._time < 1 && this._direction !== 1) {
-                    return;
-                }
-                elevation.elevation(child, 0);
-                this._toHighlight = null;
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._direction = -1;
-            };
+            this.root.open = this.open.bind(this);
+            this.root.close = this.close.bind(this);
 
             this.root.addEventListener("keydown", this._onkeydown = event => {
                 switch (event.keyCode) {
@@ -247,29 +215,56 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
         },
 
         _onkeydown: null,
-        _bindedElement: null,
         _realParent: null,
+        _anchorElement: null,
+
+        setAnchorElement(element) {
+            const previousAnchorElement = this._anchorElement;
+            if (element == null) {
+                this._anchorElement = null;
+            } else if (element instanceof HTMLElement) {
+                if (this.root.contains(element)) {
+                    throw new Error("element is in menu tree");
+                } else {
+                    this._anchorElement = element;
+                }
+            } else {
+                throw new Error("invalid element");
+            }
+            if (previousAnchorElement) {
+                document.body.removeChild(this.root);
+                this._realParent.appendChild(this.root);
+            }
+            if (this._anchorElement) {
+                (this._realParent = this.root.parentElement).removeChild(this.root);
+                document.body.appendChild(this.root);
+                this.root.style.position = "fixed";
+            } else {
+                this._realParent = null;
+                this.root.style.top = "";
+                this.root.style.left = "";
+                this.root.style.width = "";
+                this.root.style.position = "";
+            }
+        },
+
+        getAnchorElement() {
+            return this._anchorElement;
+        },
+
+        _bindedElement: null,
 
         _bindTo(element) {
             if (this._bindedElement !== element) {
                 if (this._bindedElement) {
                     this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                    document.body.removeChild(this.root);
-                    this._realParent.appendChild(this.root);
                     this._bindedElement = null;
                 }
                 if (element && element instanceof HTMLElement) {
-                    this._bindedElement = element;
-                    (this._realParent = this.root.parentElement).removeChild(this.root);
-                    document.body.appendChild(this.root);
-                    this.root.style.position = "fixed";
+                    this.setAnchorElement(this._bindedElement = element);
                     this._bindedElement.addEventListener("keydown", this._onkeydown);
                 } else {
-                    this._realParent = null;
-                    this.root.style.top = "";
-                    this.root.style.left = "";
-                    this.root.style.width = "";
-                    this.root.style.position = "";
+                    this.setAnchorElement(null);
                 }
             }
         },
@@ -302,6 +297,55 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
             return this.props.opened != null && this.props.opened !== false;
         },
 
+        open() {
+            if (this._time > 0 && this._direction !== -1) {
+                return;
+            }
+            if (this.props.keepHighlight != null) {
+                let toHighlight = null;
+                const selected = this.props.selected || [];
+                Array.prototype.some.call(this.getOptions(), opt => {
+                    if (selected.some(value => opt.value === value)) {
+                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                            opt = opt.firstElementChild;
+                        }
+                        toHighlight = opt;
+                        return true;
+                    }
+                    return false;
+                });
+                if (this._currentHighlighted) {
+                    this._currentHighlighted.end();
+                    this._currentHighlighted = null;
+                }
+                this._toHighlight = toHighlight;
+            }
+            elevation.elevation(this.root.firstElementChild, 4);
+            this._direction = 1;
+            if (this.props.preventCloseOnClickOut == null) {
+                pointerController.pointerController(document, event => {
+                    if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
+                        return;
+                    }
+                    this.close();
+                });
+            }
+        },
+
+        close() {
+            if (this._time < 1 && this._direction !== 1) {
+                return;
+            }
+            this._toHighlight = null;
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            elevation.elevation(this.root.firstElementChild, 0);
+            this._direction = -1;
+            pointerController.pointerController(document, null);
+        },
+
         _onmousedown(event) {
             if (this.getPreventFocus()) {
                 event.preventDefault();
@@ -317,6 +361,9 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
         },
 
         _setHighlighted(event) {
+            if (this.props.keepHighlight == null) {
+                return;
+            }
             let parent = event.target;
             let rippleElement = null;
             const container = this.root.firstElementChild.firstElementChild;
@@ -342,7 +389,7 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
         },
 
         _resetHighlighted() {
-            if (!this._currentHighlighted) {
+            if (this.props.keepHighlight != null && !this._currentHighlighted) {
                 this._toHighlight = this._lastHighlighted;
             }
         }
@@ -350,10 +397,10 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr10="expr10"><div expr11="expr11" style="overflow-y: auto;"><slot expr12="expr12"></slot></div></div>',
+          '<div expr712="expr712"><div expr713="expr713" style="overflow-y: auto;"><slot expr714="expr714"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr10',
-            'selector': '[expr10]',
+            'redundantAttribute': 'expr712',
+            'selector': '[expr712]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -364,8 +411,8 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr11',
-            'selector': '[expr11]',
+            'redundantAttribute': 'expr713',
+            'selector': '[expr713]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -393,8 +440,8 @@ define(['./elevation', './ripple'], function (elevation, ripple) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr12',
-            'selector': '[expr12]'
+            'redundantAttribute': 'expr714',
+            'selector': '[expr714]'
           }]
         );
       },

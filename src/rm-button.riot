@@ -377,6 +377,8 @@
         import * as riot from "riot";
         import IconComponent from "./rm-icon.riot";
 
+        import { pointerController } from "./pointerController";
+
         export default {
             onMounted() {
                 let button = this.root.querySelector("button");
@@ -436,24 +438,34 @@
                         }, 0);
                     }
                 });
+                let onclick = null;
                 button.addEventListener("click", () => {
                     if (shouldBeClick) {
-                        rippleObj.start(null, null, null);
+                        rippleObj.start(null, null, null).end();
+                        if (onclick) {
+                            onclick();
+                        }
                     }
                 });
                 let openOverlay = this.props.openOverlay;
                 if (openOverlay) {
-                    button.addEventListener("click", () => {
+                    pointerController(button, onclick = () => {
                         let overlay = document.querySelector("#" + openOverlay);
                         if (!overlay) {
                             return;
                         }
                         let tag = overlay[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                         if (tag && tag.open) {
+                            if (tag && tag.setAnchorElement) {
+                                tag.setAnchorElement(button);
+                            }
                             tag.open();
                         }
                     });
                 }
+            },
+            onBeforeUnmount() {
+                pointerController(this.root.querySelector("button"), null);
             },
             onUpdated() {
                 let button = this.root.querySelector("button");

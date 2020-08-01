@@ -1,6 +1,6 @@
 {
   "name": "riot-template",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "",
   "dependencies": {
     "@material/elevation": "^7.0.0",

@@ -3,12 +3,12 @@ var rmListSubheader = {
   'exports': null,
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr186="expr186"></slot>', [{
+    return template('<slot expr188="expr188"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr186',
-      'selector': '[expr186]'
+      'redundantAttribute': 'expr188',
+      'selector': '[expr188]'
     }]);
   },
 

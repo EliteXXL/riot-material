@@ -8,14 +8,25 @@ All notable changes to this project will be documented in this file.
 
 ## [any] - Unreleased
 ### Changed
-[ ] make `if` directive works for `slots` in `rm-tabbed-pages` component
+[ ] `if` directive works for `slots` in `rm-tabbed-pages` component
 [ ] implement documentation
 [ ] avoid `rm-select` from opening menu when focused and the tab is resumed
-[ ] make `rm-menu` align with opening element (e.g. `rm-button`)
-[ ] make `rm-menu` option for keeping highlight on element
+
+## [1.2.2] - 2020-08-01
+### Added
+- `rm-menu` option for keeping highlight on element
+- `rm-menu` align with opening element (e.g. `rm-button`) (implemented `setAnchorElement` method in `rm-menu`)
+- `rm-menu` keeps highlight only if `keep-highlight` attribute is set
+- `rm-menu` close on click out only if `prevent-close-on-click-out` is not set
+
+### Changed
+- `pointerController` remove window listeners when it has no callback
+- `pointerController` doesn't create the controller if no callback passed
+- `rm-button` uses `pointerController` for opening the overlay
 
 ## [1.2.1] - 2020-07-30
-- make programmatic opening and closing for `rm-menu`
+## Added
+- programmatic opening and closing for `rm-menu`
 
 ## [1.2.0] - 2020-07-29
 ### Added

@@ -72,7 +72,7 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr39="expr39"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr43="expr43"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -82,11 +82,11 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr40="expr40" slot="input"/>',
+            'html': '<input expr44="expr44" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr40',
-              'selector': '[expr40]',
+              'redundantAttribute': 'expr44',
+              'selector': '[expr44]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -133,18 +133,18 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr41="expr41" name="leading" slot="leading"></slot>',
+            'html': '<slot expr45="expr45" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr41',
-              'selector': '[expr41]'
+              'redundantAttribute': 'expr45',
+              'selector': '[expr45]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr42="expr42" variant="icon" dense></rm-button><slot expr43="expr43" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr46="expr46" variant="icon" dense></rm-button><slot expr47="expr47" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -153,8 +153,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr42',
-              'selector': '[expr42]',
+              'redundantAttribute': 'expr46',
+              'selector': '[expr46]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -190,8 +190,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr43',
-              'selector': '[expr43]'
+              'redundantAttribute': 'expr47',
+              'selector': '[expr47]'
             }]
           }],
 
@@ -239,8 +239,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
             }
           }],
 
-          'redundantAttribute': 'expr39',
-          'selector': '[expr39]'
+          'redundantAttribute': 'expr43',
+          'selector': '[expr43]'
         }]);
       },
 

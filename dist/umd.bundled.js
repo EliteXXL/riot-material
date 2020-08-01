@@ -253,10 +253,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr228="expr228" ref="bar"><slot expr229="expr229"></slot></div>',
+          '<div expr235="expr235" ref="bar"><slot expr236="expr236"></slot></div>',
           [{
-            'redundantAttribute': 'expr228',
-            'selector': '[expr228]',
+            'redundantAttribute': 'expr235',
+            'selector': '[expr235]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -284,8 +284,8 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr229',
-            'selector': '[expr229]'
+            'redundantAttribute': 'expr236',
+            'selector': '[expr236]'
           }]
         );
       },
@@ -958,17 +958,93 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr238="expr238"></slot>', [{
+        return template('<slot expr247="expr247"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr238',
-          'selector': '[expr238]'
+          'redundantAttribute': 'expr247',
+          'selector': '[expr247]'
         }]);
       },
 
       'name': 'rm-icon'
     };
+
+    var POINTER_CONTROLLER = Symbol("pointer-controller");
+    function pointerController(element, callback) {
+        var instance = element[POINTER_CONTROLLER];
+        if (instance) {
+            window.removeEventListener("touchstart", instance._window_ontouchstart);
+            if (callback != null) {
+                window.addEventListener("touchstart", instance._window_ontouchstart);
+            }
+            instance.callback = callback;
+            return;
+        }
+        else if (callback == null) {
+            return;
+        }
+        var touchShouldFire;
+        var lastTouch = null;
+        var ontouchstart = function (event) {
+            if (lastTouch == null || event.changedTouches[0].identifier === lastTouch) {
+                return;
+            }
+            touchShouldFire = false;
+        };
+        if (callback != null) {
+            window.addEventListener("touchstart", ontouchstart);
+        }
+        var eventHandled = false;
+        element[POINTER_CONTROLLER] = instance = {
+            _window_ontouchstart: ontouchstart,
+            ontouchstart: function (event) {
+                if (!instance.callback || lastTouch != null) {
+                    return;
+                }
+                lastTouch = event.changedTouches[0].identifier;
+                touchShouldFire = true;
+            },
+            ontouchmove: function (event) {
+                if (!instance.callback) {
+                    return;
+                }
+                touchShouldFire = false;
+            },
+            ontouchend: function (event) {
+                if (!instance.callback) {
+                    return;
+                }
+                lastTouch = null;
+                eventHandled = true;
+                setTimeout(function () { return eventHandled = false; }, 200);
+                if (!touchShouldFire) {
+                    return;
+                }
+                instance.callback.call(this, event);
+            },
+            ontouchcancel: function (event) {
+                if (!instance.callback) {
+                    return;
+                }
+                lastTouch = null;
+                eventHandled = true;
+                setTimeout(function () { return eventHandled = false; }, 200);
+            },
+            onmousedown: function (event) {
+                if (!instance.callback || eventHandled) {
+                    return;
+                }
+                instance.callback.call(this, event);
+            },
+            callback: callback
+        };
+        element.addEventListener("touchstart", instance.ontouchstart);
+        element.addEventListener("touchmove", instance.ontouchmove);
+        element.addEventListener("touchend", instance.ontouchend);
+        element.addEventListener("touchcancel", instance.ontouchcancel);
+        element.addEventListener("mousedown", instance.onmousedown);
+    }
 
     var ButtonComponent = {
       'css': `rm-button,[is="rm-button"]{ font-size: 14px; display: inline-block; margin-right: 8px; vertical-align: middle; border-radius: 4px; background: transparent; height: 2.571em; } rm-button button,[is="rm-button"] button{ font-size: inherit; font-weight: inherit; cursor: pointer; border: none; padding: 0 16px; border-radius: inherit; background: inherit; box-sizing: border-box; vertical-align: inherit; width: 100%; height: 100%; color: inherit; outline: none; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; position: relative; } rm-button[dense-padding]:not([dense-padding="false"]) button,[is="rm-button"][dense-padding]:not([dense-padding="false"]) button{ padding: 0 8px; } rm-button button::-moz-focus-inner,[is="rm-button"] button::-moz-focus-inner{ border: none; } rm-button[variant=icon],[is="rm-button"][variant=icon]{ border-radius: 50%; } rm-button[variant=icon] button,[is="rm-button"][variant=icon] button{ padding: 0.5714285714285714em; height: 2.857142857142857em; width: 2.857142857142857em; } rm-button[variant=icon] button rm-icon,[is="rm-button"][variant=icon] button rm-icon{ font-size: 1.7142857142857142em; } rm-button[variant=icon],[is="rm-button"][variant=icon]{ height: unset; } rm-button[variant="unelevated"],[is="rm-button"][variant="unelevated"],rm-button[variant="raised"],[is="rm-button"][variant="raised"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } .rm-black-surface rm-button[variant="unelevated"],.rm-black-surface [is="rm-button"][variant="unelevated"],.rm-black-surface rm-button[variant="raised"],.rm-black-surface [is="rm-button"][variant="raised"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } .rm-dark-surface rm-button[variant="unelevated"],.rm-dark-surface [is="rm-button"][variant="unelevated"],.rm-dark-surface rm-button[variant="raised"],.rm-dark-surface [is="rm-button"][variant="raised"]{ background: rgb(250, 250, 250); background: rgb(var(--color-light-surface, 250, 250, 250)); color: rgb(0, 0, 0); color: rgb(var(--color-on-light, 0, 0, 0)); } .rm-light-surface rm-button[variant="unelevated"],.rm-light-surface [is="rm-button"][variant="unelevated"],.rm-light-surface rm-button[variant="raised"],.rm-light-surface [is="rm-button"][variant="raised"]{ background: rgb(10, 10, 10); background: rgb(var(--color-dark-surface, 10, 10, 10)); color: rgb(255, 255, 255); color: rgb(var(--color-on-dark, 255, 255, 255)); } .rm-white-surface rm-button[variant="unelevated"],.rm-white-surface [is="rm-button"][variant="unelevated"],.rm-white-surface rm-button[variant="raised"],.rm-white-surface [is="rm-button"][variant="raised"]{ background: rgb(0, 0, 0); background: rgb(var(--color-black-surface, 0, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-black, 255, 255, 255)); } rm-button[variant="outlined"] button::before,[is="rm-button"][variant="outlined"] button::before{ content: ""; position: absolute; top: 0; bottom: 0; right: 0; left: 0; border: 1px solid rgba(0, 0, 0, .12); border: 1px solid rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12)); border-radius: inherit; } .rm-black-surface rm-button[variant="outlined"] button::before,.rm-black-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(255, 255, 255, .12); border-color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-dark-surface rm-button[variant="outlined"] button::before,.rm-dark-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(255, 255, 255, .12); border-color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-light-surface rm-button[variant="outlined"] button::before,.rm-light-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(0, 0, 0, .12); border-color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12)); } .rm-white-surface rm-button[variant="outlined"] button::before,.rm-white-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(0, 0, 0, .12); border-color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12)); } rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-white, 139, 0, 139)); } rm-button[color="primary"][variant="raised"],[is="rm-button"][color="primary"][variant="raised"],rm-button[color="primary"][variant="unelevated"],[is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary, 255, 255, 255)); } .rm-black-surface rm-button[color="primary"][variant="raised"],.rm-black-surface [is="rm-button"][color="primary"][variant="raised"],.rm-black-surface rm-button[color="primary"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-black, 238, 130, 238)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="primary"][variant="raised"],.rm-dark-surface [is="rm-button"][color="primary"][variant="raised"],.rm-dark-surface rm-button[color="primary"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-dark, 238, 130, 238)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="primary"][variant="raised"],.rm-light-surface [is="rm-button"][color="primary"][variant="raised"],.rm-light-surface rm-button[color="primary"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-light, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="primary"][variant="raised"],.rm-white-surface [is="rm-button"][color="primary"][variant="raised"],.rm-white-surface rm-button[color="primary"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-white, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-white, 255, 255, 255)); } rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent, 0, 0, 255)); } .rm-black-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-black, 30, 144, 255)); } .rm-dark-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-dark, 30, 144, 255)); } .rm-light-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-light, 0, 0, 255)); } .rm-white-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-white, 0, 0, 255)); } rm-button[color="accent"][variant="raised"],[is="rm-button"][color="accent"][variant="raised"],rm-button[color="accent"][variant="unelevated"],[is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent, 255, 255, 255)); } .rm-black-surface rm-button[color="accent"][variant="raised"],.rm-black-surface [is="rm-button"][color="accent"][variant="raised"],.rm-black-surface rm-button[color="accent"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-black, 30, 144, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="accent"][variant="raised"],.rm-dark-surface [is="rm-button"][color="accent"][variant="raised"],.rm-dark-surface rm-button[color="accent"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-dark, 30, 144, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="accent"][variant="raised"],.rm-light-surface [is="rm-button"][color="accent"][variant="raised"],.rm-light-surface rm-button[color="accent"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-light, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="accent"][variant="raised"],.rm-white-surface [is="rm-button"][color="accent"][variant="raised"],.rm-white-surface rm-button[color="accent"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-white, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-white, 255, 255, 255)); } rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn, 255, 0, 0)); } .rm-black-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 69, 0); color: rgb(var(--color-warn-on-black, 255, 69, 0)); } .rm-dark-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 69, 0); color: rgb(var(--color-warn-on-dark, 255, 69, 0)); } .rm-light-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn-on-light, 255, 0, 0)); } .rm-white-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn-on-white, 255, 0, 0)); } rm-button[color="warn"][variant="raised"],[is="rm-button"][color="warn"][variant="raised"],rm-button[color="warn"][variant="unelevated"],[is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn, 255, 255, 255)); } .rm-black-surface rm-button[color="warn"][variant="raised"],.rm-black-surface [is="rm-button"][color="warn"][variant="raised"],.rm-black-surface rm-button[color="warn"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 69, 0); background: rgb(var(--color-warn-on-black, 255, 69, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="warn"][variant="raised"],.rm-dark-surface [is="rm-button"][color="warn"][variant="raised"],.rm-dark-surface rm-button[color="warn"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 69, 0); background: rgb(var(--color-warn-on-dark, 255, 69, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="warn"][variant="raised"],.rm-light-surface [is="rm-button"][color="warn"][variant="raised"],.rm-light-surface rm-button[color="warn"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn-on-light, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="warn"][variant="raised"],.rm-white-surface [is="rm-button"][color="warn"][variant="raised"],.rm-white-surface rm-button[color="warn"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn-on-white, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-white, 255, 255, 255)); } rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-black-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-dark-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-light-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-white-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42)); } rm-button[disabled][variant="raised"]:not([disabled="false"]),[is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),rm-button[disabled][variant="unelevated"]:not([disabled="false"]),[is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-black-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-black-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-black-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-black-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12)); color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-dark-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-dark-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-dark-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-dark-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12)); color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-light-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-light-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-light-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-light-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-white-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-white-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-white-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-white-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42)); } rm-button[disabled]:not([disabled="false"]) button,[is="rm-button"][disabled]:not([disabled="false"]) button{ background: transparent; box-shadow: none; cursor: initial; } rm-button[variant=icon][dense],[is="rm-button"][variant=icon][dense]{ margin-right: 0.2857142857142857em; } rm-button[variant=icon][dense] button,[is="rm-button"][variant=icon][dense] button{ height: unset; width: unset; padding: 0; } rm-button[variant]:last-child,[is="rm-button"][variant]:last-child,rm-button:last-child,[is="rm-button"]:last-child{ margin-right: 0; }`,
@@ -1032,24 +1108,35 @@
                     }, 0);
                 }
             });
+            let onclick = null;
             button.addEventListener("click", () => {
                 if (shouldBeClick) {
-                    rippleObj.start(null, null, null);
+                    rippleObj.start(null, null, null).end();
+                    if (onclick) {
+                        onclick();
+                    }
                 }
             });
             let openOverlay = this.props.openOverlay;
             if (openOverlay) {
-                button.addEventListener("click", () => {
+                pointerController(button, onclick = () => {
                     let overlay = document.querySelector("#" + openOverlay);
                     if (!overlay) {
                         return;
                     }
                     let tag = overlay[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                     if (tag && tag.open) {
+                        if (tag && tag.setAnchorElement) {
+                            tag.setAnchorElement(button);
+                        }
                         tag.open();
                     }
                 });
             }
+        },
+
+        onBeforeUnmount() {
+            pointerController(this.root.querySelector("button"), null);
         },
 
         onUpdated() {
@@ -1102,7 +1189,7 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr230="expr230"></button><button expr232="expr232"></button>',
+          '<button expr590="expr590"></button><button expr592="expr592"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -1110,10 +1197,10 @@
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr230',
-            'selector': '[expr230]',
+            'redundantAttribute': 'expr590',
+            'selector': '[expr590]',
 
-            'template': template('<slot expr231="expr231"></slot>', [{
+            'template': template('<slot expr591="expr591"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -1147,8 +1234,8 @@
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr231',
-              'selector': '[expr231]'
+              'redundantAttribute': 'expr591',
+              'selector': '[expr591]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -1157,10 +1244,10 @@
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr232',
-            'selector': '[expr232]',
+            'redundantAttribute': 'expr592',
+            'selector': '[expr592]',
 
-            'template': template('<rm-icon expr233="expr233"></rm-icon>', [{
+            'template': template('<rm-icon expr593="expr593"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -1193,14 +1280,14 @@
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr234="expr234"></slot>',
+                'html': '<slot expr594="expr594"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr234',
-                  'selector': '[expr234]'
+                  'redundantAttribute': 'expr594',
+                  'selector': '[expr594]'
                 }]
               }],
 
@@ -1213,8 +1300,8 @@
                 }
               }],
 
-              'redundantAttribute': 'expr233',
-              'selector': '[expr233]'
+              'redundantAttribute': 'expr593',
+              'selector': '[expr593]'
             }])
           }]
         );
@@ -1264,10 +1351,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr235="expr235" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr236="expr236" style="vertical-align: top; display: inline-block;"> </div></label>',
+          '<label><input expr233="expr233" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr234="expr234" style="vertical-align: top; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr235',
-            'selector': '[expr235]',
+            'redundantAttribute': 'expr233',
+            'selector': '[expr233]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1285,8 +1372,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr236',
-            'selector': '[expr236]',
+            'redundantAttribute': 'expr234',
+            'selector': '[expr234]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1427,10 +1514,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr239="expr239" class="mdc-elevation--z24" ref="container"><div expr240="expr240" ref="title"><slot expr241="expr241" name="title"></slot></div><div expr242="expr242" ref="content"><slot expr243="expr243" name="content"></slot></div><div expr244="expr244" ref="actions"><slot expr245="expr245" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr238="expr238" class="mdc-elevation--z24" ref="container"><div expr239="expr239" ref="title"><slot expr240="expr240" name="title"></slot></div><div expr241="expr241" ref="content"><slot expr242="expr242" name="content"></slot></div><div expr243="expr243" ref="actions"><slot expr244="expr244" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr239',
-            'selector': '[expr239]',
+            'redundantAttribute': 'expr238',
+            'selector': '[expr238]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1441,8 +1528,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr240',
-            'selector': '[expr240]',
+            'redundantAttribute': 'expr239',
+            'selector': '[expr239]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1456,11 +1543,11 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr241',
-            'selector': '[expr241]'
+            'redundantAttribute': 'expr240',
+            'selector': '[expr240]'
           }, {
-            'redundantAttribute': 'expr242',
-            'selector': '[expr242]',
+            'redundantAttribute': 'expr241',
+            'selector': '[expr241]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1474,11 +1561,11 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr243',
-            'selector': '[expr243]'
+            'redundantAttribute': 'expr242',
+            'selector': '[expr242]'
           }, {
-            'redundantAttribute': 'expr244',
-            'selector': '[expr244]',
+            'redundantAttribute': 'expr243',
+            'selector': '[expr243]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1492,8 +1579,8 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr245',
-            'selector': '[expr245]'
+            'redundantAttribute': 'expr244',
+            'selector': '[expr244]'
           }]
         );
       },
@@ -1525,7 +1612,7 @@
     }
 
     var MenuComponent = {
-      'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
+      'css': `rm-menu,[is="rm-menu"]{ display: block; font-size: 16px; overflow: hidden; padding: 40px; margin: -40px; pointer-events: none; } rm-menu:not([anchor]),[is="rm-menu"]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=top],[is="rm-menu"][anchor=top]{ padding-top: 0; margin-top: 0; border-radius: 0 0 0.25em 0.25em; } rm-menu:not([variant])[anchor=top],[is="rm-menu"]:not([variant])[anchor=top],rm-menu[variant=outlined][anchor=top],[is="rm-menu"][variant=outlined][anchor=top],rm-menu[variant=outlined]:not([anchor]),[is="rm-menu"][variant=outlined]:not([anchor]){ border-radius: 0.25em; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom]{ padding-bottom: 0; margin-bottom: 0; border-radius: 0.25em 0.25em 0 0; } rm-menu[anchor=bottom],[is="rm-menu"][anchor=bottom],rm-menu[variant=filled][anchor=bottom],[is="rm-menu"][variant=filled][anchor=bottom],rm-menu[variant=outlined][anchor=bottom],[is="rm-menu"][variant=outlined][anchor=bottom]{ border-radius: 0.25em; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; z-index: 99; pointer-events: all; border-radius: inherit; transform-origin: top center; } rm-menu > div,[is="rm-menu"] > div{ background: white; padding: .5em 0; transform: }`,
 
       'exports': {
         _lastOpened: null,
@@ -1566,9 +1653,9 @@
                 } else {
                     this.root.style.display = "";
                     let anchor = "top";
-                    if (this._bindedElement) {
+                    if (this._anchorElement) {
                         const height = window.innerHeight;
-                        const rect = this._bindedElement.getBoundingClientRect();
+                        const rect = this._anchorElement.getBoundingClientRect();
                         if (rect.bottom < 0) {
                             this.root.style.top = "0px";
                             this.root.style.bottom = "";
@@ -1601,7 +1688,9 @@
                             }
                         }
                         this.root.style.left = rect.left + "px";
-                        this.root.style.width = rect.width + "px";
+                        if (this.props.inheritWidth != null) {
+                            this.root.style.width = rect.width + "px";
+                        }
                         this.root.setAttribute("anchor", anchor);
                     }
                     const styleAt = getMenuStyleAt(_lastTime = this._time, anchor);
@@ -1638,42 +1727,8 @@
                 get: () => this.getOptions()
             });
 
-            this.root.open = () => {
-                if (this._time > 0 && this._direction !== -1) {
-                    return;
-                }
-                elevation(child, 4);
-                let toHighlight = null;
-                const selected = this.props.selected || [];
-                Array.prototype.some.call(this.getOptions(), opt => {
-                    if (selected.some(value => opt.value === value)) {
-                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
-                            opt = opt.firstElementChild;
-                        }
-                        toHighlight = opt;
-                        return true;
-                    }
-                    return false;
-                });
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._toHighlight = toHighlight;
-                this._direction = 1;
-            };
-            this.root.close = () => {
-                if (this._time < 1 && this._direction !== 1) {
-                    return;
-                }
-                elevation(child, 0);
-                this._toHighlight = null;
-                if (this._currentHighlighted) {
-                    this._currentHighlighted.end();
-                    this._currentHighlighted = null;
-                }
-                this._direction = -1;
-            };
+            this.root.open = this.open.bind(this);
+            this.root.close = this.close.bind(this);
 
             this.root.addEventListener("keydown", this._onkeydown = event => {
                 switch (event.keyCode) {
@@ -1755,29 +1810,56 @@
         },
 
         _onkeydown: null,
-        _bindedElement: null,
         _realParent: null,
+        _anchorElement: null,
+
+        setAnchorElement(element) {
+            const previousAnchorElement = this._anchorElement;
+            if (element == null) {
+                this._anchorElement = null;
+            } else if (element instanceof HTMLElement) {
+                if (this.root.contains(element)) {
+                    throw new Error("element is in menu tree");
+                } else {
+                    this._anchorElement = element;
+                }
+            } else {
+                throw new Error("invalid element");
+            }
+            if (previousAnchorElement) {
+                document.body.removeChild(this.root);
+                this._realParent.appendChild(this.root);
+            }
+            if (this._anchorElement) {
+                (this._realParent = this.root.parentElement).removeChild(this.root);
+                document.body.appendChild(this.root);
+                this.root.style.position = "fixed";
+            } else {
+                this._realParent = null;
+                this.root.style.top = "";
+                this.root.style.left = "";
+                this.root.style.width = "";
+                this.root.style.position = "";
+            }
+        },
+
+        getAnchorElement() {
+            return this._anchorElement;
+        },
+
+        _bindedElement: null,
 
         _bindTo(element) {
             if (this._bindedElement !== element) {
                 if (this._bindedElement) {
                     this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                    document.body.removeChild(this.root);
-                    this._realParent.appendChild(this.root);
                     this._bindedElement = null;
                 }
                 if (element && element instanceof HTMLElement) {
-                    this._bindedElement = element;
-                    (this._realParent = this.root.parentElement).removeChild(this.root);
-                    document.body.appendChild(this.root);
-                    this.root.style.position = "fixed";
+                    this.setAnchorElement(this._bindedElement = element);
                     this._bindedElement.addEventListener("keydown", this._onkeydown);
                 } else {
-                    this._realParent = null;
-                    this.root.style.top = "";
-                    this.root.style.left = "";
-                    this.root.style.width = "";
-                    this.root.style.position = "";
+                    this.setAnchorElement(null);
                 }
             }
         },
@@ -1810,6 +1892,55 @@
             return this.props.opened != null && this.props.opened !== false;
         },
 
+        open() {
+            if (this._time > 0 && this._direction !== -1) {
+                return;
+            }
+            if (this.props.keepHighlight != null) {
+                let toHighlight = null;
+                const selected = this.props.selected || [];
+                Array.prototype.some.call(this.getOptions(), opt => {
+                    if (selected.some(value => opt.value === value)) {
+                        if (opt.tagName.toUpperCase() === "RM-MENU-ITEM") {
+                            opt = opt.firstElementChild;
+                        }
+                        toHighlight = opt;
+                        return true;
+                    }
+                    return false;
+                });
+                if (this._currentHighlighted) {
+                    this._currentHighlighted.end();
+                    this._currentHighlighted = null;
+                }
+                this._toHighlight = toHighlight;
+            }
+            elevation(this.root.firstElementChild, 4);
+            this._direction = 1;
+            if (this.props.preventCloseOnClickOut == null) {
+                pointerController(document, event => {
+                    if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
+                        return;
+                    }
+                    this.close();
+                });
+            }
+        },
+
+        close() {
+            if (this._time < 1 && this._direction !== 1) {
+                return;
+            }
+            this._toHighlight = null;
+            if (this._currentHighlighted) {
+                this._currentHighlighted.end();
+                this._currentHighlighted = null;
+            }
+            elevation(this.root.firstElementChild, 0);
+            this._direction = -1;
+            pointerController(document, null);
+        },
+
         _onmousedown(event) {
             if (this.getPreventFocus()) {
                 event.preventDefault();
@@ -1825,6 +1956,9 @@
         },
 
         _setHighlighted(event) {
+            if (this.props.keepHighlight == null) {
+                return;
+            }
             let parent = event.target;
             let rippleElement = null;
             const container = this.root.firstElementChild.firstElementChild;
@@ -1850,7 +1984,7 @@
         },
 
         _resetHighlighted() {
-            if (!this._currentHighlighted) {
+            if (this.props.keepHighlight != null && !this._currentHighlighted) {
                 this._toHighlight = this._lastHighlighted;
             }
         }
@@ -1858,10 +1992,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr256="expr256"><div expr257="expr257" style="overflow-y: auto;"><slot expr258="expr258"></slot></div></div>',
+          '<div expr724="expr724"><div expr725="expr725" style="overflow-y: auto;"><slot expr726="expr726"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr256',
-            'selector': '[expr256]',
+            'redundantAttribute': 'expr724',
+            'selector': '[expr724]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1872,8 +2006,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr257',
-            'selector': '[expr257]',
+            'redundantAttribute': 'expr725',
+            'selector': '[expr725]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1901,8 +2035,8 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr258',
-            'selector': '[expr258]'
+            'redundantAttribute': 'expr726',
+            'selector': '[expr726]'
           }]
         );
       },
@@ -2007,9 +2141,9 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr259="expr259"><slot expr260="expr260"></slot></button>', [{
-          'redundantAttribute': 'expr259',
-          'selector': '[expr259]',
+        return template('<button expr245="expr245"><slot expr246="expr246"></slot></button>', [{
+          'redundantAttribute': 'expr245',
+          'selector': '[expr245]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -2030,8 +2164,8 @@
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr260',
-          'selector': '[expr260]'
+          'redundantAttribute': 'expr246',
+          'selector': '[expr246]'
         }]);
       },
 
@@ -2105,10 +2239,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr261="expr261" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr262="expr262" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr248="expr248" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr249="expr249" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr261',
-            'selector': '[expr261]',
+            'redundantAttribute': 'expr248',
+            'selector': '[expr248]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -2125,8 +2259,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr262',
-            'selector': '[expr262]',
+            'redundantAttribute': 'expr249',
+            'selector': '[expr249]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2164,12 +2298,12 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr255="expr255"></slot>', [{
+        return template('<slot expr266="expr266"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr255',
-          'selector': '[expr255]'
+          'redundantAttribute': 'expr266',
+          'selector': '[expr266]'
         }]);
       },
 
@@ -2356,62 +2490,6 @@
 
       'name': 'rm-textfield-container'
     };
-
-    var POINTER_CONTROLLER = Symbol("pointer-controller");
-    function pointerController(element, callback) {
-        var instance = element[POINTER_CONTROLLER];
-        if (instance) {
-            instance.callback = callback;
-            return;
-        }
-        var touchShouldFire;
-        var lastTouch = null;
-        window.addEventListener("touchstart", function (event) {
-            if (lastTouch == null || event.changedTouches[0].identifier === lastTouch) {
-                return;
-            }
-            touchShouldFire = false;
-        });
-        var eventHandled = false;
-        element[POINTER_CONTROLLER] = instance = {
-            ontouchstart: function (event) {
-                if (!instance.callback || lastTouch != null) {
-                    return;
-                }
-                lastTouch = event.changedTouches[0].identifier;
-                touchShouldFire = true;
-            },
-            ontouchmove: function (event) {
-                touchShouldFire = false;
-            },
-            ontouchend: function (event) {
-                lastTouch = null;
-                eventHandled = true;
-                setTimeout(function () { return eventHandled = false; }, 200);
-                if (!touchShouldFire || !instance.callback) {
-                    return;
-                }
-                instance.callback.call(this, event);
-            },
-            ontouchcancel: function (event) {
-                lastTouch = null;
-                eventHandled = true;
-                setTimeout(function () { return eventHandled = false; }, 200);
-            },
-            onmousedown: function (event) {
-                if (!instance.callback || eventHandled) {
-                    return;
-                }
-                instance.callback.call(this, event);
-            },
-            callback: callback
-        };
-        element.addEventListener("touchstart", instance.ontouchstart);
-        element.addEventListener("touchmove", instance.ontouchmove);
-        element.addEventListener("touchend", instance.ontouchend);
-        element.addEventListener("touchcancel", instance.ontouchcancel);
-        element.addEventListener("mousedown", instance.onmousedown);
-    }
 
     const blockedInputs = [];
     window.addEventListener("change", event => {
@@ -2682,7 +2760,7 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr246="expr246" prevent-focus></rm-menu><rm-textfield-container expr248="expr248"></rm-textfield-container>',
+          '<rm-menu expr676="expr676" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr678="expr678"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -2693,14 +2771,14 @@
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr247="expr247"></slot>',
+              'html': '<slot expr677="expr677"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr247',
-                'selector': '[expr247]'
+                'redundantAttribute': 'expr677',
+                'selector': '[expr677]'
               }]
             }],
 
@@ -2734,8 +2812,8 @@
               }
             }],
 
-            'redundantAttribute': 'expr246',
-            'selector': '[expr246]'
+            'redundantAttribute': 'expr676',
+            'selector': '[expr676]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -2746,11 +2824,11 @@
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr249="expr249" class="rm-select--input"/><div expr250="expr250" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr679="expr679" class="rm-select--input"/><div expr680="expr680" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr249',
-                'selector': '[expr249]',
+                'redundantAttribute': 'expr679',
+                'selector': '[expr679]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -2789,8 +2867,8 @@
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr250',
-                'selector': '[expr250]',
+                'redundantAttribute': 'expr680',
+                'selector': '[expr680]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -2803,18 +2881,18 @@
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr251="expr251" name="leading" slot="leading"></slot>',
+              'html': '<slot expr681="expr681" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr251',
-                'selector': '[expr251]'
+                'redundantAttribute': 'expr681',
+                'selector': '[expr681]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr252="expr252" variant="icon" class="rm-select--clear" dense></rm-button><slot expr253="expr253" name="trailing"></slot><rm-button expr254="expr254" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr682="expr682" variant="icon" class="rm-select--clear" dense></rm-button><slot expr683="expr683" name="trailing"></slot><rm-button expr684="expr684" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -2823,8 +2901,8 @@
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr252',
-                'selector': '[expr252]',
+                'redundantAttribute': 'expr682',
+                'selector': '[expr682]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -2860,8 +2938,8 @@
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr253',
-                'selector': '[expr253]'
+                'redundantAttribute': 'expr683',
+                'selector': '[expr683]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -2888,8 +2966,8 @@
                   }
                 }],
 
-                'redundantAttribute': 'expr254',
-                'selector': '[expr254]'
+                'redundantAttribute': 'expr684',
+                'selector': '[expr684]'
               }]
             }],
 
@@ -2930,8 +3008,8 @@
               }
             }],
 
-            'redundantAttribute': 'expr248',
-            'selector': '[expr248]'
+            'redundantAttribute': 'expr678',
+            'selector': '[expr678]'
           }]
         );
       },
@@ -3464,24 +3542,24 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr263="expr263"></div>', [{
+        return template('<div expr250="expr250"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr263',
-          'selector': '[expr263]',
+          'redundantAttribute': 'expr250',
+          'selector': '[expr250]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr264="expr264" ref="tab"></div></div><div expr266="expr266" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr251="expr251" ref="tab"></div></div><div expr253="expr253" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr265="expr265" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr252="expr252" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -3498,8 +3576,8 @@
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr265',
-                'selector': '[expr265]',
+                'redundantAttribute': 'expr252',
+                'selector': '[expr252]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -3511,8 +3589,8 @@
                 }]
               }]),
 
-              'redundantAttribute': 'expr264',
-              'selector': '[expr264]',
+              'redundantAttribute': 'expr251',
+              'selector': '[expr251]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -3520,8 +3598,8 @@
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr266',
-              'selector': '[expr266]',
+              'redundantAttribute': 'expr253',
+              'selector': '[expr253]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,

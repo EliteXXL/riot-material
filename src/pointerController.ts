@@ -1,6 +1,7 @@
 const POINTER_CONTROLLER: unique symbol = Symbol("pointer-controller");
 
 interface IPointerController {
+    _window_ontouchstart: (event : TouchEvent) => void;
     ontouchstart: (event: TouchEvent) => void;
     ontouchmove: (event: TouchEvent) => void;
     ontouchend: (event: TouchEvent) => void;
@@ -12,19 +13,29 @@ interface IPointerController {
 export function pointerController(element: HTMLElement, callback: ((event: TouchEvent | MouseEvent) => void) | null): void {
     let instance: IPointerController = element[POINTER_CONTROLLER];
     if (instance) {
+        window.removeEventListener("touchstart", instance._window_ontouchstart);
+        if (callback != null) {
+            window.addEventListener("touchstart", instance._window_ontouchstart);
+        }
         instance.callback = callback;
+        return;
+    } else if (callback == null) {
         return;
     }
     let touchShouldFire: boolean;
     let lastTouch: number | null = null;
-    window.addEventListener("touchstart", event => {
+    let ontouchstart: (event: TouchEvent) => void = event => {
         if (lastTouch == null || event.changedTouches[0].identifier === lastTouch) {
             return;
         }
         touchShouldFire = false;
-    });
+    };
+    if (callback != null) {
+        window.addEventListener("touchstart", ontouchstart);
+    }
     let eventHandled: boolean = false;
     element[POINTER_CONTROLLER] = instance = {
+        _window_ontouchstart: ontouchstart,
         ontouchstart(event: TouchEvent): void {
             if (!instance.callback || lastTouch != null) {
                 return;
@@ -33,18 +44,27 @@ export function pointerController(element: HTMLElement, callback: ((event: Touch
             touchShouldFire = true;
         },
         ontouchmove(event: TouchEvent): void {
+            if (!instance.callback) {
+                return;
+            }
             touchShouldFire = false;
         },
         ontouchend(event: TouchEvent): void {
+            if (!instance.callback) {
+                return;
+            }
             lastTouch = null;
             eventHandled = true;
             setTimeout(() => eventHandled = false, 200);
-            if (!touchShouldFire || !instance.callback) {
+            if (!touchShouldFire) {
                 return;
             }
             instance.callback.call(this, event);
         },
         ontouchcancel(event: TouchEvent): void {
+            if (!instance.callback) {
+                return;
+            }
             lastTouch = null;
             eventHandled = true;
             setTimeout(() => eventHandled = false, 200);

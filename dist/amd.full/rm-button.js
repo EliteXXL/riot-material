@@ -1,4 +1,4 @@
-define(['./rm-icon', 'riot', './ripple'], function (IconComponent, riot, ripple) { 'use strict';
+define(['./rm-icon', 'riot', './ripple', './pointerController'], function (IconComponent, riot, ripple, pointerController) { 'use strict';
 
     IconComponent = IconComponent && Object.prototype.hasOwnProperty.call(IconComponent, 'default') ? IconComponent['default'] : IconComponent;
 
@@ -64,24 +64,35 @@ define(['./rm-icon', 'riot', './ripple'], function (IconComponent, riot, ripple)
                     }, 0);
                 }
             });
+            let onclick = null;
             button.addEventListener("click", () => {
                 if (shouldBeClick) {
-                    rippleObj.start(null, null, null);
+                    rippleObj.start(null, null, null).end();
+                    if (onclick) {
+                        onclick();
+                    }
                 }
             });
             let openOverlay = this.props.openOverlay;
             if (openOverlay) {
-                button.addEventListener("click", () => {
+                pointerController.pointerController(button, onclick = () => {
                     let overlay = document.querySelector("#" + openOverlay);
                     if (!overlay) {
                         return;
                     }
                     let tag = overlay[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                     if (tag && tag.open) {
+                        if (tag && tag.setAnchorElement) {
+                            tag.setAnchorElement(button);
+                        }
                         tag.open();
                     }
                 });
             }
+        },
+
+        onBeforeUnmount() {
+            pointerController.pointerController(this.root.querySelector("button"), null);
         },
 
         onUpdated() {
@@ -133,120 +144,123 @@ define(['./rm-icon', 'riot', './ripple'], function (IconComponent, riot, ripple)
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr5="expr5"></button><button expr7="expr7"></button>', [{
-          'type': bindingTypes.IF,
-
-          'evaluate': function(scope) {
-            return !scope.isIcon();
-          },
-
-          'redundantAttribute': 'expr5',
-          'selector': '[expr5]',
-
-          'template': template('<slot expr6="expr6"></slot>', [{
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'style',
-
-              'evaluate': function(scope) {
-                return scope.props.buttonStyle;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'disabled',
-
-              'evaluate': function(scope) {
-                return scope.isDisabled();
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'type',
-
-              'evaluate': function(scope) {
-                return scope.props.type;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'tabindex',
-
-              'evaluate': function(scope) {
-                return scope.props.tabindex;
-              }
-            }]
-          }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'default',
-            'redundantAttribute': 'expr6',
-            'selector': '[expr6]'
-          }])
-        }, {
-          'type': bindingTypes.IF,
-
-          'evaluate': function(scope) {
-            return scope.isIcon();
-          },
-
-          'redundantAttribute': 'expr7',
-          'selector': '[expr7]',
-
-          'template': template('<rm-icon expr8="expr8"></rm-icon>', [{
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'disabled',
-
-              'evaluate': function(scope) {
-                return scope.isDisabled();
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'type',
-
-              'evaluate': function(scope) {
-                return scope.props.type;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'tabindex',
-
-              'evaluate': function(scope) {
-                return scope.props.tabindex;
-              }
-            }]
-          }, {
-            'type': bindingTypes.TAG,
-            'getComponent': getComponent,
+        return template(
+          '<button expr570="expr570"></button><button expr572="expr572"></button>',
+          [{
+            'type': bindingTypes.IF,
 
             'evaluate': function(scope) {
-              return 'rm-icon';
+              return !scope.isIcon();
             },
 
-            'slots': [{
-              'id': 'default',
-              'html': '<slot expr9="expr9"></slot>',
+            'redundantAttribute': 'expr570',
+            'selector': '[expr570]',
 
-              'bindings': [{
-                'type': bindingTypes.SLOT,
-                'attributes': [],
-                'name': 'default',
-                'redundantAttribute': 'expr9',
-                'selector': '[expr9]'
+            'template': template('<slot expr571="expr571"></slot>', [{
+              'expressions': [{
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'style',
+
+                'evaluate': function(scope) {
+                  return scope.props.buttonStyle;
+                }
+              }, {
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'disabled',
+
+                'evaluate': function(scope) {
+                  return scope.isDisabled();
+                }
+              }, {
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'type',
+
+                'evaluate': function(scope) {
+                  return scope.props.type;
+                }
+              }, {
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'tabindex',
+
+                'evaluate': function(scope) {
+                  return scope.props.tabindex;
+                }
               }]
-            }],
+            }, {
+              'type': bindingTypes.SLOT,
+              'attributes': [],
+              'name': 'default',
+              'redundantAttribute': 'expr571',
+              'selector': '[expr571]'
+            }])
+          }, {
+            'type': bindingTypes.IF,
 
-            'attributes': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'style',
+            'evaluate': function(scope) {
+              return scope.isIcon();
+            },
+
+            'redundantAttribute': 'expr572',
+            'selector': '[expr572]',
+
+            'template': template('<rm-icon expr573="expr573"></rm-icon>', [{
+              'expressions': [{
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'disabled',
+
+                'evaluate': function(scope) {
+                  return scope.isDisabled();
+                }
+              }, {
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'type',
+
+                'evaluate': function(scope) {
+                  return scope.props.type;
+                }
+              }, {
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'tabindex',
+
+                'evaluate': function(scope) {
+                  return scope.props.tabindex;
+                }
+              }]
+            }, {
+              'type': bindingTypes.TAG,
+              'getComponent': getComponent,
 
               'evaluate': function(scope) {
-                return scope.props.iconStyle;
-              }
-            }],
+                return 'rm-icon';
+              },
 
-            'redundantAttribute': 'expr8',
-            'selector': '[expr8]'
-          }])
-        }]);
+              'slots': [{
+                'id': 'default',
+                'html': '<slot expr574="expr574"></slot>',
+
+                'bindings': [{
+                  'type': bindingTypes.SLOT,
+                  'attributes': [],
+                  'name': 'default',
+                  'redundantAttribute': 'expr574',
+                  'selector': '[expr574]'
+                }]
+              }],
+
+              'attributes': [{
+                'type': expressionTypes.ATTRIBUTE,
+                'name': 'style',
+
+                'evaluate': function(scope) {
+                  return scope.props.iconStyle;
+                }
+              }],
+
+              'redundantAttribute': 'expr573',
+              'selector': '[expr573]'
+            }])
+          }]
+        );
       },
 
       'name': 'rm-button'
