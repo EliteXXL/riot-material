@@ -7,10 +7,12 @@ All notable changes to this project will be documented in this file.
 [ ] implement font managment
 
 ## [any] - Unreleased
-### Changed
+### Add
 [ ] `if` directive works for `slots` in `rm-tabbed-pages` component
 [ ] implement documentation
+### Change
 [ ] avoid `rm-select` from opening menu when focused and the tab is resumed
+[ ] trap focus when open `rm-menu` if `prevent-focus` is not set
 
 ## [1.2.2] - 2020-08-01
 ### Added
@@ -18,7 +20,6 @@ All notable changes to this project will be documented in this file.
 - `rm-menu` align with opening element (e.g. `rm-button`) (implemented `setAnchorElement` method in `rm-menu`)
 - `rm-menu` keeps highlight only if `keep-highlight` attribute is set
 - `rm-menu` close on click out only if `prevent-close-on-click-out` is not set
-
 ### Changed
 - `pointerController` remove window listeners when it has no callback
 - `pointerController` doesn't create the controller if no callback passed
