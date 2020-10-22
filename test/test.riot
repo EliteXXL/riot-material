@@ -27,10 +27,14 @@
         <div slot="Buttons">
             <rm-button open-overlay="menu-test">TEST</rm-button>
             <rm-menu id="menu-test">
-                <rm-menu-item>Aggiungi a...</rm-menu-item>
+                <rm-menu-item onclick={ closeMenu }>Aggiungi a...</rm-menu-item>
                 <rm-menu-item>Condividi</rm-menu-item>
                 <rm-divider />
                 <rm-menu-item>Disconnetti</rm-menu-item>
+            </rm-menu>
+            <rm-menu id="submenu-test">
+                <rm-menu-item>Prova</rm-menu-item>
+                <rm-menu-item>Altro</rm-menu-item>
             </rm-menu>
         </div>
         <custom-tab slot="Page 3">

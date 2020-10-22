@@ -1,6 +1,8 @@
 define(['./rm-textfield-container', './pointerController'], function (TextfieldContainer, pointerController) { 'use strict';
 
-    TextfieldContainer = TextfieldContainer && Object.prototype.hasOwnProperty.call(TextfieldContainer, 'default') ? TextfieldContainer['default'] : TextfieldContainer;
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
 
     var rmTextfield = {
       'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
@@ -67,12 +69,12 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
         },
 
         components: {
-            "rm-textfield-container": TextfieldContainer
+            "rm-textfield-container": TextfieldContainer__default['default']
         }
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr109="expr109"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr100="expr100"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -82,11 +84,11 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr110="expr110" slot="input"/>',
+            'html': '<input expr101="expr101" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr110',
-              'selector': '[expr110]',
+              'redundantAttribute': 'expr101',
+              'selector': '[expr101]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -133,18 +135,18 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr111="expr111" name="leading" slot="leading"></slot>',
+            'html': '<slot expr102="expr102" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr111',
-              'selector': '[expr111]'
+              'redundantAttribute': 'expr102',
+              'selector': '[expr102]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr112="expr112" variant="icon" dense></rm-button><slot expr113="expr113" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr103="expr103" variant="icon" dense></rm-button><slot expr104="expr104" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -153,8 +155,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr112',
-              'selector': '[expr112]',
+              'redundantAttribute': 'expr103',
+              'selector': '[expr103]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -190,8 +192,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr113',
-              'selector': '[expr113]'
+              'redundantAttribute': 'expr104',
+              'selector': '[expr104]'
             }]
           }],
 
@@ -239,8 +241,8 @@ define(['./rm-textfield-container', './pointerController'], function (TextfieldC
             }
           }],
 
-          'redundantAttribute': 'expr109',
-          'selector': '[expr109]'
+          'redundantAttribute': 'expr100',
+          'selector': '[expr100]'
         }]);
       },
 

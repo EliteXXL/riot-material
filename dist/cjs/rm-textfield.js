@@ -1,9 +1,11 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var TextfieldContainer = _interopDefault(require('./rm-textfield-container'));
+var TextfieldContainer = require('./rm-textfield-container');
 require('./pointerController');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
 
 var rmTextfield = {
   'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
@@ -70,12 +72,12 @@ var rmTextfield = {
     },
 
     components: {
-        "rm-textfield-container": TextfieldContainer
+        "rm-textfield-container": TextfieldContainer__default['default']
     }
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<rm-textfield-container expr157="expr157"></rm-textfield-container>', [{
+    return template('<rm-textfield-container expr144="expr144"></rm-textfield-container>', [{
       'type': bindingTypes.TAG,
       'getComponent': getComponent,
 
@@ -85,11 +87,11 @@ var rmTextfield = {
 
       'slots': [{
         'id': 'input',
-        'html': '<input expr158="expr158" slot="input"/>',
+        'html': '<input expr145="expr145" slot="input"/>',
 
         'bindings': [{
-          'redundantAttribute': 'expr158',
-          'selector': '[expr158]',
+          'redundantAttribute': 'expr145',
+          'selector': '[expr145]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -136,18 +138,18 @@ var rmTextfield = {
         }]
       }, {
         'id': 'leading',
-        'html': '<slot expr159="expr159" name="leading" slot="leading"></slot>',
+        'html': '<slot expr146="expr146" name="leading" slot="leading"></slot>',
 
         'bindings': [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'leading',
-          'redundantAttribute': 'expr159',
-          'selector': '[expr159]'
+          'redundantAttribute': 'expr146',
+          'selector': '[expr146]'
         }]
       }, {
         'id': 'trailing',
-        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr160="expr160" variant="icon" dense></rm-button><slot expr161="expr161" name="trailing"></slot></span>',
+        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr147="expr147" variant="icon" dense></rm-button><slot expr148="expr148" name="trailing"></slot></span>',
 
         'bindings': [{
           'type': bindingTypes.IF,
@@ -156,8 +158,8 @@ var rmTextfield = {
             return scope.isClearable() && scope.root.value;
           },
 
-          'redundantAttribute': 'expr160',
-          'selector': '[expr160]',
+          'redundantAttribute': 'expr147',
+          'selector': '[expr147]',
 
           'template': template(null, [{
             'type': bindingTypes.TAG,
@@ -193,8 +195,8 @@ var rmTextfield = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'trailing',
-          'redundantAttribute': 'expr161',
-          'selector': '[expr161]'
+          'redundantAttribute': 'expr148',
+          'selector': '[expr148]'
         }]
       }],
 
@@ -242,8 +244,8 @@ var rmTextfield = {
         }
       }],
 
-      'redundantAttribute': 'expr157',
-      'selector': '[expr157]'
+      'redundantAttribute': 'expr144',
+      'selector': '[expr144]'
     }]);
   },
 

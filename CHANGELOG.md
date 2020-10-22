@@ -10,9 +10,20 @@ All notable changes to this project will be documented in this file.
 ### Add
 [ ] `if` directive works for `slots` in `rm-tabbed-pages` component
 [ ] implement documentation
+[ ] `ClickAwayListener`
+[ ] `ListController`
 ### Change
 [ ] avoid `rm-select` from opening menu when focused and the tab is resumed
 [ ] trap focus when open `rm-menu` if `prevent-focus` is not set
+[ ] return an id from `pointerController` for any listener
+[ ] implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
+
+## [1.2.3] - 2020-10-22
+### Added
+- `inherit-width` prop of `rm-menu` for inherit or not the width of the opening element
+- `closeMenu` prop of `slot`s inside `rm-menu` for close the menu
+### Changed
+- updated to `riot@5.0.0`
 
 ## [1.2.2] - 2020-08-01
 ### Added

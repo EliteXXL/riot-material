@@ -24,6 +24,11 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
         _time: 0,
         _direction: 0,
         _highlightedFromKeyboard: false,
+        _closeThis: null,
+
+        onBeforeMount() {
+            this._closeThis = this.close.bind(this);
+        },
 
         onMounted() {
             this.root._bindTo = this._bindTo.bind(this);
@@ -92,8 +97,17 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
                                 ;
                             }
                         }
-                        this.root.style.left = rect.left + "px";
-                        if (this.props.inheritWidth != null) {
+                        if (this.props.inheritWidth == null) {
+                            const right = window.innerWidth - rect.right;
+                            if (rect.left >= right) {
+                                this.root.style.left = "";
+                                this.root.style.right = right + "px";
+                            } else {
+                                this.root.style.left = rect.left + "px";
+                                this.root.style.right = "";
+                            }
+                        } else {
+                            this.root.style.left = rect.left + "px";
                             this.root.style.width = rect.width + "px";
                         }
                         this.root.setAttribute("anchor", anchor);
@@ -397,10 +411,10 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr712="expr712"><div expr713="expr713" style="overflow-y: auto;"><slot expr714="expr714"></slot></div></div>',
+          '<div expr21="expr21"><div expr22="expr22" style="overflow-y: auto;"><slot expr23="expr23"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr712',
-            'selector': '[expr712]',
+            'redundantAttribute': 'expr21',
+            'selector': '[expr21]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -411,8 +425,8 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
               }
             }]
           }, {
-            'redundantAttribute': 'expr713',
-            'selector': '[expr713]',
+            'redundantAttribute': 'expr22',
+            'selector': '[expr22]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -438,10 +452,19 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
             }]
           }, {
             'type': bindingTypes.SLOT,
-            'attributes': [],
+
+            'attributes': [{
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'close-menu',
+
+              'evaluate': function(scope) {
+                return scope._closeThis;
+              }
+            }],
+
             'name': 'default',
-            'redundantAttribute': 'expr714',
-            'selector': '[expr714]'
+            'redundantAttribute': 'expr23',
+            'selector': '[expr23]'
           }]
         );
       },

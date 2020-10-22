@@ -28,6 +28,11 @@ var rmMenu = {
     _time: 0,
     _direction: 0,
     _highlightedFromKeyboard: false,
+    _closeThis: null,
+
+    onBeforeMount() {
+        this._closeThis = this.close.bind(this);
+    },
 
     onMounted() {
         this.root._bindTo = this._bindTo.bind(this);
@@ -96,8 +101,17 @@ var rmMenu = {
                             ;
                         }
                     }
-                    this.root.style.left = rect.left + "px";
-                    if (this.props.inheritWidth != null) {
+                    if (this.props.inheritWidth == null) {
+                        const right = window.innerWidth - rect.right;
+                        if (rect.left >= right) {
+                            this.root.style.left = "";
+                            this.root.style.right = right + "px";
+                        } else {
+                            this.root.style.left = rect.left + "px";
+                            this.root.style.right = "";
+                        }
+                    } else {
+                        this.root.style.left = rect.left + "px";
                         this.root.style.width = rect.width + "px";
                     }
                     this.root.setAttribute("anchor", anchor);
@@ -401,10 +415,10 @@ var rmMenu = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr718="expr718"><div expr719="expr719" style="overflow-y: auto;"><slot expr720="expr720"></slot></div></div>',
+      '<div expr135="expr135"><div expr136="expr136" style="overflow-y: auto;"><slot expr137="expr137"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr718',
-        'selector': '[expr718]',
+        'redundantAttribute': 'expr135',
+        'selector': '[expr135]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -415,8 +429,8 @@ var rmMenu = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr719',
-        'selector': '[expr719]',
+        'redundantAttribute': 'expr136',
+        'selector': '[expr136]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -442,10 +456,19 @@ var rmMenu = {
         }]
       }, {
         'type': bindingTypes.SLOT,
-        'attributes': [],
+
+        'attributes': [{
+          'type': expressionTypes.ATTRIBUTE,
+          'name': 'close-menu',
+
+          'evaluate': function(scope) {
+            return scope._closeThis;
+          }
+        }],
+
         'name': 'default',
-        'redundantAttribute': 'expr720',
-        'selector': '[expr720]'
+        'redundantAttribute': 'expr137',
+        'selector': '[expr137]'
       }]
     );
   },

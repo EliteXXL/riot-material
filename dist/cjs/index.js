@@ -2,65 +2,191 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var AppBarComponent = _interopDefault(require('./rm-app-bar'));
-var BottomSheetComponent = _interopDefault(require('./rm-bottom-sheet'));
-var ButtonComponent = _interopDefault(require('./rm-button'));
-var CheckboxComponent = _interopDefault(require('./rm-checkbox'));
-var DialogComponent = _interopDefault(require('./rm-dialog'));
-var DividerComponent = _interopDefault(require('./rm-divider'));
-var IconComponent = _interopDefault(require('./rm-icon'));
-var MenuComponent = _interopDefault(require('./rm-menu'));
-var MenuItemComponent = _interopDefault(require('./rm-menu-item'));
-var RadioComponent = _interopDefault(require('./rm-radio'));
-var RippleComponent = _interopDefault(require('./rm-ripple'));
-var SelectComponent = _interopDefault(require('./rm-select'));
-var TabbedPagesComponent = _interopDefault(require('./rm-tabbed-pages'));
-var TabsComponent = _interopDefault(require('./rm-tabs'));
-var TextareaComponent = _interopDefault(require('./rm-textarea'));
-var TextfieldComponent = _interopDefault(require('./rm-textfield'));
-var TextfieldContainer = _interopDefault(require('./rm-textfield-container'));
+var AppBarComponent = require('./rm-app-bar');
+var BottomSheetComponent = require('./rm-bottom-sheet');
+var ButtonComponent = require('./rm-button');
+var CheckboxComponent = require('./rm-checkbox');
+var DialogComponent = require('./rm-dialog');
+var DividerComponent = require('./rm-divider');
+var IconComponent = require('./rm-icon');
+var MenuComponent = require('./rm-menu');
+var MenuItemComponent = require('./rm-menu-item');
+var RadioComponent = require('./rm-radio');
+var RippleComponent = require('./rm-ripple');
+var SelectComponent = require('./rm-select');
+var TabbedPagesComponent = require('./rm-tabbed-pages');
+var TabsComponent = require('./rm-tabs');
+var TextareaComponent = require('./rm-textarea');
+var TextfieldComponent = require('./rm-textfield');
+var TextfieldContainer = require('./rm-textfield-container');
 var elevation = require('./elevation');
 var background = require('./background');
 var surfaces = require('./surfaces');
 var riot = require('riot');
 
-riot.register("rm-app-bar", AppBarComponent);
-riot.register("rm-bottom-sheet", BottomSheetComponent);
-riot.register("rm-button", ButtonComponent);
-riot.register("rm-checkbox", CheckboxComponent);
-riot.register("rm-dialog", DialogComponent);
-riot.register("rm-divider", DividerComponent);
-riot.register("rm-icon", IconComponent);
-riot.register("rm-menu", MenuComponent);
-riot.register("rm-menu-item", MenuItemComponent);
-riot.register("rm-radio", RadioComponent);
-riot.register("rm-ripple", RippleComponent);
-riot.register("rm-select", SelectComponent);
-riot.register("rm-tabbed-pages", TabbedPagesComponent);
-riot.register("rm-tabs", TabsComponent);
-riot.register("rm-textarea", TextareaComponent);
-riot.register("rm-textfield", TextfieldComponent);
-riot.register("rm-textfield-container", TextfieldContainer);
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-exports.AppBarComponent = AppBarComponent;
-exports.BottomSheetComponent = BottomSheetComponent;
-exports.ButtonComponent = ButtonComponent;
-exports.CheckboxComponent = CheckboxComponent;
-exports.DialogComponent = DialogComponent;
-exports.DividerComponent = DividerComponent;
-exports.IconComponent = IconComponent;
-exports.MenuComponent = MenuComponent;
-exports.MenuItemComponent = MenuItemComponent;
-exports.RadioComponent = RadioComponent;
-exports.RippleComponent = RippleComponent;
-exports.SelectComponent = SelectComponent;
-exports.TabbedPagesComponent = TabbedPagesComponent;
-exports.TabsComponent = TabsComponent;
-exports.TextareaComponent = TextareaComponent;
-exports.TextfieldComponent = TextfieldComponent;
-exports.TextfieldContainerComponent = TextfieldContainer;
-exports.elevation = elevation;
-exports.background = background;
-exports.surfaces = surfaces;
+function _interopNamespace(e) {
+	if (e && e.__esModule) return e;
+	var n = Object.create(null);
+	if (e) {
+		Object.keys(e).forEach(function (k) {
+			if (k !== 'default') {
+				var d = Object.getOwnPropertyDescriptor(e, k);
+				Object.defineProperty(n, k, d.get ? d : {
+					enumerable: true,
+					get: function () {
+						return e[k];
+					}
+				});
+			}
+		});
+	}
+	n['default'] = e;
+	return Object.freeze(n);
+}
+
+var AppBarComponent__default = /*#__PURE__*/_interopDefaultLegacy(AppBarComponent);
+var BottomSheetComponent__default = /*#__PURE__*/_interopDefaultLegacy(BottomSheetComponent);
+var ButtonComponent__default = /*#__PURE__*/_interopDefaultLegacy(ButtonComponent);
+var CheckboxComponent__default = /*#__PURE__*/_interopDefaultLegacy(CheckboxComponent);
+var DialogComponent__default = /*#__PURE__*/_interopDefaultLegacy(DialogComponent);
+var DividerComponent__default = /*#__PURE__*/_interopDefaultLegacy(DividerComponent);
+var IconComponent__default = /*#__PURE__*/_interopDefaultLegacy(IconComponent);
+var MenuComponent__default = /*#__PURE__*/_interopDefaultLegacy(MenuComponent);
+var MenuItemComponent__default = /*#__PURE__*/_interopDefaultLegacy(MenuItemComponent);
+var RadioComponent__default = /*#__PURE__*/_interopDefaultLegacy(RadioComponent);
+var RippleComponent__default = /*#__PURE__*/_interopDefaultLegacy(RippleComponent);
+var SelectComponent__default = /*#__PURE__*/_interopDefaultLegacy(SelectComponent);
+var TabbedPagesComponent__default = /*#__PURE__*/_interopDefaultLegacy(TabbedPagesComponent);
+var TabsComponent__default = /*#__PURE__*/_interopDefaultLegacy(TabsComponent);
+var TextareaComponent__default = /*#__PURE__*/_interopDefaultLegacy(TextareaComponent);
+var TextfieldComponent__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldComponent);
+var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
+var elevation__namespace = /*#__PURE__*/_interopNamespace(elevation);
+var background__namespace = /*#__PURE__*/_interopNamespace(background);
+var surfaces__namespace = /*#__PURE__*/_interopNamespace(surfaces);
+
+riot.register("rm-app-bar", AppBarComponent__default['default']);
+riot.register("rm-bottom-sheet", BottomSheetComponent__default['default']);
+riot.register("rm-button", ButtonComponent__default['default']);
+riot.register("rm-checkbox", CheckboxComponent__default['default']);
+riot.register("rm-dialog", DialogComponent__default['default']);
+riot.register("rm-divider", DividerComponent__default['default']);
+riot.register("rm-icon", IconComponent__default['default']);
+riot.register("rm-menu", MenuComponent__default['default']);
+riot.register("rm-menu-item", MenuItemComponent__default['default']);
+riot.register("rm-radio", RadioComponent__default['default']);
+riot.register("rm-ripple", RippleComponent__default['default']);
+riot.register("rm-select", SelectComponent__default['default']);
+riot.register("rm-tabbed-pages", TabbedPagesComponent__default['default']);
+riot.register("rm-tabs", TabsComponent__default['default']);
+riot.register("rm-textarea", TextareaComponent__default['default']);
+riot.register("rm-textfield", TextfieldComponent__default['default']);
+riot.register("rm-textfield-container", TextfieldContainer__default['default']);
+
+Object.defineProperty(exports, 'AppBarComponent', {
+	enumerable: true,
+	get: function () {
+		return AppBarComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'BottomSheetComponent', {
+	enumerable: true,
+	get: function () {
+		return BottomSheetComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'ButtonComponent', {
+	enumerable: true,
+	get: function () {
+		return ButtonComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'CheckboxComponent', {
+	enumerable: true,
+	get: function () {
+		return CheckboxComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'DialogComponent', {
+	enumerable: true,
+	get: function () {
+		return DialogComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'DividerComponent', {
+	enumerable: true,
+	get: function () {
+		return DividerComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'IconComponent', {
+	enumerable: true,
+	get: function () {
+		return IconComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'MenuComponent', {
+	enumerable: true,
+	get: function () {
+		return MenuComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'MenuItemComponent', {
+	enumerable: true,
+	get: function () {
+		return MenuItemComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'RadioComponent', {
+	enumerable: true,
+	get: function () {
+		return RadioComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'RippleComponent', {
+	enumerable: true,
+	get: function () {
+		return RippleComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'SelectComponent', {
+	enumerable: true,
+	get: function () {
+		return SelectComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'TabbedPagesComponent', {
+	enumerable: true,
+	get: function () {
+		return TabbedPagesComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'TabsComponent', {
+	enumerable: true,
+	get: function () {
+		return TabsComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'TextareaComponent', {
+	enumerable: true,
+	get: function () {
+		return TextareaComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'TextfieldComponent', {
+	enumerable: true,
+	get: function () {
+		return TextfieldComponent__default['default'];
+	}
+});
+Object.defineProperty(exports, 'TextfieldContainerComponent', {
+	enumerable: true,
+	get: function () {
+		return TextfieldContainer__default['default'];
+	}
+});
+exports.elevation = elevation__namespace;
+exports.background = background__namespace;
+exports.surfaces = surfaces__namespace;

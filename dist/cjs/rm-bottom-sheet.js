@@ -278,13 +278,13 @@ var rmBottomSheet = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="dimmer"></div><div ref="content"><slot expr121="expr121"></slot></div>',
+      '<div ref="dimmer"></div><div ref="content"><slot expr123="expr123"></slot></div>',
       [{
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr121',
-        'selector': '[expr121]'
+        'redundantAttribute': 'expr123',
+        'selector': '[expr123]'
       }]
     );
   },
