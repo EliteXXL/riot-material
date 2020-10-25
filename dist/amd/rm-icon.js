@@ -17,12 +17,12 @@ define(['../node_modules/style-inject/dist/style-inject.es'], function (styleInj
     },
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
-      return template('<slot expr74="expr74"></slot>', [{
+      return template('<slot expr20="expr20"></slot>', [{
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr74',
-        'selector': '[expr74]'
+        'redundantAttribute': 'expr20',
+        'selector': '[expr20]'
       }]);
     },
 

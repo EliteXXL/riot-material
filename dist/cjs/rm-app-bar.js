@@ -115,42 +115,39 @@ var rmAppBar = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template(
-      '<div expr114="expr114" ref="bar"><slot expr115="expr115"></slot></div>',
-      [{
-        'redundantAttribute': 'expr114',
-        'selector': '[expr114]',
+    return template('<div expr57="expr57" ref="bar"><slot expr58="expr58"></slot></div>', [{
+      'redundantAttribute': 'expr57',
+      'selector': '[expr57]',
 
-        'expressions': [{
-          'type': expressionTypes.ATTRIBUTE,
-          'name': 'class',
+      'expressions': [{
+        'type': expressionTypes.ATTRIBUTE,
+        'name': 'class',
 
-          'evaluate': function(scope) {
-            return [
-              'height-',
-              scope.getHeight(),
-              ' ',
-              scope.getSurface(),
-              ' mdc-elevation--z',
-              scope.state.hasShadow ? 8 : 0
-            ].join('');
-          }
-        }, {
-          'type': expressionTypes.ATTRIBUTE,
-          'name': 'style',
-
-          'evaluate': function(scope) {
-            return scope.hasPassedBackgroundThreshold() ? '' : 'background: ' + scope.props.unelevatedBackground +';';
-          }
-        }]
+        'evaluate': function(scope) {
+          return [
+            'height-',
+            scope.getHeight(),
+            ' ',
+            scope.getSurface(),
+            ' mdc-elevation--z',
+            scope.state.hasShadow ? 8 : 0
+          ].join('');
+        }
       }, {
-        'type': bindingTypes.SLOT,
-        'attributes': [],
-        'name': 'default',
-        'redundantAttribute': 'expr115',
-        'selector': '[expr115]'
+        'type': expressionTypes.ATTRIBUTE,
+        'name': 'style',
+
+        'evaluate': function(scope) {
+          return scope.hasPassedBackgroundThreshold() ? '' : 'background: ' + scope.props.unelevatedBackground +';';
+        }
       }]
-    );
+    }, {
+      'type': bindingTypes.SLOT,
+      'attributes': [],
+      'name': 'default',
+      'redundantAttribute': 'expr58',
+      'selector': '[expr58]'
+    }]);
   },
 
   'name': 'rm-app-bar'

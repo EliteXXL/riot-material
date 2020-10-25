@@ -96,10 +96,10 @@ var rmTextfieldContainer = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<label expr149="expr149" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr150="expr150" name="leading"></slot></div><div expr151="expr151" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr152="expr152" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr153="expr153"></template><slot expr155="expr155" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr156="expr156" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr157="expr157" style="font-size: .75em;"> </div></div>',
+      '<label expr105="expr105" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr106="expr106" name="leading"></slot></div><div expr107="expr107" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr108="expr108" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr109="expr109"></template><slot expr111="expr111" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr112="expr112" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr113="expr113" style="font-size: .75em;"> </div></div>',
       [{
-        'redundantAttribute': 'expr149',
-        'selector': '[expr149]',
+        'redundantAttribute': 'expr105',
+        'selector': '[expr105]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -113,11 +113,11 @@ var rmTextfieldContainer = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'leading',
-        'redundantAttribute': 'expr150',
-        'selector': '[expr150]'
+        'redundantAttribute': 'expr106',
+        'selector': '[expr106]'
       }, {
-        'redundantAttribute': 'expr151',
-        'selector': '[expr151]',
+        'redundantAttribute': 'expr107',
+        'selector': '[expr107]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,
@@ -128,8 +128,8 @@ var rmTextfieldContainer = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr152',
-        'selector': '[expr152]',
+        'redundantAttribute': 'expr108',
+        'selector': '[expr108]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,
@@ -146,31 +146,31 @@ var rmTextfieldContainer = {
           return !scope._hasInputSlot();
         },
 
-        'redundantAttribute': 'expr153',
-        'selector': '[expr153]',
+        'redundantAttribute': 'expr109',
+        'selector': '[expr109]',
 
-        'template': template('<slot expr154="expr154"></slot>', [{
+        'template': template('<slot expr110="expr110"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr154',
-          'selector': '[expr154]'
+          'redundantAttribute': 'expr110',
+          'selector': '[expr110]'
         }])
       }, {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'input',
-        'redundantAttribute': 'expr155',
-        'selector': '[expr155]'
+        'redundantAttribute': 'expr111',
+        'selector': '[expr111]'
       }, {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'trailing',
-        'redundantAttribute': 'expr156',
-        'selector': '[expr156]'
+        'redundantAttribute': 'expr112',
+        'selector': '[expr112]'
       }, {
-        'redundantAttribute': 'expr157',
-        'selector': '[expr157]',
+        'redundantAttribute': 'expr113',
+        'selector': '[expr113]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,

@@ -1,9 +1,10 @@
 {
   "name": "riot-template",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "dependencies": {
     "@material/elevation": "^7.0.0",
+    "focus-trap": "^6.1.3",
     "material-design-icons-iconfont": "^5.0.1",
     "postcss-url": "^8.0.0",
     "riot": "^5.0.0"

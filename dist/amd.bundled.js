@@ -249,10 +249,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr228="expr228" ref="bar"><slot expr229="expr229"></slot></div>',
+          '<div expr176="expr176" ref="bar"><slot expr177="expr177"></slot></div>',
           [{
-            'redundantAttribute': 'expr228',
-            'selector': '[expr228]',
+            'redundantAttribute': 'expr176',
+            'selector': '[expr176]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -280,8 +280,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr229',
-            'selector': '[expr229]'
+            'redundantAttribute': 'expr177',
+            'selector': '[expr177]'
           }]
         );
       },
@@ -567,13 +567,13 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr230="expr230"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr178="expr178"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr230',
-            'selector': '[expr230]'
+            'redundantAttribute': 'expr178',
+            'selector': '[expr178]'
           }]
         );
       },
@@ -610,7 +610,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
     var RIPPLE = Symbol("ripple");
     var RIPPLE_COUNT = Symbol("ripple-count");
     var RIPPLE_OPTIONS = Symbol("ripple_options");
-    document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;\n}";
+    document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/\n    transition: opacity cubic-bezier(0.4,0,0.2,1) 150ms, transform cubic-bezier(0.4,0,0.2,1) 150ms;\n}";
     var DEVICE;
     (function (DEVICE) {
         DEVICE[DEVICE["KEYBOARD"] = 0] = "KEYBOARD";
@@ -954,12 +954,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr245="expr245"></slot>', [{
+        return template('<slot expr181="expr181"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr245',
-          'selector': '[expr245]'
+          'redundantAttribute': 'expr181',
+          'selector': '[expr181]'
         }]);
       },
 
@@ -1185,7 +1185,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr240="expr240"></button><button expr242="expr242"></button>',
+          '<button expr171="expr171"></button><button expr173="expr173"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -1193,10 +1193,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr240',
-            'selector': '[expr240]',
+            'redundantAttribute': 'expr171',
+            'selector': '[expr171]',
 
-            'template': template('<slot expr241="expr241"></slot>', [{
+            'template': template('<slot expr172="expr172"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -1230,8 +1230,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr241',
-              'selector': '[expr241]'
+              'redundantAttribute': 'expr172',
+              'selector': '[expr172]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -1240,10 +1240,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr242',
-            'selector': '[expr242]',
+            'redundantAttribute': 'expr173',
+            'selector': '[expr173]',
 
-            'template': template('<rm-icon expr243="expr243"></rm-icon>', [{
+            'template': template('<rm-icon expr174="expr174"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -1276,14 +1276,14 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr244="expr244"></slot>',
+                'html': '<slot expr175="expr175"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr244',
-                  'selector': '[expr244]'
+                  'redundantAttribute': 'expr175',
+                  'selector': '[expr175]'
                 }]
               }],
 
@@ -1296,8 +1296,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }
               }],
 
-              'redundantAttribute': 'expr243',
-              'selector': '[expr243]'
+              'redundantAttribute': 'expr174',
+              'selector': '[expr174]'
             }])
           }]
         );
@@ -1347,10 +1347,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr231="expr231" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr232="expr232" style="vertical-align: top; display: inline-block;"> </div></label>',
+          '<label><input expr179="expr179" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr180="expr180" style="vertical-align: top; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr231',
-            'selector': '[expr231]',
+            'redundantAttribute': 'expr179',
+            'selector': '[expr179]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1368,8 +1368,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr232',
-            'selector': '[expr232]',
+            'redundantAttribute': 'expr180',
+            'selector': '[expr180]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1510,10 +1510,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr233="expr233" class="mdc-elevation--z24" ref="container"><div expr234="expr234" ref="title"><slot expr235="expr235" name="title"></slot></div><div expr236="expr236" ref="content"><slot expr237="expr237" name="content"></slot></div><div expr238="expr238" ref="actions"><slot expr239="expr239" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr182="expr182" class="mdc-elevation--z24" ref="container"><div expr183="expr183" ref="title"><slot expr184="expr184" name="title"></slot></div><div expr185="expr185" ref="content"><slot expr186="expr186" name="content"></slot></div><div expr187="expr187" ref="actions"><slot expr188="expr188" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr233',
-            'selector': '[expr233]',
+            'redundantAttribute': 'expr182',
+            'selector': '[expr182]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1524,8 +1524,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr234',
-            'selector': '[expr234]',
+            'redundantAttribute': 'expr183',
+            'selector': '[expr183]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1539,11 +1539,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr235',
-            'selector': '[expr235]'
+            'redundantAttribute': 'expr184',
+            'selector': '[expr184]'
           }, {
-            'redundantAttribute': 'expr236',
-            'selector': '[expr236]',
+            'redundantAttribute': 'expr185',
+            'selector': '[expr185]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1557,11 +1557,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr237',
-            'selector': '[expr237]'
+            'redundantAttribute': 'expr186',
+            'selector': '[expr186]'
           }, {
-            'redundantAttribute': 'expr238',
-            'selector': '[expr238]',
+            'redundantAttribute': 'expr187',
+            'selector': '[expr187]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1575,8 +1575,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr239',
-            'selector': '[expr239]'
+            'redundantAttribute': 'expr188',
+            'selector': '[expr188]'
           }]
         );
       },
@@ -1590,6 +1590,554 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       'template': null,
       'name': 'rm-divider'
     };
+
+    /*!
+    * tabbable 5.1.2
+    * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
+    */
+    var candidateSelectors = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])', 'details>summary'];
+    var candidateSelector = /* #__PURE__ */candidateSelectors.join(',');
+    var matches = typeof Element === 'undefined' ? function () {} : Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+
+    function tabbable(el, options) {
+      options = options || {};
+      var regularTabbables = [];
+      var orderedTabbables = [];
+      var candidates = getCandidates(el, options.includeContainer, isNodeMatchingSelectorTabbable);
+      candidates.forEach(function (candidate, i) {
+        var candidateTabindex = getTabindex(candidate);
+
+        if (candidateTabindex === 0) {
+          regularTabbables.push(candidate);
+        } else {
+          orderedTabbables.push({
+            documentOrder: i,
+            tabIndex: candidateTabindex,
+            node: candidate
+          });
+        }
+      });
+      var tabbableNodes = orderedTabbables.sort(sortOrderedTabbables).map(function (a) {
+        return a.node;
+      }).concat(regularTabbables);
+      return tabbableNodes;
+    }
+
+    function getCandidates(el, includeContainer, filter) {
+      var candidates = Array.prototype.slice.apply(el.querySelectorAll(candidateSelector));
+
+      if (includeContainer && matches.call(el, candidateSelector)) {
+        candidates.unshift(el);
+      }
+
+      candidates = candidates.filter(filter);
+      return candidates;
+    }
+
+    function isNodeMatchingSelectorTabbable(node) {
+      if (!isNodeMatchingSelectorFocusable(node) || isNonTabbableRadio(node) || getTabindex(node) < 0) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function isNodeMatchingSelectorFocusable(node) {
+      if (node.disabled || isHiddenInput(node) || isHidden(node)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    var focusableCandidateSelector = /* #__PURE__ */candidateSelectors.concat('iframe').join(',');
+
+    function isFocusable(node) {
+      if (!node) {
+        throw new Error('No node provided');
+      }
+
+      if (matches.call(node, focusableCandidateSelector) === false) {
+        return false;
+      }
+
+      return isNodeMatchingSelectorFocusable(node);
+    }
+
+    function getTabindex(node) {
+      var tabindexAttr = parseInt(node.getAttribute('tabindex'), 10);
+
+      if (!isNaN(tabindexAttr)) {
+        return tabindexAttr;
+      } // Browsers do not return `tabIndex` correctly for contentEditable nodes;
+      // so if they don't have a tabindex attribute specifically set, assume it's 0.
+
+
+      if (isContentEditable(node)) {
+        return 0;
+      } // in Chrome, <audio controls/> and <video controls/> elements get a default
+      //  `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
+      //  yet they are still part of the regular tab order; in FF, they get a default
+      //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
+      //  order, consider their tab index to be 0
+
+
+      if ((node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO') && node.getAttribute('tabindex') === null) {
+        return 0;
+      }
+
+      return node.tabIndex;
+    }
+
+    function sortOrderedTabbables(a, b) {
+      return a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex;
+    }
+
+    function isContentEditable(node) {
+      return node.contentEditable === 'true';
+    }
+
+    function isInput(node) {
+      return node.tagName === 'INPUT';
+    }
+
+    function isHiddenInput(node) {
+      return isInput(node) && node.type === 'hidden';
+    }
+
+    function isRadio(node) {
+      return isInput(node) && node.type === 'radio';
+    }
+
+    function isNonTabbableRadio(node) {
+      return isRadio(node) && !isTabbableRadio(node);
+    }
+
+    function getCheckedRadio(nodes, form) {
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].checked && nodes[i].form === form) {
+          return nodes[i];
+        }
+      }
+    }
+
+    function isTabbableRadio(node) {
+      if (!node.name) {
+        return true;
+      }
+
+      var radioScope = node.form || node.ownerDocument;
+      var radioSet = radioScope.querySelectorAll('input[type="radio"][name="' + node.name + '"]');
+      var checked = getCheckedRadio(radioSet, node.form);
+      return !checked || checked === node;
+    }
+
+    function isHidden(node) {
+      if (getComputedStyle(node).visibility === 'hidden') return true;
+
+      while (node) {
+        if (getComputedStyle(node).display === 'none') return true;
+        node = node.parentElement;
+      }
+
+      return false;
+    }
+
+    /*!
+    * focus-trap 6.1.3
+    * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
+    */
+
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+
+      return obj;
+    }
+
+    function ownKeys(object, enumerableOnly) {
+      var keys = Object.keys(object);
+
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+      }
+
+      return keys;
+    }
+
+    function _objectSpread2(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {};
+
+        if (i % 2) {
+          ownKeys(Object(source), true).forEach(function (key) {
+            _defineProperty(target, key, source[key]);
+          });
+        } else if (Object.getOwnPropertyDescriptors) {
+          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        } else {
+          ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+          });
+        }
+      }
+
+      return target;
+    }
+
+    var activeFocusDelay;
+
+    var activeFocusTraps = function () {
+      var trapQueue = [];
+      return {
+        activateTrap: function activateTrap(trap) {
+          if (trapQueue.length > 0) {
+            var activeTrap = trapQueue[trapQueue.length - 1];
+
+            if (activeTrap !== trap) {
+              activeTrap.pause();
+            }
+          }
+
+          var trapIndex = trapQueue.indexOf(trap);
+
+          if (trapIndex === -1) {
+            trapQueue.push(trap);
+          } else {
+            // move this existing trap to the front of the queue
+            trapQueue.splice(trapIndex, 1);
+            trapQueue.push(trap);
+          }
+        },
+        deactivateTrap: function deactivateTrap(trap) {
+          var trapIndex = trapQueue.indexOf(trap);
+
+          if (trapIndex !== -1) {
+            trapQueue.splice(trapIndex, 1);
+          }
+
+          if (trapQueue.length > 0) {
+            trapQueue[trapQueue.length - 1].unpause();
+          }
+        }
+      };
+    }();
+
+    function createFocusTrap(element, userOptions) {
+      var doc = document;
+      var container = typeof element === 'string' ? doc.querySelector(element) : element;
+
+      var config = _objectSpread2({
+        returnFocusOnDeactivate: true,
+        escapeDeactivates: true,
+        delayInitialFocus: true
+      }, userOptions);
+
+      var state = {
+        firstTabbableNode: null,
+        lastTabbableNode: null,
+        nodeFocusedBeforeActivation: null,
+        mostRecentlyFocusedNode: null,
+        active: false,
+        paused: false
+      };
+      var trap = {
+        activate: activate,
+        deactivate: deactivate,
+        pause: pause,
+        unpause: unpause
+      };
+      return trap;
+
+      function activate(activateOptions) {
+        if (state.active) return;
+        updateTabbableNodes();
+        state.active = true;
+        state.paused = false;
+        state.nodeFocusedBeforeActivation = doc.activeElement;
+        var onActivate = activateOptions && activateOptions.onActivate ? activateOptions.onActivate : config.onActivate;
+
+        if (onActivate) {
+          onActivate();
+        }
+
+        addListeners();
+        return trap;
+      }
+
+      function deactivate(deactivateOptions) {
+        if (!state.active) return;
+        clearTimeout(activeFocusDelay);
+        removeListeners();
+        state.active = false;
+        state.paused = false;
+        activeFocusTraps.deactivateTrap(trap);
+        var onDeactivate = deactivateOptions && deactivateOptions.onDeactivate !== undefined ? deactivateOptions.onDeactivate : config.onDeactivate;
+
+        if (onDeactivate) {
+          onDeactivate();
+        }
+
+        var returnFocus = deactivateOptions && deactivateOptions.returnFocus !== undefined ? deactivateOptions.returnFocus : config.returnFocusOnDeactivate;
+
+        if (returnFocus) {
+          delay(function () {
+            tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
+          });
+        }
+
+        return trap;
+      }
+
+      function pause() {
+        if (state.paused || !state.active) return;
+        state.paused = true;
+        removeListeners();
+      }
+
+      function unpause() {
+        if (!state.paused || !state.active) return;
+        state.paused = false;
+        updateTabbableNodes();
+        addListeners();
+      }
+
+      function addListeners() {
+        if (!state.active) return; // There can be only one listening focus trap at a time
+
+        activeFocusTraps.activateTrap(trap); // Delay ensures that the focused element doesn't capture the event
+        // that caused the focus trap activation.
+
+        activeFocusDelay = config.delayInitialFocus ? delay(function () {
+          tryFocus(getInitialFocusNode());
+        }) : tryFocus(getInitialFocusNode());
+        doc.addEventListener('focusin', checkFocusIn, true);
+        doc.addEventListener('mousedown', checkPointerDown, {
+          capture: true,
+          passive: false
+        });
+        doc.addEventListener('touchstart', checkPointerDown, {
+          capture: true,
+          passive: false
+        });
+        doc.addEventListener('click', checkClick, {
+          capture: true,
+          passive: false
+        });
+        doc.addEventListener('keydown', checkKey, {
+          capture: true,
+          passive: false
+        });
+        return trap;
+      }
+
+      function removeListeners() {
+        if (!state.active) return;
+        doc.removeEventListener('focusin', checkFocusIn, true);
+        doc.removeEventListener('mousedown', checkPointerDown, true);
+        doc.removeEventListener('touchstart', checkPointerDown, true);
+        doc.removeEventListener('click', checkClick, true);
+        doc.removeEventListener('keydown', checkKey, true);
+        return trap;
+      }
+
+      function getNodeForOption(optionName) {
+        var optionValue = config[optionName];
+        var node = optionValue;
+
+        if (!optionValue) {
+          return null;
+        }
+
+        if (typeof optionValue === 'string') {
+          node = doc.querySelector(optionValue);
+
+          if (!node) {
+            throw new Error('`' + optionName + '` refers to no known node');
+          }
+        }
+
+        if (typeof optionValue === 'function') {
+          node = optionValue();
+
+          if (!node) {
+            throw new Error('`' + optionName + '` did not return a node');
+          }
+        }
+
+        return node;
+      }
+
+      function getInitialFocusNode() {
+        var node;
+
+        if (getNodeForOption('initialFocus') !== null) {
+          node = getNodeForOption('initialFocus');
+        } else if (container.contains(doc.activeElement)) {
+          node = doc.activeElement;
+        } else {
+          node = state.firstTabbableNode || getNodeForOption('fallbackFocus');
+        }
+
+        if (!node) {
+          throw new Error('Your focus-trap needs to have at least one focusable element');
+        }
+
+        return node;
+      }
+
+      function getReturnFocusNode(previousActiveElement) {
+        var node = getNodeForOption('setReturnFocus');
+        return node ? node : previousActiveElement;
+      } // This needs to be done on mousedown and touchstart instead of click
+      // so that it precedes the focus event.
+
+
+      function checkPointerDown(e) {
+        if (container.contains(e.target)) {
+          // allow the click since it ocurred inside the trap
+          return;
+        }
+
+        if (config.clickOutsideDeactivates) {
+          // immediately deactivate the trap
+          deactivate({
+            // if, on deactivation, we should return focus to the node originally-focused
+            //  when the trap was activated (or the configured `setReturnFocus` node),
+            //  then assume it's also OK to return focus to the outside node that was
+            //  just clicked, causing deactivation, as long as that node is focusable;
+            //  if it isn't focusable, then return focus to the original node focused
+            //  on activation (or the configured `setReturnFocus` node)
+            // NOTE: by setting `returnFocus: false`, deactivate() will do nothing,
+            //  which will result in the outside click setting focus to the node
+            //  that was clicked, whether it's focusable or not; by setting
+            //  `returnFocus: true`, we'll attempt to re-focus the node originally-focused
+            //  on activation (or the configured `setReturnFocus` node)
+            returnFocus: config.returnFocusOnDeactivate && !isFocusable(e.target)
+          });
+          return;
+        } // This is needed for mobile devices.
+        // (If we'll only let `click` events through,
+        // then on mobile they will be blocked anyways if `touchstart` is blocked.)
+
+
+        if (config.allowOutsideClick && (typeof config.allowOutsideClick === 'boolean' ? config.allowOutsideClick : config.allowOutsideClick(e))) {
+          // allow the click outside the trap to take place
+          return;
+        } // otherwise, prevent the click
+
+
+        e.preventDefault();
+      } // In case focus escapes the trap for some strange reason, pull it back in.
+
+
+      function checkFocusIn(e) {
+        // In Firefox when you Tab out of an iframe the Document is briefly focused.
+        if (container.contains(e.target) || e.target instanceof Document) {
+          return;
+        }
+
+        e.stopImmediatePropagation();
+        tryFocus(state.mostRecentlyFocusedNode || getInitialFocusNode());
+      }
+
+      function checkKey(e) {
+        if (config.escapeDeactivates !== false && isEscapeEvent(e)) {
+          e.preventDefault();
+          deactivate();
+          return;
+        }
+
+        if (isTabEvent(e)) {
+          checkTab(e);
+          return;
+        }
+      } // Hijack Tab events on the first and last focusable nodes of the trap,
+      // in order to prevent focus from escaping. If it escapes for even a
+      // moment it can end up scrolling the page and causing confusion so we
+      // kind of need to capture the action at the keydown phase.
+
+
+      function checkTab(e) {
+        updateTabbableNodes();
+
+        if (e.shiftKey && e.target === state.firstTabbableNode) {
+          e.preventDefault();
+          tryFocus(state.lastTabbableNode);
+          return;
+        }
+
+        if (!e.shiftKey && e.target === state.lastTabbableNode) {
+          e.preventDefault();
+          tryFocus(state.firstTabbableNode);
+          return;
+        }
+      }
+
+      function checkClick(e) {
+        if (config.clickOutsideDeactivates) return;
+        if (container.contains(e.target)) return;
+
+        if (config.allowOutsideClick && (typeof config.allowOutsideClick === 'boolean' ? config.allowOutsideClick : config.allowOutsideClick(e))) {
+          return;
+        }
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+
+      function updateTabbableNodes() {
+        var tabbableNodes = tabbable(container);
+        state.firstTabbableNode = tabbableNodes[0] || getInitialFocusNode();
+        state.lastTabbableNode = tabbableNodes[tabbableNodes.length - 1] || getInitialFocusNode();
+      }
+
+      function tryFocus(node) {
+        if (node === doc.activeElement) return;
+
+        if (!node || !node.focus) {
+          tryFocus(getInitialFocusNode());
+          return;
+        }
+
+        node.focus({
+          preventScroll: !!config.preventScroll
+        });
+        state.mostRecentlyFocusedNode = node;
+
+        if (isSelectableInput(node)) {
+          node.select();
+        }
+      }
+    }
+
+    function isSelectableInput(node) {
+      return node.tagName && node.tagName.toLowerCase() === 'input' && typeof node.select === 'function';
+    }
+
+    function isEscapeEvent(e) {
+      return e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27;
+    }
+
+    function isTabEvent(e) {
+      return e.key === 'Tab' || e.keyCode === 9;
+    }
+
+    function delay(fn) {
+      return setTimeout(fn, 0);
+    }
 
     function getMenuStyleAt(time, anchor) {
         // time = 0 : closed
@@ -1616,6 +2164,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
         _direction: 0,
         _highlightedFromKeyboard: false,
         _closeThis: null,
+        _focusTrap: null,
 
         onBeforeMount() {
             this._closeThis = this.close.bind(this);
@@ -1644,6 +2193,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                         this._time = Math.min(this._time + delta, 1);
                     } else if (this._direction < 0) {
                         this._time = Math.max(this._time - delta, 0);
+                    }
+                    if (this._time >= 1 && !this.getPreventFocus()) {
+                        (this._focusTrap = createFocusTrap(this.root, {
+                            setReturnFocus: this._anchorElement,
+                            clickOutsideDeactivates: true,
+                            onDeactivate: () => {
+                                this._focusTrap = null;
+                                this.close();
+                            }
+                        })).activate();
+                        console.log(this._focusTrap);
+                        // this.root.focus();
                     }
                     if (this._time >= 1 || this._time <= 0) {
                         this._direction = 0;
@@ -1707,7 +2268,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                     child.style.transform = styleAt.transform;
                     child.style.opacity = styleAt.opacity;
 
-                    if (this._toHighlight && this._time >= 1) {
+                    if (this._time >= 1 && this._toHighlight) {
                         this._currentHighlighted = ripple(this._lastHighlighted = this._toHighlight).highlight();
                         this._toHighlight = null;
 
@@ -1809,10 +2370,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                         break;
                     }
                     case 13: {
-                        if (this._lastHighlighted) {
-                            this._lastHighlighted.click();
+                        if (this.getOpened()) {
+                            if (this._lastHighlighted) {
+                                this._lastHighlighted.click();
+                            }
+                            event.preventDefault();
                         }
-                        event.preventDefault();
                         break;
                     }
                 }
@@ -1860,17 +2423,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
         _bindedElement: null,
 
         _bindTo(element) {
-            if (this._bindedElement !== element) {
-                if (this._bindedElement) {
-                    this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                    this._bindedElement = null;
-                }
-                if (element && element instanceof HTMLElement) {
-                    this.setAnchorElement(this._bindedElement = element);
-                    this._bindedElement.addEventListener("keydown", this._onkeydown);
-                } else {
-                    this.setAnchorElement(null);
-                }
+            if (this._bindedElement === element) {
+                return;
+            }
+            if (this._bindedElement) {
+                this._bindedElement.removeEventListener("keydown", this._onkeydown);
+                this._bindedElement = null;
+            }
+            if (element && element instanceof HTMLElement) {
+                this.setAnchorElement(this._bindedElement = element);
+                this._bindedElement.addEventListener("keydown", this._onkeydown);
+            } else {
+                this.setAnchorElement(null);
             }
         },
 
@@ -1927,19 +2491,15 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }
             elevation(this.root.firstElementChild, 4);
             this._direction = 1;
-            if (this.props.preventCloseOnClickOut == null) {
-                pointerController(document, event => {
-                    if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
-                        return;
-                    }
-                    this.close();
-                });
-            }
+            if (this.props.preventCloseOnClickOut == null) ;
         },
 
         close() {
             if (this._time < 1 && this._direction !== 1) {
                 return;
+            }
+            if (this._focusTrap) {
+                return this._focusTrap.deactivate();
             }
             this._toHighlight = null;
             if (this._currentHighlighted) {
@@ -2002,10 +2562,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr258="expr258"><div expr259="expr259" style="overflow-y: auto;"><slot expr260="expr260"></slot></div></div>',
+          '<div expr191="expr191"><div expr192="expr192" style="overflow-y: auto;"><slot expr193="expr193"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr258',
-            'selector': '[expr258]',
+            'redundantAttribute': 'expr191',
+            'selector': '[expr191]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2016,8 +2576,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr259',
-            'selector': '[expr259]',
+            'redundantAttribute': 'expr192',
+            'selector': '[expr192]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2054,8 +2614,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }],
 
             'name': 'default',
-            'redundantAttribute': 'expr260',
-            'selector': '[expr260]'
+            'redundantAttribute': 'expr193',
+            'selector': '[expr193]'
           }]
         );
       },
@@ -2160,9 +2720,9 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr246="expr246"><slot expr247="expr247"></slot></button>', [{
-          'redundantAttribute': 'expr246',
-          'selector': '[expr246]',
+        return template('<button expr189="expr189"><slot expr190="expr190"></slot></button>', [{
+          'redundantAttribute': 'expr189',
+          'selector': '[expr189]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -2183,8 +2743,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr247',
-          'selector': '[expr247]'
+          'redundantAttribute': 'expr190',
+          'selector': '[expr190]'
         }]);
       },
 
@@ -2258,10 +2818,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr261="expr261" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr262="expr262" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr194="expr194" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr195="expr195" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr261',
-            'selector': '[expr261]',
+            'redundantAttribute': 'expr194',
+            'selector': '[expr194]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -2278,8 +2838,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr262',
-            'selector': '[expr262]',
+            'redundantAttribute': 'expr195',
+            'selector': '[expr195]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2317,12 +2877,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr257="expr257"></slot>', [{
+        return template('<slot expr205="expr205"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr257',
-          'selector': '[expr257]'
+          'redundantAttribute': 'expr205',
+          'selector': '[expr205]'
         }]);
       },
 
@@ -2419,10 +2979,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr266="expr266" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr267="expr267" name="leading"></slot></div><div expr268="expr268" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr269="expr269" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr270="expr270"></template><slot expr272="expr272" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr273="expr273" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr274="expr274" style="font-size: .75em;"> </div></div>',
+          '<label expr218="expr218" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr219="expr219" name="leading"></slot></div><div expr220="expr220" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr221="expr221" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr222="expr222"></template><slot expr224="expr224" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr225="expr225" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr226="expr226" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr266',
-            'selector': '[expr266]',
+            'redundantAttribute': 'expr218',
+            'selector': '[expr218]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2436,11 +2996,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr267',
-            'selector': '[expr267]'
+            'redundantAttribute': 'expr219',
+            'selector': '[expr219]'
           }, {
-            'redundantAttribute': 'expr268',
-            'selector': '[expr268]',
+            'redundantAttribute': 'expr220',
+            'selector': '[expr220]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2451,8 +3011,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr269',
-            'selector': '[expr269]',
+            'redundantAttribute': 'expr221',
+            'selector': '[expr221]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2469,31 +3029,31 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr270',
-            'selector': '[expr270]',
+            'redundantAttribute': 'expr222',
+            'selector': '[expr222]',
 
-            'template': template('<slot expr271="expr271"></slot>', [{
+            'template': template('<slot expr223="expr223"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr271',
-              'selector': '[expr271]'
+              'redundantAttribute': 'expr223',
+              'selector': '[expr223]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr272',
-            'selector': '[expr272]'
+            'redundantAttribute': 'expr224',
+            'selector': '[expr224]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr273',
-            'selector': '[expr273]'
+            'redundantAttribute': 'expr225',
+            'selector': '[expr225]'
           }, {
-            'redundantAttribute': 'expr274',
-            'selector': '[expr274]',
+            'redundantAttribute': 'expr226',
+            'selector': '[expr226]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2779,7 +3339,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr248="expr248" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr250="expr250"></rm-textfield-container>',
+          '<rm-menu expr196="expr196" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr198="expr198"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -2790,14 +3350,14 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr249="expr249"></slot>',
+              'html': '<slot expr197="expr197"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr249',
-                'selector': '[expr249]'
+                'redundantAttribute': 'expr197',
+                'selector': '[expr197]'
               }]
             }],
 
@@ -2831,8 +3391,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr248',
-            'selector': '[expr248]'
+            'redundantAttribute': 'expr196',
+            'selector': '[expr196]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -2843,11 +3403,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr251="expr251" class="rm-select--input"/><div expr252="expr252" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr199="expr199" class="rm-select--input"/><div expr200="expr200" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr251',
-                'selector': '[expr251]',
+                'redundantAttribute': 'expr199',
+                'selector': '[expr199]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -2886,8 +3446,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr252',
-                'selector': '[expr252]',
+                'redundantAttribute': 'expr200',
+                'selector': '[expr200]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -2900,18 +3460,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr253="expr253" name="leading" slot="leading"></slot>',
+              'html': '<slot expr201="expr201" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr253',
-                'selector': '[expr253]'
+                'redundantAttribute': 'expr201',
+                'selector': '[expr201]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr254="expr254" variant="icon" class="rm-select--clear" dense></rm-button><slot expr255="expr255" name="trailing"></slot><rm-button expr256="expr256" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr202="expr202" variant="icon" class="rm-select--clear" dense></rm-button><slot expr203="expr203" name="trailing"></slot><rm-button expr204="expr204" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -2920,8 +3480,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr254',
-                'selector': '[expr254]',
+                'redundantAttribute': 'expr202',
+                'selector': '[expr202]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -2957,8 +3517,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr255',
-                'selector': '[expr255]'
+                'redundantAttribute': 'expr203',
+                'selector': '[expr203]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -2985,8 +3545,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }],
 
-                'redundantAttribute': 'expr256',
-                'selector': '[expr256]'
+                'redundantAttribute': 'expr204',
+                'selector': '[expr204]'
               }]
             }],
 
@@ -3027,8 +3587,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr250',
-            'selector': '[expr250]'
+            'redundantAttribute': 'expr198',
+            'selector': '[expr198]'
           }]
         );
       },
@@ -3561,24 +4121,24 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr275="expr275"></div>', [{
+        return template('<div expr206="expr206"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr275',
-          'selector': '[expr275]',
+          'redundantAttribute': 'expr206',
+          'selector': '[expr206]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr276="expr276" ref="tab"></div></div><div expr278="expr278" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr207="expr207" ref="tab"></div></div><div expr209="expr209" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr277="expr277" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr208="expr208" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -3595,8 +4155,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr277',
-                'selector': '[expr277]',
+                'redundantAttribute': 'expr208',
+                'selector': '[expr208]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -3608,8 +4168,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr276',
-              'selector': '[expr276]',
+              'redundantAttribute': 'expr207',
+              'selector': '[expr207]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -3617,8 +4177,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr278',
-              'selector': '[expr278]',
+              'redundantAttribute': 'expr209',
+              'selector': '[expr209]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -3745,10 +4305,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr263="expr263" ref="label"> </div><textarea expr264="expr264"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr265="expr265" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr215="expr215" ref="label"> </div><textarea expr216="expr216"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr217="expr217" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr263',
-            'selector': '[expr263]',
+            'redundantAttribute': 'expr215',
+            'selector': '[expr215]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3759,8 +4319,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr264',
-            'selector': '[expr264]',
+            'redundantAttribute': 'expr216',
+            'selector': '[expr216]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3778,8 +4338,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr265',
-            'selector': '[expr265]',
+            'redundantAttribute': 'expr217',
+            'selector': '[expr217]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3866,7 +4426,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr279="expr279"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr210="expr210"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -3876,11 +4436,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr280="expr280" slot="input"/>',
+            'html': '<input expr211="expr211" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr280',
-              'selector': '[expr280]',
+              'redundantAttribute': 'expr211',
+              'selector': '[expr211]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -3927,18 +4487,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr281="expr281" name="leading" slot="leading"></slot>',
+            'html': '<slot expr212="expr212" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr281',
-              'selector': '[expr281]'
+              'redundantAttribute': 'expr212',
+              'selector': '[expr212]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr282="expr282" variant="icon" dense></rm-button><slot expr283="expr283" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr213="expr213" variant="icon" dense></rm-button><slot expr214="expr214" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -3947,8 +4507,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr282',
-              'selector': '[expr282]',
+              'redundantAttribute': 'expr213',
+              'selector': '[expr213]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -3984,8 +4544,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr283',
-              'selector': '[expr283]'
+              'redundantAttribute': 'expr214',
+              'selector': '[expr214]'
             }]
           }],
 
@@ -4033,8 +4593,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }
           }],
 
-          'redundantAttribute': 'expr279',
-          'selector': '[expr279]'
+          'redundantAttribute': 'expr210',
+          'selector': '[expr210]'
         }]);
       },
 

@@ -18,6 +18,14 @@ All notable changes to this project will be documented in this file.
 [ ] return an id from `pointerController` for any listener
 [ ] implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 
+## [1.2.4] - 2020-10-25
+### Added
+- 'focus-trap' on `rm-menu`
+### Changed
+- fixed pressing `enter` on closed `rm-select` selects last selected by `enter` option
+- new transition bezier-curve on `ripple`
+- bug exporting in amd.full using 'externalizer.js'
+
 ## [1.2.3] - 2020-10-22
 ### Added
 - `inherit-width` prop of `rm-menu` for inherit or not the width of the opening element

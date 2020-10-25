@@ -1,4 +1,4 @@
-define(['./elevation', './ripple', './pointerController'], function (elevation, ripple, pointerController) { 'use strict';
+define(['./elevation', './ripple', './pointerController', 'focus-trap'], function (elevation, ripple, pointerController, focusTrap) { 'use strict';
 
     function getMenuStyleAt(time, anchor) {
         // time = 0 : closed
@@ -25,6 +25,7 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
         _direction: 0,
         _highlightedFromKeyboard: false,
         _closeThis: null,
+        _focusTrap: null,
 
         onBeforeMount() {
             this._closeThis = this.close.bind(this);
@@ -53,6 +54,18 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
                         this._time = Math.min(this._time + delta, 1);
                     } else if (this._direction < 0) {
                         this._time = Math.max(this._time - delta, 0);
+                    }
+                    if (this._time >= 1 && !this.getPreventFocus()) {
+                        (this._focusTrap = focusTrap.createFocusTrap(this.root, {
+                            setReturnFocus: this._anchorElement,
+                            clickOutsideDeactivates: true,
+                            onDeactivate: () => {
+                                this._focusTrap = null;
+                                this.close();
+                            }
+                        })).activate();
+                        console.log(this._focusTrap);
+                        // this.root.focus();
                     }
                     if (this._time >= 1 || this._time <= 0) {
                         this._direction = 0;
@@ -116,7 +129,7 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
                     child.style.transform = styleAt.transform;
                     child.style.opacity = styleAt.opacity;
 
-                    if (this._toHighlight && this._time >= 1) {
+                    if (this._time >= 1 && this._toHighlight) {
                         this._currentHighlighted = ripple.ripple(this._lastHighlighted = this._toHighlight).highlight();
                         this._toHighlight = null;
 
@@ -218,10 +231,12 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
                         break;
                     }
                     case 13: {
-                        if (this._lastHighlighted) {
-                            this._lastHighlighted.click();
+                        if (this.getOpened()) {
+                            if (this._lastHighlighted) {
+                                this._lastHighlighted.click();
+                            }
+                            event.preventDefault();
                         }
-                        event.preventDefault();
                         break;
                     }
                 }
@@ -269,17 +284,18 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
         _bindedElement: null,
 
         _bindTo(element) {
-            if (this._bindedElement !== element) {
-                if (this._bindedElement) {
-                    this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                    this._bindedElement = null;
-                }
-                if (element && element instanceof HTMLElement) {
-                    this.setAnchorElement(this._bindedElement = element);
-                    this._bindedElement.addEventListener("keydown", this._onkeydown);
-                } else {
-                    this.setAnchorElement(null);
-                }
+            if (this._bindedElement === element) {
+                return;
+            }
+            if (this._bindedElement) {
+                this._bindedElement.removeEventListener("keydown", this._onkeydown);
+                this._bindedElement = null;
+            }
+            if (element && element instanceof HTMLElement) {
+                this.setAnchorElement(this._bindedElement = element);
+                this._bindedElement.addEventListener("keydown", this._onkeydown);
+            } else {
+                this.setAnchorElement(null);
             }
         },
 
@@ -336,19 +352,15 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
             }
             elevation.elevation(this.root.firstElementChild, 4);
             this._direction = 1;
-            if (this.props.preventCloseOnClickOut == null) {
-                pointerController.pointerController(document, event => {
-                    if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
-                        return;
-                    }
-                    this.close();
-                });
-            }
+            if (this.props.preventCloseOnClickOut == null) ;
         },
 
         close() {
             if (this._time < 1 && this._direction !== 1) {
                 return;
+            }
+            if (this._focusTrap) {
+                return this._focusTrap.deactivate();
             }
             this._toHighlight = null;
             if (this._currentHighlighted) {
@@ -411,10 +423,10 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr76="expr76"><div expr77="expr77" style="overflow-y: auto;"><slot expr78="expr78"></slot></div></div>',
+          '<div expr21="expr21"><div expr22="expr22" style="overflow-y: auto;"><slot expr23="expr23"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr76',
-            'selector': '[expr76]',
+            'redundantAttribute': 'expr21',
+            'selector': '[expr21]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -425,8 +437,8 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
               }
             }]
           }, {
-            'redundantAttribute': 'expr77',
-            'selector': '[expr77]',
+            'redundantAttribute': 'expr22',
+            'selector': '[expr22]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -463,8 +475,8 @@ define(['./elevation', './ripple', './pointerController'], function (elevation, 
             }],
 
             'name': 'default',
-            'redundantAttribute': 'expr78',
-            'selector': '[expr78]'
+            'redundantAttribute': 'expr23',
+            'selector': '[expr23]'
           }]
         );
       },

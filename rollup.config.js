@@ -11,28 +11,28 @@ const postcss = require("rollup-plugin-postcss");
 const postcssurl = require("postcss-url");
 
 export default [
-    {
-        input: ["src/**/!(*.d.ts)"],
-        plugins: [
-            multiInput(),
-            externalizer(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
-            riot(),
-            commonjs(),
-            typescript()
-        ],
-        external: [ "riot" ],
-        output: {
-            globals: { riot: "riot"},
-            dir: "dist/amd.full",
-            format: "amd"
-        }
-    },
+    // {
+    //     input: ["src/**/!(*.d.ts)"],
+    //     plugins: [
+    //         multiInput(),
+    //         externalizer(),
+    //         postcss({
+    //             plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
+    //             sourceMap: false,
+    //             extract: false,
+    //             minimize: true
+    //         }),
+    //         riot(),
+    //         commonjs(),
+    //         typescript()
+    //     ],
+    //     external: [ "riot" ],
+    //     output: {
+    //         globals: { riot: "riot"},
+    //         dir: "dist/amd.full",
+    //         format: "amd"
+    //     }
+    // },
     {
         input: ["src/**/!(*.d.ts)"],
         plugins: [

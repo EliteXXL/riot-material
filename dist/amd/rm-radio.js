@@ -67,10 +67,10 @@ define(['./ripple'], function (ripple) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr82="expr82" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr83="expr83" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr24="expr24" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr25="expr25" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr82',
-            'selector': '[expr82]',
+            'redundantAttribute': 'expr24',
+            'selector': '[expr24]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -87,8 +87,8 @@ define(['./ripple'], function (ripple) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr83',
-            'selector': '[expr83]',
+            'redundantAttribute': 'expr25',
+            'selector': '[expr25]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

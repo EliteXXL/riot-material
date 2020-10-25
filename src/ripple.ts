@@ -45,7 +45,8 @@ document.head.appendChild(document.createElement("style")).innerHTML = `
 }
 .rm-ripple {
     position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;
-    transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;
+    /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/
+    transition: opacity cubic-bezier(0.4,0,0.2,1) 150ms, transform cubic-bezier(0.4,0,0.2,1) 150ms;
 }`;
 
 // the following listeners are needed to determine if the focus

@@ -52,6 +52,7 @@
         import { elevation } from "./elevation";
         import { ripple, isRipple } from "./ripple";
         import { pointerController } from "./pointerController";
+        import { createFocusTrap } from "focus-trap";
 
         function getMenuStyleAt(time, anchor) {
             // time = 0 : closed
@@ -93,6 +94,7 @@
             _direction: 0,
             _highlightedFromKeyboard: false,
             _closeThis: null,
+            _focusTrap: null,
             onBeforeMount() {
                 this._closeThis = this.close.bind(this);
             },
@@ -119,6 +121,16 @@
                             this._time = Math.min(this._time + delta, 1);
                         } else if (this._direction < 0) {
                             this._time = Math.max(this._time - delta, 0);
+                        }
+                        if (this._time >= 1 && !this.getPreventFocus()) {
+                            (this._focusTrap = createFocusTrap(this.root, {
+                                setReturnFocus: this._anchorElement,
+                                clickOutsideDeactivates: true,
+                                onDeactivate: () => {
+                                    this._focusTrap = null;
+                                    this.close();
+                                }
+                            })).activate();
                         }
                         if (this._time >= 1 || this._time <= 0) {
                             this._direction = 0;
@@ -284,10 +296,12 @@
                             break;
                         }
                         case 13: {
-                            if (this._lastHighlighted) {
-                                this._lastHighlighted.click();
+                            if (this.getOpened()) {
+                                if (this._lastHighlighted) {
+                                    this._lastHighlighted.click();
+                                }
+                                event.preventDefault();
                             }
-                            event.preventDefault();
                             break;
                         }
                     }
@@ -330,17 +344,18 @@
             },
             _bindedElement: null,
             _bindTo(element) {
-                if (this._bindedElement !== element) {
-                    if (this._bindedElement) {
-                        this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                        this._bindedElement = null;
-                    }
-                    if (element && element instanceof HTMLElement) {
-                        this.setAnchorElement(this._bindedElement = element);
-                        this._bindedElement.addEventListener("keydown", this._onkeydown);
-                    } else {
-                        this.setAnchorElement(null);
-                    }
+                if (this._bindedElement === element) {
+                    return;
+                }
+                if (this._bindedElement) {
+                    this._bindedElement.removeEventListener("keydown", this._onkeydown);
+                    this._bindedElement = null;
+                }
+                if (element && element instanceof HTMLElement) {
+                    this.setAnchorElement(this._bindedElement = element);
+                    this._bindedElement.addEventListener("keydown", this._onkeydown);
+                } else {
+                    this.setAnchorElement(null);
                 }
             },
             _lastHighlighted: null,
@@ -392,17 +407,20 @@
                 elevation(this.root.firstElementChild, 4);
                 this._direction = 1;
                 if (this.props.preventCloseOnClickOut == null) {
-                    pointerController(document, event => {
-                        if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
-                            return;
-                        }
-                        this.close();
-                    });
+                    // pointerController(document, event => {
+                    //     if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
+                    //         return;
+                    //     }
+                    //     this.close();
+                    // });
                 }
             },
             close() {
                 if (this._time < 1 && this._direction !== 1) {
                     return;
+                }
+                if (this._focusTrap) {
+                    return this._focusTrap.deactivate();
                 }
                 this._toHighlight = null;
                 if (this._currentHighlighted) {

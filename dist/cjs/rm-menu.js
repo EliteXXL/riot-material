@@ -3,6 +3,7 @@
 var elevation = require('./elevation');
 var ripple = require('./ripple');
 var pointerController = require('./pointerController');
+var focusTrap = require('focus-trap');
 
 function getMenuStyleAt(time, anchor) {
     // time = 0 : closed
@@ -29,6 +30,7 @@ var rmMenu = {
     _direction: 0,
     _highlightedFromKeyboard: false,
     _closeThis: null,
+    _focusTrap: null,
 
     onBeforeMount() {
         this._closeThis = this.close.bind(this);
@@ -57,6 +59,18 @@ var rmMenu = {
                     this._time = Math.min(this._time + delta, 1);
                 } else if (this._direction < 0) {
                     this._time = Math.max(this._time - delta, 0);
+                }
+                if (this._time >= 1 && !this.getPreventFocus()) {
+                    (this._focusTrap = focusTrap.createFocusTrap(this.root, {
+                        setReturnFocus: this._anchorElement,
+                        clickOutsideDeactivates: true,
+                        onDeactivate: () => {
+                            this._focusTrap = null;
+                            this.close();
+                        }
+                    })).activate();
+                    console.log(this._focusTrap);
+                    // this.root.focus();
                 }
                 if (this._time >= 1 || this._time <= 0) {
                     this._direction = 0;
@@ -120,7 +134,7 @@ var rmMenu = {
                 child.style.transform = styleAt.transform;
                 child.style.opacity = styleAt.opacity;
 
-                if (this._toHighlight && this._time >= 1) {
+                if (this._time >= 1 && this._toHighlight) {
                     this._currentHighlighted = ripple.ripple(this._lastHighlighted = this._toHighlight).highlight();
                     this._toHighlight = null;
 
@@ -222,10 +236,12 @@ var rmMenu = {
                     break;
                 }
                 case 13: {
-                    if (this._lastHighlighted) {
-                        this._lastHighlighted.click();
+                    if (this.getOpened()) {
+                        if (this._lastHighlighted) {
+                            this._lastHighlighted.click();
+                        }
+                        event.preventDefault();
                     }
-                    event.preventDefault();
                     break;
                 }
             }
@@ -273,17 +289,18 @@ var rmMenu = {
     _bindedElement: null,
 
     _bindTo(element) {
-        if (this._bindedElement !== element) {
-            if (this._bindedElement) {
-                this._bindedElement.removeEventListener("keydown", this._onkeydown);
-                this._bindedElement = null;
-            }
-            if (element && element instanceof HTMLElement) {
-                this.setAnchorElement(this._bindedElement = element);
-                this._bindedElement.addEventListener("keydown", this._onkeydown);
-            } else {
-                this.setAnchorElement(null);
-            }
+        if (this._bindedElement === element) {
+            return;
+        }
+        if (this._bindedElement) {
+            this._bindedElement.removeEventListener("keydown", this._onkeydown);
+            this._bindedElement = null;
+        }
+        if (element && element instanceof HTMLElement) {
+            this.setAnchorElement(this._bindedElement = element);
+            this._bindedElement.addEventListener("keydown", this._onkeydown);
+        } else {
+            this.setAnchorElement(null);
         }
     },
 
@@ -340,19 +357,15 @@ var rmMenu = {
         }
         elevation.elevation(this.root.firstElementChild, 4);
         this._direction = 1;
-        if (this.props.preventCloseOnClickOut == null) {
-            pointerController.pointerController(document, event => {
-                if (this._time === 0 && this._direction === 1 || this.root.contains(event.target)) {
-                    return;
-                }
-                this.close();
-            });
-        }
+        if (this.props.preventCloseOnClickOut == null) ;
     },
 
     close() {
         if (this._time < 1 && this._direction !== 1) {
             return;
+        }
+        if (this._focusTrap) {
+            return this._focusTrap.deactivate();
         }
         this._toHighlight = null;
         if (this._currentHighlighted) {
@@ -415,10 +428,10 @@ var rmMenu = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr135="expr135"><div expr136="expr136" style="overflow-y: auto;"><slot expr137="expr137"></slot></div></div>',
+      '<div expr79="expr79"><div expr80="expr80" style="overflow-y: auto;"><slot expr81="expr81"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr135',
-        'selector': '[expr135]',
+        'redundantAttribute': 'expr79',
+        'selector': '[expr79]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -429,8 +442,8 @@ var rmMenu = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr136',
-        'selector': '[expr136]',
+        'redundantAttribute': 'expr80',
+        'selector': '[expr80]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -467,8 +480,8 @@ var rmMenu = {
         }],
 
         'name': 'default',
-        'redundantAttribute': 'expr137',
-        'selector': '[expr137]'
+        'redundantAttribute': 'expr81',
+        'selector': '[expr81]'
       }]
     );
   },

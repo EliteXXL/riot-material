@@ -67,10 +67,10 @@ var rmRadio = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<label><input expr204="expr204" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr205="expr205" style="vertical-align: middle; display: inline-block;"> </div></label>',
+      '<label><input expr148="expr148" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr149="expr149" style="vertical-align: middle; display: inline-block;"> </div></label>',
       [{
-        'redundantAttribute': 'expr204',
-        'selector': '[expr204]',
+        'redundantAttribute': 'expr148',
+        'selector': '[expr148]',
 
         'expressions': [{
           'type': expressionTypes.VALUE,
@@ -87,8 +87,8 @@ var rmRadio = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr205',
-        'selector': '[expr205]',
+        'redundantAttribute': 'expr149',
+        'selector': '[expr149]',
 
         'expressions': [{
           'type': expressionTypes.TEXT,

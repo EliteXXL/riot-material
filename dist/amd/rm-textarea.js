@@ -103,10 +103,10 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr97="expr97" ref="label"> </div><textarea expr98="expr98"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr99="expr99" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr49="expr49" ref="label"> </div><textarea expr50="expr50"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr51="expr51" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr97',
-            'selector': '[expr97]',
+            'redundantAttribute': 'expr49',
+            'selector': '[expr49]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -117,8 +117,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr98',
-            'selector': '[expr98]',
+            'redundantAttribute': 'expr50',
+            'selector': '[expr50]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -136,8 +136,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr99',
-            'selector': '[expr99]',
+            'redundantAttribute': 'expr51',
+            'selector': '[expr51]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
