@@ -1,4 +1,9 @@
 <test>
+    <rm-app-bar fixed scroll-target="window"
+        elevation-threshold="0"
+        unelevated-background="blue"
+    />
+    <rm-app-bar placeholder />
     <rm-tabbed-pages hidden-tabs={ state.variant === "outlined" ? "2" : "" } selected-index="1">
         <custom-tab slot="Inputs">
             <rm-select label="Variant" onchange={ onchangeVariant } variant={ state.variant }>

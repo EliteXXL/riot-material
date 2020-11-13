@@ -3,21 +3,24 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.0] - Unreleased
 ### Changed
-[ ] redesign color system
-[ ] implement font managment
+- redesign color system
+- implement font managment
 
 ## [any] - Unreleased
 ### Added
-[ ] `if` directive works for `slots` in `rm-tabbed-pages` component
-[ ] implement documentation
-[ ] `ClickAwayListener`
-[ ] `ListController`
+- `if` directive works for `slots` in `rm-tabbed-pages` component
+- implement documentation
+- `ClickAwayListener`
+- `ListController`
 ### Change
-[ ] avoid `rm-select` from opening menu when focused and the tab is resumed
-[ ] trap focus when open `rm-menu` if `prevent-focus` is not set
-[ ] return an id from `pointerController` for any listener
-[ ] implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
-[ ] filterable `rm-select` does not reset value when typed
+- avoid `rm-select` from opening menu when focused and the tab is resumed
+- trap focus when open `rm-menu` if `prevent-focus` is not set
+- return an id from `pointerController` for any listener
+- implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
+- filterable `rm-select` does not reset value when typed
+
+## [1.2.6] - 2020-11-13
+- Fixed bug in `rm-app-bar` with `elevation-threshold`
 
 ## [1.2.4] - 2020-10-25
 ### Added

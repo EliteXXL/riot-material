@@ -13,12 +13,12 @@ define(['./style-inject.es-dcc58f81'], function (styleInject_es) { 'use strict';
     },
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
-      return template('<slot expr17="expr17"></slot>', [{
+      return template('<slot expr16="expr16"></slot>', [{
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr17',
-        'selector': '[expr17]'
+        'redundantAttribute': 'expr16',
+        'selector': '[expr16]'
       }]);
     },
 

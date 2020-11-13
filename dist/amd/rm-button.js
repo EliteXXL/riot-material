@@ -142,17 +142,17 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr12="expr12"></button><button expr14="expr14"></button>', [{
+        return template('<button expr3="expr3"></button><button expr5="expr5"></button>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return !scope.isIcon();
           },
 
-          'redundantAttribute': 'expr12',
-          'selector': '[expr12]',
+          'redundantAttribute': 'expr3',
+          'selector': '[expr3]',
 
-          'template': template('<slot expr13="expr13"></slot>', [{
+          'template': template('<slot expr4="expr4"></slot>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'style',
@@ -186,8 +186,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr13',
-            'selector': '[expr13]'
+            'redundantAttribute': 'expr4',
+            'selector': '[expr4]'
           }])
         }, {
           'type': bindingTypes.IF,
@@ -196,10 +196,10 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             return scope.isIcon();
           },
 
-          'redundantAttribute': 'expr14',
-          'selector': '[expr14]',
+          'redundantAttribute': 'expr5',
+          'selector': '[expr5]',
 
-          'template': template('<rm-icon expr15="expr15"></rm-icon>', [{
+          'template': template('<rm-icon expr6="expr6"></rm-icon>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'disabled',
@@ -232,14 +232,14 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr16="expr16"></slot>',
+              'html': '<slot expr7="expr7"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr16',
-                'selector': '[expr16]'
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]'
               }]
             }],
 
@@ -252,8 +252,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               }
             }],
 
-            'redundantAttribute': 'expr15',
-            'selector': '[expr15]'
+            'redundantAttribute': 'expr6',
+            'selector': '[expr6]'
           }])
         }]);
       },

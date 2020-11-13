@@ -90,10 +90,10 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr48="expr48" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr49="expr49" name="leading"></slot></div><div expr50="expr50" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr51="expr51" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr52="expr52"></template><slot expr54="expr54" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr55="expr55" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr56="expr56" style="font-size: .75em;"> </div></div>',
+          '<label expr47="expr47" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr48="expr48" name="leading"></slot></div><div expr49="expr49" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr50="expr50" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr51="expr51"></template><slot expr53="expr53" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr54="expr54" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr55="expr55" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr48',
-            'selector': '[expr48]',
+            'redundantAttribute': 'expr47',
+            'selector': '[expr47]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -107,11 +107,11 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr49',
-            'selector': '[expr49]'
+            'redundantAttribute': 'expr48',
+            'selector': '[expr48]'
           }, {
-            'redundantAttribute': 'expr50',
-            'selector': '[expr50]',
+            'redundantAttribute': 'expr49',
+            'selector': '[expr49]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -122,8 +122,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               }
             }]
           }, {
-            'redundantAttribute': 'expr51',
-            'selector': '[expr51]',
+            'redundantAttribute': 'expr50',
+            'selector': '[expr50]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -140,31 +140,31 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr52',
-            'selector': '[expr52]',
+            'redundantAttribute': 'expr51',
+            'selector': '[expr51]',
 
-            'template': template('<slot expr53="expr53"></slot>', [{
+            'template': template('<slot expr52="expr52"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr53',
-              'selector': '[expr53]'
+              'redundantAttribute': 'expr52',
+              'selector': '[expr52]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr54',
-            'selector': '[expr54]'
+            'redundantAttribute': 'expr53',
+            'selector': '[expr53]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr55',
-            'selector': '[expr55]'
+            'redundantAttribute': 'expr54',
+            'selector': '[expr54]'
           }, {
-            'redundantAttribute': 'expr56',
-            'selector': '[expr56]',
+            'redundantAttribute': 'expr55',
+            'selector': '[expr55]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

@@ -70,7 +70,7 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr40="expr40"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr33="expr33"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -80,11 +80,11 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr41="expr41" slot="input"/>',
+            'html': '<input expr34="expr34" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr41',
-              'selector': '[expr41]',
+              'redundantAttribute': 'expr34',
+              'selector': '[expr34]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -131,18 +131,18 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr42="expr42" name="leading" slot="leading"></slot>',
+            'html': '<slot expr35="expr35" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr42',
-              'selector': '[expr42]'
+              'redundantAttribute': 'expr35',
+              'selector': '[expr35]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr43="expr43" variant="icon" dense></rm-button><slot expr44="expr44" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr36="expr36" variant="icon" dense></rm-button><slot expr37="expr37" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -151,8 +151,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr43',
-              'selector': '[expr43]',
+              'redundantAttribute': 'expr36',
+              'selector': '[expr36]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -188,8 +188,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr44',
-              'selector': '[expr44]'
+              'redundantAttribute': 'expr37',
+              'selector': '[expr37]'
             }]
           }],
 
@@ -237,8 +237,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             }
           }],
 
-          'redundantAttribute': 'expr40',
-          'selector': '[expr40]'
+          'redundantAttribute': 'expr33',
+          'selector': '[expr33]'
         }]);
       },
 

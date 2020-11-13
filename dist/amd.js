@@ -137,15 +137,17 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
     });
 
     var AppBarComponent = {
-      'css': `rm-app-bar,[is="rm-app-bar"]{ display: contents; } rm-app-bar [ref=bar],[is="rm-app-bar"] [ref=bar]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary, 255, 255, 255)); padding: 8px; box-sizing: border-box; transition: box-shadow ease-in-out 100ms; } rm-app-bar[placeholder]:not([placeholder="false"]) [ref=bar],[is="rm-app-bar"][placeholder]:not([placeholder="false"]) [ref=bar]{ opacity: 0; } rm-app-bar[surface="black"] [ref=bar],[is="rm-app-bar"][surface="black"] [ref=bar]{ background: rgb(0, 0, 0); background: rgb(var(--color-black-surface, 0, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-black, 255, 255, 255)); } rm-app-bar[surface="dark"] [ref=bar],[is="rm-app-bar"][surface="dark"] [ref=bar]{ background: rgb(10, 10, 10); background: rgb(var(--color-dark-surface, 10, 10, 10)); color: rgb(255, 255, 255); color: rgb(var(--color-on-dark, 255, 255, 255)); } rm-app-bar[surface="light"] [ref=bar],[is="rm-app-bar"][surface="light"] [ref=bar]{ background: rgb(250, 250, 250); background: rgb(var(--color-light-surface, 250, 250, 250)); color: rgb(0, 0, 0); color: rgb(var(--color-on-light, 0, 0, 0)); } rm-app-bar[surface="white"] [ref=bar],[is="rm-app-bar"][surface="white"] [ref=bar]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } rm-app-bar[fixed]:not([fixed="false"]) [ref=bar],[is="rm-app-bar"][fixed]:not([fixed="false"]) [ref=bar]{ position: fixed; top: 0; left: 0; right: 0; z-index: 99; } rm-app-bar[fixed]:not([fixed="false"])[bottom]:not([bottom="false"]) [ref=bar],[is="rm-app-bar"][fixed]:not([fixed="false"])[bottom]:not([bottom="false"]) [ref=bar]{ position: fixed; top: unset; bottom: 0; left: 0; right: 0; } rm-app-bar[clamped]:not([clamped="false"]) [ref=bar],[is="rm-app-bar"][clamped]:not([clamped="false"]) [ref=bar]{ overflow: hidden; } rm-app-bar [ref=bar].height-48,[is="rm-app-bar"] [ref=bar].height-48{ height: 48px; padding: 4px 8px; } rm-app-bar [ref=bar].height-56,[is="rm-app-bar"] [ref=bar].height-56{ height: 56px; } rm-app-bar [ref=bar].height-64,[is="rm-app-bar"] [ref=bar].height-64{ height: 64px; padding: 12px 8px; }`,
+      'css': `rm-app-bar,[is="rm-app-bar"]{ display: block; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary, 255, 255, 255)); padding: 8px; box-sizing: border-box; transition: box-shadow ease-in-out 100ms; } rm-app-bar[placeholder]:not([placeholder="false"]),[is="rm-app-bar"][placeholder]:not([placeholder="false"]){ opacity: 0; } rm-app-bar[surface="black"],[is="rm-app-bar"][surface="black"]{ background: rgb(0, 0, 0); background: rgb(var(--color-black-surface, 0, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-black, 255, 255, 255)); } rm-app-bar[surface="dark"],[is="rm-app-bar"][surface="dark"]{ background: rgb(10, 10, 10); background: rgb(var(--color-dark-surface, 10, 10, 10)); color: rgb(255, 255, 255); color: rgb(var(--color-on-dark, 255, 255, 255)); } rm-app-bar[surface="light"],[is="rm-app-bar"][surface="light"]{ background: rgb(250, 250, 250); background: rgb(var(--color-light-surface, 250, 250, 250)); color: rgb(0, 0, 0); color: rgb(var(--color-on-light, 0, 0, 0)); } rm-app-bar[surface="white"],[is="rm-app-bar"][surface="white"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } rm-app-bar[fixed]:not([fixed="false"]),[is="rm-app-bar"][fixed]:not([fixed="false"]){ position: fixed; top: 0; left: 0; right: 0; z-index: 99; } rm-app-bar[fixed]:not([fixed="false"])[bottom]:not([bottom="false"]),[is="rm-app-bar"][fixed]:not([fixed="false"])[bottom]:not([bottom="false"]){ position: fixed; top: unset; bottom: 0; left: 0; right: 0; } rm-app-bar[clamped]:not([clamped="false"]),[is="rm-app-bar"][clamped]:not([clamped="false"]){ overflow: hidden; } rm-app-bar.height-48,[is="rm-app-bar"].height-48{ height: 48px; padding: 4px 8px; } rm-app-bar.height-56,[is="rm-app-bar"].height-56{ height: 56px; } rm-app-bar.height-64,[is="rm-app-bar"].height-64{ height: 64px; padding: 12px 8px; }`,
 
       'exports': {
         state: {
             hasShadow: false
         },
 
-        onMounted() {
-            this._onscoll = () => {
+        _mounted: false,
+
+        onBeforeMount() {
+            this._onscroll = () => {
                 let hasShadow = false;
                 if (this._scrollTarget != null) {
                     if (this.props.bottom != null && this.props.bottom !== "false") {
@@ -160,7 +162,6 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }
                 this.update({ hasShadow });
             };
-            onChange(this.update, this);
             let scrollTarget = null;
             if (this.props.scrollTarget) {
                 if (typeof this.props.scrollTarget === "string") {
@@ -173,9 +174,17 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }
             }
             this.setScrollTarget(scrollTarget);
+        },
+
+        onMounted() {
+            onChange(this.update, this);
             window.addEventListener("resize", this._onresize = () => {
                 this._recalculateScrollbar();
             });
+            this._mounted = true;
+            if (this._scrollTarget) {
+                this._onscroll();
+            }
         },
 
         onUnmounted() {
@@ -189,7 +198,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
         },
 
         _onresize: null,
-        _onscoll: null,
+        _onscroll: null,
         _scrollTarget: null,
 
         _recalculateScrollbar() {
@@ -197,7 +206,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             if (this._scrollTarget != null && !(this._scrollTarget instanceof Window)) {
                 margin = this._scrollTarget.getBoundingClientRect().width - this._scrollTarget.scrollWidth;
             }
-            this.root.querySelector("[ref=bar]").style.marginRight = margin + "px";
+            this.root.style.marginRight = margin + "px";
         },
 
         setScrollTarget(element) {
@@ -205,15 +214,17 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return;
             }
             if (this._scrollTarget != null) {
-                this._scrollTarget.removeEventListener("scroll", this._onscoll);
+                this._scrollTarget.removeEventListener("scroll", this._onscroll);
             }
             if (element) {
-                (this._scrollTarget = element).addEventListener("scroll", this._onscoll);
+                (this._scrollTarget = element).addEventListener("scroll", this._onscroll);
             } else {
                 this._scrollTarget = null;
             }
             this._recalculateScrollbar();
-            this._onscoll();
+            if (this._mounted) {
+                this._onscroll();
+            }
         },
 
         getSurface() {
@@ -248,42 +259,36 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template(
-          '<div expr232="expr232" ref="bar"><slot expr233="expr233"></slot></div>',
-          [{
-            'redundantAttribute': 'expr232',
-            'selector': '[expr232]',
+        return template('<slot expr231="expr231"></slot>', [{
+          'expressions': [{
+            'type': expressionTypes.ATTRIBUTE,
+            'name': 'class',
 
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'class',
-
-              'evaluate': function(scope) {
-                return [
-                  'height-',
-                  scope.getHeight(),
-                  ' ',
-                  scope.getSurface(),
-                  ' mdc-elevation--z',
-                  scope.state.hasShadow ? 8 : 0
-                ].join('');
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'style',
-
-              'evaluate': function(scope) {
-                return scope.hasPassedBackgroundThreshold() ? '' : 'background: ' + scope.props.unelevatedBackground +';';
-              }
-            }]
+            'evaluate': function(scope) {
+              return [
+                'height-',
+                scope.getHeight(),
+                ' ',
+                scope.getSurface(),
+                ' mdc-elevation--z',
+                scope.state.hasShadow ? 8 : 0
+              ].join('');
+            }
           }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'default',
-            'redundantAttribute': 'expr233',
-            'selector': '[expr233]'
+            'type': expressionTypes.ATTRIBUTE,
+            'name': 'style',
+
+            'evaluate': function(scope) {
+              return scope.hasPassedBackgroundThreshold() ? "" : "background: " + scope.props.unelevatedBackground +";";
+            }
           }]
-        );
+        }, {
+          'type': bindingTypes.SLOT,
+          'attributes': [],
+          'name': 'default',
+          'redundantAttribute': 'expr231',
+          'selector': '[expr231]'
+        }]);
       },
 
       'name': 'rm-app-bar'
@@ -567,13 +572,13 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr234="expr234"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr230="expr230"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr234',
-            'selector': '[expr234]'
+            'redundantAttribute': 'expr230',
+            'selector': '[expr230]'
           }]
         );
       },
@@ -954,12 +959,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr235="expr235"></slot>', [{
+        return template('<slot expr239="expr239"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr235',
-          'selector': '[expr235]'
+          'redundantAttribute': 'expr239',
+          'selector': '[expr239]'
         }]);
       },
 
@@ -1185,7 +1190,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr227="expr227"></button><button expr229="expr229"></button>',
+          '<button expr232="expr232"></button><button expr234="expr234"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -1193,10 +1198,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr227',
-            'selector': '[expr227]',
+            'redundantAttribute': 'expr232',
+            'selector': '[expr232]',
 
-            'template': template('<slot expr228="expr228"></slot>', [{
+            'template': template('<slot expr233="expr233"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -1230,8 +1235,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr228',
-              'selector': '[expr228]'
+              'redundantAttribute': 'expr233',
+              'selector': '[expr233]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -1240,10 +1245,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr229',
-            'selector': '[expr229]',
+            'redundantAttribute': 'expr234',
+            'selector': '[expr234]',
 
-            'template': template('<rm-icon expr230="expr230"></rm-icon>', [{
+            'template': template('<rm-icon expr235="expr235"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -1276,14 +1281,14 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr231="expr231"></slot>',
+                'html': '<slot expr236="expr236"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr231',
-                  'selector': '[expr231]'
+                  'redundantAttribute': 'expr236',
+                  'selector': '[expr236]'
                 }]
               }],
 
@@ -1296,8 +1301,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }
               }],
 
-              'redundantAttribute': 'expr230',
-              'selector': '[expr230]'
+              'redundantAttribute': 'expr235',
+              'selector': '[expr235]'
             }])
           }]
         );
@@ -1347,10 +1352,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr243="expr243" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr244="expr244" style="vertical-align: top; display: inline-block;"> </div></label>',
+          '<label><input expr237="expr237" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr238="expr238" style="vertical-align: top; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr243',
-            'selector': '[expr243]',
+            'redundantAttribute': 'expr237',
+            'selector': '[expr237]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1368,8 +1373,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr244',
-            'selector': '[expr244]',
+            'redundantAttribute': 'expr238',
+            'selector': '[expr238]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -1510,10 +1515,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr236="expr236" class="mdc-elevation--z24" ref="container"><div expr237="expr237" ref="title"><slot expr238="expr238" name="title"></slot></div><div expr239="expr239" ref="content"><slot expr240="expr240" name="content"></slot></div><div expr241="expr241" ref="actions"><slot expr242="expr242" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr223="expr223" class="mdc-elevation--z24" ref="container"><div expr224="expr224" ref="title"><slot expr225="expr225" name="title"></slot></div><div expr226="expr226" ref="content"><slot expr227="expr227" name="content"></slot></div><div expr228="expr228" ref="actions"><slot expr229="expr229" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr236',
-            'selector': '[expr236]',
+            'redundantAttribute': 'expr223',
+            'selector': '[expr223]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -1524,8 +1529,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr237',
-            'selector': '[expr237]',
+            'redundantAttribute': 'expr224',
+            'selector': '[expr224]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1539,11 +1544,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr238',
-            'selector': '[expr238]'
+            'redundantAttribute': 'expr225',
+            'selector': '[expr225]'
           }, {
-            'redundantAttribute': 'expr239',
-            'selector': '[expr239]',
+            'redundantAttribute': 'expr226',
+            'selector': '[expr226]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1557,11 +1562,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr240',
-            'selector': '[expr240]'
+            'redundantAttribute': 'expr227',
+            'selector': '[expr227]'
           }, {
-            'redundantAttribute': 'expr241',
-            'selector': '[expr241]',
+            'redundantAttribute': 'expr228',
+            'selector': '[expr228]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -1575,8 +1580,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr242',
-            'selector': '[expr242]'
+            'redundantAttribute': 'expr229',
+            'selector': '[expr229]'
           }]
         );
       },
@@ -2560,10 +2565,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr249="expr249"><div expr250="expr250" style="overflow-y: auto;"><slot expr251="expr251"></slot></div></div>',
+          '<div expr242="expr242"><div expr243="expr243" style="overflow-y: auto;"><slot expr244="expr244"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr249',
-            'selector': '[expr249]',
+            'redundantAttribute': 'expr242',
+            'selector': '[expr242]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2574,8 +2579,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr250',
-            'selector': '[expr250]',
+            'redundantAttribute': 'expr243',
+            'selector': '[expr243]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2612,8 +2617,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }],
 
             'name': 'default',
-            'redundantAttribute': 'expr251',
-            'selector': '[expr251]'
+            'redundantAttribute': 'expr244',
+            'selector': '[expr244]'
           }]
         );
       },
@@ -2718,9 +2723,9 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr247="expr247"><slot expr248="expr248"></slot></button>', [{
-          'redundantAttribute': 'expr247',
-          'selector': '[expr247]',
+        return template('<button expr240="expr240"><slot expr241="expr241"></slot></button>', [{
+          'redundantAttribute': 'expr240',
+          'selector': '[expr240]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -2741,8 +2746,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr248',
-          'selector': '[expr248]'
+          'redundantAttribute': 'expr241',
+          'selector': '[expr241]'
         }]);
       },
 
@@ -2875,12 +2880,12 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr252="expr252"></slot>', [{
+        return template('<slot expr247="expr247"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr252',
-          'selector': '[expr252]'
+          'redundantAttribute': 'expr247',
+          'selector': '[expr247]'
         }]);
       },
 
@@ -2977,10 +2982,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr274="expr274" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr275="expr275" name="leading"></slot></div><div expr276="expr276" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr277="expr277" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr278="expr278"></template><slot expr280="expr280" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr281="expr281" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr282="expr282" style="font-size: .75em;"> </div></div>',
+          '<label expr261="expr261" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr262="expr262" name="leading"></slot></div><div expr263="expr263" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr264="expr264" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr265="expr265"></template><slot expr267="expr267" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr268="expr268" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr269="expr269" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr274',
-            'selector': '[expr274]',
+            'redundantAttribute': 'expr261',
+            'selector': '[expr261]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2994,11 +2999,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr275',
-            'selector': '[expr275]'
+            'redundantAttribute': 'expr262',
+            'selector': '[expr262]'
           }, {
-            'redundantAttribute': 'expr276',
-            'selector': '[expr276]',
+            'redundantAttribute': 'expr263',
+            'selector': '[expr263]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3009,8 +3014,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr277',
-            'selector': '[expr277]',
+            'redundantAttribute': 'expr264',
+            'selector': '[expr264]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3027,31 +3032,31 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr278',
-            'selector': '[expr278]',
+            'redundantAttribute': 'expr265',
+            'selector': '[expr265]',
 
-            'template': template('<slot expr279="expr279"></slot>', [{
+            'template': template('<slot expr266="expr266"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr279',
-              'selector': '[expr279]'
+              'redundantAttribute': 'expr266',
+              'selector': '[expr266]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr280',
-            'selector': '[expr280]'
+            'redundantAttribute': 'expr267',
+            'selector': '[expr267]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr281',
-            'selector': '[expr281]'
+            'redundantAttribute': 'expr268',
+            'selector': '[expr268]'
           }, {
-            'redundantAttribute': 'expr282',
-            'selector': '[expr282]',
+            'redundantAttribute': 'expr269',
+            'selector': '[expr269]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3337,7 +3342,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr253="expr253" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr255="expr255"></rm-textfield-container>',
+          '<rm-menu expr252="expr252" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr254="expr254"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -3348,14 +3353,14 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr254="expr254"></slot>',
+              'html': '<slot expr253="expr253"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr254',
-                'selector': '[expr254]'
+                'redundantAttribute': 'expr253',
+                'selector': '[expr253]'
               }]
             }],
 
@@ -3389,8 +3394,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr253',
-            'selector': '[expr253]'
+            'redundantAttribute': 'expr252',
+            'selector': '[expr252]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -3401,11 +3406,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr256="expr256" class="rm-select--input"/><div expr257="expr257" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr255="expr255" class="rm-select--input"/><div expr256="expr256" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr256',
-                'selector': '[expr256]',
+                'redundantAttribute': 'expr255',
+                'selector': '[expr255]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -3444,8 +3449,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr257',
-                'selector': '[expr257]',
+                'redundantAttribute': 'expr256',
+                'selector': '[expr256]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -3458,18 +3463,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr258="expr258" name="leading" slot="leading"></slot>',
+              'html': '<slot expr257="expr257" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr258',
-                'selector': '[expr258]'
+                'redundantAttribute': 'expr257',
+                'selector': '[expr257]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr259="expr259" variant="icon" class="rm-select--clear" dense></rm-button><slot expr260="expr260" name="trailing"></slot><rm-button expr261="expr261" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr258="expr258" variant="icon" class="rm-select--clear" dense></rm-button><slot expr259="expr259" name="trailing"></slot><rm-button expr260="expr260" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -3478,8 +3483,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr259',
-                'selector': '[expr259]',
+                'redundantAttribute': 'expr258',
+                'selector': '[expr258]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -3515,8 +3520,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr260',
-                'selector': '[expr260]'
+                'redundantAttribute': 'expr259',
+                'selector': '[expr259]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -3543,8 +3548,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }],
 
-                'redundantAttribute': 'expr261',
-                'selector': '[expr261]'
+                'redundantAttribute': 'expr260',
+                'selector': '[expr260]'
               }]
             }],
 
@@ -3585,8 +3590,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr255',
-            'selector': '[expr255]'
+            'redundantAttribute': 'expr254',
+            'selector': '[expr254]'
           }]
         );
       },
@@ -4119,24 +4124,24 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr267="expr267"></div>', [{
+        return template('<div expr248="expr248"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr267',
-          'selector': '[expr267]',
+          'redundantAttribute': 'expr248',
+          'selector': '[expr248]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr268="expr268" ref="tab"></div></div><div expr270="expr270" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr249="expr249" ref="tab"></div></div><div expr251="expr251" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr269="expr269" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr250="expr250" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -4153,8 +4158,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr269',
-                'selector': '[expr269]',
+                'redundantAttribute': 'expr250',
+                'selector': '[expr250]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -4166,8 +4171,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr268',
-              'selector': '[expr268]',
+              'redundantAttribute': 'expr249',
+              'selector': '[expr249]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -4175,8 +4180,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr270',
-              'selector': '[expr270]',
+              'redundantAttribute': 'expr251',
+              'selector': '[expr251]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -4303,10 +4308,10 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr271="expr271" ref="label"> </div><textarea expr272="expr272"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr273="expr273" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr270="expr270" ref="label"> </div><textarea expr271="expr271"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr272="expr272" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr271',
-            'selector': '[expr271]',
+            'redundantAttribute': 'expr270',
+            'selector': '[expr270]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -4317,8 +4322,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr272',
-            'selector': '[expr272]',
+            'redundantAttribute': 'expr271',
+            'selector': '[expr271]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -4336,8 +4341,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr273',
-            'selector': '[expr273]',
+            'redundantAttribute': 'expr272',
+            'selector': '[expr272]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -4424,7 +4429,7 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr262="expr262"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr273="expr273"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -4434,11 +4439,11 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr263="expr263" slot="input"/>',
+            'html': '<input expr274="expr274" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr263',
-              'selector': '[expr263]',
+              'redundantAttribute': 'expr274',
+              'selector': '[expr274]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -4485,18 +4490,18 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr264="expr264" name="leading" slot="leading"></slot>',
+            'html': '<slot expr275="expr275" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr264',
-              'selector': '[expr264]'
+              'redundantAttribute': 'expr275',
+              'selector': '[expr275]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr265="expr265" variant="icon" dense></rm-button><slot expr266="expr266" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr276="expr276" variant="icon" dense></rm-button><slot expr277="expr277" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -4505,8 +4510,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr265',
-              'selector': '[expr265]',
+              'redundantAttribute': 'expr276',
+              'selector': '[expr276]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -4542,8 +4547,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr266',
-              'selector': '[expr266]'
+              'redundantAttribute': 'expr277',
+              'selector': '[expr277]'
             }]
           }],
 
@@ -4591,8 +4596,8 @@ define(['exports', 'riot'], function (exports, riot) { 'use strict';
             }
           }],
 
-          'redundantAttribute': 'expr262',
-          'selector': '[expr262]'
+          'redundantAttribute': 'expr273',
+          'selector': '[expr273]'
         }]);
       },
 

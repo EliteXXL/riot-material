@@ -1,16 +1,11 @@
-<rm-app-bar>
-    <div class="height-{ getHeight() } { getSurface() } mdc-elevation--z{ state.hasShadow ? 8 : 0 }" style="{
-        hasPassedBackgroundThreshold() ? '' : 'background: ' + props.unelevatedBackground +';'
-    }" ref="bar">
-        <slot />
-    </div>
+<rm-app-bar class="height-{ getHeight() } { getSurface() } mdc-elevation--z{ state.hasShadow ? 8 : 0 }" style={
+    hasPassedBackgroundThreshold() ? "" : "background: " + props.unelevatedBackground +";"
+}>
+    <slot />
 
     <style>
         :host {
-            display: contents;
-        }
-
-        [ref=bar] {
+            display: block;
             background: rgb(139, 0, 139);
             background: rgb(var(--color-primary, 139, 0, 139));
             color: rgb(255, 255, 255);
@@ -20,59 +15,59 @@
             transition: box-shadow ease-in-out 100ms;
         }
         
-        :host[placeholder]:not([placeholder="false"]) [ref=bar] {
+        :host[placeholder]:not([placeholder="false"])  {
             opacity: 0;
         }
 
-        :host[surface="black"] [ref=bar] {
+        :host[surface="black"]  {
             background: rgb(0, 0, 0);
             background: rgb(var(--color-black-surface, 0, 0, 0));
             color: rgb(255, 255, 255);
             color: rgb(var(--color-on-black, 255, 255, 255));
         }
-        :host[surface="dark"] [ref=bar] {
+        :host[surface="dark"]  {
             background: rgb(10, 10, 10);
             background: rgb(var(--color-dark-surface, 10, 10, 10));
             color: rgb(255, 255, 255);
             color: rgb(var(--color-on-dark, 255, 255, 255));
         }
-        :host[surface="light"] [ref=bar] {
+        :host[surface="light"]  {
             background: rgb(250, 250, 250);
             background: rgb(var(--color-light-surface, 250, 250, 250));
             color: rgb(0, 0, 0);
             color: rgb(var(--color-on-light, 0, 0, 0));
         }
-        :host[surface="white"] [ref=bar] {
+        :host[surface="white"]  {
             background: rgb(255, 255, 255);
             background: rgb(var(--color-white-surface, 255, 255, 255));
             color: rgb(0, 0, 0);
             color: rgb(var(--color-on-white, 0, 0, 0));
         }
 
-        :host[fixed]:not([fixed="false"]) [ref=bar] {
+        :host[fixed]:not([fixed="false"])  {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 99;
         }
 
-        :host[fixed]:not([fixed="false"])[bottom]:not([bottom="false"]) [ref=bar] {
+        :host[fixed]:not([fixed="false"])[bottom]:not([bottom="false"])  {
             position: fixed;
             top: unset;
             bottom: 0; left: 0; right: 0;
         }
 
-        :host[clamped]:not([clamped="false"]) [ref=bar] {
+        :host[clamped]:not([clamped="false"])  {
             overflow: hidden;
         }
 
-        [ref=bar].height-48 {
+        :host.height-48 {
             height: 48px;
             padding: 4px 8px;
         }
-        [ref=bar].height-56 {
+        :host.height-56 {
             height: 56px;
         }
-        [ref=bar].height-64 {
+        :host.height-64 {
             height: 64px;
             padding: 12px 8px;
         }
@@ -86,8 +81,9 @@
             state: {
                 hasShadow: false
             },
-            onMounted() {
-                this._onscoll = () => {
+            _mounted: false,
+            onBeforeMount() {
+                this._onscroll = () => {
                     let hasShadow = false;
                     if (this._scrollTarget != null) {
                         if (this.props.bottom != null && this.props.bottom !== "false") {
@@ -102,7 +98,6 @@
                     }
                     this.update({ hasShadow });
                 };
-                utils.onChange(this.update, this);
                 let scrollTarget = null;
                 if (this.props.scrollTarget) {
                     if (typeof this.props.scrollTarget === "string") {
@@ -115,9 +110,16 @@
                     }
                 }
                 this.setScrollTarget(scrollTarget);
+            },
+            onMounted() {
+                utils.onChange(this.update, this);
                 window.addEventListener("resize", this._onresize = () => {
                     this._recalculateScrollbar();
                 });
+                this._mounted = true;
+                if (this._scrollTarget) {
+                    this._onscroll();
+                }
             },
             onUnmounted() {
                 utils.offChange(this.update, this);
@@ -128,29 +130,31 @@
                 return utils.getHeight();
             },
             _onresize: null,
-            _onscoll: null,
+            _onscroll: null,
             _scrollTarget: null,
             _recalculateScrollbar() {
                 let margin = 0;
                 if (this._scrollTarget != null && !(this._scrollTarget instanceof Window)) {
                     margin = this._scrollTarget.getBoundingClientRect().width - this._scrollTarget.scrollWidth;
                 }
-                this.root.querySelector("[ref=bar]").style.marginRight = margin + "px";
+                this.root.style.marginRight = margin + "px";
             },
             setScrollTarget(element) {
                 if (element === this._scrollTarget) {
                     return;
                 }
                 if (this._scrollTarget != null) {
-                    this._scrollTarget.removeEventListener("scroll", this._onscoll);
+                    this._scrollTarget.removeEventListener("scroll", this._onscroll);
                 }
                 if (element) {
-                    (this._scrollTarget = element).addEventListener("scroll", this._onscoll);
+                    (this._scrollTarget = element).addEventListener("scroll", this._onscroll);
                 } else {
                     this._scrollTarget = null;
                 }
                 this._recalculateScrollbar();
-                this._onscoll();
+                if (this._mounted) {
+                    this._onscroll();
+                }
             },
             getSurface() {
                 if (this.props.lightSurface != null && this.props.lightSurface !== "false") {
