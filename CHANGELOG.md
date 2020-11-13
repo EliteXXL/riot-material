@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 [ ] implement font managment
 
 ## [any] - Unreleased
-### Add
+### Added
 [ ] `if` directive works for `slots` in `rm-tabbed-pages` component
 [ ] implement documentation
 [ ] `ClickAwayListener`
@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 [ ] trap focus when open `rm-menu` if `prevent-focus` is not set
 [ ] return an id from `pointerController` for any listener
 [ ] implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
+[ ] filterable `rm-select` does not reset value when typed
 
 ## [1.2.4] - 2020-10-25
 ### Added

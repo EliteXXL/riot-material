@@ -1,10 +1,4 @@
-define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './pointerController'], function (ButtonComponent, MenuComponent, TextfieldContainer, riot, pointerController) { 'use strict';
-
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var ButtonComponent__default = /*#__PURE__*/_interopDefaultLegacy(ButtonComponent);
-    var MenuComponent__default = /*#__PURE__*/_interopDefaultLegacy(MenuComponent);
-    var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
+define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9283330e', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './pointerController-ae6dff1d', './rm-button', './rm-menu', './rm-textfield-container'], function (styleInject_es, mdc_elevation, elevation, tslib_es6, ripple, riot, rmIcon, pointerController, rmButton, rmMenu, rmTextfieldContainer) { 'use strict';
 
     const blockedInputs = [];
     window.addEventListener("change", event => {
@@ -13,7 +7,7 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
         }
     }, true);
 
-    var rmSelect = {
+    var SelectComponent = {
       'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; opacity: 0; cursor: default; width: 100%; } rm-select[filterable]:not([filterable=false]) .rm-select--input,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--input{ opacity: 1; cursor: text; } rm-select .rm-select--label,[is="rm-select"] .rm-select--label{ position: absolute; top: 0; left: 0; font-size: inherit; line-height: inherit; } rm-select[filterable]:not([filterable=false]) .rm-select--label,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--label{ display: none; }`,
 
       'exports': {
@@ -267,15 +261,15 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
         },
 
         components: {
-            "rm-textfield-container": TextfieldContainer__default['default'],
-            "rm-button": ButtonComponent__default['default'],
-            "rm-menu": MenuComponent__default['default']
+            "rm-textfield-container": rmTextfieldContainer,
+            "rm-button": rmButton,
+            "rm-menu": rmMenu
         }
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr27="expr27" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr29="expr29"></rm-textfield-container>',
+          '<rm-menu expr31="expr31" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr33="expr33"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -286,14 +280,14 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr28="expr28"></slot>',
+              'html': '<slot expr32="expr32"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr28',
-                'selector': '[expr28]'
+                'redundantAttribute': 'expr32',
+                'selector': '[expr32]'
               }]
             }],
 
@@ -327,8 +321,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }
             }],
 
-            'redundantAttribute': 'expr27',
-            'selector': '[expr27]'
+            'redundantAttribute': 'expr31',
+            'selector': '[expr31]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -339,11 +333,11 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr30="expr30" class="rm-select--input"/><div expr31="expr31" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr34="expr34" class="rm-select--input"/><div expr35="expr35" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr30',
-                'selector': '[expr30]',
+                'redundantAttribute': 'expr34',
+                'selector': '[expr34]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -382,8 +376,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr31',
-                'selector': '[expr31]',
+                'redundantAttribute': 'expr35',
+                'selector': '[expr35]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -396,18 +390,18 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr32="expr32" name="leading" slot="leading"></slot>',
+              'html': '<slot expr36="expr36" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr32',
-                'selector': '[expr32]'
+                'redundantAttribute': 'expr36',
+                'selector': '[expr36]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr33="expr33" variant="icon" class="rm-select--clear" dense></rm-button><slot expr34="expr34" name="trailing"></slot><rm-button expr35="expr35" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr37="expr37" variant="icon" class="rm-select--clear" dense></rm-button><slot expr38="expr38" name="trailing"></slot><rm-button expr39="expr39" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -416,8 +410,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr33',
-                'selector': '[expr33]',
+                'redundantAttribute': 'expr37',
+                'selector': '[expr37]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -453,8 +447,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr34',
-                'selector': '[expr34]'
+                'redundantAttribute': 'expr38',
+                'selector': '[expr38]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -481,8 +475,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
                   }
                 }],
 
-                'redundantAttribute': 'expr35',
-                'selector': '[expr35]'
+                'redundantAttribute': 'expr39',
+                'selector': '[expr39]'
               }]
             }],
 
@@ -523,8 +517,8 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
               }
             }],
 
-            'redundantAttribute': 'expr29',
-            'selector': '[expr29]'
+            'redundantAttribute': 'expr33',
+            'selector': '[expr33]'
           }]
         );
       },
@@ -532,6 +526,6 @@ define(['./rm-button', './rm-menu', './rm-textfield-container', 'riot', './point
       'name': 'rm-select'
     };
 
-    return rmSelect;
+    return SelectComponent;
 
 });

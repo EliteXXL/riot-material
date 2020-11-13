@@ -11,7 +11,7 @@ var STATE;
 })(STATE || (STATE = {}));
 const CONTENT_STYLE = Symbol("content-style");
 
-var rmBottomSheet = {
+var BottomSheetComponent = {
   'css': `rm-bottom-sheet,[is="rm-bottom-sheet"]{ display: contents; } rm-bottom-sheet [ref="dimmer"],[is="rm-bottom-sheet"] [ref="dimmer"]{ content: ""; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, .42); background: rgba(0, 0, 0, var(--color-opacity-secondary, .42)); touch-action: none; z-index: 100; } rm-bottom-sheet [ref="content"],[is="rm-bottom-sheet"] [ref="content"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); position: fixed; overflow: hidden; height: 0; bottom: 0; right: 0; left: 0; touch-action: none; z-index: 100; }`,
 
   'exports': {
@@ -276,13 +276,13 @@ var rmBottomSheet = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="dimmer"></div><div ref="content"><slot expr119="expr119"></slot></div>',
+      '<div ref="dimmer"></div><div ref="content"><slot expr123="expr123"></slot></div>',
       [{
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr119',
-        'selector': '[expr119]'
+        'redundantAttribute': 'expr123',
+        'selector': '[expr123]'
       }]
     );
   },
@@ -290,4 +290,4 @@ var rmBottomSheet = {
   'name': 'rm-bottom-sheet'
 };
 
-export default rmBottomSheet;
+export default BottomSheetComponent;

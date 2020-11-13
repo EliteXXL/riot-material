@@ -1,6 +1,6 @@
-define(['./ripple'], function (ripple) { 'use strict';
+define(['./tslib.es6-3a2117de', './ripple-9ef33106'], function (tslib_es6, ripple) { 'use strict';
 
-    var rmTabs = {
+    var TabsComponent = {
       'css': `rm-tabs,[is="rm-tabs"]{ display: block; overflow-y: hidden; } rm-tabs > div,[is="rm-tabs"] > div{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; } rm-tabs > div > [ref=indicator],[is="rm-tabs"] > div > [ref=indicator]{ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-tabs > div > [ref=indicator],.rm-black-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-tabs > div > [ref=indicator],.rm-dark-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-tabs > div > [ref=indicator],.rm-light-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-tabs > div > [ref=indicator],.rm-white-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-white, 139, 0, 139)); } rm-tabs > div > [ref=tabs] > [ref=tab],[is="rm-tabs"] > div > [ref=tabs] > [ref=tab]{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabs > div > [ref=tabs] > [ref=tab].selected,[is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-black-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-dark-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-light-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-white-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-white, 139, 0, 139)); }`,
 
       'exports': {
@@ -87,24 +87,24 @@ define(['./ripple'], function (ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr45="expr45"></div>', [{
+        return template('<div expr26="expr26"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr45',
-          'selector': '[expr45]',
+          'redundantAttribute': 'expr26',
+          'selector': '[expr26]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr46="expr46" ref="tab"></div></div><div expr48="expr48" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr27="expr27" ref="tab"></div></div><div expr29="expr29" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr47="expr47" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr28="expr28" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -121,8 +121,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr47',
-                'selector': '[expr47]',
+                'redundantAttribute': 'expr28',
+                'selector': '[expr28]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -134,8 +134,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr46',
-              'selector': '[expr46]',
+              'redundantAttribute': 'expr27',
+              'selector': '[expr27]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -143,8 +143,8 @@ define(['./ripple'], function (ripple) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr48',
-              'selector': '[expr48]',
+              'redundantAttribute': 'expr29',
+              'selector': '[expr29]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -168,6 +168,6 @@ define(['./ripple'], function (ripple) { 'use strict';
       'name': 'rm-tabs'
     };
 
-    return rmTabs;
+    return TabsComponent;
 
 });

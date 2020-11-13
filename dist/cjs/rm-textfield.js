@@ -1,13 +1,15 @@
 'use strict';
 
-var TextfieldContainer = require('./rm-textfield-container');
-require('./pointerController');
+require('./style-inject.es-dcee06b6.js');
+require('./tslib.es6-c0666302.js');
+require('./ripple-486af47f.js');
+require('riot');
+require('./rm-icon.js');
+require('./pointerController-228f7d55.js');
+require('./rm-button.js');
+var rmTextfieldContainer = require('./rm-textfield-container.js');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
-
-var rmTextfield = {
+var TextfieldComponent = {
   'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
 
   'exports': {
@@ -72,12 +74,12 @@ var rmTextfield = {
     },
 
     components: {
-        "rm-textfield-container": TextfieldContainer__default['default']
+        "rm-textfield-container": rmTextfieldContainer
     }
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<rm-textfield-container expr97="expr97"></rm-textfield-container>', [{
+    return template('<rm-textfield-container expr98="expr98"></rm-textfield-container>', [{
       'type': bindingTypes.TAG,
       'getComponent': getComponent,
 
@@ -87,11 +89,11 @@ var rmTextfield = {
 
       'slots': [{
         'id': 'input',
-        'html': '<input expr98="expr98" slot="input"/>',
+        'html': '<input expr99="expr99" slot="input"/>',
 
         'bindings': [{
-          'redundantAttribute': 'expr98',
-          'selector': '[expr98]',
+          'redundantAttribute': 'expr99',
+          'selector': '[expr99]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -138,18 +140,18 @@ var rmTextfield = {
         }]
       }, {
         'id': 'leading',
-        'html': '<slot expr99="expr99" name="leading" slot="leading"></slot>',
+        'html': '<slot expr100="expr100" name="leading" slot="leading"></slot>',
 
         'bindings': [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'leading',
-          'redundantAttribute': 'expr99',
-          'selector': '[expr99]'
+          'redundantAttribute': 'expr100',
+          'selector': '[expr100]'
         }]
       }, {
         'id': 'trailing',
-        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr100="expr100" variant="icon" dense></rm-button><slot expr101="expr101" name="trailing"></slot></span>',
+        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr101="expr101" variant="icon" dense></rm-button><slot expr102="expr102" name="trailing"></slot></span>',
 
         'bindings': [{
           'type': bindingTypes.IF,
@@ -158,8 +160,8 @@ var rmTextfield = {
             return scope.isClearable() && scope.root.value;
           },
 
-          'redundantAttribute': 'expr100',
-          'selector': '[expr100]',
+          'redundantAttribute': 'expr101',
+          'selector': '[expr101]',
 
           'template': template(null, [{
             'type': bindingTypes.TAG,
@@ -195,8 +197,8 @@ var rmTextfield = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'trailing',
-          'redundantAttribute': 'expr101',
-          'selector': '[expr101]'
+          'redundantAttribute': 'expr102',
+          'selector': '[expr102]'
         }]
       }],
 
@@ -244,12 +246,12 @@ var rmTextfield = {
         }
       }],
 
-      'redundantAttribute': 'expr97',
-      'selector': '[expr97]'
+      'redundantAttribute': 'expr98',
+      'selector': '[expr98]'
     }]);
   },
 
   'name': 'rm-textfield'
 };
 
-module.exports = rmTextfield;
+module.exports = TextfieldComponent;

@@ -1,4 +1,4 @@
-var rmDialog = {
+var DialogComponent = {
   'css': `rm-dialog,[is="rm-dialog"]{ position: fixed; display: block; top: 0; bottom: 0; right: 0; left: 0; padding: 40px; background: rgba(0, 0, 0, .42); background: rgba(0, 0, 0, var(--color-opacity-secondary, .42)); box-sizing: border-box; z-index: 100; font-size: 0; text-align: center; } rm-dialog > [ref=aligner],[is="rm-dialog"] > [ref=aligner]{ width: 0; height: 100%; vertical-align: middle; display: inline-block; } rm-dialog > [ref=container],[is="rm-dialog"] > [ref=container]{ width: 100%; font-size: 16px; vertical-align: middle; display: inline-block; max-width: 560px; text-align: initial; } rm-dialog > [ref=container] > [ref=title],[is="rm-dialog"] > [ref=container] > [ref=title]{ min-height: 8px; border-radius: 4px 4px 0 0; } rm-dialog > [ref=container] > [ref=content],[is="rm-dialog"] > [ref=container] > [ref=content]{ overflow: auto; } rm-dialog > [ref=container] > [ref=actions],[is="rm-dialog"] > [ref=container] > [ref=actions]{ min-height: 8px; border-radius: 0 0 4px 4px; }`,
 
   'exports': {
@@ -122,10 +122,10 @@ var rmDialog = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="aligner"></div><div expr122="expr122" class="mdc-elevation--z24" ref="container"><div expr123="expr123" ref="title"><slot expr124="expr124" name="title"></slot></div><div expr125="expr125" ref="content"><slot expr126="expr126" name="content"></slot></div><div expr127="expr127" ref="actions"><slot expr128="expr128" name="actions"></slot></div></div>',
+      '<div ref="aligner"></div><div expr114="expr114" class="mdc-elevation--z24" ref="container"><div expr115="expr115" ref="title"><slot expr116="expr116" name="title"></slot></div><div expr117="expr117" ref="content"><slot expr118="expr118" name="content"></slot></div><div expr119="expr119" ref="actions"><slot expr120="expr120" name="actions"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr122',
-        'selector': '[expr122]',
+        'redundantAttribute': 'expr114',
+        'selector': '[expr114]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -136,8 +136,8 @@ var rmDialog = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr123',
-        'selector': '[expr123]',
+        'redundantAttribute': 'expr115',
+        'selector': '[expr115]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -151,11 +151,11 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'title',
-        'redundantAttribute': 'expr124',
-        'selector': '[expr124]'
+        'redundantAttribute': 'expr116',
+        'selector': '[expr116]'
       }, {
-        'redundantAttribute': 'expr125',
-        'selector': '[expr125]',
+        'redundantAttribute': 'expr117',
+        'selector': '[expr117]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -169,11 +169,11 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'content',
-        'redundantAttribute': 'expr126',
-        'selector': '[expr126]'
+        'redundantAttribute': 'expr118',
+        'selector': '[expr118]'
       }, {
-        'redundantAttribute': 'expr127',
-        'selector': '[expr127]',
+        'redundantAttribute': 'expr119',
+        'selector': '[expr119]',
 
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
@@ -187,8 +187,8 @@ var rmDialog = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'actions',
-        'redundantAttribute': 'expr128',
-        'selector': '[expr128]'
+        'redundantAttribute': 'expr120',
+        'selector': '[expr120]'
       }]
     );
   },
@@ -196,4 +196,4 @@ var rmDialog = {
   'name': 'rm-dialog'
 };
 
-export default rmDialog;
+export default DialogComponent;

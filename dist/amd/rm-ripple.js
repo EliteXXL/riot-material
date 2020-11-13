@@ -1,6 +1,6 @@
-define(['./ripple'], function (ripple) { 'use strict';
+define(['./tslib.es6-3a2117de', './ripple-9ef33106'], function (tslib_es6, ripple) { 'use strict';
 
-    var rmRipple = {
+    var RippleComponent = {
       'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
 
       'exports': {
@@ -21,18 +21,18 @@ define(['./ripple'], function (ripple) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr26="expr26"></slot>', [{
+        return template('<slot expr30="expr30"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr26',
-          'selector': '[expr26]'
+          'redundantAttribute': 'expr30',
+          'selector': '[expr30]'
         }]);
       },
 
       'name': 'rm-ripple'
     };
 
-    return rmRipple;
+    return RippleComponent;
 
 });

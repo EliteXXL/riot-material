@@ -1,6 +1,6 @@
 define(function () { 'use strict';
 
-    var rmDialog = {
+    var DialogComponent = {
       'css': `rm-dialog,[is="rm-dialog"]{ position: fixed; display: block; top: 0; bottom: 0; right: 0; left: 0; padding: 40px; background: rgba(0, 0, 0, .42); background: rgba(0, 0, 0, var(--color-opacity-secondary, .42)); box-sizing: border-box; z-index: 100; font-size: 0; text-align: center; } rm-dialog > [ref=aligner],[is="rm-dialog"] > [ref=aligner]{ width: 0; height: 100%; vertical-align: middle; display: inline-block; } rm-dialog > [ref=container],[is="rm-dialog"] > [ref=container]{ width: 100%; font-size: 16px; vertical-align: middle; display: inline-block; max-width: 560px; text-align: initial; } rm-dialog > [ref=container] > [ref=title],[is="rm-dialog"] > [ref=container] > [ref=title]{ min-height: 8px; border-radius: 4px 4px 0 0; } rm-dialog > [ref=container] > [ref=content],[is="rm-dialog"] > [ref=container] > [ref=content]{ overflow: auto; } rm-dialog > [ref=container] > [ref=actions],[is="rm-dialog"] > [ref=container] > [ref=actions]{ min-height: 8px; border-radius: 0 0 4px 4px; }`,
 
       'exports': {
@@ -124,10 +124,10 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr11="expr11" class="mdc-elevation--z24" ref="container"><div expr12="expr12" ref="title"><slot expr13="expr13" name="title"></slot></div><div expr14="expr14" ref="content"><slot expr15="expr15" name="content"></slot></div><div expr16="expr16" ref="actions"><slot expr17="expr17" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr5="expr5" class="mdc-elevation--z24" ref="container"><div expr6="expr6" ref="title"><slot expr7="expr7" name="title"></slot></div><div expr8="expr8" ref="content"><slot expr9="expr9" name="content"></slot></div><div expr10="expr10" ref="actions"><slot expr11="expr11" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr11',
-            'selector': '[expr11]',
+            'redundantAttribute': 'expr5',
+            'selector': '[expr5]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -138,8 +138,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr12',
-            'selector': '[expr12]',
+            'redundantAttribute': 'expr6',
+            'selector': '[expr6]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -153,11 +153,11 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr13',
-            'selector': '[expr13]'
+            'redundantAttribute': 'expr7',
+            'selector': '[expr7]'
           }, {
-            'redundantAttribute': 'expr14',
-            'selector': '[expr14]',
+            'redundantAttribute': 'expr8',
+            'selector': '[expr8]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -171,11 +171,11 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr15',
-            'selector': '[expr15]'
+            'redundantAttribute': 'expr9',
+            'selector': '[expr9]'
           }, {
-            'redundantAttribute': 'expr16',
-            'selector': '[expr16]',
+            'redundantAttribute': 'expr10',
+            'selector': '[expr10]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -189,8 +189,8 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr17',
-            'selector': '[expr17]'
+            'redundantAttribute': 'expr11',
+            'selector': '[expr11]'
           }]
         );
       },
@@ -198,6 +198,6 @@ define(function () { 'use strict';
       'name': 'rm-dialog'
     };
 
-    return rmDialog;
+    return DialogComponent;
 
 });

@@ -1,16 +1,16 @@
 'use strict';
 
-var ButtonComponent = require('./rm-button');
-var MenuComponent = require('./rm-menu');
-var TextfieldContainer = require('./rm-textfield-container');
+require('./style-inject.es-dcee06b6.js');
+require('./mdc.elevation-9bc22beb.js');
+require('./elevation-2d8ab2df.js');
+require('./tslib.es6-c0666302.js');
+require('./ripple-486af47f.js');
 require('riot');
-var pointerController = require('./pointerController');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var ButtonComponent__default = /*#__PURE__*/_interopDefaultLegacy(ButtonComponent);
-var MenuComponent__default = /*#__PURE__*/_interopDefaultLegacy(MenuComponent);
-var TextfieldContainer__default = /*#__PURE__*/_interopDefaultLegacy(TextfieldContainer);
+require('./rm-icon.js');
+var pointerController = require('./pointerController-228f7d55.js');
+var rmButton = require('./rm-button.js');
+var rmMenu = require('./rm-menu.js');
+var rmTextfieldContainer = require('./rm-textfield-container.js');
 
 const blockedInputs = [];
 window.addEventListener("change", event => {
@@ -19,7 +19,7 @@ window.addEventListener("change", event => {
     }
 }, true);
 
-var rmSelect = {
+var SelectComponent = {
   'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; opacity: 0; cursor: default; width: 100%; } rm-select[filterable]:not([filterable=false]) .rm-select--input,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--input{ opacity: 1; cursor: text; } rm-select .rm-select--label,[is="rm-select"] .rm-select--label{ position: absolute; top: 0; left: 0; font-size: inherit; line-height: inherit; } rm-select[filterable]:not([filterable=false]) .rm-select--label,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--label{ display: none; }`,
 
   'exports': {
@@ -273,15 +273,15 @@ var rmSelect = {
     },
 
     components: {
-        "rm-textfield-container": TextfieldContainer__default['default'],
-        "rm-button": ButtonComponent__default['default'],
-        "rm-menu": MenuComponent__default['default']
+        "rm-textfield-container": rmTextfieldContainer,
+        "rm-button": rmButton,
+        "rm-menu": rmMenu
     }
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<rm-menu expr84="expr84" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr86="expr86"></rm-textfield-container>',
+      '<rm-menu expr82="expr82" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr84="expr84"></rm-textfield-container>',
       [{
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -292,14 +292,14 @@ var rmSelect = {
 
         'slots': [{
           'id': 'default',
-          'html': '<slot expr85="expr85"></slot>',
+          'html': '<slot expr83="expr83"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr85',
-            'selector': '[expr85]'
+            'redundantAttribute': 'expr83',
+            'selector': '[expr83]'
           }]
         }],
 
@@ -333,8 +333,8 @@ var rmSelect = {
           }
         }],
 
-        'redundantAttribute': 'expr84',
-        'selector': '[expr84]'
+        'redundantAttribute': 'expr82',
+        'selector': '[expr82]'
       }, {
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -345,11 +345,11 @@ var rmSelect = {
 
         'slots': [{
           'id': 'input',
-          'html': '<span slot="input"><input expr87="expr87" class="rm-select--input"/><div expr88="expr88" class="rm-select--label"> </div></span>',
+          'html': '<span slot="input"><input expr85="expr85" class="rm-select--input"/><div expr86="expr86" class="rm-select--label"> </div></span>',
 
           'bindings': [{
-            'redundantAttribute': 'expr87',
-            'selector': '[expr87]',
+            'redundantAttribute': 'expr85',
+            'selector': '[expr85]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -388,8 +388,8 @@ var rmSelect = {
               }
             }]
           }, {
-            'redundantAttribute': 'expr88',
-            'selector': '[expr88]',
+            'redundantAttribute': 'expr86',
+            'selector': '[expr86]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -402,18 +402,18 @@ var rmSelect = {
           }]
         }, {
           'id': 'leading',
-          'html': '<slot expr89="expr89" name="leading" slot="leading"></slot>',
+          'html': '<slot expr87="expr87" name="leading" slot="leading"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr89',
-            'selector': '[expr89]'
+            'redundantAttribute': 'expr87',
+            'selector': '[expr87]'
           }]
         }, {
           'id': 'trailing',
-          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr90="expr90" variant="icon" class="rm-select--clear" dense></rm-button><slot expr91="expr91" name="trailing"></slot><rm-button expr92="expr92" variant="icon" tabindex="-1" dense></rm-button></span>',
+          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr88="expr88" variant="icon" class="rm-select--clear" dense></rm-button><slot expr89="expr89" name="trailing"></slot><rm-button expr90="expr90" variant="icon" tabindex="-1" dense></rm-button></span>',
 
           'bindings': [{
             'type': bindingTypes.IF,
@@ -422,8 +422,8 @@ var rmSelect = {
               return scope.isClearable() && scope.root.value;
             },
 
-            'redundantAttribute': 'expr90',
-            'selector': '[expr90]',
+            'redundantAttribute': 'expr88',
+            'selector': '[expr88]',
 
             'template': template(null, [{
               'type': bindingTypes.TAG,
@@ -459,8 +459,8 @@ var rmSelect = {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr91',
-            'selector': '[expr91]'
+            'redundantAttribute': 'expr89',
+            'selector': '[expr89]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -487,8 +487,8 @@ var rmSelect = {
               }
             }],
 
-            'redundantAttribute': 'expr92',
-            'selector': '[expr92]'
+            'redundantAttribute': 'expr90',
+            'selector': '[expr90]'
           }]
         }],
 
@@ -529,8 +529,8 @@ var rmSelect = {
           }
         }],
 
-        'redundantAttribute': 'expr86',
-        'selector': '[expr86]'
+        'redundantAttribute': 'expr84',
+        'selector': '[expr84]'
       }]
     );
   },
@@ -538,4 +538,4 @@ var rmSelect = {
   'name': 'rm-select'
 };
 
-module.exports = rmSelect;
+module.exports = SelectComponent;

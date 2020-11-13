@@ -1,7 +1,8 @@
+import './tslib.es6-2755a364.js';
+import { r as ripple } from './ripple-b4246d71.js';
 import { __ } from 'riot';
-import { ripple } from './ripple';
 
-var rmMenuItem = {
+var MenuItemComponent = {
   'css': `rm-menu-item,[is="rm-menu-item"]{ display: contents; } rm-menu-item > button,[is="rm-menu-item"] > button{ font-size: 16px; line-height: 1.5em; padding: 0.75em 1em; border: 0; background: none; width: 100%; text-align: left; cursor: pointer; outline: none; display: block; min-height: 3em; } rm-menu-item[title] > button,[is="rm-menu-item"][title] > button{ font-weight: bold; color: rgba(0, 0, 0, 0.9); } rm-menu-item[inset] > button,[is="rm-menu-item"][inset] > button{ padding-left: 4.5em; } rm-menu-item[short-inset] > button,[is="rm-menu-item"][short-inset] > button{ padding-left: 2em; } rm-menu-item[passive] > button,[is="rm-menu-item"][passive] > button{ cursor: initial; }`,
 
   'exports': {
@@ -98,9 +99,9 @@ var rmMenuItem = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr132="expr132"><slot expr133="expr133"></slot></button>', [{
-      'redundantAttribute': 'expr132',
-      'selector': '[expr132]',
+    return template('<button expr137="expr137"><slot expr138="expr138"></slot></button>', [{
+      'redundantAttribute': 'expr137',
+      'selector': '[expr137]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -121,12 +122,12 @@ var rmMenuItem = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr133',
-      'selector': '[expr133]'
+      'redundantAttribute': 'expr138',
+      'selector': '[expr138]'
     }]);
   },
 
   'name': 'rm-menu-item'
 };
 
-export default rmMenuItem;
+export default MenuItemComponent;

@@ -1,4 +1,4 @@
-define(function () { 'use strict';
+define(['exports'], function (exports) { 'use strict';
 
   function styleInject(css, ref) {
     if ( ref === void 0 ) ref = {};
@@ -27,6 +27,6 @@ define(function () { 'use strict';
     }
   }
 
-  return styleInject;
+  exports.styleInject = styleInject;
 
 });

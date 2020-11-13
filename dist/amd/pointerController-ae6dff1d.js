@@ -78,6 +78,4 @@ define(['exports'], function (exports) { 'use strict';
 
     exports.pointerController = pointerController;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
 });

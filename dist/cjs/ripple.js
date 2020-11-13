@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var tslib = require('tslib');
+var tslib_es6 = require('./tslib.es6-c0666302.js');
 
 var RIPPLE = Symbol("ripple");
 var RIPPLE_COUNT = Symbol("ripple-count");
@@ -137,7 +137,7 @@ function ripple(element, options) {
     if (options == null && ripple != null) {
         return ripple;
     }
-    options = tslib.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
+    options = tslib_es6.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
     if (options.detectLabel != null && !options.detectLabel) {
         options.usePointerFocus = false;
     }
@@ -250,7 +250,7 @@ function ripple(element, options) {
             },
             set: function (options) {
                 var prevOptions = this[RIPPLE_OPTIONS];
-                options = this[RIPPLE_OPTIONS] = tslib.__assign(tslib.__assign(tslib.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
+                options = this[RIPPLE_OPTIONS] = tslib_es6.__assign(tslib_es6.__assign(tslib_es6.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
                 if (options.detectLabel != null && !options.detectLabel) {
                     options.usePointerFocus = false;
                 }

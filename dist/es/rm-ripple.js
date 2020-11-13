@@ -1,6 +1,7 @@
-import { ripple } from './ripple';
+import './tslib.es6-2755a364.js';
+import { r as ripple } from './ripple-b4246d71.js';
 
-var rmRipple = {
+var RippleComponent = {
   'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
 
   'exports': {
@@ -21,16 +22,16 @@ var rmRipple = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr138="expr138"></slot>', [{
+    return template('<slot expr136="expr136"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr138',
-      'selector': '[expr138]'
+      'redundantAttribute': 'expr136',
+      'selector': '[expr136]'
     }]);
   },
 
   'name': 'rm-ripple'
 };
 
-export default rmRipple;
+export default RippleComponent;

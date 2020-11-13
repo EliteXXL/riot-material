@@ -1,9 +1,10 @@
 'use strict';
 
+require('./tslib.es6-c0666302.js');
+var ripple = require('./ripple-486af47f.js');
 var riot = require('riot');
-var ripple = require('./ripple');
 
-var rmMenuItem = {
+var MenuItemComponent = {
   'css': `rm-menu-item,[is="rm-menu-item"]{ display: contents; } rm-menu-item > button,[is="rm-menu-item"] > button{ font-size: 16px; line-height: 1.5em; padding: 0.75em 1em; border: 0; background: none; width: 100%; text-align: left; cursor: pointer; outline: none; display: block; min-height: 3em; } rm-menu-item[title] > button,[is="rm-menu-item"][title] > button{ font-weight: bold; color: rgba(0, 0, 0, 0.9); } rm-menu-item[inset] > button,[is="rm-menu-item"][inset] > button{ padding-left: 4.5em; } rm-menu-item[short-inset] > button,[is="rm-menu-item"][short-inset] > button{ padding-left: 2em; } rm-menu-item[passive] > button,[is="rm-menu-item"][passive] > button{ cursor: initial; }`,
 
   'exports': {
@@ -100,9 +101,9 @@ var rmMenuItem = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr70="expr70"><slot expr71="expr71"></slot></button>', [{
-      'redundantAttribute': 'expr70',
-      'selector': '[expr70]',
+    return template('<button expr74="expr74"><slot expr75="expr75"></slot></button>', [{
+      'redundantAttribute': 'expr74',
+      'selector': '[expr74]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -123,12 +124,12 @@ var rmMenuItem = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr71',
-      'selector': '[expr71]'
+      'redundantAttribute': 'expr75',
+      'selector': '[expr75]'
     }]);
   },
 
   'name': 'rm-menu-item'
 };
 
-module.exports = rmMenuItem;
+module.exports = MenuItemComponent;

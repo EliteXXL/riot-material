@@ -1,9 +1,92 @@
 'use strict';
 
-require('./elevation');
-var utils = require('./app-bar-utils');
+require('./style-inject.es-dcee06b6.js');
+require('./mdc.elevation-9bc22beb.js');
+require('./elevation-2d8ab2df.js');
 
-var rmAppBar = {
+var breakpoints = {
+    0: {
+        0: 48,
+        560: 56
+    },
+    600: {
+        0: 48,
+        560: 56,
+        640: 64
+    }
+};
+var height;
+function get_height() {
+    var documentHeight = document.documentElement.clientHeight;
+    var documentWidth = document.documentElement.clientWidth;
+    var barHeight = 48;
+    var heightBreakpoints;
+    Object.entries(breakpoints).some(function (entry) {
+        var minWidth = entry[0], heightBreakpoints_ = entry[1];
+        if (documentWidth < minWidth) {
+            return true;
+        }
+        heightBreakpoints = heightBreakpoints_;
+        return false;
+    });
+    Object.entries(heightBreakpoints).some(function (entry) {
+        var minHeight = entry[0], height = entry[1];
+        if (documentHeight < minHeight) {
+            return true;
+        }
+        barHeight = height;
+        return false;
+    });
+    return barHeight;
+}
+function getHeight() {
+    setup();
+    return height;
+}
+var done = false;
+var listeners = [];
+function setup() {
+    if (done) {
+        return;
+    }
+    window.addEventListener("resize", function () {
+        height = get_height();
+        for (var i = 0; i < listeners.length;) {
+            var actual = listeners[i];
+            actual.listener.call(actual.thisArg);
+            if (actual.once) {
+                listeners.splice(i, 1);
+            }
+            else {
+                i++;
+            }
+        }
+    });
+    height = get_height();
+    done = true;
+}
+function onChange(listener, thisArg) {
+    listeners.push({
+        listener: listener,
+        thisArg: thisArg,
+        once: false
+    });
+}
+function offChange(listener, thisArg) {
+    var index = -1;
+    if (listeners.some(function (l, i) {
+        if (listener === l.listener &&
+            thisArg === l.thisArg) {
+            index = i;
+            return true;
+        }
+        return false;
+    })) {
+        listeners.splice(index, 1);
+    }
+}
+
+var AppBarComponent = {
   'css': `rm-app-bar,[is="rm-app-bar"]{ display: contents; } rm-app-bar [ref=bar],[is="rm-app-bar"] [ref=bar]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary, 255, 255, 255)); padding: 8px; box-sizing: border-box; transition: box-shadow ease-in-out 100ms; } rm-app-bar[placeholder]:not([placeholder="false"]) [ref=bar],[is="rm-app-bar"][placeholder]:not([placeholder="false"]) [ref=bar]{ opacity: 0; } rm-app-bar[surface="black"] [ref=bar],[is="rm-app-bar"][surface="black"] [ref=bar]{ background: rgb(0, 0, 0); background: rgb(var(--color-black-surface, 0, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-black, 255, 255, 255)); } rm-app-bar[surface="dark"] [ref=bar],[is="rm-app-bar"][surface="dark"] [ref=bar]{ background: rgb(10, 10, 10); background: rgb(var(--color-dark-surface, 10, 10, 10)); color: rgb(255, 255, 255); color: rgb(var(--color-on-dark, 255, 255, 255)); } rm-app-bar[surface="light"] [ref=bar],[is="rm-app-bar"][surface="light"] [ref=bar]{ background: rgb(250, 250, 250); background: rgb(var(--color-light-surface, 250, 250, 250)); color: rgb(0, 0, 0); color: rgb(var(--color-on-light, 0, 0, 0)); } rm-app-bar[surface="white"] [ref=bar],[is="rm-app-bar"][surface="white"] [ref=bar]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } rm-app-bar[fixed]:not([fixed="false"]) [ref=bar],[is="rm-app-bar"][fixed]:not([fixed="false"]) [ref=bar]{ position: fixed; top: 0; left: 0; right: 0; z-index: 99; } rm-app-bar[fixed]:not([fixed="false"])[bottom]:not([bottom="false"]) [ref=bar],[is="rm-app-bar"][fixed]:not([fixed="false"])[bottom]:not([bottom="false"]) [ref=bar]{ position: fixed; top: unset; bottom: 0; left: 0; right: 0; } rm-app-bar[clamped]:not([clamped="false"]) [ref=bar],[is="rm-app-bar"][clamped]:not([clamped="false"]) [ref=bar]{ overflow: hidden; } rm-app-bar [ref=bar].height-48,[is="rm-app-bar"] [ref=bar].height-48{ height: 48px; padding: 4px 8px; } rm-app-bar [ref=bar].height-56,[is="rm-app-bar"] [ref=bar].height-56{ height: 56px; } rm-app-bar [ref=bar].height-64,[is="rm-app-bar"] [ref=bar].height-64{ height: 64px; padding: 12px 8px; }`,
 
   'exports': {
@@ -27,7 +110,7 @@ var rmAppBar = {
             }
             this.update({ hasShadow });
         };
-        utils.onChange(this.update, this);
+        onChange(this.update, this);
         let scrollTarget = null;
         if (this.props.scrollTarget) {
             if (typeof this.props.scrollTarget === "string") {
@@ -46,13 +129,13 @@ var rmAppBar = {
     },
 
     onUnmounted() {
-        utils.offChange(this.update, this);
+        offChange(this.update, this);
         this.setScrollTarget(null);
         window.removeEventListener("resize", this._onresize);
     },
 
     getHeight() {
-        return utils.getHeight();
+        return getHeight();
     },
 
     _onresize: null,
@@ -115,9 +198,9 @@ var rmAppBar = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<div expr57="expr57" ref="bar"><slot expr58="expr58"></slot></div>', [{
-      'redundantAttribute': 'expr57',
-      'selector': '[expr57]',
+    return template('<div expr62="expr62" ref="bar"><slot expr63="expr63"></slot></div>', [{
+      'redundantAttribute': 'expr62',
+      'selector': '[expr62]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -145,12 +228,12 @@ var rmAppBar = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr58',
-      'selector': '[expr58]'
+      'redundantAttribute': 'expr63',
+      'selector': '[expr63]'
     }]);
   },
 
   'name': 'rm-app-bar'
 };
 
-module.exports = rmAppBar;
+module.exports = AppBarComponent;

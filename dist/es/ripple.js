@@ -1,4 +1,4 @@
-import { __assign } from 'tslib';
+import { _ as __assign } from './tslib.es6-2755a364.js';
 
 var RIPPLE = Symbol("ripple");
 var RIPPLE_COUNT = Symbol("ripple-count");

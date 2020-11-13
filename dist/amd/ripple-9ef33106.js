@@ -1,9 +1,9 @@
-define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict';
+define(['exports', './tslib.es6-3a2117de'], function (exports, tslib_es6) { 'use strict';
 
     var RIPPLE = Symbol("ripple");
     var RIPPLE_COUNT = Symbol("ripple-count");
     var RIPPLE_OPTIONS = Symbol("ripple_options");
-    document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;\n}";
+    document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/\n    transition: opacity cubic-bezier(0.4,0,0.2,1) 150ms, transform cubic-bezier(0.4,0,0.2,1) 150ms;\n}";
     var DEVICE;
     (function (DEVICE) {
         DEVICE[DEVICE["KEYBOARD"] = 0] = "KEYBOARD";
@@ -29,7 +29,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
         scaleUpStyle = window.getComputedStyle(div).transform;
         document.body.removeChild(div);
     }
-    exports.Ripple = (function () {
+    var Ripple = (function () {
         function Ripple(x, y, r, type) {
             if (type === void 0) { type = Ripple.TYPE.NORMAL; }
             this._ended = false;
@@ -124,7 +124,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
             TYPE[TYPE["QUICK"] = 1] = "QUICK";
             TYPE[TYPE["INSTANT"] = 2] = "INSTANT";
         })(TYPE = Ripple.TYPE || (Ripple.TYPE = {}));
-    })(exports.Ripple || (exports.Ripple = {}));
+    })(Ripple || (Ripple = {}));
     var canEventStartRipple = true;
     window.addEventListener("pointerdown", function () { canEventStartRipple = true; });
     function ripple(element, options) {
@@ -133,7 +133,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
         if (options == null && ripple != null) {
             return ripple;
         }
-        options = index.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
+        options = tslib_es6.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
         if (options.detectLabel != null && !options.detectLabel) {
             options.usePointerFocus = false;
         }
@@ -162,7 +162,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
         ripple = (_a = {
                 highlight: function () {
                     var _this = this;
-                    var currentRipple = new exports.Ripple(0, 0, null, exports.Ripple.TYPE.INSTANT).attachTo(element, function () {
+                    var currentRipple = new Ripple(0, 0, null, Ripple.TYPE.INSTANT).attachTo(element, function () {
                         _this[RIPPLE_COUNT]--;
                     });
                     this[RIPPLE_COUNT]++;
@@ -170,15 +170,15 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
                 },
                 start: function (x, y, event, type) {
                     var _this = this;
-                    if (type === void 0) { type = exports.Ripple.TYPE.NORMAL; }
+                    if (type === void 0) { type = Ripple.TYPE.NORMAL; }
                     var isFocus = !!(event && event.type === "focus");
                     var isMouseEnter = !!(event && event.type === "mouseenter");
                     var options = this[RIPPLE_OPTIONS];
                     if (isFocus) {
-                        type = exports.Ripple.TYPE.QUICK;
+                        type = Ripple.TYPE.QUICK;
                     }
                     else if (isMouseEnter) {
-                        type = this[RIPPLE_COUNT] > 0 || options.instantHighlight ? exports.Ripple.TYPE.INSTANT : exports.Ripple.TYPE.QUICK;
+                        type = this[RIPPLE_COUNT] > 0 || options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
                     }
                     var r = null;
                     var rect = null;
@@ -210,7 +210,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
                             }
                         }
                     }
-                    var currentRipple = new exports.Ripple(x, y, r, type).attachTo(element, function () {
+                    var currentRipple = new Ripple(x, y, r, type).attachTo(element, function () {
                         _this[RIPPLE_COUNT]--;
                     });
                     this[RIPPLE_COUNT]++;
@@ -246,7 +246,7 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
                 },
                 set: function (options) {
                     var prevOptions = this[RIPPLE_OPTIONS];
-                    options = this[RIPPLE_OPTIONS] = index.__assign(index.__assign(index.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
+                    options = this[RIPPLE_OPTIONS] = tslib_es6.__assign(tslib_es6.__assign(tslib_es6.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
                     if (options.detectLabel != null && !options.detectLabel) {
                         options.usePointerFocus = false;
                     }
@@ -336,7 +336,5 @@ define(['exports', './lib/tslib/index'], function (exports, index) { 'use strict
 
     exports.isRipple = isRipple;
     exports.ripple = ripple;
-
-    Object.defineProperty(exports, '__esModule', { value: true });
 
 });

@@ -1,12 +1,137 @@
 'use strict';
 
+require('./tslib.es6-c0666302.js');
+var ripple = require('./ripple-486af47f.js');
 var riot = require('riot');
-var ripple = require('./ripple');
-var motionController = require('./motionController');
+
+var MOTION_CONTROLLER = Symbol("motion-controller");
+function motionController(element) {
+    var existingMotionController = element[MOTION_CONTROLLER];
+    if (existingMotionController != null) {
+        return existingMotionController;
+    }
+    var self;
+    var eventTarget = new EventTarget();
+    var length = 0;
+    var getLength = function () {
+        return length;
+    };
+    var setLength = function (l) {
+        length = l;
+        return self;
+    };
+    var index = 0;
+    var getSelectedIndex = function () {
+        return index;
+    };
+    var setSelectedIndex = function (i) {
+        if (i < 0) {
+            i = 0;
+        }
+        if (i >= length) {
+            i = length - 1;
+        }
+        index = i;
+        return self;
+    };
+    var motion = 0;
+    var getMotion = function () {
+        var m = parseFloat(motion);
+        if (isNaN(m)) {
+            return 0;
+        }
+        m = Math.max(Math.min(1, m), -1);
+        var index = getSelectedIndex();
+        if (index === 0 && m < 0 || index === getLength() - 1 && m > 0) {
+            return 0;
+        }
+        return m;
+    };
+    var _touchIdentifier = null;
+    var startMotion = function (event) {
+        if (_touchIdentifier != null) {
+            return;
+        }
+        var touch = event.targetTouches[0];
+        var identifier = _touchIdentifier = touch.identifier;
+        var startX = touch.clientX;
+        var lastDirection = null;
+        var updateMotion = function (event) {
+            var index;
+            if (!Array.from(event.changedTouches).some(function (touch, i) {
+                index = i;
+                return touch.identifier === identifier;
+            })) {
+                return;
+            }
+            var lastMotion = getMotion();
+            var touch = event.changedTouches[index];
+            var endX = touch.clientX;
+            var delta = endX - startX;
+            motion = -delta / element.getBoundingClientRect().width;
+            var newMotion = getMotion();
+            if (newMotion !== lastMotion) {
+                lastDirection = newMotion > lastMotion ? 1 : -1;
+            }
+            eventTarget.dispatchEvent(new CustomEvent("motionchanged", { detail: { motion: newMotion } }));
+        };
+        var endMotion = function (event) {
+            if (!Array.from(event.changedTouches).some(function (touch) {
+                return touch.identifier === identifier;
+            })) {
+                return;
+            }
+            if (lastDirection != null) {
+                var m = getMotion();
+                motion = 0;
+                var newM = void 0;
+                if (m < 0) {
+                    newM = lastDirection < 0 ? -1 : 0;
+                }
+                else {
+                    newM = lastDirection > 0 ? 1 : 0;
+                }
+                lastDirection = null;
+                var roundedMotion = Math.round(newM);
+                var previousIndex = getSelectedIndex();
+                if (roundedMotion !== 0) {
+                    setSelectedIndex(previousIndex + roundedMotion);
+                }
+                eventTarget.dispatchEvent(new CustomEvent("motionapplied", { detail: {
+                        previousIndex: previousIndex,
+                        currentIndex: getSelectedIndex()
+                    } }));
+            }
+            _touchIdentifier = null;
+            element.removeEventListener("touchend", endMotion);
+            element.removeEventListener("touchcancel", endMotion);
+            element.removeEventListener("touchmove", updateMotion);
+        };
+        element.addEventListener("touchend", endMotion);
+        element.addEventListener("touchcancel", endMotion);
+        element.addEventListener("touchmove", updateMotion);
+    };
+    element.addEventListener("touchstart", startMotion);
+    return element[MOTION_CONTROLLER] = self = {
+        getMotion: getMotion,
+        getSelectedIndex: getSelectedIndex,
+        setSelectedIndex: setSelectedIndex,
+        getLength: getLength,
+        setLength: setLength,
+        on: function (type, callback) {
+            eventTarget.addEventListener(type, callback);
+            return self;
+        },
+        off: function (type, callback) {
+            eventTarget.removeEventListener(type, callback);
+            return self;
+        }
+    };
+}
 
 const PAGE_INDEX = Symbol("page-index");
 
-var rmTabbedPages = {
+var TabbedPagesComponent = {
   'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; overflow: hidden; position: relative; width: 1px; height: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div > button,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div > button{ background-color: transparent; border: 0; padding: 12px 16px; font-size: 16px; line-height: 20px; height: 100%; width: 100%; cursor: pointer; outline: none; } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; white-space: initial; }`,
 
   'exports': {
@@ -25,7 +150,7 @@ var rmTabbedPages = {
             window.requestAnimationFrame(frame);
         };
         window.requestAnimationFrame(frame);
-        motionController.motionController(this.root.children[1])
+        motionController(this.root.children[1])
         .setSelectedIndex(this.getSelectedIndex())
         .on("motionchanged", event => this.update({ motion: event.detail.motion, instant: true }))
         .on("motionapplied", event => {
@@ -150,7 +275,7 @@ var rmTabbedPages = {
         }
 
         // update motionController length
-        motionController.motionController(this.root.children[1]).setLength(this.getLength());
+        motionController(this.root.children[1]).setLength(this.getLength());
 
         // set indicator to correct position and size
         this._updateIndicator(!update || this.state.instant);
@@ -238,7 +363,7 @@ var rmTabbedPages = {
             return;
         }
         this.update({ selectedIndex: index });
-        motionController.motionController(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
+        motionController(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
     },
 
     getIndicatorLeft() {
@@ -303,7 +428,7 @@ var rmTabbedPages = {
     },
 
     getMotion() {
-        return motionController.motionController(this.root.children[1]).getMotion();
+        return motionController(this.root.children[1]).getMotion();
     }
   },
 
@@ -317,4 +442,4 @@ var rmTabbedPages = {
   'name': 'rm-tabbed-pages'
 };
 
-module.exports = rmTabbedPages;
+module.exports = TabbedPagesComponent;
