@@ -136,6 +136,7 @@ var AppBarComponent = {
     },
 
     onUnmounted() {
+        this._mounted = false;
         offChange(this.update, this);
         this.setScrollTarget(null);
         window.removeEventListener("resize", this._onresize);
@@ -207,7 +208,7 @@ var AppBarComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr113="expr113"></slot>', [{
+    return template('<slot expr112="expr112"></slot>', [{
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
         'name': 'class',
@@ -234,8 +235,8 @@ var AppBarComponent = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr113',
-      'selector': '[expr113]'
+      'redundantAttribute': 'expr112',
+      'selector': '[expr112]'
     }]);
   },
 

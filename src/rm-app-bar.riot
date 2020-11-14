@@ -122,6 +122,7 @@
                 }
             },
             onUnmounted() {
+                this._mounted = false;
                 utils.offChange(this.update, this);
                 this.setScrollTarget(null);
                 window.removeEventListener("resize", this._onresize);

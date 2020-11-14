@@ -192,6 +192,7 @@
         },
 
         onUnmounted() {
+            this._mounted = false;
             offChange(this.update, this);
             this.setScrollTarget(null);
             window.removeEventListener("resize", this._onresize);
@@ -963,12 +964,12 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr294="expr294"></slot>', [{
+        return template('<slot expr298="expr298"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr294',
-          'selector': '[expr294]'
+          'redundantAttribute': 'expr298',
+          'selector': '[expr298]'
         }]);
       },
 
@@ -2569,10 +2570,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr295="expr295"><div expr296="expr296" style="overflow-y: auto;"><slot expr297="expr297"></slot></div></div>',
+          '<div expr294="expr294"><div expr295="expr295" style="overflow-y: auto;"><slot expr296="expr296"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr295',
-            'selector': '[expr295]',
+            'redundantAttribute': 'expr294',
+            'selector': '[expr294]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2583,8 +2584,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr296',
-            'selector': '[expr296]',
+            'redundantAttribute': 'expr295',
+            'selector': '[expr295]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -2621,8 +2622,8 @@
             }],
 
             'name': 'default',
-            'redundantAttribute': 'expr297',
-            'selector': '[expr297]'
+            'redundantAttribute': 'expr296',
+            'selector': '[expr296]'
           }]
         );
       },
@@ -2727,9 +2728,9 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr300="expr300"><slot expr301="expr301"></slot></button>', [{
-          'redundantAttribute': 'expr300',
-          'selector': '[expr300]',
+        return template('<button expr299="expr299"><slot expr300="expr300"></slot></button>', [{
+          'redundantAttribute': 'expr299',
+          'selector': '[expr299]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -2750,8 +2751,8 @@
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr301',
-          'selector': '[expr301]'
+          'redundantAttribute': 'expr300',
+          'selector': '[expr300]'
         }]);
       },
 
@@ -2825,10 +2826,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr298="expr298" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr299="expr299" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr310="expr310" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr311="expr311" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr298',
-            'selector': '[expr298]',
+            'redundantAttribute': 'expr310',
+            'selector': '[expr310]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -2845,8 +2846,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr299',
-            'selector': '[expr299]',
+            'redundantAttribute': 'expr311',
+            'selector': '[expr311]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -2884,12 +2885,12 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr302="expr302"></slot>', [{
+        return template('<slot expr297="expr297"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr302',
-          'selector': '[expr302]'
+          'redundantAttribute': 'expr297',
+          'selector': '[expr297]'
         }]);
       },
 
@@ -2986,10 +2987,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr312="expr312" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr313="expr313" name="leading"></slot></div><div expr314="expr314" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr315="expr315" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr316="expr316"></template><slot expr318="expr318" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr319="expr319" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr320="expr320" style="font-size: .75em;"> </div></div>',
+          '<label expr324="expr324" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr325="expr325" name="leading"></slot></div><div expr326="expr326" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr327="expr327" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr328="expr328"></template><slot expr330="expr330" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr331="expr331" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr332="expr332" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr312',
-            'selector': '[expr312]',
+            'redundantAttribute': 'expr324',
+            'selector': '[expr324]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -3003,11 +3004,11 @@
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr313',
-            'selector': '[expr313]'
+            'redundantAttribute': 'expr325',
+            'selector': '[expr325]'
           }, {
-            'redundantAttribute': 'expr314',
-            'selector': '[expr314]',
+            'redundantAttribute': 'expr326',
+            'selector': '[expr326]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3018,8 +3019,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr315',
-            'selector': '[expr315]',
+            'redundantAttribute': 'expr327',
+            'selector': '[expr327]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3036,31 +3037,31 @@
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr316',
-            'selector': '[expr316]',
+            'redundantAttribute': 'expr328',
+            'selector': '[expr328]',
 
-            'template': template('<slot expr317="expr317"></slot>', [{
+            'template': template('<slot expr329="expr329"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr317',
-              'selector': '[expr317]'
+              'redundantAttribute': 'expr329',
+              'selector': '[expr329]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr318',
-            'selector': '[expr318]'
+            'redundantAttribute': 'expr330',
+            'selector': '[expr330]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr319',
-            'selector': '[expr319]'
+            'redundantAttribute': 'expr331',
+            'selector': '[expr331]'
           }, {
-            'redundantAttribute': 'expr320',
-            'selector': '[expr320]',
+            'redundantAttribute': 'expr332',
+            'selector': '[expr332]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3346,7 +3347,7 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr303="expr303" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr305="expr305"></rm-textfield-container>',
+          '<rm-menu expr301="expr301" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr303="expr303"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -3357,14 +3358,14 @@
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr304="expr304"></slot>',
+              'html': '<slot expr302="expr302"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr304',
-                'selector': '[expr304]'
+                'redundantAttribute': 'expr302',
+                'selector': '[expr302]'
               }]
             }],
 
@@ -3398,8 +3399,8 @@
               }
             }],
 
-            'redundantAttribute': 'expr303',
-            'selector': '[expr303]'
+            'redundantAttribute': 'expr301',
+            'selector': '[expr301]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -3410,11 +3411,11 @@
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr306="expr306" class="rm-select--input"/><div expr307="expr307" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr304="expr304" class="rm-select--input"/><div expr305="expr305" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr306',
-                'selector': '[expr306]',
+                'redundantAttribute': 'expr304',
+                'selector': '[expr304]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -3453,8 +3454,8 @@
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr307',
-                'selector': '[expr307]',
+                'redundantAttribute': 'expr305',
+                'selector': '[expr305]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -3467,18 +3468,18 @@
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr308="expr308" name="leading" slot="leading"></slot>',
+              'html': '<slot expr306="expr306" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr308',
-                'selector': '[expr308]'
+                'redundantAttribute': 'expr306',
+                'selector': '[expr306]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr309="expr309" variant="icon" class="rm-select--clear" dense></rm-button><slot expr310="expr310" name="trailing"></slot><rm-button expr311="expr311" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr307="expr307" variant="icon" class="rm-select--clear" dense></rm-button><slot expr308="expr308" name="trailing"></slot><rm-button expr309="expr309" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -3487,8 +3488,8 @@
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr309',
-                'selector': '[expr309]',
+                'redundantAttribute': 'expr307',
+                'selector': '[expr307]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -3524,8 +3525,8 @@
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr310',
-                'selector': '[expr310]'
+                'redundantAttribute': 'expr308',
+                'selector': '[expr308]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -3552,8 +3553,8 @@
                   }
                 }],
 
-                'redundantAttribute': 'expr311',
-                'selector': '[expr311]'
+                'redundantAttribute': 'expr309',
+                'selector': '[expr309]'
               }]
             }],
 
@@ -3594,8 +3595,8 @@
               }
             }],
 
-            'redundantAttribute': 'expr305',
-            'selector': '[expr305]'
+            'redundantAttribute': 'expr303',
+            'selector': '[expr303]'
           }]
         );
       },
@@ -4128,24 +4129,24 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr329="expr329"></div>', [{
+        return template('<div expr320="expr320"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr329',
-          'selector': '[expr329]',
+          'redundantAttribute': 'expr320',
+          'selector': '[expr320]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr330="expr330" ref="tab"></div></div><div expr332="expr332" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr321="expr321" ref="tab"></div></div><div expr323="expr323" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr331="expr331" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr322="expr322" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -4162,8 +4163,8 @@
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr331',
-                'selector': '[expr331]',
+                'redundantAttribute': 'expr322',
+                'selector': '[expr322]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -4175,8 +4176,8 @@
                 }]
               }]),
 
-              'redundantAttribute': 'expr330',
-              'selector': '[expr330]',
+              'redundantAttribute': 'expr321',
+              'selector': '[expr321]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -4184,8 +4185,8 @@
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr332',
-              'selector': '[expr332]',
+              'redundantAttribute': 'expr323',
+              'selector': '[expr323]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -4312,10 +4313,10 @@
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr321="expr321" ref="label"> </div><textarea expr322="expr322"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr323="expr323" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr312="expr312" ref="label"> </div><textarea expr313="expr313"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr314="expr314" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr321',
-            'selector': '[expr321]',
+            'redundantAttribute': 'expr312',
+            'selector': '[expr312]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -4326,8 +4327,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr322',
-            'selector': '[expr322]',
+            'redundantAttribute': 'expr313',
+            'selector': '[expr313]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -4345,8 +4346,8 @@
               }
             }]
           }, {
-            'redundantAttribute': 'expr323',
-            'selector': '[expr323]',
+            'redundantAttribute': 'expr314',
+            'selector': '[expr314]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -4433,7 +4434,7 @@
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr324="expr324"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr315="expr315"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -4443,11 +4444,11 @@
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr325="expr325" slot="input"/>',
+            'html': '<input expr316="expr316" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr325',
-              'selector': '[expr325]',
+              'redundantAttribute': 'expr316',
+              'selector': '[expr316]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -4494,18 +4495,18 @@
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr326="expr326" name="leading" slot="leading"></slot>',
+            'html': '<slot expr317="expr317" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr326',
-              'selector': '[expr326]'
+              'redundantAttribute': 'expr317',
+              'selector': '[expr317]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr327="expr327" variant="icon" dense></rm-button><slot expr328="expr328" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr318="expr318" variant="icon" dense></rm-button><slot expr319="expr319" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -4514,8 +4515,8 @@
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr327',
-              'selector': '[expr327]',
+              'redundantAttribute': 'expr318',
+              'selector': '[expr318]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -4551,8 +4552,8 @@
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr328',
-              'selector': '[expr328]'
+              'redundantAttribute': 'expr319',
+              'selector': '[expr319]'
             }]
           }],
 
@@ -4600,8 +4601,8 @@
             }
           }],
 
-          'redundantAttribute': 'expr324',
-          'selector': '[expr324]'
+          'redundantAttribute': 'expr315',
+          'selector': '[expr315]'
         }]);
       },
 

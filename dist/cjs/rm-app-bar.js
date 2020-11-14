@@ -138,6 +138,7 @@ var AppBarComponent = {
     },
 
     onUnmounted() {
+        this._mounted = false;
         offChange(this.update, this);
         this.setScrollTarget(null);
         window.removeEventListener("resize", this._onresize);

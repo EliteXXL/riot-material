@@ -19,7 +19,14 @@ All notable changes to this project will be documented in this file.
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
 
+## [1.2.7] - 2020-11-14
+###Added
+###Changed
+- Fixed bug in `rm-app-bar`: calling `update` during unmount lifecycle
+
 ## [1.2.6] - 2020-11-13
+###Added
+###Changed
 - Fixed bug in `rm-app-bar` with `elevation-threshold`
 
 ## [1.2.4] - 2020-10-25

@@ -15,12 +15,12 @@ var IconComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr65="expr65"></slot>', [{
+    return template('<slot expr78="expr78"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr65',
-      'selector': '[expr65]'
+      'redundantAttribute': 'expr78',
+      'selector': '[expr78]'
     }]);
   },
 
