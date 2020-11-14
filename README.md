@@ -1,8 +1,6 @@
 # [riot](https://riot.js.org/) implementation of [Material Design](https://material.io/)
-
 ## Installation
 ```npm install riot-material```
-
 ## Usage
 index.js
 ```js
@@ -44,3 +42,19 @@ More ui elements in the upcoming documentation. Here a list:
 - `rm-textarea`
 - `rm-textfield-container`
 - `rm-textfield`
+
+There are also a couple of modules that can be used, such as:
+- `app-bar-utils`
+- `background`
+- `elevation`
+- `motionController`
+- `pointerController`
+- `ripple`
+- `surfaces`
+
+Many of these are probably to be separated from this package, so stay tuned!
+
+If you want to import any module separated, you should do like following, by now:
+```
+import { ... } from "riot-material/dist/cjs/<module>.js";
+```
