@@ -124,10 +124,10 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr2="expr2" class="mdc-elevation--z24" ref="container"><div expr3="expr3" ref="title"><slot expr4="expr4" name="title"></slot></div><div expr5="expr5" ref="content"><slot expr6="expr6" name="content"></slot></div><div expr7="expr7" ref="actions"><slot expr8="expr8" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr7="expr7" class="mdc-elevation--z24" ref="container"><div expr8="expr8" ref="title"><slot expr9="expr9" name="title"></slot></div><div expr10="expr10" ref="content"><slot expr11="expr11" name="content"></slot></div><div expr12="expr12" ref="actions"><slot expr13="expr13" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr2',
-            'selector': '[expr2]',
+            'redundantAttribute': 'expr7',
+            'selector': '[expr7]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -138,8 +138,8 @@ define(function () { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr3',
-            'selector': '[expr3]',
+            'redundantAttribute': 'expr8',
+            'selector': '[expr8]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -153,11 +153,11 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr4',
-            'selector': '[expr4]'
+            'redundantAttribute': 'expr9',
+            'selector': '[expr9]'
           }, {
-            'redundantAttribute': 'expr5',
-            'selector': '[expr5]',
+            'redundantAttribute': 'expr10',
+            'selector': '[expr10]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -171,11 +171,11 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr6',
-            'selector': '[expr6]'
+            'redundantAttribute': 'expr11',
+            'selector': '[expr11]'
           }, {
-            'redundantAttribute': 'expr7',
-            'selector': '[expr7]',
+            'redundantAttribute': 'expr12',
+            'selector': '[expr12]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -189,8 +189,8 @@ define(function () { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr8',
-            'selector': '[expr8]'
+            'redundantAttribute': 'expr13',
+            'selector': '[expr13]'
           }]
         );
       },

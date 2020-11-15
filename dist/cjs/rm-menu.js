@@ -581,6 +581,7 @@ var MenuComponent = {
     _highlightedFromKeyboard: false,
     _closeThis: null,
     _focusTrap: null,
+    _mounted: false,
 
     onBeforeMount() {
         this._closeThis = this.close.bind(this);
@@ -597,8 +598,12 @@ var MenuComponent = {
         }
         let _lastTime = null;
         let _lastNow = Date.now();
+        this._mounted = true;
         let frame = () => {
             if (!this.root.isConnected) {
+                if (this._mounted) {
+                    window.requestAnimationFrame(frame);
+                }
                 return;
             }
             const last = _lastNow;
@@ -796,6 +801,10 @@ var MenuComponent = {
         });
     },
 
+    onUnmounted() {
+        this._mounted = false;
+    },
+
     _onkeydown: null,
     _realParent: null,
     _anchorElement: null,
@@ -976,10 +985,10 @@ var MenuComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr66="expr66"><div expr67="expr67" style="overflow-y: auto;"><slot expr68="expr68"></slot></div></div>',
+      '<div expr88="expr88"><div expr89="expr89" style="overflow-y: auto;"><slot expr90="expr90"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr66',
-        'selector': '[expr66]',
+        'redundantAttribute': 'expr88',
+        'selector': '[expr88]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -990,8 +999,8 @@ var MenuComponent = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr67',
-        'selector': '[expr67]',
+        'redundantAttribute': 'expr89',
+        'selector': '[expr89]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1028,8 +1037,8 @@ var MenuComponent = {
         }],
 
         'name': 'default',
-        'redundantAttribute': 'expr68',
-        'selector': '[expr68]'
+        'redundantAttribute': 'expr90',
+        'selector': '[expr90]'
       }]
     );
   },

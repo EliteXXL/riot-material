@@ -95,6 +95,7 @@
             _highlightedFromKeyboard: false,
             _closeThis: null,
             _focusTrap: null,
+            _mounted: false,
             onBeforeMount() {
                 this._closeThis = this.close.bind(this);
             },
@@ -109,8 +110,12 @@
                 }
                 let _lastTime = null;
                 let _lastNow = Date.now();
+                this._mounted = true;
                 let frame = () => {
                     if (!this.root.isConnected) {
+                        if (this._mounted) {
+                            window.requestAnimationFrame(frame);
+                        }
                         return;
                     }
                     const last = _lastNow;
@@ -306,6 +311,9 @@
                         }
                     }
                 });
+            },
+            onUnmounted() {
+                this._mounted = false;
             },
             _onkeydown: null,
             _realParent: null,

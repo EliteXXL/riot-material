@@ -574,6 +574,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
       _highlightedFromKeyboard: false,
       _closeThis: null,
       _focusTrap: null,
+      _mounted: false,
 
       onBeforeMount() {
           this._closeThis = this.close.bind(this);
@@ -590,8 +591,12 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           }
           let _lastTime = null;
           let _lastNow = Date.now();
+          this._mounted = true;
           let frame = () => {
               if (!this.root.isConnected) {
+                  if (this._mounted) {
+                      window.requestAnimationFrame(frame);
+                  }
                   return;
               }
               const last = _lastNow;
@@ -789,6 +794,10 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           });
       },
 
+      onUnmounted() {
+          this._mounted = false;
+      },
+
       _onkeydown: null,
       _realParent: null,
       _anchorElement: null,
@@ -969,10 +978,10 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
       return template(
-        '<div expr30="expr30"><div expr31="expr31" style="overflow-y: auto;"><slot expr32="expr32"></slot></div></div>',
+        '<div expr18="expr18"><div expr19="expr19" style="overflow-y: auto;"><slot expr20="expr20"></slot></div></div>',
         [{
-          'redundantAttribute': 'expr30',
-          'selector': '[expr30]',
+          'redundantAttribute': 'expr18',
+          'selector': '[expr18]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -983,8 +992,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
             }
           }]
         }, {
-          'redundantAttribute': 'expr31',
-          'selector': '[expr31]',
+          'redundantAttribute': 'expr19',
+          'selector': '[expr19]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -1021,8 +1030,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           }],
 
           'name': 'default',
-          'redundantAttribute': 'expr32',
-          'selector': '[expr32]'
+          'redundantAttribute': 'expr20',
+          'selector': '[expr20]'
         }]
       );
     },

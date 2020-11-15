@@ -269,7 +269,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr17="expr17" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr19="expr19"></rm-textfield-container>',
+          '<rm-menu expr25="expr25" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr27="expr27"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -280,14 +280,14 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr18="expr18"></slot>',
+              'html': '<slot expr26="expr26"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr18',
-                'selector': '[expr18]'
+                'redundantAttribute': 'expr26',
+                'selector': '[expr26]'
               }]
             }],
 
@@ -321,8 +321,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }
             }],
 
-            'redundantAttribute': 'expr17',
-            'selector': '[expr17]'
+            'redundantAttribute': 'expr25',
+            'selector': '[expr25]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -333,11 +333,11 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr20="expr20" class="rm-select--input"/><div expr21="expr21" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr28="expr28" class="rm-select--input"/><div expr29="expr29" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr20',
-                'selector': '[expr20]',
+                'redundantAttribute': 'expr28',
+                'selector': '[expr28]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -376,8 +376,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr21',
-                'selector': '[expr21]',
+                'redundantAttribute': 'expr29',
+                'selector': '[expr29]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -390,18 +390,18 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr22="expr22" name="leading" slot="leading"></slot>',
+              'html': '<slot expr30="expr30" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr22',
-                'selector': '[expr22]'
+                'redundantAttribute': 'expr30',
+                'selector': '[expr30]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr23="expr23" variant="icon" class="rm-select--clear" dense></rm-button><slot expr24="expr24" name="trailing"></slot><rm-button expr25="expr25" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr31="expr31" variant="icon" class="rm-select--clear" dense></rm-button><slot expr32="expr32" name="trailing"></slot><rm-button expr33="expr33" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -410,8 +410,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr23',
-                'selector': '[expr23]',
+                'redundantAttribute': 'expr31',
+                'selector': '[expr31]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -447,8 +447,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr24',
-                'selector': '[expr24]'
+                'redundantAttribute': 'expr32',
+                'selector': '[expr32]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -475,8 +475,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   }
                 }],
 
-                'redundantAttribute': 'expr25',
-                'selector': '[expr25]'
+                'redundantAttribute': 'expr33',
+                'selector': '[expr33]'
               }]
             }],
 
@@ -517,8 +517,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }
             }],
 
-            'redundantAttribute': 'expr19',
-            'selector': '[expr19]'
+            'redundantAttribute': 'expr27',
+            'selector': '[expr27]'
           }]
         );
       },

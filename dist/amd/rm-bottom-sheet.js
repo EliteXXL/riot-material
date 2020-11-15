@@ -278,13 +278,13 @@ define(function () { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr9="expr9"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr6="expr6"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr9',
-            'selector': '[expr9]'
+            'redundantAttribute': 'expr6',
+            'selector': '[expr6]'
           }]
         );
       },

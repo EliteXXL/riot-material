@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "",
   "dependencies": {
     "@material/elevation": "^7.0.0",

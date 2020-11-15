@@ -24,12 +24,12 @@ var RippleComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr94="expr94"></slot>', [{
+    return template('<slot expr76="expr76"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr94',
-      'selector': '[expr94]'
+      'redundantAttribute': 'expr76',
+      'selector': '[expr76]'
     }]);
   },
 
