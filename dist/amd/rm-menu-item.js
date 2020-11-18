@@ -97,9 +97,9 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr21="expr21"><slot expr22="expr22"></slot></button>', [{
-          'redundantAttribute': 'expr21',
-          'selector': '[expr21]',
+        return template('<button expr9="expr9"><slot expr10="expr10"></slot></button>', [{
+          'redundantAttribute': 'expr9',
+          'selector': '[expr9]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -120,8 +120,8 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr22',
-          'selector': '[expr22]'
+          'redundantAttribute': 'expr10',
+          'selector': '[expr10]'
         }]);
       },
 

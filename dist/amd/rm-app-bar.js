@@ -206,7 +206,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr5="expr5"></slot>', [{
+        return template('<slot expr3="expr3"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'class',
@@ -233,8 +233,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr5',
-          'selector': '[expr5]'
+          'redundantAttribute': 'expr3',
+          'selector': '[expr3]'
         }]);
       },
 

@@ -1,4 +1,4 @@
-define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './pointerController-ae6dff1d', './rm-button', './rm-textfield-container'], function (styleInject_es, tslib_es6, ripple, riot, rmIcon, pointerController, rmButton, rmTextfieldContainer) { 'use strict';
+define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './rm-button-4ce4def9', './rm-textfield-container'], function (styleInject_es, tslib_es6, ripple, riot, rmIcon, rmButton, rmTextfieldContainer) { 'use strict';
 
     var TextfieldComponent = {
       'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
@@ -59,6 +59,14 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             return this.props.clearable != null && this.props.clearable !== false;
         },
 
+        isDisabled() {
+            return this.props.disabled != null && this.props.disabled !== false;
+        },
+
+        isFullWidth() {
+            return this.props.fullWidth != null && this.props.fullWidth !== false;
+        },
+
         clear() {
             this.root.value = "";
             this.update();
@@ -70,7 +78,7 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr38="expr38"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr51="expr51"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -80,11 +88,11 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr39="expr39" slot="input"/>',
+            'html': '<input expr52="expr52" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr39',
-              'selector': '[expr39]',
+              'redundantAttribute': 'expr52',
+              'selector': '[expr52]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -125,24 +133,24 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
                 'name': 'disabled',
 
                 'evaluate': function(scope) {
-                  return scope.props.disabled;
+                  return scope.isDisabled();
                 }
               }]
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr40="expr40" name="leading" slot="leading"></slot>',
+            'html': '<slot expr53="expr53" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr40',
-              'selector': '[expr40]'
+              'redundantAttribute': 'expr53',
+              'selector': '[expr53]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr41="expr41" variant="icon" dense></rm-button><slot expr42="expr42" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr54="expr54" variant="icon" dense></rm-button><slot expr55="expr55" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -151,8 +159,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr41',
-              'selector': '[expr41]',
+              'redundantAttribute': 'expr54',
+              'selector': '[expr54]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -180,7 +188,7 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
                   'name': 'tabindex',
 
                   'evaluate': function(scope) {
-                    return scope.props.disabled ? "-1" : null;
+                    return scope.isDisabled() ? "-1" : null;
                   }
                 }]
               }])
@@ -188,8 +196,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr42',
-              'selector': '[expr42]'
+              'redundantAttribute': 'expr55',
+              'selector': '[expr55]'
             }]
           }],
 
@@ -212,14 +220,14 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             'name': 'full-width',
 
             'evaluate': function(scope) {
-              return scope.props.fullWidth;
+              return scope.isFullWidth();
             }
           }, {
             'type': expressionTypes.ATTRIBUTE,
             'name': 'disabled',
 
             'evaluate': function(scope) {
-              return scope.props.disabled;
+              return scope.isDisabled();
             }
           }, {
             'type': expressionTypes.ATTRIBUTE,
@@ -237,8 +245,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             }
           }],
 
-          'redundantAttribute': 'expr38',
-          'selector': '[expr38]'
+          'redundantAttribute': 'expr51',
+          'selector': '[expr51]'
         }]);
       },
 

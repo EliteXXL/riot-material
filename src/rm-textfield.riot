@@ -1,15 +1,15 @@
 <rm-textfield>
     <rm-textfield-container variant={ props.variant }
-        label={ props.label } full-width={ props.fullWidth } disabled={ props.disabled }
+        label={ props.label } full-width={ isFullWidth() } disabled={ isDisabled() }
         class={ _getTextfieldContainerClass() } onmousedown={ _oncontainermousedown}
     >
         <input onfocus={ _oninputfocus } onblur={ _oninputblur } oninput={ _oninputinput }
-            value={ props.value } name={ props.name } disabled={ props.disabled } slot="input"
+            value={ props.value } name={ props.name } disabled={ isDisabled() } slot="input"
         >
         <slot name="leading" slot="leading" />
         <span style="white-space: nowrap;" slot="trailing">
             <rm-button variant="icon" onclick={ clear }
-                if={ isClearable() && root.value } dense tabindex={ props.disabled ? "-1" : null }
+                if={ isClearable() && root.value } dense tabindex={ isDisabled() ? "-1" : null }
             >clear</rm-button>
             <slot name="trailing" />
         </span>
@@ -85,6 +85,12 @@
             },
             isClearable() {
                 return this.props.clearable != null && this.props.clearable !== false;
+            },
+            isDisabled() {
+                return this.props.disabled != null && this.props.disabled !== false;
+            },
+            isFullWidth() {
+                return this.props.fullWidth != null && this.props.fullWidth !== false;
             },
             clear() {
                 this.root.value = "";

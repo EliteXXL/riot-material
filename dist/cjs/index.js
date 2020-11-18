@@ -11,8 +11,7 @@ require('./tslib.es6-c0666302.js');
 require('./ripple-486af47f.js');
 var riot = require('riot');
 var rmIcon = require('./rm-icon.js');
-require('./pointerController-228f7d55.js');
-var rmButton = require('./rm-button.js');
+var rmButton = require('./rm-button-7634aa24.js');
 var rmCheckbox = require('./rm-checkbox.js');
 var rmDialog = require('./rm-dialog.js');
 var rmDivider = require('./rm-divider.js');
@@ -55,7 +54,7 @@ var surfaces = /*#__PURE__*/Object.freeze({
 
 riot.register("rm-app-bar", rmAppBar);
 riot.register("rm-bottom-sheet", rmBottomSheet);
-riot.register("rm-button", rmButton);
+riot.register("rm-button", rmButton.ButtonComponent);
 riot.register("rm-checkbox", rmCheckbox);
 riot.register("rm-dialog", rmDialog);
 riot.register("rm-divider", rmDivider);
@@ -75,7 +74,7 @@ exports.AppBarComponent = rmAppBar;
 exports.elevation = elevation.elevation;
 exports.BottomSheetComponent = rmBottomSheet;
 exports.IconComponent = rmIcon;
-exports.ButtonComponent = rmButton;
+exports.ButtonComponent = rmButton.ButtonComponent;
 exports.CheckboxComponent = rmCheckbox;
 exports.DialogComponent = rmDialog;
 exports.DividerComponent = rmDivider;

@@ -260,7 +260,10 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
                 const page = pageContainer.children[index];
                 const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                 if (instance != null) {
-                    instance.unmount();
+                    instance.unmount(
+                        Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                        this[riot.__.globals.PARENT_KEY_SYMBOL]
+                    );
                 }
                 // if (page.nextElementSibling) {
                 //     console.log("setting page index of", index);
@@ -291,9 +294,15 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
                 let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                 if (instance == null) {
                     instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
-                    instance.mount(el, this[riot.__.globals.PARENT_KEY_SYMBOL], this[riot.__.globals.PARENT_KEY_SYMBOL]);
+                    instance.mount(
+                        el, Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                        this[riot.__.globals.PARENT_KEY_SYMBOL]
+                    );
                 } else if (update && !this.state.skipUpdate) {
-                    instance.update();
+                    instance.update(
+                        Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                        this[riot.__.globals.PARENT_KEY_SYMBOL]
+                    );
                 }
             }
             delete this.state.instant;

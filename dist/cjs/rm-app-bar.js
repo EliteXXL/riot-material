@@ -210,7 +210,7 @@ var AppBarComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr71="expr71"></slot>', [{
+    return template('<slot expr57="expr57"></slot>', [{
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
         'name': 'class',
@@ -237,8 +237,8 @@ var AppBarComponent = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr71',
-      'selector': '[expr71]'
+      'redundantAttribute': 'expr57',
+      'selector': '[expr57]'
     }]);
   },
 

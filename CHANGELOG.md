@@ -19,6 +19,14 @@ All notable changes to this project will be documented in this file.
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
 
+## [1.2.8] - 2020-11-18
+### Added
+- `rm-textfield`.`isFullWidth()`
+- `rm-textfield`.`isDisabled()`
+### Changed
+- fixed `rm-textfield` full-width
+- fixed the way scope is created in `rm-tabbed-pages`
+
 ## [1.2.8] - 2020-11-15
 ### Added
 ### Changed

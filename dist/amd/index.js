@@ -1,4 +1,4 @@
-define(['exports', './style-inject.es-dcc58f81', './mdc.elevation-d362346e', './rm-app-bar', './elevation-9283330e', './rm-bottom-sheet', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './pointerController-ae6dff1d', './rm-button', './rm-checkbox', './rm-dialog', './rm-divider', './rm-menu', './rm-menu-item', './rm-radio', './rm-ripple', './rm-textfield-container', './rm-select', './rm-tabbed-pages', './rm-tabs', './rm-textarea', './rm-textfield'], function (exports, styleInject_es, mdc_elevation, rmAppBar, elevation, rmBottomSheet, tslib_es6, ripple, riot, rmIcon, pointerController, rmButton, rmCheckbox, rmDialog, rmDivider, rmMenu, rmMenuItem, rmRadio, rmRipple, rmTextfieldContainer, rmSelect, rmTabbedPages, rmTabs, rmTextarea, rmTextfield) { 'use strict';
+define(['exports', './style-inject.es-dcc58f81', './mdc.elevation-d362346e', './rm-app-bar', './elevation-9283330e', './rm-bottom-sheet', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './rm-button-4ce4def9', './rm-checkbox', './rm-dialog', './rm-divider', './rm-menu', './rm-menu-item', './rm-radio', './rm-ripple', './rm-textfield-container', './rm-select', './rm-tabbed-pages', './rm-tabs', './rm-textarea', './rm-textfield'], function (exports, styleInject_es, mdc_elevation, rmAppBar, elevation, rmBottomSheet, tslib_es6, ripple, riot, rmIcon, rmButton, rmCheckbox, rmDialog, rmDivider, rmMenu, rmMenuItem, rmRadio, rmRipple, rmTextfieldContainer, rmSelect, rmTabbedPages, rmTabs, rmTextarea, rmTextfield) { 'use strict';
 
 	var style = document.createElement("style");
 	style.innerHTML = "\n.rm-background {\n    background: rgb(245, 245, 245);\n    background: rgb(var(--color-background, 245, 245, 245));\n    color: rgb(0, 0, 0);\n    color: rgb(var(--color-on-background, 0, 0, 0));\n}\n";
@@ -28,7 +28,7 @@ define(['exports', './style-inject.es-dcc58f81', './mdc.elevation-d362346e', './
 
 	riot.register("rm-app-bar", rmAppBar);
 	riot.register("rm-bottom-sheet", rmBottomSheet);
-	riot.register("rm-button", rmButton);
+	riot.register("rm-button", rmButton.ButtonComponent);
 	riot.register("rm-checkbox", rmCheckbox);
 	riot.register("rm-dialog", rmDialog);
 	riot.register("rm-divider", rmDivider);
@@ -48,7 +48,7 @@ define(['exports', './style-inject.es-dcc58f81', './mdc.elevation-d362346e', './
 	exports.elevation = elevation.elevation;
 	exports.BottomSheetComponent = rmBottomSheet;
 	exports.IconComponent = rmIcon;
-	exports.ButtonComponent = rmButton;
+	exports.ButtonComponent = rmButton.ButtonComponent;
 	exports.CheckboxComponent = rmCheckbox;
 	exports.DialogComponent = rmDialog;
 	exports.DividerComponent = rmDivider;

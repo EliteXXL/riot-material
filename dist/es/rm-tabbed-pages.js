@@ -262,7 +262,10 @@ var TabbedPagesComponent = {
             const page = pageContainer.children[index];
             const instance = page[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
             if (instance != null) {
-                instance.unmount();
+                instance.unmount(
+                    Object.create(this[__.globals.PARENT_KEY_SYMBOL]),
+                    this[__.globals.PARENT_KEY_SYMBOL]
+                );
             }
             // if (page.nextElementSibling) {
             //     console.log("setting page index of", index);
@@ -293,9 +296,15 @@ var TabbedPagesComponent = {
             let instance = el[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
             if (instance == null) {
                 instance = el[__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = __.DOMBindings.template(slot.html, slot.bindings);
-                instance.mount(el, this[__.globals.PARENT_KEY_SYMBOL], this[__.globals.PARENT_KEY_SYMBOL]);
+                instance.mount(
+                    el, Object.create(this[__.globals.PARENT_KEY_SYMBOL]),
+                    this[__.globals.PARENT_KEY_SYMBOL]
+                );
             } else if (update && !this.state.skipUpdate) {
-                instance.update();
+                instance.update(
+                    Object.create(this[__.globals.PARENT_KEY_SYMBOL]),
+                    this[__.globals.PARENT_KEY_SYMBOL]
+                );
             }
         }
         delete this.state.instant;

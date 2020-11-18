@@ -1,10 +1,10 @@
-define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9283330e', './tslib.es6-3a2117de', './ripple-9ef33106', './pointerController-ae6dff1d'], function (styleInject_es, mdc_elevation, elevation, tslib_es6, ripple, pointerController) { 'use strict';
+define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9283330e', './tslib.es6-3a2117de', './ripple-9ef33106'], function (styleInject_es, mdc_elevation, elevation, tslib_es6, ripple) { 'use strict';
 
   /*!
-  * tabbable 5.1.2
+  * tabbable 5.1.3
   * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
   */
-  var candidateSelectors = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])', 'details>summary'];
+  var candidateSelectors = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])', 'details>summary:first-of-type', 'details'];
   var candidateSelector = /* #__PURE__ */candidateSelectors.join(',');
   var matches = typeof Element === 'undefined' ? function () {} : Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
 
@@ -52,7 +52,9 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
   }
 
   function isNodeMatchingSelectorFocusable(node) {
-    if (node.disabled || isHiddenInput(node) || isHidden(node)) {
+    if (node.disabled || isHiddenInput(node) || isHidden(node) ||
+    /* For a details element with a summary, the summary element gets the focused  */
+    isDetailsWithSummary(node)) {
       return false;
     }
 
@@ -84,14 +86,14 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     if (isContentEditable(node)) {
       return 0;
-    } // in Chrome, <audio controls/> and <video controls/> elements get a default
+    } // in Chrome, <details/>, <audio controls/> and <video controls/> elements get a default
     //  `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
     //  yet they are still part of the regular tab order; in FF, they get a default
     //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
-    //  order, consider their tab index to be 0
+    //  order, consider their tab index to be 0.
 
 
-    if ((node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO') && node.getAttribute('tabindex') === null) {
+    if ((node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO' || node.nodeName === 'DETAILS') && node.getAttribute('tabindex') === null) {
       return 0;
     }
 
@@ -112,6 +114,13 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
   function isHiddenInput(node) {
     return isInput(node) && node.type === 'hidden';
+  }
+
+  function isDetailsWithSummary(node) {
+    var r = node.tagName === 'DETAILS' && Array.prototype.slice.apply(node.children).some(function (child) {
+      return child.tagName === 'SUMMARY';
+    });
+    return r;
   }
 
   function isRadio(node) {
@@ -143,6 +152,12 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
   function isHidden(node) {
     if (getComputedStyle(node).visibility === 'hidden') return true;
+    var isDirectSummary = node.matches('details>summary:first-of-type');
+    var nodeUnderDetails = isDirectSummary ? node.parentElement : node;
+
+    if (nodeUnderDetails.matches('details:not([open]) *')) {
+      return true;
+    }
 
     while (node) {
       if (getComputedStyle(node).display === 'none') return true;
@@ -153,7 +168,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
   }
 
   /*!
-  * focus-trap 6.1.3
+  * focus-trap 6.2.0
   * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
   */
 
@@ -244,9 +259,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
     };
   }();
 
-  function createFocusTrap(element, userOptions) {
+  function createFocusTrap(elements, userOptions) {
     var doc = document;
-    var container = typeof element === 'string' ? doc.querySelector(element) : element;
 
     var config = _objectSpread2({
       returnFocusOnDeactivate: true,
@@ -255,8 +269,10 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
     }, userOptions);
 
     var state = {
-      firstTabbableNode: null,
-      lastTabbableNode: null,
+      // @type {Array<HTMLElement>}
+      containers: [],
+      // @type {{ firstTabbableNode: HTMLElement, lastTabbableNode: HTMLElement }}
+      tabbableGroups: [],
       nodeFocusedBeforeActivation: null,
       mostRecentlyFocusedNode: null,
       active: false,
@@ -266,9 +282,24 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
       activate: activate,
       deactivate: deactivate,
       pause: pause,
-      unpause: unpause
+      unpause: unpause,
+      updateContainerElements: updateContainerElements
     };
+    updateContainerElements(elements);
     return trap;
+
+    function updateContainerElements(containerElements) {
+      var elementsAsArray = [].concat(containerElements).filter(Boolean);
+      state.containers = elementsAsArray.map(function (element) {
+        return typeof element === 'string' ? doc.querySelector(element) : element;
+      });
+
+      if (state.active) {
+        updateTabbableNodes();
+      }
+
+      return trap;
+    }
 
     function activate(activateOptions) {
       if (state.active) return;
@@ -311,16 +342,18 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
     }
 
     function pause() {
-      if (state.paused || !state.active) return;
+      if (state.paused || !state.active) return trap;
       state.paused = true;
       removeListeners();
+      return trap;
     }
 
     function unpause() {
-      if (!state.paused || !state.active) return;
+      if (!state.paused || !state.active) return trap;
       state.paused = false;
       updateTabbableNodes();
       addListeners();
+      return trap;
     }
 
     function addListeners() {
@@ -394,10 +427,12 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
       if (getNodeForOption('initialFocus') !== null) {
         node = getNodeForOption('initialFocus');
-      } else if (container.contains(doc.activeElement)) {
+      } else if (containersContain(doc.activeElement)) {
         node = doc.activeElement;
       } else {
-        node = state.firstTabbableNode || getNodeForOption('fallbackFocus');
+        var firstTabbableGroup = state.tabbableGroups[0];
+        var firstTabbableNode = firstTabbableGroup && firstTabbableGroup.firstTabbableNode;
+        node = firstTabbableNode || getNodeForOption('fallbackFocus');
       }
 
       if (!node) {
@@ -415,7 +450,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
 
     function checkPointerDown(e) {
-      if (container.contains(e.target)) {
+      if (containersContain(e.target)) {
         // allow the click since it ocurred inside the trap
         return;
       }
@@ -454,7 +489,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     function checkFocusIn(e) {
       // In Firefox when you Tab out of an iframe the Document is briefly focused.
-      if (container.contains(e.target) || e.target instanceof Document) {
+      if (containersContain(e.target) || e.target instanceof Document) {
         return;
       }
 
@@ -481,23 +516,42 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     function checkTab(e) {
       updateTabbableNodes();
+      var destinationNode = null;
 
-      if (e.shiftKey && e.target === state.firstTabbableNode) {
-        e.preventDefault();
-        tryFocus(state.lastTabbableNode);
-        return;
+      if (e.shiftKey) {
+        var startOfGroupIndex = state.tabbableGroups.findIndex(function (_ref) {
+          var firstTabbableNode = _ref.firstTabbableNode;
+          return e.target === firstTabbableNode;
+        });
+
+        if (startOfGroupIndex >= 0) {
+          var destinationGroupIndex = startOfGroupIndex === 0 ? state.tabbableGroups.length - 1 : startOfGroupIndex - 1;
+          var destinationGroup = state.tabbableGroups[destinationGroupIndex];
+          destinationNode = destinationGroup.lastTabbableNode;
+        }
+      } else {
+        var lastOfGroupIndex = state.tabbableGroups.findIndex(function (_ref2) {
+          var lastTabbableNode = _ref2.lastTabbableNode;
+          return e.target === lastTabbableNode;
+        });
+
+        if (lastOfGroupIndex >= 0) {
+          var _destinationGroupIndex = lastOfGroupIndex === state.tabbableGroups.length - 1 ? 0 : lastOfGroupIndex + 1;
+
+          var _destinationGroup = state.tabbableGroups[_destinationGroupIndex];
+          destinationNode = _destinationGroup.firstTabbableNode;
+        }
       }
 
-      if (!e.shiftKey && e.target === state.lastTabbableNode) {
+      if (destinationNode) {
         e.preventDefault();
-        tryFocus(state.firstTabbableNode);
-        return;
+        tryFocus(destinationNode);
       }
     }
 
     function checkClick(e) {
       if (config.clickOutsideDeactivates) return;
-      if (container.contains(e.target)) return;
+      if (containersContain(e.target)) return;
 
       if (config.allowOutsideClick && (typeof config.allowOutsideClick === 'boolean' ? config.allowOutsideClick : config.allowOutsideClick(e))) {
         return;
@@ -508,9 +562,13 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
     }
 
     function updateTabbableNodes() {
-      var tabbableNodes = tabbable(container);
-      state.firstTabbableNode = tabbableNodes[0] || getInitialFocusNode();
-      state.lastTabbableNode = tabbableNodes[tabbableNodes.length - 1] || getInitialFocusNode();
+      state.tabbableGroups = state.containers.map(function (container) {
+        var tabbableNodes = tabbable(container);
+        return {
+          firstTabbableNode: tabbableNodes[0],
+          lastTabbableNode: tabbableNodes[tabbableNodes.length - 1]
+        };
+      });
     }
 
     function tryFocus(node) {
@@ -529,6 +587,12 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
       if (isSelectableInput(node)) {
         node.select();
       }
+    }
+
+    function containersContain(element) {
+      return state.containers.some(function (container) {
+        return container.contains(element);
+      });
     }
   }
 
@@ -924,7 +988,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           }
           elevation.elevation$1(this.root.firstElementChild, 0);
           this._direction = -1;
-          pointerController.pointerController(document, null);
+          // pointerController(document, null);
       },
 
       _onmousedown(event) {
@@ -978,10 +1042,10 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
       return template(
-        '<div expr18="expr18"><div expr19="expr19" style="overflow-y: auto;"><slot expr20="expr20"></slot></div></div>',
+        '<div expr20="expr20"><div expr21="expr21" style="overflow-y: auto;"><slot expr22="expr22"></slot></div></div>',
         [{
-          'redundantAttribute': 'expr18',
-          'selector': '[expr18]',
+          'redundantAttribute': 'expr20',
+          'selector': '[expr20]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -992,8 +1056,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
             }
           }]
         }, {
-          'redundantAttribute': 'expr19',
-          'selector': '[expr19]',
+          'redundantAttribute': 'expr21',
+          'selector': '[expr21]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -1030,8 +1094,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           }],
 
           'name': 'default',
-          'redundantAttribute': 'expr20',
-          'selector': '[expr20]'
+          'redundantAttribute': 'expr22',
+          'selector': '[expr22]'
         }]
       );
     },

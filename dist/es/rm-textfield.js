@@ -3,8 +3,7 @@ import './tslib.es6-2755a364.js';
 import './ripple-b4246d71.js';
 import 'riot';
 import './rm-icon.js';
-import './pointerController-7c4a10f4.js';
-import './rm-button.js';
+import './rm-button-6d1f8151.js';
 import TextfieldContainerComponent from './rm-textfield-container.js';
 
 var TextfieldComponent = {
@@ -66,6 +65,14 @@ var TextfieldComponent = {
         return this.props.clearable != null && this.props.clearable !== false;
     },
 
+    isDisabled() {
+        return this.props.disabled != null && this.props.disabled !== false;
+    },
+
+    isFullWidth() {
+        return this.props.fullWidth != null && this.props.fullWidth !== false;
+    },
+
     clear() {
         this.root.value = "";
         this.update();
@@ -77,7 +84,7 @@ var TextfieldComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<rm-textfield-container expr151="expr151"></rm-textfield-container>', [{
+    return template('<rm-textfield-container expr150="expr150"></rm-textfield-container>', [{
       'type': bindingTypes.TAG,
       'getComponent': getComponent,
 
@@ -87,11 +94,11 @@ var TextfieldComponent = {
 
       'slots': [{
         'id': 'input',
-        'html': '<input expr152="expr152" slot="input"/>',
+        'html': '<input expr151="expr151" slot="input"/>',
 
         'bindings': [{
-          'redundantAttribute': 'expr152',
-          'selector': '[expr152]',
+          'redundantAttribute': 'expr151',
+          'selector': '[expr151]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -132,24 +139,24 @@ var TextfieldComponent = {
             'name': 'disabled',
 
             'evaluate': function(scope) {
-              return scope.props.disabled;
+              return scope.isDisabled();
             }
           }]
         }]
       }, {
         'id': 'leading',
-        'html': '<slot expr153="expr153" name="leading" slot="leading"></slot>',
+        'html': '<slot expr152="expr152" name="leading" slot="leading"></slot>',
 
         'bindings': [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'leading',
-          'redundantAttribute': 'expr153',
-          'selector': '[expr153]'
+          'redundantAttribute': 'expr152',
+          'selector': '[expr152]'
         }]
       }, {
         'id': 'trailing',
-        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr154="expr154" variant="icon" dense></rm-button><slot expr155="expr155" name="trailing"></slot></span>',
+        'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr153="expr153" variant="icon" dense></rm-button><slot expr154="expr154" name="trailing"></slot></span>',
 
         'bindings': [{
           'type': bindingTypes.IF,
@@ -158,8 +165,8 @@ var TextfieldComponent = {
             return scope.isClearable() && scope.root.value;
           },
 
-          'redundantAttribute': 'expr154',
-          'selector': '[expr154]',
+          'redundantAttribute': 'expr153',
+          'selector': '[expr153]',
 
           'template': template(null, [{
             'type': bindingTypes.TAG,
@@ -187,7 +194,7 @@ var TextfieldComponent = {
               'name': 'tabindex',
 
               'evaluate': function(scope) {
-                return scope.props.disabled ? "-1" : null;
+                return scope.isDisabled() ? "-1" : null;
               }
             }]
           }])
@@ -195,8 +202,8 @@ var TextfieldComponent = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'trailing',
-          'redundantAttribute': 'expr155',
-          'selector': '[expr155]'
+          'redundantAttribute': 'expr154',
+          'selector': '[expr154]'
         }]
       }],
 
@@ -219,14 +226,14 @@ var TextfieldComponent = {
         'name': 'full-width',
 
         'evaluate': function(scope) {
-          return scope.props.fullWidth;
+          return scope.isFullWidth();
         }
       }, {
         'type': expressionTypes.ATTRIBUTE,
         'name': 'disabled',
 
         'evaluate': function(scope) {
-          return scope.props.disabled;
+          return scope.isDisabled();
         }
       }, {
         'type': expressionTypes.ATTRIBUTE,
@@ -244,8 +251,8 @@ var TextfieldComponent = {
         }
       }],
 
-      'redundantAttribute': 'expr151',
-      'selector': '[expr151]'
+      'redundantAttribute': 'expr150',
+      'selector': '[expr150]'
     }]);
   },
 
