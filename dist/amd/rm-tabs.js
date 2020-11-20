@@ -87,24 +87,24 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr35="expr35"></div>', [{
+        return template('<div expr34="expr34"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr35',
-          'selector': '[expr35]',
+          'redundantAttribute': 'expr34',
+          'selector': '[expr34]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr36="expr36" ref="tab"></div></div><div expr38="expr38" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr35="expr35" ref="tab"></div></div><div expr37="expr37" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr37="expr37" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr36="expr36" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -121,8 +121,8 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr37',
-                'selector': '[expr37]',
+                'redundantAttribute': 'expr36',
+                'selector': '[expr36]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -134,8 +134,8 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
                 }]
               }]),
 
-              'redundantAttribute': 'expr36',
-              'selector': '[expr36]',
+              'redundantAttribute': 'expr35',
+              'selector': '[expr35]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -143,8 +143,8 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr38',
-              'selector': '[expr38]',
+              'redundantAttribute': 'expr37',
+              'selector': '[expr37]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,

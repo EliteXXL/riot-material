@@ -1,4 +1,4 @@
-define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9283330e', './tslib.es6-3a2117de', './ripple-c2731ee9', 'riot', './rm-icon', './rm-button-ab367e31', './rm-menu', './rm-textfield-container'], function (styleInject_es, mdc_elevation, elevation, tslib_es6, ripple, riot, rmIcon, rmButton, rmMenu, rmTextfieldContainer) { 'use strict';
+define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9283330e', './tslib.es6-3a2117de', './ripple-c2731ee9', 'riot', './rm-icon', './rm-button-94803f6b', './rm-menu', './rm-textfield-container'], function (styleInject_es, mdc_elevation, elevation, tslib_es6, ripple, riot, rmIcon, rmButton, rmMenu, rmTextfieldContainer) { 'use strict';
 
     const blockedInputs = [];
     window.addEventListener("change", event => {
@@ -269,7 +269,7 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr26="expr26" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr28="expr28"></rm-textfield-container>',
+          '<rm-menu expr25="expr25" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr27="expr27"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -280,14 +280,14 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr27="expr27"></slot>',
+              'html': '<slot expr26="expr26"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr27',
-                'selector': '[expr27]'
+                'redundantAttribute': 'expr26',
+                'selector': '[expr26]'
               }]
             }],
 
@@ -321,8 +321,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }
             }],
 
-            'redundantAttribute': 'expr26',
-            'selector': '[expr26]'
+            'redundantAttribute': 'expr25',
+            'selector': '[expr25]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -333,11 +333,11 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr29="expr29" class="rm-select--input"/><div expr30="expr30" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr28="expr28" class="rm-select--input"/><div expr29="expr29" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr29',
-                'selector': '[expr29]',
+                'redundantAttribute': 'expr28',
+                'selector': '[expr28]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -376,8 +376,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr30',
-                'selector': '[expr30]',
+                'redundantAttribute': 'expr29',
+                'selector': '[expr29]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -390,18 +390,18 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr31="expr31" name="leading" slot="leading"></slot>',
+              'html': '<slot expr30="expr30" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr31',
-                'selector': '[expr31]'
+                'redundantAttribute': 'expr30',
+                'selector': '[expr30]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr32="expr32" variant="icon" class="rm-select--clear" dense></rm-button><slot expr33="expr33" name="trailing"></slot><rm-button expr34="expr34" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr31="expr31" variant="icon" class="rm-select--clear" dense></rm-button><slot expr32="expr32" name="trailing"></slot><rm-button expr33="expr33" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -410,8 +410,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr32',
-                'selector': '[expr32]',
+                'redundantAttribute': 'expr31',
+                'selector': '[expr31]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -447,8 +447,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr33',
-                'selector': '[expr33]'
+                'redundantAttribute': 'expr32',
+                'selector': '[expr32]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -475,8 +475,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
                   }
                 }],
 
-                'redundantAttribute': 'expr34',
-                'selector': '[expr34]'
+                'redundantAttribute': 'expr33',
+                'selector': '[expr33]'
               }]
             }],
 
@@ -517,8 +517,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
               }
             }],
 
-            'redundantAttribute': 'expr28',
-            'selector': '[expr28]'
+            'redundantAttribute': 'expr27',
+            'selector': '[expr27]'
           }]
         );
       },

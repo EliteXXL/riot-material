@@ -1042,10 +1042,10 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
 
     'template': function(template, expressionTypes, bindingTypes, getComponent) {
       return template(
-        '<div expr17="expr17"><div expr18="expr18" style="overflow-y: auto;"><slot expr19="expr19"></slot></div></div>',
+        '<div expr22="expr22"><div expr23="expr23" style="overflow-y: auto;"><slot expr24="expr24"></slot></div></div>',
         [{
-          'redundantAttribute': 'expr17',
-          'selector': '[expr17]',
+          'redundantAttribute': 'expr22',
+          'selector': '[expr22]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -1056,8 +1056,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
             }
           }]
         }, {
-          'redundantAttribute': 'expr18',
-          'selector': '[expr18]',
+          'redundantAttribute': 'expr23',
+          'selector': '[expr23]',
 
           'expressions': [{
             'type': expressionTypes.EVENT,
@@ -1094,8 +1094,8 @@ define(['./style-inject.es-dcc58f81', './mdc.elevation-d362346e', './elevation-9
           }],
 
           'name': 'default',
-          'redundantAttribute': 'expr19',
-          'selector': '[expr19]'
+          'redundantAttribute': 'expr24',
+          'selector': '[expr24]'
         }]
       );
     },

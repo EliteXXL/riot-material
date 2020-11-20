@@ -96,7 +96,7 @@ var ButtonComponent = {
             if (!rippleKeyMatch) {
                 return;
             }
-            const rippleKey = rippleKeyMatch[1];
+            let rippleKey = rippleKeyMatch[1];
             rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
             const floatValue = parseFloat(value);
             rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;
@@ -228,7 +228,7 @@ var ButtonComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<button expr112="expr112"></button><button expr114="expr114"></button>',
+      '<button expr116="expr116"></button><button expr118="expr118"></button>',
       [{
         'type': bindingTypes.IF,
 
@@ -236,10 +236,10 @@ var ButtonComponent = {
           return !scope.isIcon();
         },
 
-        'redundantAttribute': 'expr112',
-        'selector': '[expr112]',
+        'redundantAttribute': 'expr116',
+        'selector': '[expr116]',
 
-        'template': template('<slot expr113="expr113"></slot>', [{
+        'template': template('<slot expr117="expr117"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'style',
@@ -273,8 +273,8 @@ var ButtonComponent = {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr113',
-          'selector': '[expr113]'
+          'redundantAttribute': 'expr117',
+          'selector': '[expr117]'
         }])
       }, {
         'type': bindingTypes.IF,
@@ -283,10 +283,10 @@ var ButtonComponent = {
           return scope.isIcon();
         },
 
-        'redundantAttribute': 'expr114',
-        'selector': '[expr114]',
+        'redundantAttribute': 'expr118',
+        'selector': '[expr118]',
 
-        'template': template('<rm-icon expr115="expr115"></rm-icon>', [{
+        'template': template('<rm-icon expr119="expr119"></rm-icon>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'disabled',
@@ -319,14 +319,14 @@ var ButtonComponent = {
 
           'slots': [{
             'id': 'default',
-            'html': '<slot expr116="expr116"></slot>',
+            'html': '<slot expr120="expr120"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr116',
-              'selector': '[expr116]'
+              'redundantAttribute': 'expr120',
+              'selector': '[expr120]'
             }]
           }],
 
@@ -339,8 +339,8 @@ var ButtonComponent = {
             }
           }],
 
-          'redundantAttribute': 'expr115',
-          'selector': '[expr115]'
+          'redundantAttribute': 'expr119',
+          'selector': '[expr119]'
         }])
       }]
     );

@@ -1048,10 +1048,10 @@ var MenuComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr75="expr75"><div expr76="expr76" style="overflow-y: auto;"><slot expr77="expr77"></slot></div></div>',
+      '<div expr74="expr74"><div expr75="expr75" style="overflow-y: auto;"><slot expr76="expr76"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr75',
-        'selector': '[expr75]',
+        'redundantAttribute': 'expr74',
+        'selector': '[expr74]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1062,8 +1062,8 @@ var MenuComponent = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr76',
-        'selector': '[expr76]',
+        'redundantAttribute': 'expr75',
+        'selector': '[expr75]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1100,8 +1100,8 @@ var MenuComponent = {
         }],
 
         'name': 'default',
-        'redundantAttribute': 'expr77',
-        'selector': '[expr77]'
+        'redundantAttribute': 'expr76',
+        'selector': '[expr76]'
       }]
     );
   },

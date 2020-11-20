@@ -11,7 +11,7 @@ require('./tslib.es6-c0666302.js');
 require('./ripple-a1db6faf.js');
 var riot = require('riot');
 var rmIcon = require('./rm-icon.js');
-var rmButton = require('./rm-button-ed42af30.js');
+var rmButton = require('./rm-button-f4e81c98.js');
 var rmCheckbox = require('./rm-checkbox.js');
 var rmDialog = require('./rm-dialog.js');
 var rmDivider = require('./rm-divider.js');

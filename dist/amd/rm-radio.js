@@ -67,10 +67,10 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr24="expr24" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr25="expr25" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr20="expr20" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr21="expr21" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr24',
-            'selector': '[expr24]',
+            'redundantAttribute': 'expr20',
+            'selector': '[expr20]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -87,8 +87,8 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
               }
             }]
           }, {
-            'redundantAttribute': 'expr25',
-            'selector': '[expr25]',
+            'redundantAttribute': 'expr21',
+            'selector': '[expr21]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,

@@ -5,7 +5,7 @@ require('./tslib.es6-c0666302.js');
 require('./ripple-a1db6faf.js');
 require('riot');
 require('./rm-icon.js');
-require('./rm-button-ed42af30.js');
+require('./rm-button-f4e81c98.js');
 var rmTextfieldContainer = require('./rm-textfield-container.js');
 
 var TextfieldComponent = {

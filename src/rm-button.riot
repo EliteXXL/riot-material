@@ -394,7 +394,7 @@
                     if (!rippleKeyMatch) {
                         return;
                     }
-                    const rippleKey = rippleKeyMatch[1];
+                    let rippleKey = rippleKeyMatch[1];
                     rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
                     const floatValue = parseFloat(value);
                     rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;

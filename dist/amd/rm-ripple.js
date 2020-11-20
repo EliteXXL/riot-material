@@ -21,12 +21,12 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, rippl
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr23="expr23"></slot>', [{
+        return template('<slot expr38="expr38"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr23',
-          'selector': '[expr23]'
+          'redundantAttribute': 'expr38',
+          'selector': '[expr38]'
         }]);
       },
 

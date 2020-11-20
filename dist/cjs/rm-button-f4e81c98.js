@@ -98,7 +98,7 @@ var ButtonComponent = {
             if (!rippleKeyMatch) {
                 return;
             }
-            const rippleKey = rippleKeyMatch[1];
+            let rippleKey = rippleKeyMatch[1];
             rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
             const floatValue = parseFloat(value);
             rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;
@@ -229,17 +229,17 @@ var ButtonComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr57="expr57"></button><button expr59="expr59"></button>', [{
+    return template('<button expr69="expr69"></button><button expr71="expr71"></button>', [{
       'type': bindingTypes.IF,
 
       'evaluate': function(scope) {
         return !scope.isIcon();
       },
 
-      'redundantAttribute': 'expr57',
-      'selector': '[expr57]',
+      'redundantAttribute': 'expr69',
+      'selector': '[expr69]',
 
-      'template': template('<slot expr58="expr58"></slot>', [{
+      'template': template('<slot expr70="expr70"></slot>', [{
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
           'name': 'style',
@@ -273,8 +273,8 @@ var ButtonComponent = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr58',
-        'selector': '[expr58]'
+        'redundantAttribute': 'expr70',
+        'selector': '[expr70]'
       }])
     }, {
       'type': bindingTypes.IF,
@@ -283,10 +283,10 @@ var ButtonComponent = {
         return scope.isIcon();
       },
 
-      'redundantAttribute': 'expr59',
-      'selector': '[expr59]',
+      'redundantAttribute': 'expr71',
+      'selector': '[expr71]',
 
-      'template': template('<rm-icon expr60="expr60"></rm-icon>', [{
+      'template': template('<rm-icon expr72="expr72"></rm-icon>', [{
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
           'name': 'disabled',
@@ -319,14 +319,14 @@ var ButtonComponent = {
 
         'slots': [{
           'id': 'default',
-          'html': '<slot expr61="expr61"></slot>',
+          'html': '<slot expr73="expr73"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr61',
-            'selector': '[expr61]'
+            'redundantAttribute': 'expr73',
+            'selector': '[expr73]'
           }]
         }],
 
@@ -339,8 +339,8 @@ var ButtonComponent = {
           }
         }],
 
-        'redundantAttribute': 'expr60',
-        'selector': '[expr60]'
+        'redundantAttribute': 'expr72',
+        'selector': '[expr72]'
       }])
     }]);
   },

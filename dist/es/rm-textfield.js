@@ -3,7 +3,7 @@ import './tslib.es6-2755a364.js';
 import './ripple-256651ea.js';
 import 'riot';
 import './rm-icon.js';
-import './rm-button-5696705e.js';
+import './rm-button-34a0445a.js';
 import TextfieldContainerComponent from './rm-textfield-container.js';
 
 var TextfieldComponent = {
