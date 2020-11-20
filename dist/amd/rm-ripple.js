@@ -1,4 +1,4 @@
-define(['./tslib.es6-3a2117de', './ripple-9ef33106'], function (tslib_es6, ripple) { 'use strict';
+define(['./tslib.es6-3a2117de', './ripple-c2731ee9'], function (tslib_es6, ripple) { 'use strict';
 
     var RippleComponent = {
       'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
@@ -21,12 +21,12 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106'], function (tslib_es6, rippl
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr35="expr35"></slot>', [{
+        return template('<slot expr23="expr23"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr35',
-          'selector': '[expr35]'
+          'redundantAttribute': 'expr23',
+          'selector': '[expr23]'
         }]);
       },
 

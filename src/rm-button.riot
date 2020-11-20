@@ -380,8 +380,31 @@
         import { pointerController } from "./pointerController";
 
         export default {
+            _updateRipple() {
+                const button = this.root.querySelector("button");
+                const rippleOptions = this.isIcon() ? { centered: true } : {};
+                if (!this.isRaised() && !this.isUnelevated()) {
+                    rippleOptions.highlight = true;
+                }
+                rippleOptions.color = "currentColor";
+                rippleOptions.stopRippling = true;
+                Object.entries(this.props).forEach(entry => {
+                    const [key, value] = entry;
+                    const rippleKeyMatch = key.match(/ripple([A-Z]\w+)/);
+                    if (!rippleKeyMatch) {
+                        return;
+                    }
+                    const rippleKey = rippleKeyMatch[1];
+                    rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
+                    const floatValue = parseFloat(value);
+                    rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;
+                });
+                rippleOptions.detectLabel = false;
+                rippleOptions.disabled = this.isDisabled();
+                return ripple(button, rippleOptions);
+            },
             onMounted() {
-                let button = this.root.querySelector("button");
+                const button = this.root.querySelector("button");
                 button.addEventListener("pointerdown", event => {
                     if (this.state.pressed) {
                         return;
@@ -402,25 +425,7 @@
                     button.classList.add("mdc-elevation-transition");
                     button.classList.add("mdc-elevation--z2");
                 }
-                let rippleOptions = this.isIcon() ? { centered: true } : {};
-                if (!this.isRaised() && !this.isUnelevated()) {
-                    rippleOptions.highlight = true;
-                }
-                rippleOptions.color = "currentColor";
-                rippleOptions.stopRippling = true;
-                Object.entries(this.props).forEach(entry => {
-                    let [key, value] = entry;
-                    let rippleKeyMatch = key.match(/ripple([A-Z]\w+)/);
-                    if (!rippleKeyMatch) {
-                        return;
-                    }
-                    let rippleKey = rippleKeyMatch[1];
-                    rippleKey = rippleKey[0].toLowerCase() + rippleKey.slice(1);
-                    let floatValue = parseFloat(value);
-                    rippleOptions[rippleKey] = isNaN(floatValue) ? value != null && value !== "false" && value !== false : floatValue;
-                });
-                rippleOptions.detectLabel = false;
-                let rippleObj = ripple(button, rippleOptions);
+                let rippleObj = this._updateRipple();
                 let shouldBeClick = false;
                 button.addEventListener("keydown", event => {
                     if (event.keyCode === 13) {
@@ -478,6 +483,7 @@
                     // button.classList.remove("mdc-elevation--z"+ (this.state.pressed ? 8: 2));
                     // button.classList.remove("mdc-elevation--z"+ (this.state.pressed ? 2: 8));
                 }
+                this._updateRipple();
             },
             isText() {
                 return this.props.variant || this.props.variant === "text";

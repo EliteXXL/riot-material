@@ -1,7 +1,7 @@
-define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106', 'riot', './rm-icon', './rm-button-4ce4def9', './rm-textfield-container'], function (styleInject_es, tslib_es6, ripple, riot, rmIcon, rmButton, rmTextfieldContainer) { 'use strict';
+define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-c2731ee9', 'riot', './rm-icon', './rm-button-ab367e31', './rm-textfield-container'], function (styleInject_es, tslib_es6, ripple, riot, rmIcon, rmButton, rmTextfieldContainer) { 'use strict';
 
     var TextfieldComponent = {
-      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
+      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; }`,
 
       'exports': {
         _input: null,
@@ -78,7 +78,7 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr51="expr51"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr39="expr39"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -88,11 +88,11 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr52="expr52" slot="input"/>',
+            'html': '<input expr40="expr40" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr52',
-              'selector': '[expr52]',
+              'redundantAttribute': 'expr40',
+              'selector': '[expr40]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -139,18 +139,18 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr53="expr53" name="leading" slot="leading"></slot>',
+            'html': '<slot expr41="expr41" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr53',
-              'selector': '[expr53]'
+              'redundantAttribute': 'expr41',
+              'selector': '[expr41]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr54="expr54" variant="icon" dense></rm-button><slot expr55="expr55" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr42="expr42" variant="icon" dense></rm-button><slot expr43="expr43" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -159,8 +159,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr54',
-              'selector': '[expr54]',
+              'redundantAttribute': 'expr42',
+              'selector': '[expr42]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -196,8 +196,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr55',
-              'selector': '[expr55]'
+              'redundantAttribute': 'expr43',
+              'selector': '[expr43]'
             }]
           }],
 
@@ -245,8 +245,8 @@ define(['./style-inject.es-dcc58f81', './tslib.es6-3a2117de', './ripple-9ef33106
             }
           }],
 
-          'redundantAttribute': 'expr51',
-          'selector': '[expr51]'
+          'redundantAttribute': 'expr39',
+          'selector': '[expr39]'
         }]);
       },
 

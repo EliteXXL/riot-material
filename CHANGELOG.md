@@ -18,8 +18,17 @@ All notable changes to this project will be documented in this file.
 - return an id from `pointerController` for any listener
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
+- ripple mouse enter istant option
 
-## [1.2.8] - 2020-11-18
+## [1.2.10] - 2020-11-20
+### Added
+### Changed
+- fix `rm-button[disable]` having mouse enter ripple
+- fix color rm-textfield
+- set more duration on ripple
+- fix color of button of tabbed pages
+
+## [1.2.9] - 2020-11-18
 ### Added
 - `rm-textfield`.`isFullWidth()`
 - `rm-textfield`.`isDisabled()`

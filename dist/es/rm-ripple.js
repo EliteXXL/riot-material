@@ -1,5 +1,5 @@
 import './tslib.es6-2755a364.js';
-import { r as ripple } from './ripple-b4246d71.js';
+import { r as ripple } from './ripple-256651ea.js';
 
 var RippleComponent = {
   'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
@@ -22,12 +22,12 @@ var RippleComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr127="expr127"></slot>', [{
+    return template('<slot expr131="expr131"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr127',
-      'selector': '[expr127]'
+      'redundantAttribute': 'expr131',
+      'selector': '[expr131]'
     }]);
   },
 

@@ -122,10 +122,10 @@ var DialogComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div ref="aligner"></div><div expr120="expr120" class="mdc-elevation--z24" ref="container"><div expr121="expr121" ref="title"><slot expr122="expr122" name="title"></slot></div><div expr123="expr123" ref="content"><slot expr124="expr124" name="content"></slot></div><div expr125="expr125" ref="actions"><slot expr126="expr126" name="actions"></slot></div></div>',
+      '<div ref="aligner"></div><div expr122="expr122" class="mdc-elevation--z24" ref="container"><div expr123="expr123" ref="title"><slot expr124="expr124" name="title"></slot></div><div expr125="expr125" ref="content"><slot expr126="expr126" name="content"></slot></div><div expr127="expr127" ref="actions"><slot expr128="expr128" name="actions"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr120',
-        'selector': '[expr120]',
+        'redundantAttribute': 'expr122',
+        'selector': '[expr122]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -135,24 +135,6 @@ var DialogComponent = {
             return scope._oncontainerclick;
           }
         }]
-      }, {
-        'redundantAttribute': 'expr121',
-        'selector': '[expr121]',
-
-        'expressions': [{
-          'type': expressionTypes.ATTRIBUTE,
-          'name': 'class',
-
-          'evaluate': function(scope) {
-            return ['rm-', scope.getSurface(), '-surface'].join('');
-          }
-        }]
-      }, {
-        'type': bindingTypes.SLOT,
-        'attributes': [],
-        'name': 'title',
-        'redundantAttribute': 'expr122',
-        'selector': '[expr122]'
       }, {
         'redundantAttribute': 'expr123',
         'selector': '[expr123]',
@@ -168,7 +150,7 @@ var DialogComponent = {
       }, {
         'type': bindingTypes.SLOT,
         'attributes': [],
-        'name': 'content',
+        'name': 'title',
         'redundantAttribute': 'expr124',
         'selector': '[expr124]'
       }, {
@@ -186,9 +168,27 @@ var DialogComponent = {
       }, {
         'type': bindingTypes.SLOT,
         'attributes': [],
-        'name': 'actions',
+        'name': 'content',
         'redundantAttribute': 'expr126',
         'selector': '[expr126]'
+      }, {
+        'redundantAttribute': 'expr127',
+        'selector': '[expr127]',
+
+        'expressions': [{
+          'type': expressionTypes.ATTRIBUTE,
+          'name': 'class',
+
+          'evaluate': function(scope) {
+            return ['rm-', scope.getSurface(), '-surface'].join('');
+          }
+        }]
+      }, {
+        'type': bindingTypes.SLOT,
+        'attributes': [],
+        'name': 'actions',
+        'redundantAttribute': 'expr128',
+        'selector': '[expr128]'
       }]
     );
   },

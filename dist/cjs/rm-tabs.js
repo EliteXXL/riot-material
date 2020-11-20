@@ -1,7 +1,7 @@
 'use strict';
 
 require('./tslib.es6-c0666302.js');
-var ripple = require('./ripple-486af47f.js');
+var ripple = require('./ripple-a1db6faf.js');
 
 var TabsComponent = {
   'css': `rm-tabs,[is="rm-tabs"]{ display: block; overflow-y: hidden; } rm-tabs > div,[is="rm-tabs"] > div{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; } rm-tabs > div > [ref=indicator],[is="rm-tabs"] > div > [ref=indicator]{ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-tabs > div > [ref=indicator],.rm-black-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-tabs > div > [ref=indicator],.rm-dark-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-tabs > div > [ref=indicator],.rm-light-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-tabs > div > [ref=indicator],.rm-white-surface [is="rm-tabs"] > div > [ref=indicator]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-white, 139, 0, 139)); } rm-tabs > div > [ref=tabs] > [ref=tab],[is="rm-tabs"] > div > [ref=tabs] > [ref=tab]{ display: table-cell; width: 1px; padding: 12px 16px; cursor: pointer; overflow: hidden; position: relative; font-size: 16px; line-height: 20px; } rm-tabs > div > [ref=tabs] > [ref=tab].selected,[is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-black-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-dark-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-light-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-tabs > div > [ref=tabs] > [ref=tab].selected,.rm-white-surface [is="rm-tabs"] > div > [ref=tabs] > [ref=tab].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-white, 139, 0, 139)); }`,
@@ -90,24 +90,24 @@ var TabsComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<div expr103="expr103"></div>', [{
+    return template('<div expr94="expr94"></div>', [{
       'type': bindingTypes.IF,
 
       'evaluate': function(scope) {
         return scope.props.tabs;
       },
 
-      'redundantAttribute': 'expr103',
-      'selector': '[expr103]',
+      'redundantAttribute': 'expr94',
+      'selector': '[expr94]',
 
       'template': template(
-        '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr104="expr104" ref="tab"></div></div><div expr106="expr106" ref="indicator"></div>',
+        '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr95="expr95" ref="tab"></div></div><div expr97="expr97" ref="indicator"></div>',
         [{
           'type': bindingTypes.EACH,
           'getKey': null,
           'condition': null,
 
-          'template': template('<div expr105="expr105" style="display: inline-block;"> </div>', [{
+          'template': template('<div expr96="expr96" style="display: inline-block;"> </div>', [{
             'expressions': [{
               'type': expressionTypes.EVENT,
               'name': 'onclick',
@@ -124,8 +124,8 @@ var TabsComponent = {
               }
             }]
           }, {
-            'redundantAttribute': 'expr105',
-            'selector': '[expr105]',
+            'redundantAttribute': 'expr96',
+            'selector': '[expr96]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -137,8 +137,8 @@ var TabsComponent = {
             }]
           }]),
 
-          'redundantAttribute': 'expr104',
-          'selector': '[expr104]',
+          'redundantAttribute': 'expr95',
+          'selector': '[expr95]',
           'itemName': 'tab',
           'indexName': 'index',
 
@@ -146,8 +146,8 @@ var TabsComponent = {
             return scope.getTabs();
           }
         }, {
-          'redundantAttribute': 'expr106',
-          'selector': '[expr106]',
+          'redundantAttribute': 'expr97',
+          'selector': '[expr97]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,

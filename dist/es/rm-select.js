@@ -2,10 +2,10 @@ import './style-inject.es-1f59c1d0.js';
 import './mdc.elevation-603a7f6f.js';
 import './elevation-1b68733d.js';
 import './tslib.es6-2755a364.js';
-import './ripple-b4246d71.js';
+import './ripple-256651ea.js';
 import 'riot';
 import './rm-icon.js';
-import { p as pointerController, B as ButtonComponent } from './rm-button-6d1f8151.js';
+import { p as pointerController, B as ButtonComponent } from './rm-button-5696705e.js';
 import MenuComponent from './rm-menu.js';
 import TextfieldContainerComponent from './rm-textfield-container.js';
 
@@ -17,7 +17,7 @@ window.addEventListener("change", event => {
 }, true);
 
 var SelectComponent = {
-  'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; opacity: 0; cursor: default; width: 100%; } rm-select[filterable]:not([filterable=false]) .rm-select--input,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--input{ opacity: 1; cursor: text; } rm-select .rm-select--label,[is="rm-select"] .rm-select--label{ position: absolute; top: 0; left: 0; font-size: inherit; line-height: inherit; } rm-select[filterable]:not([filterable=false]) .rm-select--label,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--label{ display: none; }`,
+  'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; opacity: 0; cursor: default; width: 100%; color: currentColor; } rm-select[filterable]:not([filterable=false]) .rm-select--input,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--input{ opacity: 1; cursor: text; } rm-select .rm-select--label,[is="rm-select"] .rm-select--label{ position: absolute; top: 0; left: 0; font-size: inherit; line-height: inherit; } rm-select[filterable]:not([filterable=false]) .rm-select--label,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--label{ display: none; }`,
 
   'exports': {
     state: {
@@ -278,7 +278,7 @@ var SelectComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<rm-menu expr138="expr138" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr140="expr140"></rm-textfield-container>',
+      '<rm-menu expr141="expr141" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr143="expr143"></rm-textfield-container>',
       [{
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -289,14 +289,14 @@ var SelectComponent = {
 
         'slots': [{
           'id': 'default',
-          'html': '<slot expr139="expr139"></slot>',
+          'html': '<slot expr142="expr142"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr139',
-            'selector': '[expr139]'
+            'redundantAttribute': 'expr142',
+            'selector': '[expr142]'
           }]
         }],
 
@@ -330,8 +330,8 @@ var SelectComponent = {
           }
         }],
 
-        'redundantAttribute': 'expr138',
-        'selector': '[expr138]'
+        'redundantAttribute': 'expr141',
+        'selector': '[expr141]'
       }, {
         'type': bindingTypes.TAG,
         'getComponent': getComponent,
@@ -342,11 +342,11 @@ var SelectComponent = {
 
         'slots': [{
           'id': 'input',
-          'html': '<span slot="input"><input expr141="expr141" class="rm-select--input"/><div expr142="expr142" class="rm-select--label"> </div></span>',
+          'html': '<span slot="input"><input expr144="expr144" class="rm-select--input"/><div expr145="expr145" class="rm-select--label"> </div></span>',
 
           'bindings': [{
-            'redundantAttribute': 'expr141',
-            'selector': '[expr141]',
+            'redundantAttribute': 'expr144',
+            'selector': '[expr144]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -385,8 +385,8 @@ var SelectComponent = {
               }
             }]
           }, {
-            'redundantAttribute': 'expr142',
-            'selector': '[expr142]',
+            'redundantAttribute': 'expr145',
+            'selector': '[expr145]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -399,18 +399,18 @@ var SelectComponent = {
           }]
         }, {
           'id': 'leading',
-          'html': '<slot expr143="expr143" name="leading" slot="leading"></slot>',
+          'html': '<slot expr146="expr146" name="leading" slot="leading"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr143',
-            'selector': '[expr143]'
+            'redundantAttribute': 'expr146',
+            'selector': '[expr146]'
           }]
         }, {
           'id': 'trailing',
-          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr144="expr144" variant="icon" class="rm-select--clear" dense></rm-button><slot expr145="expr145" name="trailing"></slot><rm-button expr146="expr146" variant="icon" tabindex="-1" dense></rm-button></span>',
+          'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr147="expr147" variant="icon" class="rm-select--clear" dense></rm-button><slot expr148="expr148" name="trailing"></slot><rm-button expr149="expr149" variant="icon" tabindex="-1" dense></rm-button></span>',
 
           'bindings': [{
             'type': bindingTypes.IF,
@@ -419,8 +419,8 @@ var SelectComponent = {
               return scope.isClearable() && scope.root.value;
             },
 
-            'redundantAttribute': 'expr144',
-            'selector': '[expr144]',
+            'redundantAttribute': 'expr147',
+            'selector': '[expr147]',
 
             'template': template(null, [{
               'type': bindingTypes.TAG,
@@ -456,8 +456,8 @@ var SelectComponent = {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr145',
-            'selector': '[expr145]'
+            'redundantAttribute': 'expr148',
+            'selector': '[expr148]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -484,8 +484,8 @@ var SelectComponent = {
               }
             }],
 
-            'redundantAttribute': 'expr146',
-            'selector': '[expr146]'
+            'redundantAttribute': 'expr149',
+            'selector': '[expr149]'
           }]
         }],
 
@@ -526,8 +526,8 @@ var SelectComponent = {
           }
         }],
 
-        'redundantAttribute': 'expr140',
-        'selector': '[expr140]'
+        'redundantAttribute': 'expr143',
+        'selector': '[expr143]'
       }]
     );
   },

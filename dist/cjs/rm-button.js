@@ -2,10 +2,10 @@
 
 require('./style-inject.es-dcee06b6.js');
 require('./tslib.es6-c0666302.js');
-require('./ripple-486af47f.js');
+require('./ripple-a1db6faf.js');
 require('riot');
 require('./rm-icon.js');
-var rmButton = require('./rm-button-7634aa24.js');
+var rmButton = require('./rm-button-ed42af30.js');
 
 
 

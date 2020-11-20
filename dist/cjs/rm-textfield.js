@@ -2,14 +2,14 @@
 
 require('./style-inject.es-dcee06b6.js');
 require('./tslib.es6-c0666302.js');
-require('./ripple-486af47f.js');
+require('./ripple-a1db6faf.js');
 require('riot');
 require('./rm-icon.js');
-require('./rm-button-7634aa24.js');
+require('./rm-button-ed42af30.js');
 var rmTextfieldContainer = require('./rm-textfield-container.js');
 
 var TextfieldComponent = {
-  'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; }`,
+  'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; }`,
 
   'exports': {
     _input: null,

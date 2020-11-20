@@ -1,7 +1,7 @@
 'use strict';
 
 require('./tslib.es6-c0666302.js');
-var ripple = require('./ripple-486af47f.js');
+var ripple = require('./ripple-a1db6faf.js');
 var riot = require('riot');
 
 var MenuItemComponent = {
@@ -101,9 +101,9 @@ var MenuItemComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr74="expr74"><slot expr75="expr75"></slot></button>', [{
-      'redundantAttribute': 'expr74',
-      'selector': '[expr74]',
+    return template('<button expr70="expr70"><slot expr71="expr71"></slot></button>', [{
+      'redundantAttribute': 'expr70',
+      'selector': '[expr70]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -124,8 +124,8 @@ var MenuItemComponent = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr75',
-      'selector': '[expr75]'
+      'redundantAttribute': 'expr71',
+      'selector': '[expr71]'
     }]);
   },
 

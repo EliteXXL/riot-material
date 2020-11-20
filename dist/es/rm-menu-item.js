@@ -1,5 +1,5 @@
 import './tslib.es6-2755a364.js';
-import { r as ripple } from './ripple-b4246d71.js';
+import { r as ripple } from './ripple-256651ea.js';
 import { __ } from 'riot';
 
 var MenuItemComponent = {
@@ -99,9 +99,9 @@ var MenuItemComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr133="expr133"><slot expr134="expr134"></slot></button>', [{
-      'redundantAttribute': 'expr133',
-      'selector': '[expr133]',
+    return template('<button expr129="expr129"><slot expr130="expr130"></slot></button>', [{
+      'redundantAttribute': 'expr129',
+      'selector': '[expr129]',
 
       'expressions': [{
         'type': expressionTypes.ATTRIBUTE,
@@ -122,8 +122,8 @@ var MenuItemComponent = {
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr134',
-      'selector': '[expr134]'
+      'redundantAttribute': 'expr130',
+      'selector': '[expr130]'
     }]);
   },
 

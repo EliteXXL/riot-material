@@ -1,4 +1,4 @@
-define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es6, ripple, riot) { 'use strict';
+define(['./tslib.es6-3a2117de', './ripple-c2731ee9', 'riot'], function (tslib_es6, ripple, riot) { 'use strict';
 
     var MenuItemComponent = {
       'css': `rm-menu-item,[is="rm-menu-item"]{ display: contents; } rm-menu-item > button,[is="rm-menu-item"] > button{ font-size: 16px; line-height: 1.5em; padding: 0.75em 1em; border: 0; background: none; width: 100%; text-align: left; cursor: pointer; outline: none; display: block; min-height: 3em; } rm-menu-item[title] > button,[is="rm-menu-item"][title] > button{ font-weight: bold; color: rgba(0, 0, 0, 0.9); } rm-menu-item[inset] > button,[is="rm-menu-item"][inset] > button{ padding-left: 4.5em; } rm-menu-item[short-inset] > button,[is="rm-menu-item"][short-inset] > button{ padding-left: 2em; } rm-menu-item[passive] > button,[is="rm-menu-item"][passive] > button{ cursor: initial; }`,
@@ -97,9 +97,9 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr9="expr9"><slot expr10="expr10"></slot></button>', [{
-          'redundantAttribute': 'expr9',
-          'selector': '[expr9]',
+        return template('<button expr21="expr21"><slot expr22="expr22"></slot></button>', [{
+          'redundantAttribute': 'expr21',
+          'selector': '[expr21]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -120,8 +120,8 @@ define(['./tslib.es6-3a2117de', './ripple-9ef33106', 'riot'], function (tslib_es
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr10',
-          'selector': '[expr10]'
+          'redundantAttribute': 'expr22',
+          'selector': '[expr22]'
         }]);
       },
 

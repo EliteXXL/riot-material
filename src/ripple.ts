@@ -46,7 +46,7 @@ document.head.appendChild(document.createElement("style")).innerHTML = `
 .rm-ripple {
     position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;
     /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/
-    transition: opacity cubic-bezier(0.4,0,0.2,1) 150ms, transform cubic-bezier(0.4,0,0.2,1) 150ms;
+    transition: opacity cubic-bezier(0.4,0,0.2,1) 450ms, transform cubic-bezier(0.4,0,0.2,1) 450ms;
 }`;
 
 // the following listeners are needed to determine if the focus
@@ -224,7 +224,7 @@ export function ripple(element: HTMLElement, options?: IRippleOptions): IRipple 
     };
 
     let onMouseEnter: (event: MouseEvent) => void = event => {
-        if (!ripple![RIPPLE_OPTIONS].highlight) {
+        if (!ripple![RIPPLE_OPTIONS].highlight || ripple![RIPPLE_OPTIONS].disabled) {
             return;
         }
 
