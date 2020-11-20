@@ -1,28 +1,11 @@
 'use strict';
 
-var tslib_es6 = require('./tslib.es6-c0666302.js');
+var whatInput = require('./what-input-800533f2.js');
 
 var RIPPLE = Symbol("ripple");
 var RIPPLE_COUNT = Symbol("ripple-count");
 var RIPPLE_OPTIONS = Symbol("ripple_options");
 document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/\n    transition: opacity cubic-bezier(0.4,0,0.2,1) 450ms, transform cubic-bezier(0.4,0,0.2,1) 450ms;\n}";
-var DEVICE;
-(function (DEVICE) {
-    DEVICE[DEVICE["KEYBOARD"] = 0] = "KEYBOARD";
-    DEVICE[DEVICE["POINTER"] = 1] = "POINTER";
-})(DEVICE || (DEVICE = {}));
-var canBeDevice = DEVICE.KEYBOARD;
-function canBePointer() {
-    canBeDevice = DEVICE.POINTER;
-    setTimeout(function () {
-        canBeDevice = DEVICE.KEYBOARD;
-    }, 0);
-}
-window.addEventListener("mousedown", canBePointer, true);
-window.addEventListener("mouseup", canBePointer, true);
-window.addEventListener("touchstart", canBePointer, true);
-window.addEventListener("touchend", canBePointer, true);
-window.addEventListener("touchcancel", canBePointer, true);
 var scaleUpStyle;
 {
     var div = document.createElement("div");
@@ -135,7 +118,7 @@ function ripple(element, options) {
     if (options == null && ripple != null) {
         return ripple;
     }
-    options = tslib_es6.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
+    options = whatInput.__assign({ radius: undefined, unbounded: false, centered: false, disabled: false, highlight: false, instantHighlight: false, unboundedFocus: false, color: "currentColor", focusTarget: undefined, detectLabel: true, usePointerFocus: false, stopRippling: false }, options);
     if (options.detectLabel != null && !options.detectLabel) {
         options.usePointerFocus = false;
     }
@@ -150,7 +133,7 @@ function ripple(element, options) {
     var pointerElement = element;
     var lastFocusTarget = undefined;
     var onFocus = function (event) {
-        if (canBeDevice === DEVICE.POINTER && !ripple[RIPPLE_OPTIONS].usePointerFocus) {
+        if (whatInput.whatInput.ask() !== "keyboard" && !ripple[RIPPLE_OPTIONS].usePointerFocus) {
             return;
         }
         ripple.start(null, null, event);
@@ -177,7 +160,7 @@ function ripple(element, options) {
                 var isMouseEnter = !!(event && event.type === "mouseenter");
                 var options = this[RIPPLE_OPTIONS];
                 if (isFocus) {
-                    type = Ripple.TYPE.QUICK;
+                    type = options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
                 }
                 else if (isMouseEnter) {
                     type = this[RIPPLE_COUNT] > 0 || options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
@@ -248,7 +231,7 @@ function ripple(element, options) {
             },
             set: function (options) {
                 var prevOptions = this[RIPPLE_OPTIONS];
-                options = this[RIPPLE_OPTIONS] = tslib_es6.__assign(tslib_es6.__assign(tslib_es6.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
+                options = this[RIPPLE_OPTIONS] = whatInput.__assign(whatInput.__assign(whatInput.__assign({}, prevOptions), options), { detectLabel: prevOptions.detectLabel });
                 if (options.detectLabel != null && !options.detectLabel) {
                     options.usePointerFocus = false;
                 }

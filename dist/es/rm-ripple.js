@@ -1,5 +1,5 @@
-import './tslib.es6-2755a364.js';
-import { r as ripple } from './ripple-256651ea.js';
+import './what-input-23b77705.js';
+import { r as ripple } from './ripple-d74c9522.js';
 
 var RippleComponent = {
   'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
@@ -22,12 +22,12 @@ var RippleComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr134="expr134"></slot>', [{
+    return template('<slot expr146="expr146"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr134',
-      'selector': '[expr134]'
+      'redundantAttribute': 'expr146',
+      'selector': '[expr146]'
     }]);
   },
 

@@ -18,7 +18,13 @@ All notable changes to this project will be documented in this file.
 - return an id from `pointerController` for any listener
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
-- ripple mouse enter istant option
+
+## [1.2.13] - 2020-11-20
+### Added
+### Changed
+- uses `what-input` to figure what input is used for interaction
+- defaults `ripple.instantHighlight = true` to `rm-button:not([variant=flat]):not([variant=icon])` and button of tabbed pages
+- `rm-button.isText()` is `rm-button.isFlat()`
 
 ## [1.2.10] - 2020-11-20
 ### Added

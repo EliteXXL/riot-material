@@ -383,8 +383,11 @@
             _updateRipple() {
                 const button = this.root.querySelector("button");
                 const rippleOptions = this.isIcon() ? { centered: true } : {};
-                if (!this.isRaised() && !this.isUnelevated()) {
+                if (!this.isRaised()) {
                     rippleOptions.highlight = true;
+                    if (!this.isFlat() && !this.isIcon()) {
+                        rippleOptions.instantHighlight = true;
+                    }
                 }
                 rippleOptions.color = "currentColor";
                 rippleOptions.stopRippling = true;
@@ -485,8 +488,8 @@
                 }
                 this._updateRipple();
             },
-            isText() {
-                return this.props.variant || this.props.variant === "text";
+            isFlat() {
+                return this.props.variant == null || this.props.variant === "flat";
             },
             isRaised() {
                 return this.props.variant != null && this.props.variant === "raised";

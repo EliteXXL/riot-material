@@ -1,6 +1,6 @@
 'use strict';
 
-var ripple = require('./ripple-a1db6faf.js');
+var ripple = require('./ripple-ee7cbc9d.js');
 var riot = require('riot');
 var rmIcon = require('./rm-icon.js');
 
@@ -87,8 +87,11 @@ var ButtonComponent = {
     _updateRipple() {
         const button = this.root.querySelector("button");
         const rippleOptions = this.isIcon() ? { centered: true } : {};
-        if (!this.isRaised() && !this.isUnelevated()) {
+        if (!this.isRaised()) {
             rippleOptions.highlight = true;
+            if (!this.isFlat() && !this.isIcon()) {
+                rippleOptions.instantHighlight = true;
+            }
         }
         rippleOptions.color = "currentColor";
         rippleOptions.stopRippling = true;
@@ -189,8 +192,8 @@ var ButtonComponent = {
         this._updateRipple();
     },
 
-    isText() {
-        return this.props.variant || this.props.variant === "text";
+    isFlat() {
+        return this.props.variant == null || this.props.variant === "flat";
     },
 
     isRaised() {
@@ -229,17 +232,17 @@ var ButtonComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<button expr69="expr69"></button><button expr71="expr71"></button>', [{
+    return template('<button expr68="expr68"></button><button expr70="expr70"></button>', [{
       'type': bindingTypes.IF,
 
       'evaluate': function(scope) {
         return !scope.isIcon();
       },
 
-      'redundantAttribute': 'expr69',
-      'selector': '[expr69]',
+      'redundantAttribute': 'expr68',
+      'selector': '[expr68]',
 
-      'template': template('<slot expr70="expr70"></slot>', [{
+      'template': template('<slot expr69="expr69"></slot>', [{
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
           'name': 'style',
@@ -273,8 +276,8 @@ var ButtonComponent = {
         'type': bindingTypes.SLOT,
         'attributes': [],
         'name': 'default',
-        'redundantAttribute': 'expr70',
-        'selector': '[expr70]'
+        'redundantAttribute': 'expr69',
+        'selector': '[expr69]'
       }])
     }, {
       'type': bindingTypes.IF,
@@ -283,10 +286,10 @@ var ButtonComponent = {
         return scope.isIcon();
       },
 
-      'redundantAttribute': 'expr71',
-      'selector': '[expr71]',
+      'redundantAttribute': 'expr70',
+      'selector': '[expr70]',
 
-      'template': template('<rm-icon expr72="expr72"></rm-icon>', [{
+      'template': template('<rm-icon expr71="expr71"></rm-icon>', [{
         'expressions': [{
           'type': expressionTypes.ATTRIBUTE,
           'name': 'disabled',
@@ -319,14 +322,14 @@ var ButtonComponent = {
 
         'slots': [{
           'id': 'default',
-          'html': '<slot expr73="expr73"></slot>',
+          'html': '<slot expr72="expr72"></slot>',
 
           'bindings': [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr73',
-            'selector': '[expr73]'
+            'redundantAttribute': 'expr72',
+            'selector': '[expr72]'
           }]
         }],
 
@@ -339,8 +342,8 @@ var ButtonComponent = {
           }
         }],
 
-        'redundantAttribute': 'expr72',
-        'selector': '[expr72]'
+        'redundantAttribute': 'expr71',
+        'selector': '[expr71]'
       }])
     }]);
   },

@@ -1,7 +1,7 @@
 'use strict';
 
-require('./tslib.es6-c0666302.js');
-var ripple = require('./ripple-a1db6faf.js');
+require('./what-input-800533f2.js');
+var ripple = require('./ripple-ee7cbc9d.js');
 var riot = require('riot');
 
 var MOTION_CONTROLLER = Symbol("motion-controller");
@@ -247,7 +247,7 @@ var TabbedPagesComponent = {
                     this.setSelectedIndex(this._getUpdatedIndexOf(index));
                 });
                 button.innerText = slot.id;
-                ripple.ripple(button, { detectLabel: false, color: "currentColor" });
+                ripple.ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
             }
         });
 

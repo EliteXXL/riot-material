@@ -1,3 +1,5 @@
+import whatInput from "what-input";
+
 const RIPPLE: unique symbol = Symbol("ripple");
 const RIPPLE_COUNT: unique symbol = Symbol("ripple-count");
 const RIPPLE_OPTIONS: unique symbol = Symbol("ripple_options");
@@ -48,25 +50,6 @@ document.head.appendChild(document.createElement("style")).innerHTML = `
     /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/
     transition: opacity cubic-bezier(0.4,0,0.2,1) 450ms, transform cubic-bezier(0.4,0,0.2,1) 450ms;
 }`;
-
-// the following listeners are needed to determine if the focus
-// on an element was given by the keyboard or a pointer
-enum DEVICE {
-    KEYBOARD = 0,
-    POINTER = 1
-}
-let canBeDevice: DEVICE = DEVICE.KEYBOARD;
-function canBePointer(): void {
-    canBeDevice = DEVICE.POINTER;
-    setTimeout(() => {
-        canBeDevice = DEVICE.KEYBOARD;
-    }, 0);
-}
-window.addEventListener("mousedown", canBePointer, true);
-window.addEventListener("mouseup", canBePointer, true);
-window.addEventListener("touchstart", canBePointer, true);
-window.addEventListener("touchend", canBePointer, true);
-window.addEventListener("touchcancel", canBePointer, true);
 
 let scaleUpStyle: string;
 {
@@ -217,7 +200,7 @@ export function ripple(element: HTMLElement, options?: IRippleOptions): IRipple 
 
     let lastFocusTarget: HTMLElement | undefined = undefined;
     let onFocus: (event: FocusEvent) => void = event => {
-        if (canBeDevice === DEVICE.POINTER && !ripple![RIPPLE_OPTIONS].usePointerFocus) {
+        if (whatInput.ask() !== "keyboard" && !ripple![RIPPLE_OPTIONS].usePointerFocus) {
             return;
         }
         ripple!.start(null, null, event);
@@ -244,7 +227,7 @@ export function ripple(element: HTMLElement, options?: IRippleOptions): IRipple 
             let isMouseEnter: boolean = !!(event && event.type === "mouseenter");
             let options: IRippleOptions = this[RIPPLE_OPTIONS];
             if (isFocus) {
-                type = Ripple.TYPE.QUICK;
+                type = options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
             } else if (isMouseEnter) {
                 type = this[RIPPLE_COUNT] > 0 || options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
             }

@@ -3,8 +3,8 @@
 require('./style-inject.es-dcee06b6.js');
 require('./mdc.elevation-9bc22beb.js');
 var elevation = require('./elevation-2d8ab2df.js');
-require('./tslib.es6-c0666302.js');
-var ripple = require('./ripple-a1db6faf.js');
+require('./what-input-800533f2.js');
+var ripple = require('./ripple-ee7cbc9d.js');
 
 /*!
 * tabbable 5.1.3
@@ -1048,10 +1048,10 @@ var MenuComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr74="expr74"><div expr75="expr75" style="overflow-y: auto;"><slot expr76="expr76"></slot></div></div>',
+      '<div expr77="expr77"><div expr78="expr78" style="overflow-y: auto;"><slot expr79="expr79"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr74',
-        'selector': '[expr74]',
+        'redundantAttribute': 'expr77',
+        'selector': '[expr77]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1062,8 +1062,8 @@ var MenuComponent = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr75',
-        'selector': '[expr75]',
+        'redundantAttribute': 'expr78',
+        'selector': '[expr78]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1100,8 +1100,8 @@ var MenuComponent = {
         }],
 
         'name': 'default',
-        'redundantAttribute': 'expr76',
-        'selector': '[expr76]'
+        'redundantAttribute': 'expr79',
+        'selector': '[expr79]'
       }]
     );
   },

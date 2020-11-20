@@ -260,7 +260,7 @@ define(['exports'], function (exports) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr170="expr170"></slot>', [{
+        return template('<slot expr168="expr168"></slot>', [{
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
             'name': 'class',
@@ -287,8 +287,8 @@ define(['exports'], function (exports) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr170',
-          'selector': '[expr170]'
+          'redundantAttribute': 'expr168',
+          'selector': '[expr168]'
         }]);
       },
 
@@ -573,13 +573,13 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="dimmer"></div><div ref="content"><slot expr177="expr177"></slot></div>',
+          '<div ref="dimmer"></div><div ref="content"><slot expr178="expr178"></slot></div>',
           [{
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr177',
-            'selector': '[expr177]'
+            'redundantAttribute': 'expr178',
+            'selector': '[expr178]'
           }]
         );
       },
@@ -613,27 +613,536 @@ define(['exports'], function (exports) { 'use strict';
         return __assign.apply(this, arguments);
     };
 
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function createCommonjsModule(fn, basedir, module) {
+    	return module = {
+    	  path: basedir,
+    	  exports: {},
+    	  require: function (path, base) {
+          return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
+        }
+    	}, fn(module, module.exports), module.exports;
+    }
+
+    function commonjsRequire () {
+    	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
+    }
+
+    var whatInput = createCommonjsModule(function (module, exports) {
+    /**
+     * what-input - A global utility for tracking the current input method (mouse, keyboard or touch).
+     * @version v5.2.10
+     * @link https://github.com/ten1seven/what-input
+     * @license MIT
+     */
+    (function webpackUniversalModuleDefinition(root, factory) {
+    	module.exports = factory();
+    })(commonjsGlobal, function() {
+    return /******/ (function(modules) { // webpackBootstrap
+    /******/ 	// The module cache
+    /******/ 	var installedModules = {};
+
+    /******/ 	// The require function
+    /******/ 	function __webpack_require__(moduleId) {
+
+    /******/ 		// Check if module is in cache
+    /******/ 		if(installedModules[moduleId])
+    /******/ 			return installedModules[moduleId].exports;
+
+    /******/ 		// Create a new module (and put it into the cache)
+    /******/ 		var module = installedModules[moduleId] = {
+    /******/ 			exports: {},
+    /******/ 			id: moduleId,
+    /******/ 			loaded: false
+    /******/ 		};
+
+    /******/ 		// Execute the module function
+    /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+    /******/ 		// Flag the module as loaded
+    /******/ 		module.loaded = true;
+
+    /******/ 		// Return the exports of the module
+    /******/ 		return module.exports;
+    /******/ 	}
+
+
+    /******/ 	// expose the modules object (__webpack_modules__)
+    /******/ 	__webpack_require__.m = modules;
+
+    /******/ 	// expose the module cache
+    /******/ 	__webpack_require__.c = installedModules;
+
+    /******/ 	// __webpack_public_path__
+    /******/ 	__webpack_require__.p = "";
+
+    /******/ 	// Load entry module and return exports
+    /******/ 	return __webpack_require__(0);
+    /******/ })
+    /************************************************************************/
+    /******/ ([
+    /* 0 */
+    /***/ (function(module, exports) {
+
+    	module.exports = function () {
+    	  /*
+    	   * bail out if there is no document or window
+    	   * (i.e. in a node/non-DOM environment)
+    	   *
+    	   * Return a stubbed API instead
+    	   */
+    	  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    	    return {
+    	      // always return "initial" because no interaction will ever be detected
+    	      ask: function ask() {
+    	        return 'initial';
+    	      },
+
+    	      // always return null
+    	      element: function element() {
+    	        return null;
+    	      },
+
+    	      // no-op
+    	      ignoreKeys: function ignoreKeys() {},
+
+    	      // no-op
+    	      specificKeys: function specificKeys() {},
+
+    	      // no-op
+    	      registerOnChange: function registerOnChange() {},
+
+    	      // no-op
+    	      unRegisterOnChange: function unRegisterOnChange() {}
+    	    };
+    	  }
+
+    	  /*
+    	   * variables
+    	   */
+
+    	  // cache document.documentElement
+    	  var docElem = document.documentElement;
+
+    	  // currently focused dom element
+    	  var currentElement = null;
+
+    	  // last used input type
+    	  var currentInput = 'initial';
+
+    	  // last used input intent
+    	  var currentIntent = currentInput;
+
+    	  // UNIX timestamp of current event
+    	  var currentTimestamp = Date.now();
+
+    	  // check for a `data-whatpersist` attribute on either the `html` or `body` elements, defaults to `true`
+    	  var shouldPersist = 'false';
+
+    	  // form input types
+    	  var formInputs = ['button', 'input', 'select', 'textarea'];
+
+    	  // empty array for holding callback functions
+    	  var functionList = [];
+
+    	  // list of modifier keys commonly used with the mouse and
+    	  // can be safely ignored to prevent false keyboard detection
+    	  var ignoreMap = [16, // shift
+    	  17, // control
+    	  18, // alt
+    	  91, // Windows key / left Apple cmd
+    	  93 // Windows menu / right Apple cmd
+    	  ];
+
+    	  var specificMap = [];
+
+    	  // mapping of events to input types
+    	  var inputMap = {
+    	    keydown: 'keyboard',
+    	    keyup: 'keyboard',
+    	    mousedown: 'mouse',
+    	    mousemove: 'mouse',
+    	    MSPointerDown: 'pointer',
+    	    MSPointerMove: 'pointer',
+    	    pointerdown: 'pointer',
+    	    pointermove: 'pointer',
+    	    touchstart: 'touch',
+    	    touchend: 'touch'
+
+    	    // boolean: true if the page is being scrolled
+    	  };var isScrolling = false;
+
+    	  // store current mouse position
+    	  var mousePos = {
+    	    x: null,
+    	    y: null
+
+    	    // map of IE 10 pointer events
+    	  };var pointerMap = {
+    	    2: 'touch',
+    	    3: 'touch', // treat pen like touch
+    	    4: 'mouse'
+
+    	    // check support for passive event listeners
+    	  };var supportsPassive = false;
+
+    	  try {
+    	    var opts = Object.defineProperty({}, 'passive', {
+    	      get: function get() {
+    	        supportsPassive = true;
+    	      }
+    	    });
+
+    	    window.addEventListener('test', null, opts);
+    	  } catch (e) {}
+    	  // fail silently
+
+
+    	  /*
+    	   * set up
+    	   */
+
+    	  var setUp = function setUp() {
+    	    // add correct mouse wheel event mapping to `inputMap`
+    	    inputMap[detectWheel()] = 'mouse';
+
+    	    addListeners();
+    	  };
+
+    	  /*
+    	   * events
+    	   */
+
+    	  var addListeners = function addListeners() {
+    	    // `pointermove`, `MSPointerMove`, `mousemove` and mouse wheel event binding
+    	    // can only demonstrate potential, but not actual, interaction
+    	    // and are treated separately
+    	    var options = supportsPassive ? { passive: true } : false;
+
+    	    document.addEventListener('DOMContentLoaded', setPersist);
+
+    	    // pointer events (mouse, pen, touch)
+    	    if (window.PointerEvent) {
+    	      window.addEventListener('pointerdown', setInput);
+    	      window.addEventListener('pointermove', setIntent);
+    	    } else if (window.MSPointerEvent) {
+    	      window.addEventListener('MSPointerDown', setInput);
+    	      window.addEventListener('MSPointerMove', setIntent);
+    	    } else {
+    	      // mouse events
+    	      window.addEventListener('mousedown', setInput);
+    	      window.addEventListener('mousemove', setIntent);
+
+    	      // touch events
+    	      if ('ontouchstart' in window) {
+    	        window.addEventListener('touchstart', setInput, options);
+    	        window.addEventListener('touchend', setInput);
+    	      }
+    	    }
+
+    	    // mouse wheel
+    	    window.addEventListener(detectWheel(), setIntent, options);
+
+    	    // keyboard events
+    	    window.addEventListener('keydown', setInput);
+    	    window.addEventListener('keyup', setInput);
+
+    	    // focus events
+    	    window.addEventListener('focusin', setElement);
+    	    window.addEventListener('focusout', clearElement);
+    	  };
+
+    	  // checks if input persistence should happen and
+    	  // get saved state from session storage if true (defaults to `false`)
+    	  var setPersist = function setPersist() {
+    	    shouldPersist = !(docElem.getAttribute('data-whatpersist') || document.body.getAttribute('data-whatpersist') === 'false');
+
+    	    if (shouldPersist) {
+    	      // check for session variables and use if available
+    	      try {
+    	        if (window.sessionStorage.getItem('what-input')) {
+    	          currentInput = window.sessionStorage.getItem('what-input');
+    	        }
+
+    	        if (window.sessionStorage.getItem('what-intent')) {
+    	          currentIntent = window.sessionStorage.getItem('what-intent');
+    	        }
+    	      } catch (e) {
+    	        // fail silently
+    	      }
+    	    }
+
+    	    // always run these so at least `initial` state is set
+    	    doUpdate('input');
+    	    doUpdate('intent');
+    	  };
+
+    	  // checks conditions before updating new input
+    	  var setInput = function setInput(event) {
+    	    var eventKey = event.which;
+    	    var value = inputMap[event.type];
+
+    	    if (value === 'pointer') {
+    	      value = pointerType(event);
+    	    }
+
+    	    var ignoreMatch = !specificMap.length && ignoreMap.indexOf(eventKey) === -1;
+
+    	    var specificMatch = specificMap.length && specificMap.indexOf(eventKey) !== -1;
+
+    	    var shouldUpdate = value === 'keyboard' && eventKey && (ignoreMatch || specificMatch) || value === 'mouse' || value === 'touch';
+
+    	    // prevent touch detection from being overridden by event execution order
+    	    if (validateTouch(value)) {
+    	      shouldUpdate = false;
+    	    }
+
+    	    if (shouldUpdate && currentInput !== value) {
+    	      currentInput = value;
+
+    	      persistInput('input', currentInput);
+    	      doUpdate('input');
+    	    }
+
+    	    if (shouldUpdate && currentIntent !== value) {
+    	      // preserve intent for keyboard interaction with form fields
+    	      var activeElem = document.activeElement;
+    	      var notFormInput = activeElem && activeElem.nodeName && (formInputs.indexOf(activeElem.nodeName.toLowerCase()) === -1 || activeElem.nodeName.toLowerCase() === 'button' && !checkClosest(activeElem, 'form'));
+
+    	      if (notFormInput) {
+    	        currentIntent = value;
+
+    	        persistInput('intent', currentIntent);
+    	        doUpdate('intent');
+    	      }
+    	    }
+    	  };
+
+    	  // updates the doc and `inputTypes` array with new input
+    	  var doUpdate = function doUpdate(which) {
+    	    docElem.setAttribute('data-what' + which, which === 'input' ? currentInput : currentIntent);
+
+    	    fireFunctions(which);
+    	  };
+
+    	  // updates input intent for `mousemove` and `pointermove`
+    	  var setIntent = function setIntent(event) {
+    	    var value = inputMap[event.type];
+
+    	    if (value === 'pointer') {
+    	      value = pointerType(event);
+    	    }
+
+    	    // test to see if `mousemove` happened relative to the screen to detect scrolling versus mousemove
+    	    detectScrolling(event);
+
+    	    // only execute if scrolling isn't happening
+    	    if ((!isScrolling && !validateTouch(value) || isScrolling && event.type === 'wheel' || event.type === 'mousewheel' || event.type === 'DOMMouseScroll') && currentIntent !== value) {
+    	      currentIntent = value;
+
+    	      persistInput('intent', currentIntent);
+    	      doUpdate('intent');
+    	    }
+    	  };
+
+    	  var setElement = function setElement(event) {
+    	    if (!event.target.nodeName) {
+    	      // If nodeName is undefined, clear the element
+    	      // This can happen if click inside an <svg> element.
+    	      clearElement();
+    	      return;
+    	    }
+
+    	    currentElement = event.target.nodeName.toLowerCase();
+    	    docElem.setAttribute('data-whatelement', currentElement);
+
+    	    if (event.target.classList && event.target.classList.length) {
+    	      docElem.setAttribute('data-whatclasses', event.target.classList.toString().replace(' ', ','));
+    	    }
+    	  };
+
+    	  var clearElement = function clearElement() {
+    	    currentElement = null;
+
+    	    docElem.removeAttribute('data-whatelement');
+    	    docElem.removeAttribute('data-whatclasses');
+    	  };
+
+    	  var persistInput = function persistInput(which, value) {
+    	    if (shouldPersist) {
+    	      try {
+    	        window.sessionStorage.setItem('what-' + which, value);
+    	      } catch (e) {
+    	        // fail silently
+    	      }
+    	    }
+    	  };
+
+    	  /*
+    	   * utilities
+    	   */
+
+    	  var pointerType = function pointerType(event) {
+    	    if (typeof event.pointerType === 'number') {
+    	      return pointerMap[event.pointerType];
+    	    } else {
+    	      // treat pen like touch
+    	      return event.pointerType === 'pen' ? 'touch' : event.pointerType;
+    	    }
+    	  };
+
+    	  // prevent touch detection from being overridden by event execution order
+    	  var validateTouch = function validateTouch(value) {
+    	    var timestamp = Date.now();
+
+    	    var touchIsValid = value === 'mouse' && currentInput === 'touch' && timestamp - currentTimestamp < 200;
+
+    	    currentTimestamp = timestamp;
+
+    	    return touchIsValid;
+    	  };
+
+    	  // detect version of mouse wheel event to use
+    	  // via https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+    	  var detectWheel = function detectWheel() {
+    	    var wheelType = null;
+
+    	    // Modern browsers support "wheel"
+    	    if ('onwheel' in document.createElement('div')) {
+    	      wheelType = 'wheel';
+    	    } else {
+    	      // Webkit and IE support at least "mousewheel"
+    	      // or assume that remaining browsers are older Firefox
+    	      wheelType = document.onmousewheel !== undefined ? 'mousewheel' : 'DOMMouseScroll';
+    	    }
+
+    	    return wheelType;
+    	  };
+
+    	  // runs callback functions
+    	  var fireFunctions = function fireFunctions(type) {
+    	    for (var i = 0, len = functionList.length; i < len; i++) {
+    	      if (functionList[i].type === type) {
+    	        functionList[i].fn.call(undefined, type === 'input' ? currentInput : currentIntent);
+    	      }
+    	    }
+    	  };
+
+    	  // finds matching element in an object
+    	  var objPos = function objPos(match) {
+    	    for (var i = 0, len = functionList.length; i < len; i++) {
+    	      if (functionList[i].fn === match) {
+    	        return i;
+    	      }
+    	    }
+    	  };
+
+    	  var detectScrolling = function detectScrolling(event) {
+    	    if (mousePos.x !== event.screenX || mousePos.y !== event.screenY) {
+    	      isScrolling = false;
+
+    	      mousePos.x = event.screenX;
+    	      mousePos.y = event.screenY;
+    	    } else {
+    	      isScrolling = true;
+    	    }
+    	  };
+
+    	  // manual version of `closest()`
+    	  var checkClosest = function checkClosest(elem, tag) {
+    	    var ElementPrototype = window.Element.prototype;
+
+    	    if (!ElementPrototype.matches) {
+    	      ElementPrototype.matches = ElementPrototype.msMatchesSelector || ElementPrototype.webkitMatchesSelector;
+    	    }
+
+    	    if (!ElementPrototype.closest) {
+    	      do {
+    	        if (elem.matches(tag)) {
+    	          return elem;
+    	        }
+
+    	        elem = elem.parentElement || elem.parentNode;
+    	      } while (elem !== null && elem.nodeType === 1);
+
+    	      return null;
+    	    } else {
+    	      return elem.closest(tag);
+    	    }
+    	  };
+
+    	  /*
+    	   * init
+    	   */
+
+    	  // don't start script unless browser cuts the mustard
+    	  // (also passes if polyfills are used)
+    	  if ('addEventListener' in window && Array.prototype.indexOf) {
+    	    setUp();
+    	  }
+
+    	  /*
+    	   * api
+    	   */
+
+    	  return {
+    	    // returns string: the current input type
+    	    // opt: 'intent'|'input'
+    	    // 'input' (default): returns the same value as the `data-whatinput` attribute
+    	    // 'intent': includes `data-whatintent` value if it's different than `data-whatinput`
+    	    ask: function ask(opt) {
+    	      return opt === 'intent' ? currentIntent : currentInput;
+    	    },
+
+    	    // returns string: the currently focused element or null
+    	    element: function element() {
+    	      return currentElement;
+    	    },
+
+    	    // overwrites ignored keys with provided array
+    	    ignoreKeys: function ignoreKeys(arr) {
+    	      ignoreMap = arr;
+    	    },
+
+    	    // overwrites specific char keys to update on
+    	    specificKeys: function specificKeys(arr) {
+    	      specificMap = arr;
+    	    },
+
+    	    // attach functions to input and intent "events"
+    	    // funct: function to fire on change
+    	    // eventType: 'input'|'intent'
+    	    registerOnChange: function registerOnChange(fn, eventType) {
+    	      functionList.push({
+    	        fn: fn,
+    	        type: eventType || 'input'
+    	      });
+    	    },
+
+    	    unRegisterOnChange: function unRegisterOnChange(fn) {
+    	      var position = objPos(fn);
+
+    	      if (position || position === 0) {
+    	        functionList.splice(position, 1);
+    	      }
+    	    },
+
+    	    clearStorage: function clearStorage() {
+    	      window.sessionStorage.clear();
+    	    }
+    	  };
+    	}();
+
+    /***/ })
+    /******/ ])
+    });
+    });
+
     var RIPPLE = Symbol("ripple");
     var RIPPLE_COUNT = Symbol("ripple-count");
     var RIPPLE_OPTIONS = Symbol("ripple_options");
     document.head.appendChild(document.createElement("style")).innerHTML = "\n.rm-ripple-container { overflow: hidden; position: relative; }\n.rm-ripple-container--unbounded { overflow: visible; }\n.rm-ripple-container--highlighto.rm-ripple-container--highlighted:not([disabled])::after,\n.rm-ripple-container--highlighto:not([disabled]):hover::after {\n    content: ''; position: absolute;\n    top: 0; right: 0; bottom: 0; left: 0;\n    background: black; background: var(--ripple-color, black); pointer-events: none;\n    border-radius: inherit; opacity: .1;\n}\n.rm-ripple {\n    position: absolute; border-radius: 50%; background: black; background: var(--ripple-color, black); pointer-events: none;\n    /*transition: opacity cubic-bezier(.22,.61,.36,1) 450ms, transform cubic-bezier(.22,.61,.36,1) 400ms;*/\n    transition: opacity cubic-bezier(0.4,0,0.2,1) 450ms, transform cubic-bezier(0.4,0,0.2,1) 450ms;\n}";
-    var DEVICE;
-    (function (DEVICE) {
-        DEVICE[DEVICE["KEYBOARD"] = 0] = "KEYBOARD";
-        DEVICE[DEVICE["POINTER"] = 1] = "POINTER";
-    })(DEVICE || (DEVICE = {}));
-    var canBeDevice = DEVICE.KEYBOARD;
-    function canBePointer() {
-        canBeDevice = DEVICE.POINTER;
-        setTimeout(function () {
-            canBeDevice = DEVICE.KEYBOARD;
-        }, 0);
-    }
-    window.addEventListener("mousedown", canBePointer, true);
-    window.addEventListener("mouseup", canBePointer, true);
-    window.addEventListener("touchstart", canBePointer, true);
-    window.addEventListener("touchend", canBePointer, true);
-    window.addEventListener("touchcancel", canBePointer, true);
     var scaleUpStyle;
     {
         var div = document.createElement("div");
@@ -761,7 +1270,7 @@ define(['exports'], function (exports) { 'use strict';
         var pointerElement = element;
         var lastFocusTarget = undefined;
         var onFocus = function (event) {
-            if (canBeDevice === DEVICE.POINTER && !ripple[RIPPLE_OPTIONS].usePointerFocus) {
+            if (whatInput.ask() !== "keyboard" && !ripple[RIPPLE_OPTIONS].usePointerFocus) {
                 return;
             }
             ripple.start(null, null, event);
@@ -788,7 +1297,7 @@ define(['exports'], function (exports) { 'use strict';
                     var isMouseEnter = !!(event && event.type === "mouseenter");
                     var options = this[RIPPLE_OPTIONS];
                     if (isFocus) {
-                        type = Ripple.TYPE.QUICK;
+                        type = options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
                     }
                     else if (isMouseEnter) {
                         type = this[RIPPLE_COUNT] > 0 || options.instantHighlight ? Ripple.TYPE.INSTANT : Ripple.TYPE.QUICK;
@@ -3325,8 +3834,11 @@ define(['exports'], function (exports) { 'use strict';
         _updateRipple() {
             const button = this.root.querySelector("button");
             const rippleOptions = this.isIcon() ? { centered: true } : {};
-            if (!this.isRaised() && !this.isUnelevated()) {
+            if (!this.isRaised()) {
                 rippleOptions.highlight = true;
+                if (!this.isFlat() && !this.isIcon()) {
+                    rippleOptions.instantHighlight = true;
+                }
             }
             rippleOptions.color = "currentColor";
             rippleOptions.stopRippling = true;
@@ -3427,8 +3939,8 @@ define(['exports'], function (exports) { 'use strict';
             this._updateRipple();
         },
 
-        isText() {
-            return this.props.variant || this.props.variant === "text";
+        isFlat() {
+            return this.props.variant == null || this.props.variant === "flat";
         },
 
         isRaised() {
@@ -3468,7 +3980,7 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<button expr171="expr171"></button><button expr173="expr173"></button>',
+          '<button expr169="expr169"></button><button expr171="expr171"></button>',
           [{
             'type': bindingTypes.IF,
 
@@ -3476,10 +3988,10 @@ define(['exports'], function (exports) { 'use strict';
               return !scope.isIcon();
             },
 
-            'redundantAttribute': 'expr171',
-            'selector': '[expr171]',
+            'redundantAttribute': 'expr169',
+            'selector': '[expr169]',
 
-            'template': template('<slot expr172="expr172"></slot>', [{
+            'template': template('<slot expr170="expr170"></slot>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'style',
@@ -3513,8 +4025,8 @@ define(['exports'], function (exports) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr172',
-              'selector': '[expr172]'
+              'redundantAttribute': 'expr170',
+              'selector': '[expr170]'
             }])
           }, {
             'type': bindingTypes.IF,
@@ -3523,10 +4035,10 @@ define(['exports'], function (exports) { 'use strict';
               return scope.isIcon();
             },
 
-            'redundantAttribute': 'expr173',
-            'selector': '[expr173]',
+            'redundantAttribute': 'expr171',
+            'selector': '[expr171]',
 
-            'template': template('<rm-icon expr174="expr174"></rm-icon>', [{
+            'template': template('<rm-icon expr172="expr172"></rm-icon>', [{
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
                 'name': 'disabled',
@@ -3559,14 +4071,14 @@ define(['exports'], function (exports) { 'use strict';
 
               'slots': [{
                 'id': 'default',
-                'html': '<slot expr175="expr175"></slot>',
+                'html': '<slot expr173="expr173"></slot>',
 
                 'bindings': [{
                   'type': bindingTypes.SLOT,
                   'attributes': [],
                   'name': 'default',
-                  'redundantAttribute': 'expr175',
-                  'selector': '[expr175]'
+                  'redundantAttribute': 'expr173',
+                  'selector': '[expr173]'
                 }]
               }],
 
@@ -3579,8 +4091,8 @@ define(['exports'], function (exports) { 'use strict';
                 }
               }],
 
-              'redundantAttribute': 'expr174',
-              'selector': '[expr174]'
+              'redundantAttribute': 'expr172',
+              'selector': '[expr172]'
             }])
           }]
         );
@@ -3630,10 +4142,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr168="expr168" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr169="expr169" style="vertical-align: top; display: inline-block;"> </div></label>',
+          '<label><input expr174="expr174" type="checkbox" tabindex="0"/><div ref="box"><div ref="border"></div><div ref="check-box"><div ref="check"><div></div><div></div></div></div></div><div expr175="expr175" style="vertical-align: top; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr168',
-            'selector': '[expr168]',
+            'redundantAttribute': 'expr174',
+            'selector': '[expr174]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3651,8 +4163,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr169',
-            'selector': '[expr169]',
+            'redundantAttribute': 'expr175',
+            'selector': '[expr175]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -3793,10 +4305,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="aligner"></div><div expr178="expr178" class="mdc-elevation--z24" ref="container"><div expr179="expr179" ref="title"><slot expr180="expr180" name="title"></slot></div><div expr181="expr181" ref="content"><slot expr182="expr182" name="content"></slot></div><div expr183="expr183" ref="actions"><slot expr184="expr184" name="actions"></slot></div></div>',
+          '<div ref="aligner"></div><div expr179="expr179" class="mdc-elevation--z24" ref="container"><div expr180="expr180" ref="title"><slot expr181="expr181" name="title"></slot></div><div expr182="expr182" ref="content"><slot expr183="expr183" name="content"></slot></div><div expr184="expr184" ref="actions"><slot expr185="expr185" name="actions"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr178',
-            'selector': '[expr178]',
+            'redundantAttribute': 'expr179',
+            'selector': '[expr179]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -3807,8 +4319,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr179',
-            'selector': '[expr179]',
+            'redundantAttribute': 'expr180',
+            'selector': '[expr180]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3822,11 +4334,11 @@ define(['exports'], function (exports) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'title',
-            'redundantAttribute': 'expr180',
-            'selector': '[expr180]'
-          }, {
             'redundantAttribute': 'expr181',
-            'selector': '[expr181]',
+            'selector': '[expr181]'
+          }, {
+            'redundantAttribute': 'expr182',
+            'selector': '[expr182]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3840,11 +4352,11 @@ define(['exports'], function (exports) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'content',
-            'redundantAttribute': 'expr182',
-            'selector': '[expr182]'
-          }, {
             'redundantAttribute': 'expr183',
-            'selector': '[expr183]',
+            'selector': '[expr183]'
+          }, {
+            'redundantAttribute': 'expr184',
+            'selector': '[expr184]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -3858,8 +4370,8 @@ define(['exports'], function (exports) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'actions',
-            'redundantAttribute': 'expr184',
-            'selector': '[expr184]'
+            'redundantAttribute': 'expr185',
+            'selector': '[expr185]'
           }]
         );
       },
@@ -4916,10 +5428,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div expr187="expr187"><div expr188="expr188" style="overflow-y: auto;"><slot expr189="expr189"></slot></div></div>',
+          '<div expr188="expr188"><div expr189="expr189" style="overflow-y: auto;"><slot expr190="expr190"></slot></div></div>',
           [{
-            'redundantAttribute': 'expr187',
-            'selector': '[expr187]',
+            'redundantAttribute': 'expr188',
+            'selector': '[expr188]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -4930,8 +5442,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr188',
-            'selector': '[expr188]',
+            'redundantAttribute': 'expr189',
+            'selector': '[expr189]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -4968,8 +5480,8 @@ define(['exports'], function (exports) { 'use strict';
             }],
 
             'name': 'default',
-            'redundantAttribute': 'expr189',
-            'selector': '[expr189]'
+            'redundantAttribute': 'expr190',
+            'selector': '[expr190]'
           }]
         );
       },
@@ -5074,9 +5586,9 @@ define(['exports'], function (exports) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr185="expr185"><slot expr186="expr186"></slot></button>', [{
-          'redundantAttribute': 'expr185',
-          'selector': '[expr185]',
+        return template('<button expr186="expr186"><slot expr187="expr187"></slot></button>', [{
+          'redundantAttribute': 'expr186',
+          'selector': '[expr186]',
 
           'expressions': [{
             'type': expressionTypes.ATTRIBUTE,
@@ -5097,8 +5609,8 @@ define(['exports'], function (exports) { 'use strict';
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr186',
-          'selector': '[expr186]'
+          'redundantAttribute': 'expr187',
+          'selector': '[expr187]'
         }]);
       },
 
@@ -5172,10 +5684,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label><input expr190="expr190" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr191="expr191" style="vertical-align: middle; display: inline-block;"> </div></label>',
+          '<label><input expr200="expr200" type="radio" tabindex="0"/><div ref="circle"><div ref="border"></div><div ref="radio-circle"></div></div><div expr201="expr201" style="vertical-align: middle; display: inline-block;"> </div></label>',
           [{
-            'redundantAttribute': 'expr190',
-            'selector': '[expr190]',
+            'redundantAttribute': 'expr200',
+            'selector': '[expr200]',
 
             'expressions': [{
               'type': expressionTypes.VALUE,
@@ -5192,8 +5704,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr191',
-            'selector': '[expr191]',
+            'redundantAttribute': 'expr201',
+            'selector': '[expr201]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -5231,12 +5743,12 @@ define(['exports'], function (exports) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<slot expr192="expr192"></slot>', [{
+        return template('<slot expr177="expr177"></slot>', [{
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr192',
-          'selector': '[expr192]'
+          'redundantAttribute': 'expr177',
+          'selector': '[expr177]'
         }]);
       },
 
@@ -5333,10 +5845,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<label expr206="expr206" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr207="expr207" name="leading"></slot></div><div expr208="expr208" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr209="expr209" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr210="expr210"></template><slot expr212="expr212" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr213="expr213" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr214="expr214" style="font-size: .75em;"> </div></div>',
+          '<label expr210="expr210" class="rm-textfield-container--main"><div class="rm-textfield-container--border"></div><div class="rm-textfield-container--leading"><slot expr211="expr211" name="leading"></slot></div><div expr212="expr212" class="rm-textfield-container--border-notch"> </div><div class="rm-textfield-container--container"><div class="rm-textfield-container--content"><div expr213="expr213" class="rm-textfield-container--label"> </div><div style="position: relative; user-select: auto;"><template expr214="expr214"></template><slot expr216="expr216" name="input"></slot></div></div></div><div class="rm-textfield-container--trailing"><slot expr217="expr217" name="trailing"></slot></div><div class="rm-textfield-container--basic-underline"></div><div class="rm-textfield-container--underline"></div><div class="rm-textfield-container--disabled-block"></div></label><div style="height: 1em; line-height: 1em; margin-bottom: -1em; pointer-events: none;"><div expr218="expr218" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr206',
-            'selector': '[expr206]',
+            'redundantAttribute': 'expr210',
+            'selector': '[expr210]',
 
             'expressions': [{
               'type': expressionTypes.EVENT,
@@ -5350,11 +5862,11 @@ define(['exports'], function (exports) { 'use strict';
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'leading',
-            'redundantAttribute': 'expr207',
-            'selector': '[expr207]'
+            'redundantAttribute': 'expr211',
+            'selector': '[expr211]'
           }, {
-            'redundantAttribute': 'expr208',
-            'selector': '[expr208]',
+            'redundantAttribute': 'expr212',
+            'selector': '[expr212]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -5365,8 +5877,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr209',
-            'selector': '[expr209]',
+            'redundantAttribute': 'expr213',
+            'selector': '[expr213]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -5383,31 +5895,31 @@ define(['exports'], function (exports) { 'use strict';
               return !scope._hasInputSlot();
             },
 
-            'redundantAttribute': 'expr210',
-            'selector': '[expr210]',
+            'redundantAttribute': 'expr214',
+            'selector': '[expr214]',
 
-            'template': template('<slot expr211="expr211"></slot>', [{
+            'template': template('<slot expr215="expr215"></slot>', [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'default',
-              'redundantAttribute': 'expr211',
-              'selector': '[expr211]'
+              'redundantAttribute': 'expr215',
+              'selector': '[expr215]'
             }])
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'input',
-            'redundantAttribute': 'expr212',
-            'selector': '[expr212]'
+            'redundantAttribute': 'expr216',
+            'selector': '[expr216]'
           }, {
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'trailing',
-            'redundantAttribute': 'expr213',
-            'selector': '[expr213]'
+            'redundantAttribute': 'expr217',
+            'selector': '[expr217]'
           }, {
-            'redundantAttribute': 'expr214',
-            'selector': '[expr214]',
+            'redundantAttribute': 'expr218',
+            'selector': '[expr218]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -5693,7 +6205,7 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<rm-menu expr197="expr197" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr199="expr199"></rm-textfield-container>',
+          '<rm-menu expr191="expr191" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr193="expr193"></rm-textfield-container>',
           [{
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -5704,14 +6216,14 @@ define(['exports'], function (exports) { 'use strict';
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr198="expr198"></slot>',
+              'html': '<slot expr192="expr192"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr198',
-                'selector': '[expr198]'
+                'redundantAttribute': 'expr192',
+                'selector': '[expr192]'
               }]
             }],
 
@@ -5745,8 +6257,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr197',
-            'selector': '[expr197]'
+            'redundantAttribute': 'expr191',
+            'selector': '[expr191]'
           }, {
             'type': bindingTypes.TAG,
             'getComponent': getComponent,
@@ -5757,11 +6269,11 @@ define(['exports'], function (exports) { 'use strict';
 
             'slots': [{
               'id': 'input',
-              'html': '<span slot="input"><input expr200="expr200" class="rm-select--input"/><div expr201="expr201" class="rm-select--label"> </div></span>',
+              'html': '<span slot="input"><input expr194="expr194" class="rm-select--input"/><div expr195="expr195" class="rm-select--label"> </div></span>',
 
               'bindings': [{
-                'redundantAttribute': 'expr200',
-                'selector': '[expr200]',
+                'redundantAttribute': 'expr194',
+                'selector': '[expr194]',
 
                 'expressions': [{
                   'type': expressionTypes.EVENT,
@@ -5800,8 +6312,8 @@ define(['exports'], function (exports) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr201',
-                'selector': '[expr201]',
+                'redundantAttribute': 'expr195',
+                'selector': '[expr195]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -5814,18 +6326,18 @@ define(['exports'], function (exports) { 'use strict';
               }]
             }, {
               'id': 'leading',
-              'html': '<slot expr202="expr202" name="leading" slot="leading"></slot>',
+              'html': '<slot expr196="expr196" name="leading" slot="leading"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'leading',
-                'redundantAttribute': 'expr202',
-                'selector': '[expr202]'
+                'redundantAttribute': 'expr196',
+                'selector': '[expr196]'
               }]
             }, {
               'id': 'trailing',
-              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr203="expr203" variant="icon" class="rm-select--clear" dense></rm-button><slot expr204="expr204" name="trailing"></slot><rm-button expr205="expr205" variant="icon" tabindex="-1" dense></rm-button></span>',
+              'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr197="expr197" variant="icon" class="rm-select--clear" dense></rm-button><slot expr198="expr198" name="trailing"></slot><rm-button expr199="expr199" variant="icon" tabindex="-1" dense></rm-button></span>',
 
               'bindings': [{
                 'type': bindingTypes.IF,
@@ -5834,8 +6346,8 @@ define(['exports'], function (exports) { 'use strict';
                   return scope.isClearable() && scope.root.value;
                 },
 
-                'redundantAttribute': 'expr203',
-                'selector': '[expr203]',
+                'redundantAttribute': 'expr197',
+                'selector': '[expr197]',
 
                 'template': template(null, [{
                   'type': bindingTypes.TAG,
@@ -5871,8 +6383,8 @@ define(['exports'], function (exports) { 'use strict';
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'trailing',
-                'redundantAttribute': 'expr204',
-                'selector': '[expr204]'
+                'redundantAttribute': 'expr198',
+                'selector': '[expr198]'
               }, {
                 'type': bindingTypes.TAG,
                 'getComponent': getComponent,
@@ -5899,8 +6411,8 @@ define(['exports'], function (exports) { 'use strict';
                   }
                 }],
 
-                'redundantAttribute': 'expr205',
-                'selector': '[expr205]'
+                'redundantAttribute': 'expr199',
+                'selector': '[expr199]'
               }]
             }],
 
@@ -5941,8 +6453,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }],
 
-            'redundantAttribute': 'expr199',
-            'selector': '[expr199]'
+            'redundantAttribute': 'expr193',
+            'selector': '[expr193]'
           }]
         );
       },
@@ -6193,7 +6705,7 @@ define(['exports'], function (exports) { 'use strict';
                         this.setSelectedIndex(this._getUpdatedIndexOf(index));
                     });
                     button.innerText = slot.id;
-                    ripple(button, { detectLabel: false, color: "currentColor" });
+                    ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
                 }
             });
 
@@ -6484,24 +6996,24 @@ define(['exports'], function (exports) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<div expr193="expr193"></div>', [{
+        return template('<div expr219="expr219"></div>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return scope.props.tabs;
           },
 
-          'redundantAttribute': 'expr193',
-          'selector': '[expr193]',
+          'redundantAttribute': 'expr219',
+          'selector': '[expr219]',
 
           'template': template(
-            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr194="expr194" ref="tab"></div></div><div expr196="expr196" ref="indicator"></div>',
+            '<div style="display: table; width: 100%; text-align: center; white-space: nowrap;" ref="tabs"><div expr220="expr220" ref="tab"></div></div><div expr222="expr222" ref="indicator"></div>',
             [{
               'type': bindingTypes.EACH,
               'getKey': null,
               'condition': null,
 
-              'template': template('<div expr195="expr195" style="display: inline-block;"> </div>', [{
+              'template': template('<div expr221="expr221" style="display: inline-block;"> </div>', [{
                 'expressions': [{
                   'type': expressionTypes.EVENT,
                   'name': 'onclick',
@@ -6518,8 +7030,8 @@ define(['exports'], function (exports) { 'use strict';
                   }
                 }]
               }, {
-                'redundantAttribute': 'expr195',
-                'selector': '[expr195]',
+                'redundantAttribute': 'expr221',
+                'selector': '[expr221]',
 
                 'expressions': [{
                   'type': expressionTypes.TEXT,
@@ -6531,8 +7043,8 @@ define(['exports'], function (exports) { 'use strict';
                 }]
               }]),
 
-              'redundantAttribute': 'expr194',
-              'selector': '[expr194]',
+              'redundantAttribute': 'expr220',
+              'selector': '[expr220]',
               'itemName': 'tab',
               'indexName': 'index',
 
@@ -6540,8 +7052,8 @@ define(['exports'], function (exports) { 'use strict';
                 return scope.getTabs();
               }
             }, {
-              'redundantAttribute': 'expr196',
-              'selector': '[expr196]',
+              'redundantAttribute': 'expr222',
+              'selector': '[expr222]',
 
               'expressions': [{
                 'type': expressionTypes.ATTRIBUTE,
@@ -6668,10 +7180,10 @@ define(['exports'], function (exports) { 'use strict';
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
         return template(
-          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr215="expr215" ref="label"> </div><textarea expr216="expr216"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr217="expr217" style="font-size: .75em;"> </div></div>',
+          '<div ref="outlined-margin-top"></div><div ref="container"><div ref="border"></div><div ref="textarea-container"><div ref="mirror">&nbsp;</div><div expr207="expr207" ref="label"> </div><textarea expr208="expr208"></textarea></div><div ref="basic-underline"></div><div ref="underline"></div></div><div style="height: 1.25em;"><div expr209="expr209" style="font-size: .75em;"> </div></div>',
           [{
-            'redundantAttribute': 'expr215',
-            'selector': '[expr215]',
+            'redundantAttribute': 'expr207',
+            'selector': '[expr207]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -6682,8 +7194,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr216',
-            'selector': '[expr216]',
+            'redundantAttribute': 'expr208',
+            'selector': '[expr208]',
 
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
@@ -6701,8 +7213,8 @@ define(['exports'], function (exports) { 'use strict';
               }
             }]
           }, {
-            'redundantAttribute': 'expr217',
-            'selector': '[expr217]',
+            'redundantAttribute': 'expr209',
+            'selector': '[expr209]',
 
             'expressions': [{
               'type': expressionTypes.TEXT,
@@ -6797,7 +7309,7 @@ define(['exports'], function (exports) { 'use strict';
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<rm-textfield-container expr218="expr218"></rm-textfield-container>', [{
+        return template('<rm-textfield-container expr202="expr202"></rm-textfield-container>', [{
           'type': bindingTypes.TAG,
           'getComponent': getComponent,
 
@@ -6807,11 +7319,11 @@ define(['exports'], function (exports) { 'use strict';
 
           'slots': [{
             'id': 'input',
-            'html': '<input expr219="expr219" slot="input"/>',
+            'html': '<input expr203="expr203" slot="input"/>',
 
             'bindings': [{
-              'redundantAttribute': 'expr219',
-              'selector': '[expr219]',
+              'redundantAttribute': 'expr203',
+              'selector': '[expr203]',
 
               'expressions': [{
                 'type': expressionTypes.EVENT,
@@ -6858,18 +7370,18 @@ define(['exports'], function (exports) { 'use strict';
             }]
           }, {
             'id': 'leading',
-            'html': '<slot expr220="expr220" name="leading" slot="leading"></slot>',
+            'html': '<slot expr204="expr204" name="leading" slot="leading"></slot>',
 
             'bindings': [{
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'leading',
-              'redundantAttribute': 'expr220',
-              'selector': '[expr220]'
+              'redundantAttribute': 'expr204',
+              'selector': '[expr204]'
             }]
           }, {
             'id': 'trailing',
-            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr221="expr221" variant="icon" dense></rm-button><slot expr222="expr222" name="trailing"></slot></span>',
+            'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr205="expr205" variant="icon" dense></rm-button><slot expr206="expr206" name="trailing"></slot></span>',
 
             'bindings': [{
               'type': bindingTypes.IF,
@@ -6878,8 +7390,8 @@ define(['exports'], function (exports) { 'use strict';
                 return scope.isClearable() && scope.root.value;
               },
 
-              'redundantAttribute': 'expr221',
-              'selector': '[expr221]',
+              'redundantAttribute': 'expr205',
+              'selector': '[expr205]',
 
               'template': template(null, [{
                 'type': bindingTypes.TAG,
@@ -6915,8 +7427,8 @@ define(['exports'], function (exports) { 'use strict';
               'type': bindingTypes.SLOT,
               'attributes': [],
               'name': 'trailing',
-              'redundantAttribute': 'expr222',
-              'selector': '[expr222]'
+              'redundantAttribute': 'expr206',
+              'selector': '[expr206]'
             }]
           }],
 
@@ -6964,8 +7476,8 @@ define(['exports'], function (exports) { 'use strict';
             }
           }],
 
-          'redundantAttribute': 'expr218',
-          'selector': '[expr218]'
+          'redundantAttribute': 'expr202',
+          'selector': '[expr202]'
         }]);
       },
 

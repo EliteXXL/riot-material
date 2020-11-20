@@ -1,4 +1,4 @@
-define(['./tslib.es6-3a2117de', './ripple-c2731ee9', 'riot'], function (tslib_es6, ripple, riot) { 'use strict';
+define(['./what-input-bd56bfc1', './ripple-20ec92c7', 'riot'], function (whatInput, ripple, riot) { 'use strict';
 
     var MOTION_CONTROLLER = Symbol("motion-controller");
     function motionController(element) {
@@ -243,7 +243,7 @@ define(['./tslib.es6-3a2117de', './ripple-c2731ee9', 'riot'], function (tslib_es
                         this.setSelectedIndex(this._getUpdatedIndexOf(index));
                     });
                     button.innerText = slot.id;
-                    ripple.ripple(button, { detectLabel: false, color: "currentColor" });
+                    ripple.ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
                 }
             });
 

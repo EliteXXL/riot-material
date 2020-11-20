@@ -1,4 +1,4 @@
-define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports, ripple, riot, rmIcon) { 'use strict';
+define(['exports', './ripple-20ec92c7', 'riot', './rm-icon'], function (exports, ripple, riot, rmIcon) { 'use strict';
 
     var POINTER_CONTROLLER = Symbol("pointer-controller");
     function pointerController(element, callback) {
@@ -83,8 +83,11 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
         _updateRipple() {
             const button = this.root.querySelector("button");
             const rippleOptions = this.isIcon() ? { centered: true } : {};
-            if (!this.isRaised() && !this.isUnelevated()) {
+            if (!this.isRaised()) {
                 rippleOptions.highlight = true;
+                if (!this.isFlat() && !this.isIcon()) {
+                    rippleOptions.instantHighlight = true;
+                }
             }
             rippleOptions.color = "currentColor";
             rippleOptions.stopRippling = true;
@@ -185,8 +188,8 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
             this._updateRipple();
         },
 
-        isText() {
-            return this.props.variant || this.props.variant === "text";
+        isFlat() {
+            return this.props.variant == null || this.props.variant === "flat";
         },
 
         isRaised() {
@@ -225,17 +228,17 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
       },
 
       'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr12="expr12"></button><button expr14="expr14"></button>', [{
+        return template('<button expr17="expr17"></button><button expr19="expr19"></button>', [{
           'type': bindingTypes.IF,
 
           'evaluate': function(scope) {
             return !scope.isIcon();
           },
 
-          'redundantAttribute': 'expr12',
-          'selector': '[expr12]',
+          'redundantAttribute': 'expr17',
+          'selector': '[expr17]',
 
-          'template': template('<slot expr13="expr13"></slot>', [{
+          'template': template('<slot expr18="expr18"></slot>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'style',
@@ -269,8 +272,8 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
             'type': bindingTypes.SLOT,
             'attributes': [],
             'name': 'default',
-            'redundantAttribute': 'expr13',
-            'selector': '[expr13]'
+            'redundantAttribute': 'expr18',
+            'selector': '[expr18]'
           }])
         }, {
           'type': bindingTypes.IF,
@@ -279,10 +282,10 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
             return scope.isIcon();
           },
 
-          'redundantAttribute': 'expr14',
-          'selector': '[expr14]',
+          'redundantAttribute': 'expr19',
+          'selector': '[expr19]',
 
-          'template': template('<rm-icon expr15="expr15"></rm-icon>', [{
+          'template': template('<rm-icon expr20="expr20"></rm-icon>', [{
             'expressions': [{
               'type': expressionTypes.ATTRIBUTE,
               'name': 'disabled',
@@ -315,14 +318,14 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
 
             'slots': [{
               'id': 'default',
-              'html': '<slot expr16="expr16"></slot>',
+              'html': '<slot expr21="expr21"></slot>',
 
               'bindings': [{
                 'type': bindingTypes.SLOT,
                 'attributes': [],
                 'name': 'default',
-                'redundantAttribute': 'expr16',
-                'selector': '[expr16]'
+                'redundantAttribute': 'expr21',
+                'selector': '[expr21]'
               }]
             }],
 
@@ -335,8 +338,8 @@ define(['exports', './ripple-c2731ee9', 'riot', './rm-icon'], function (exports,
               }
             }],
 
-            'redundantAttribute': 'expr15',
-            'selector': '[expr15]'
+            'redundantAttribute': 'expr20',
+            'selector': '[expr20]'
           }])
         }]);
       },

@@ -1,5 +1,5 @@
-import './tslib.es6-2755a364.js';
-import { r as ripple } from './ripple-256651ea.js';
+import './what-input-23b77705.js';
+import { r as ripple } from './ripple-d74c9522.js';
 import { __ } from 'riot';
 
 var MOTION_CONTROLLER = Symbol("motion-controller");
@@ -245,7 +245,7 @@ var TabbedPagesComponent = {
                     this.setSelectedIndex(this._getUpdatedIndexOf(index));
                 });
                 button.innerText = slot.id;
-                ripple(button, { detectLabel: false, color: "currentColor" });
+                ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
             }
         });
 

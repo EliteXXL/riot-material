@@ -1,8 +1,8 @@
 import './style-inject.es-1f59c1d0.js';
 import './mdc.elevation-603a7f6f.js';
 import { a as elevation } from './elevation-1b68733d.js';
-import './tslib.es6-2755a364.js';
-import { i as isRipple, r as ripple } from './ripple-256651ea.js';
+import './what-input-23b77705.js';
+import { i as isRipple, r as ripple } from './ripple-d74c9522.js';
 
 /*!
 * tabbable 5.1.3
@@ -1046,10 +1046,10 @@ var MenuComponent = {
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
     return template(
-      '<div expr144="expr144"><div expr145="expr145" style="overflow-y: auto;"><slot expr146="expr146"></slot></div></div>',
+      '<div expr131="expr131"><div expr132="expr132" style="overflow-y: auto;"><slot expr133="expr133"></slot></div></div>',
       [{
-        'redundantAttribute': 'expr144',
-        'selector': '[expr144]',
+        'redundantAttribute': 'expr131',
+        'selector': '[expr131]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1060,8 +1060,8 @@ var MenuComponent = {
           }
         }]
       }, {
-        'redundantAttribute': 'expr145',
-        'selector': '[expr145]',
+        'redundantAttribute': 'expr132',
+        'selector': '[expr132]',
 
         'expressions': [{
           'type': expressionTypes.EVENT,
@@ -1098,8 +1098,8 @@ var MenuComponent = {
         }],
 
         'name': 'default',
-        'redundantAttribute': 'expr146',
-        'selector': '[expr146]'
+        'redundantAttribute': 'expr133',
+        'selector': '[expr133]'
       }]
     );
   },

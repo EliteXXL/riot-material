@@ -1,7 +1,7 @@
 'use strict';
 
-require('./tslib.es6-c0666302.js');
-var ripple = require('./ripple-a1db6faf.js');
+require('./what-input-800533f2.js');
+var ripple = require('./ripple-ee7cbc9d.js');
 
 var RippleComponent = {
   'css': `rm-ripple,[is="rm-ripple"]{ display: inline-block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }`,
@@ -24,12 +24,12 @@ var RippleComponent = {
   },
 
   'template': function(template, expressionTypes, bindingTypes, getComponent) {
-    return template('<slot expr81="expr81"></slot>', [{
+    return template('<slot expr74="expr74"></slot>', [{
       'type': bindingTypes.SLOT,
       'attributes': [],
       'name': 'default',
-      'redundantAttribute': 'expr81',
-      'selector': '[expr81]'
+      'redundantAttribute': 'expr74',
+      'selector': '[expr74]'
     }]);
   },
 
