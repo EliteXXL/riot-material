@@ -1,10 +1,6 @@
-const riot = require("rollup-plugin-riot");
 const commonjs = require("@rollup/plugin-commonjs");
 const typescript = require("@rollup/plugin-typescript");
-const multiInput = require("rollup-plugin-multi-input").default;
 const nodeResolve = require("@rollup/plugin-node-resolve").default;
-const postcss = require("rollup-plugin-postcss");
-const postcssurl = require("postcss-url");
 
 const globals = {
     "riot": "riot"
@@ -13,85 +9,54 @@ const external = Object.keys(globals);
 
 export default [
     {
-        input: ["src/**/!(*.d.ts)"],
+        input: "src/index.ts",
         external,
         plugins: [
-            multiInput(),
             nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
             commonjs(),
-            typescript(),
-            riot()
+            typescript()
         ],
         output: {
-            dir: "dist/amd",
-            format: "amd"
-        }
-    },
-    {
-        input: ["src/**/!(*.d.ts)"],
-        external,
-        plugins: [
-            multiInput(),
-            nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
-            commonjs(),
-            typescript(),
-            riot()
-        ],
-        output: {
-            dir: "dist/cjs",
+            file: "dist/index.js",
             format: "cjs",
             exports: "auto"
         }
     },
     {
-        input: ["src/**/!(*.d.ts)"],
+        input: "src/index.ts",
         external,
         plugins: [
-            multiInput(),
             nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
             commonjs(),
-            typescript(),
-            riot()
+            typescript()
         ],
         output: {
-            dir: "dist/es",
+            file: "dist/index.es.js",
             format: "es"
         }
     },
     {
         input: "src/index.ts",
+        external,
         plugins: [
             nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
             commonjs(),
-            typescript(),
-            riot()
+            typescript()
         ],
         output: {
-            file: "dist/amd+libs.js",
+            file: "dist/index.amd.js",
+            format: "amd"
+        }
+    },
+    {
+        input: "src/index.ts",
+        plugins: [
+            nodeResolve(),
+            commonjs(),
+            typescript()
+        ],
+        output: {
+            file: "dist/index.amd+libs.js",
             format: "amd"
         }
     },
@@ -100,39 +65,12 @@ export default [
         external,
         plugins: [
             nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
             commonjs(),
-            typescript(),
-            riot()
+            typescript()
         ],
         output: {
-            file: "dist/amd.js",
-            format: "amd"
-        }
-    },
-    {
-        input: "src/index.ts",
-        external,
-        plugins: [
-            nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
-            commonjs(),
-            typescript(),
-            riot()
-        ],
-        output: {
-            name: "RM",
-            file: "dist/umd.js",
+            name: "riotMaterial",
+            file: "dist/index.umd.js",
             format: "umd",
             globals
         }
@@ -141,19 +79,12 @@ export default [
         input: "src/index.ts",
         plugins: [
             nodeResolve(),
-            postcss({
-                plugins: [ postcssurl({ url: "inline" })/* , autoprefixer() */],
-                sourceMap: false,
-                extract: false,
-                minimize: true
-            }),
             commonjs(),
-            typescript(),
-            riot()
+            typescript()
         ],
         output: {
-            name: "RM",
-            file: "dist/umd+libs.js",
+            name: "riotMaterial",
+            file: "dist/index.umd+libs.js",
             format: "umd"
         }
     }

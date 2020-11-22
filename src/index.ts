@@ -1,62 +1,70 @@
-import AppBarComponent from "./rm-app-bar.riot";
-import BottomSheetComponent from "./rm-bottom-sheet.riot";
-import ButtonComponent from "./rm-button.riot";
-import CheckboxComponent from "./rm-checkbox.riot";
-import DialogComponent from "./rm-dialog.riot";
-import DividerComponent from "./rm-divider.riot";
-import IconComponent from "./rm-icon.riot";
-import MenuComponent from "./rm-menu.riot";
-import MenuItemComponent from "./rm-menu-item.riot";
-import RadioComponent from "./rm-radio.riot";
-import RippleComponent from "./rm-ripple.riot";
-import SelectComponent from "./rm-select.riot";
-import TabbedPagesComponent from "./rm-tabbed-pages.riot";
-import TabsComponent from "./rm-tabs.riot";
-import TextareaComponent from "./rm-textarea.riot";
-import TextfieldComponent from "./rm-textfield.riot";
-import TextfieldContainerComponent from "./rm-textfield-container.riot";
+import AppBarComponent from "@riot-material/rm-app-bar";
+// import BottomSheetComponent from "@riot-material/rm-bottom-sheet";
+import ButtonComponent from "@riot-material/rm-button";
+import CheckboxComponent from "@riot-material/rm-checkbox";
+import DialogComponent from "@riot-material/rm-dialog";
+import DividerComponent from "@riot-material/rm-divider";
+import IconComponent from "@riot-material/rm-icon";
+import MenuComponent from "@riot-material/rm-menu";
+import MenuItemComponent from "@riot-material/rm-menu-item";
+import RadioComponent from "@riot-material/rm-radio";
+// import RippleComponent from "@riot-material/rm-ripple";
+import SelectComponent from "@riot-material/rm-select";
+import TabbedPagesComponent from "@riot-material/rm-tabbed-pages";
+// import TabsComponent from "@riot-material/rm-tabs";
+// import TextareaComponent from "@riot-material/rm-textarea";
+import TextfieldComponent from "@riot-material/rm-textfield";
+import TextfieldContainerComponent from "@riot-material/rm-textfield-container";
 
-export * as elevation from "./elevation";
+import elevation from "@riot-material/elevation";
 
-export * as background from "./background";
-export * as surfaces from "./surfaces";
+import * as background from "@riot-material/background";
+import * as surfaces from "@riot-material/surfaces";
 
-import * as riot from "riot";
+import { register } from "riot";
 
-riot.register("rm-app-bar", AppBarComponent);
-riot.register("rm-bottom-sheet", BottomSheetComponent);
-riot.register("rm-button", ButtonComponent);
-riot.register("rm-checkbox", CheckboxComponent);
-riot.register("rm-dialog", DialogComponent);
-riot.register("rm-divider", DividerComponent);
-riot.register("rm-icon", IconComponent);
-riot.register("rm-menu", MenuComponent);
-riot.register("rm-menu-item", MenuItemComponent);
-riot.register("rm-radio", RadioComponent);
-riot.register("rm-ripple", RippleComponent);
-riot.register("rm-select", SelectComponent);
-riot.register("rm-tabbed-pages", TabbedPagesComponent);
-riot.register("rm-tabs", TabsComponent);
-riot.register("rm-textarea", TextareaComponent);
-riot.register("rm-textfield", TextfieldComponent);
-riot.register("rm-textfield-container", TextfieldContainerComponent);
+register("rm-app-bar", AppBarComponent);
+// register("rm-bottom-sheet", BottomSheetComponent);
+register("rm-button", ButtonComponent);
+register("rm-checkbox", CheckboxComponent);
+register("rm-dialog", DialogComponent);
+register("rm-divider", DividerComponent);
+register("rm-icon", IconComponent);
+register("rm-menu", MenuComponent);
+register("rm-menu-item", MenuItemComponent);
+register("rm-radio", RadioComponent);
+// register("rm-ripple", RippleComponent);
+register("rm-select", SelectComponent);
+register("rm-tabbed-pages", TabbedPagesComponent);
+// register("rm-tabs", TabsComponent);
+// register("rm-textarea", TextareaComponent);
+register("rm-textfield", TextfieldComponent);
+register("rm-textfield-container", TextfieldContainerComponent);
+
+// tslint:disable-next-line:typedef
+const components = {
+    appBar: AppBarComponent,
+    // bottomSheet: BottomSheetComponent,
+    button: ButtonComponent,
+    checkbox: CheckboxComponent,
+    dialog: DialogComponent,
+    divider: DividerComponent,
+    icon: IconComponent,
+    menu: MenuComponent,
+    menuItem: MenuItemComponent,
+    radio: RadioComponent,
+    // ripple: RippleComponent,
+    select: SelectComponent,
+    tabbedPages: TabbedPagesComponent,
+    // tabs: TabsComponent,
+    // textarea: TextareaComponent,
+    textfield: TextfieldComponent,
+    textfieldContainer: TextfieldContainerComponent
+};
 
 export {
-    AppBarComponent,
-    BottomSheetComponent,
-    ButtonComponent,
-    CheckboxComponent,
-    DialogComponent,
-    DividerComponent,
-    IconComponent,
-    MenuComponent,
-    MenuItemComponent,
-    RadioComponent,
-    RippleComponent,
-    SelectComponent,
-    TabbedPagesComponent,
-    TabsComponent,
-    TextareaComponent,
-    TextfieldComponent,
-    TextfieldContainerComponent
+    components,
+    elevation,
+    surfaces,
+    background
 };

@@ -1,30 +1,37 @@
 {
   "name": "riot-material",
-  "version": "1.2.13",
+  "version": "2.0.1",
   "description": "",
   "dependencies": {
-    "@material/elevation": "^7.0.0",
-    "focus-trap": "^6.2.0",
-    "material-design-icons-iconfont": "^5.0.1",
-    "riot": "^5.0.0",
-    "what-input": "^5.2.10"
+    "@riot-material/background": "^1.0.0",
+    "@riot-material/elevation": "^1.0.1",
+    "@riot-material/position-controller": "^1.0.1",
+    "@riot-material/rm-app-bar": "^1.0.1",
+    "@riot-material/rm-button": "^1.0.1",
+    "@riot-material/rm-checkbox": "^1.0.0",
+    "@riot-material/rm-dialog": "^1.0.0",
+    "@riot-material/rm-divider": "^1.0.0",
+    "@riot-material/rm-icon": "^1.0.0",
+    "@riot-material/rm-menu": "^1.0.0",
+    "@riot-material/rm-menu-item": "^1.0.0",
+    "@riot-material/rm-radio": "^1.0.0",
+    "@riot-material/rm-select": "^1.0.4",
+    "@riot-material/rm-tabbed-pages": "^1.0.0",
+    "@riot-material/rm-textfield": "^1.0.1",
+    "@riot-material/rm-textfield-container": "^1.0.0",
+    "@riot-material/surfaces": "^1.0.0",
+    "riot": "^5.0.0"
   },
   "devDependencies": {
-    "@riotjs/compiler": "^4.11.0",
-    "@rollup/plugin-commonjs": "^13.0.2",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@rollup/plugin-typescript": "^5.0.2",
-    "postcss-url": "^8.0.0",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-typescript": "^6.1.0",
     "rollup": "^2.33.3",
-    "rollup-plugin-multi-input": "^1.1.1",
-    "rollup-plugin-postcss": "^3.1.8",
-    "rollup-plugin-riot": "^4.0.2",
-    "style-inject": "^0.3.0",
     "tslib": "^2.0.3",
-    "typescript": "^3.9.7"
+    "typescript": "^4.1.2"
   },
   "scripts": {},
   "author": "Giuliano Collacchioni",
   "license": "MIT",
-  "main": "dist/cjs/index.js"
+  "main": "dist/index.js"
 }
