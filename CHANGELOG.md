@@ -1,10 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [2.0.0] - 2020-11-22
-- split the components and submodule to external modules
-- remove `rm-textarea`, `rm-tabs`, `rm-bottom-sheet`, `rm-ripple` (to be restored)
-- update all dependencies
+## [2.0.2] - 2020-11-22
+- update README
+- update sub-packages
 
 ## [next major] - Unreleased
 - redesign color system
@@ -22,6 +21,11 @@ All notable changes to this project will be documented in this file.
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
 - tabbed pages does not unmount page during motion
+
+## [2.0.0] - 2020-11-22
+- split the components and submodule to external packages
+- remove `rm-textarea`, `rm-tabs`, `rm-bottom-sheet`, `rm-ripple` (to be restored)
+- update all dependencies
 
 ## [1.2.13] - 2020-11-20
 - uses `what-input` to figure what input is used for interaction

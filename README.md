@@ -1,60 +1,69 @@
 # [riot](https://riot.js.org/) implementation of [Material Design](https://material.io/)
 ## Installation
-```npm install riot-material```
-## Usage
-index.js
+You can install it via nodejs
+```sh
+npm install riot-material
+```
+or download one of the bundled file
 ```js
-import "riot-material"
+/**
+ * `dist/index.amd.js`,
+ * `dist/index.amd+libs.js`
+ * `dist/index.umd.js`,
+ * `dist/index.umd+libs.js`
+ */
+requirejs.config({
+  paths: {
+      "riot-material": "path/to/riot-material",
+   },
+});
 
-// any code here
+require(['riot-material'], function (riotMaterial) {
+    // ...
+});
+
+/**
+ * `dist/index.js`,
+ * `dist/index.es.js`,
+ * npm installation
+ */
+import * as riotMaterial from "riot-material";
 ```
-
-component.riot
-```riot
-<component>
-    <rm-button onclick={ log }>Click me!</rm-button>
-
-    <script>
-        export default {
-            log() {
-                console.log("button clicked");
-            }
-        }
-    </script>
-</component>
+otherwise you can include the script in your project html
+```html
+<script src="riot-material/index.umd.js" />
+<!-- or -->
+<script src="riot-material/index.umd+libs.js" />
 ```
-More ui elements in the upcoming documentation. Here a list:
-- `rm-app-bar`
-- `rm-bottom-sheet`
-- `rm-button`
-- `rm-checkbox`
-- `rm-dialog`
-- `rm-divider`
-- `rm-icon`
-- `rm-list-subheader`
-- `rm-menu-item`
-- `rm-menu`
-- `rm-radio`
-- `rm-ripple`
-- `rm-select`
-- `rm-tabbed-pages`
-- `rm-tabs`
-- `rm-textarea`
-- `rm-textfield-container`
-- `rm-textfield`
-
-There are also a couple of modules that can be used, such as:
-- `app-bar-utils`
-- `background`
-- `elevation`
-- `motionController`
-- `pointerController`
-- `ripple`
-- `surfaces`
-
-Many of these are probably to be separated from this package, so stay tuned!
-
-If you want to import any module separated, you should do like following, by now:
+and access it via
+```js
+window.riotMaterial;
 ```
-import { ... } from "riot-material/dist/cjs/<module>.js";
-```
+*Note: all the bundled file having `+libs` contain also the dependencies needed by the component, which, in this case, are:  
+`riot`  
+Be sure to have them when installing manually or including via html the non-`+libs` files*
+## Documentation
+Importing this package will occur in `register`ing all the components globally in riot
+
+Refer to each sub-package documentation:
+- `components.appBar` **rm-app-bar** tag - *Not yet available*
+- [`components.button` **rm-button** tag](https://github.com/riot-material/rm-button#properties)
+- [`components.checkbox` **rm-checkbox** tag](https://github.com/riot-material/rm-checkbox#properties)
+- `components.dialog` **rm-dialog** tag - *Not yet available*
+- `components.divider` **rm-divider** tag - *Not yet available*
+- `components.icon` **rm-icon** tag - *Not yet available*
+- `components.menuItem` **rm-menu-item** tag - *Not yet available*
+- `components.menu` **rm-menu** tag - *Not yet available*
+- `components.radio` **rm-radio** tag - *Not yet available*
+- `components.select` **rm-select** tag - *Not yet available*
+- `components.tabbedPages` **rm-tabbed-pages** tag - *Not yet available*
+- [`components.textfieldContainer` **rm-textfield-container** tag](https://github.com/riot-material/rm-textfield-container#properties)
+- [`components.textfield` **rm-textfield** tag](https://github.com/riot-material/rm-textfield#properties)
+<!--  -->
+- [`appBarUtils` **app-bar-utils** sub-package](https://github.com/riot-material/app-bar-utils#documentation)
+- `background` **background** sub-package - *Not yet available*
+- `elevation` **elevation** sub-package - *Not yet available*
+- `positionController` **position-controller** sub-package - *Not yet available*
+- `beforeFocusListener` **before-focus-listener** sub-package - *Not yet available*
+- `ripple` **ripple** sub-package - *Not yet available*
+- `surfaces` **surfaces** sub-package - *Not yet available*
