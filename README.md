@@ -51,7 +51,7 @@ Refer to each sub-package documentation:
 - [`components.checkbox` **rm-checkbox** tag](https://github.com/riot-material/rm-checkbox#properties)
 - `components.dialog` **rm-dialog** tag - *Not yet available*
 - `components.divider` **rm-divider** tag - *Not yet available*
-- `components.icon` **rm-icon** tag - *Not yet available*
+- [`components.icon` **rm-icon** tag](https://github.com/riot-material/rm-icon#documentation)
 - `components.menuItem` **rm-menu-item** tag - *Not yet available*
 - `components.menu` **rm-menu** tag - *Not yet available*
 - `components.radio` **rm-radio** tag - *Not yet available*
@@ -63,7 +63,7 @@ Refer to each sub-package documentation:
 - [`appBarUtils` **app-bar-utils** sub-package](https://github.com/riot-material/app-bar-utils#documentation)
 - `background` **background** sub-package - *Not yet available*
 - `elevation` **elevation** sub-package - *Not yet available*
-- `positionController` **position-controller** sub-package - *Not yet available*
+- [`positionController` **position-controller** sub-package](https://github.com/riot-material/position-controller#methods)
 - `beforeFocusListener` **before-focus-listener** sub-package - *Not yet available*
 - `ripple` **ripple** sub-package - *Not yet available*
 - `surfaces` **surfaces** sub-package - *Not yet available*
