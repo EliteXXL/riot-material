@@ -56,7 +56,7 @@ Refer to each sub-package documentation:
 - `components.menu` **rm-menu** tag - *Not yet available*
 - `components.radio` **rm-radio** tag - *Not yet available*
 - `components.select` **rm-select** tag - *Not yet available*
-- `components.tabbedPages` **rm-tabbed-pages** tag - *Not yet available*
+- [`components.tabbedPages` **rm-tabbed-pages** tag](https://github.com/riot-material/rm-tabbed-pages#properties)
 - [`components.textfieldContainer` **rm-textfield-container** tag](https://github.com/riot-material/rm-textfield-container#properties)
 - [`components.textfield` **rm-textfield** tag](https://github.com/riot-material/rm-textfield#properties)
 <!--  -->
