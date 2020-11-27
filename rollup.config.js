@@ -16,76 +16,26 @@ export default [
             commonjs(),
             typescript()
         ],
-        output: {
-            file: "dist/index.js",
-            format: "cjs",
-            exports: "auto"
-        }
-    },
-    {
-        input: "src/index.ts",
-        external,
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            typescript()
-        ],
-        output: {
-            file: "dist/index.es.js",
-            format: "es"
-        }
-    },
-    {
-        input: "src/index.ts",
-        external,
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            typescript()
-        ],
-        output: {
-            file: "dist/index.amd.js",
-            format: "amd"
-        }
-    },
-    {
-        input: "src/index.ts",
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            typescript()
-        ],
-        output: {
-            file: "dist/index.amd+libs.js",
-            format: "amd"
-        }
-    },
-    {
-        input: "src/index.ts",
-        external,
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            typescript()
-        ],
-        output: {
-            name: "riotMaterial",
-            file: "dist/index.umd.js",
-            format: "umd",
-            globals
-        }
-    },
-    {
-        input: "src/index.ts",
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            typescript()
-        ],
-        output: {
-            name: "riotMaterial",
-            file: "dist/index.umd+libs.js",
-            format: "umd"
-        }
+        output: [
+            {
+                file: "dist/index.js",
+                format: "cjs",
+                exports: "auto"
+            },
+            {
+                file: "dist/index.es.js",
+                format: "es"
+            },
+            {
+                file: "dist/index.amd.js",
+                format: "amd"
+            },
+            {
+                name: "riotMaterial",
+                file: "dist/index.umd.js",
+                format: "umd",
+                globals
+            }
+        ]
     }
 ];

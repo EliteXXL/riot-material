@@ -7,10 +7,8 @@ npm install riot-material
 or download one of the bundled file
 ```js
 /**
- * `dist/index.amd.js`,
- * `dist/index.amd+libs.js`
- * `dist/index.umd.js`,
- * `dist/index.umd+libs.js`
+ * `dist/index.amd.js`
+ * `dist/index.umd.js`
  */
 requirejs.config({
   paths: {
@@ -32,16 +30,12 @@ import * as riotMaterial from "riot-material";
 otherwise you can include the script in your project html
 ```html
 <script src="riot-material/index.umd.js" />
-<!-- or -->
-<script src="riot-material/index.umd+libs.js" />
 ```
 and access it via
 ```js
 window.riotMaterial;
 ```
-*Note: all the bundled file having `+libs` contain also the dependencies needed by the component, which, in this case, are:  
-`riot`  
-Be sure to have them when installing manually or including via html the non-`+libs` files*
+*Note: "riot" dependency is treated as external, be sure to have it when installing manually or including via html*
 ## Documentation
 Importing this package will occur in `register`ing all the components globally in riot
 

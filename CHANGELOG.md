@@ -1,9 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [2.0.6] - 2020-11-26
-- update dependencies
-- update README
+## [2.0.7] - 2020-11-27
+- update rm-tabbed-pages sub-package
+- treating "riot" dependency as external during bundling
+- tidy up rollup config: same result, more concise
 
 ## [next major] - Unreleased
 - redesign color system
@@ -21,6 +22,10 @@ All notable changes to this project will be documented in this file.
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
 - tabbed pages does not unmount page during motion
+
+## [2.0.6] - 2020-11-26
+- update dependencies
+- update README
 
 ## [2.0.5] - 2020-11-26
 - update sub-packages
