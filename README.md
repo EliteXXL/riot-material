@@ -46,10 +46,11 @@ Refer to each sub-package documentation:
 - `components.dialog` **rm-dialog** tag - *Not yet available*
 - `components.divider` **rm-divider** tag - *Not yet available*
 - [`components.icon` **rm-icon** tag](https://github.com/riot-material/rm-icon#documentation)
+- [`components.icon` **rm-list-item** tag](https://github.com/riot-material/rm-list-item#properties)
 - [`components.menuItem` **rm-menu-item** tag](https://github.com/riot-material/rm-menu-item#properties)
 - [`components.menu` **rm-menu** tag](https://github.com/riot-material/rm-menu#properties)
 - [`components.radio` **rm-radio** tag](https://github.com/riot-material/rm-radio#properties)
-- `components.select` **rm-select** tag - *Not yet available*
+- [`components.select` **rm-select** tag](https://github.com/riot-material/rm-select)
 - [`components.tabbedPages` **rm-tabbed-pages** tag](https://github.com/riot-material/rm-tabbed-pages#properties)
 - [`components.textfieldContainer` **rm-textfield-container** tag](https://github.com/riot-material/rm-textfield-container#properties)
 - [`components.textfield` **rm-textfield** tag](https://github.com/riot-material/rm-textfield#properties)

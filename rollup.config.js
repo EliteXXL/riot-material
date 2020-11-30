@@ -1,20 +1,37 @@
 const commonjs = require("@rollup/plugin-commonjs");
-const typescript = require("@rollup/plugin-typescript");
 const nodeResolve = require("@rollup/plugin-node-resolve").default;
 
 const globals = {
+    "@riot-material/background": "riotMaterial.background",
+    "@riot-material/elevation": "riotMaterial.elevation",
+    "@riot-material/position-controller": "riotMaterial.positionController",
+    "@riot-material/ripple": "riotMaterial.ripple",
+    "@riot-material/rm-app-bar": "riotMaterial.components.appBar",
+    "@riot-material/rm-button": "riotMaterial.components.button",
+    "@riot-material/rm-checkbox": "riotMaterial.components.checkbox",
+    "@riot-material/rm-dialog": "riotMaterial.components.dialog",
+    "@riot-material/rm-divider": "riotMaterial.components.divider",
+    "@riot-material/rm-icon": "riotMaterial.components.icon",
+    "@riot-material/rm-list-item": "riotMaterial.components.listItem",
+    "@riot-material/rm-menu": "riotMaterial.components.menu",
+    "@riot-material/rm-menu-item": "riotMaterial.components.menuItem",
+    "@riot-material/rm-radio": "riotMaterial.components.radio",
+    "@riot-material/rm-select": "riotMaterial.components.select",
+    "@riot-material/rm-tabbed-pages": "riotMaterial.components.tabbedPages",
+    "@riot-material/rm-textfield": "riotMaterial.components.textfield",
+    "@riot-material/rm-textfield-container": "riotMaterial.components.textfieldContainer",
+    "@riot-material/surfaces": "riotMaterial.surfaces",
     "riot": "riot"
 };
 const external = Object.keys(globals);
 
 export default [
     {
-        input: "src/index.ts",
+        input: "src/index.js",
         external,
         plugins: [
             nodeResolve(),
-            commonjs(),
-            typescript()
+            commonjs
         ],
         output: [
             {
@@ -25,16 +42,28 @@ export default [
             {
                 file: "dist/index.es.js",
                 format: "es"
-            },
+            }
+        ]
+    },
+    {
+        input: "src/index.js",
+        external: [ "riot" ],
+        plugins: [
+            nodeResolve(),
+            commonjs()
+        ],
+        output: [
             {
                 file: "dist/index.amd.js",
                 format: "amd"
             },
             {
-                name: "riotMaterial",
                 file: "dist/index.umd.js",
                 format: "umd",
-                globals
+                name: "riotMaterial",
+                globals: {
+                    "riot": "riot"
+                }
             }
         ]
     }

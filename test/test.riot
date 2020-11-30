@@ -1,46 +1,44 @@
 <test>
     <rm-app-bar fixed scroll-target="window"
-        elevation-threshold="0"
-        unelevated-background="blue"
     />
     <rm-app-bar placeholder />
     <rm-tabbed-pages hidden-tabs={ state.variant === "outlined" ? "2" : "" } selected-index="1">
         <custom-tab slot="Inputs">
             <rm-select label="Variant" onchange={ onchangeVariant } variant={ state.variant }>
-                <rm-menu-item value="flat" selected>Flat</rm-menu-item>
-                <rm-menu-item value="filled">Filled</rm-menu-item>
-                <rm-menu-item value="outlined">Outlined</rm-menu-item>
+                <rm-list-item value="flat" menu-option>Flat</rm-list-item>
+                <rm-list-item value="filled" menu-option>Filled</rm-list-item>
+                <rm-list-item value="outlined" menu-option>Outlined</rm-list-item>
             </rm-select>
             <div />
             <rm-textfield-tests variant={ state.variant }/>
             <div />
             <rm-select label="Select item" variant={ state.variant } disabled={ state.disabled }>
-                <rm-menu-item></rm-menu-item>
-                <rm-menu-item value="0">All</rm-menu-item>
+                <rm-list-item></rm-list-item>
+                <rm-list-item value="0">All</rm-list-item>
                 <rm-list-subheader>Cars</rm-list-subheader>
-                <rm-menu-item short-inset label="Hyundai" value="1">Hyundai</rm-menu-item>
-                <rm-menu-item short-inset label="Fiat" value="2">Fiat</rm-menu-item>
-                <rm-menu-item short-inset label="BMW" value="3">BMW</rm-menu-item>
+                <rm-list-item short-inset label="Hyundai" value="1">Hyundai</rm-list-item>
+                <rm-list-item short-inset label="Fiat" value="2">Fiat</rm-list-item>
+                <rm-list-item short-inset label="BMW" value="3">BMW</rm-list-item>
             </rm-select>
             <rm-select ref="creation" label="Filterable test" variant={ state.variant } filterable oninput={ _update } onchange={ _update } clearable disabled={ state.disabled }>
-                <rm-menu-item />
-                <rm-menu-item value="0">Prova</rm-menu-item>
-                <rm-menu-item value="1">Altro</rm-menu-item>
-                <rm-menu-item value="crea" label={ state.filter } if={ state.filter }>Crea "{ state.filter }"</rm-menu-item>
+                <rm-list-item />
+                <rm-list-item value="0">Prova</rm-list-item>
+                <rm-list-item value="1">Altro</rm-list-item>
+                <rm-list-item value="crea" label={ state.filter } if={ state.filter }>Crea "{ state.filter }"</rm-list-item>
             </rm-select>
         </custom-tab>
         <div slot="Buttons">
             <rm-button open-overlay="menu-test" variant="unelevated">TEST</rm-button>
             <rm-button disabled>TEST</rm-button>
             <rm-menu id="menu-test">
-                <rm-menu-item onclick={ closeMenu }>Aggiungi a...</rm-menu-item>
-                <rm-menu-item>Condividi</rm-menu-item>
+                <rm-list-item onclick={ closeMenu }>Aggiungi a...</rm-list-item>
+                <rm-list-item>Condividi</rm-list-item>
                 <rm-divider />
-                <rm-menu-item>Disconnetti</rm-menu-item>
+                <rm-list-item>Disconnetti</rm-list-item>
             </rm-menu>
             <rm-menu id="submenu-test">
-                <rm-menu-item>Prova</rm-menu-item>
-                <rm-menu-item>Altro</rm-menu-item>
+                <rm-list-item>Prova</rm-list-item>
+                <rm-list-item>Altro</rm-list-item>
             </rm-menu>
         </div>
         <custom-tab slot="Page 3">
@@ -52,7 +50,7 @@
         export default {
             state: {
                 hide: true,
-                variant: "flat",
+                variant: "filled",
                 disabled: false
             },
             onMounted() {

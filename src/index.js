@@ -5,6 +5,7 @@ import CheckboxComponent from "@riot-material/rm-checkbox";
 import DialogComponent from "@riot-material/rm-dialog";
 import DividerComponent from "@riot-material/rm-divider";
 import IconComponent from "@riot-material/rm-icon";
+import ListItemComponent from "@riot-material/rm-list-item";
 import MenuComponent from "@riot-material/rm-menu";
 import MenuItemComponent from "@riot-material/rm-menu-item";
 import RadioComponent from "@riot-material/rm-radio";
@@ -20,6 +21,7 @@ import elevation from "@riot-material/elevation";
 
 import * as background from "@riot-material/background";
 import * as surfaces from "@riot-material/surfaces";
+import * as ripple from "@riot-material/ripple";
 
 import { register } from "riot";
 
@@ -30,6 +32,7 @@ register("rm-checkbox", CheckboxComponent);
 register("rm-dialog", DialogComponent);
 register("rm-divider", DividerComponent);
 register("rm-icon", IconComponent);
+register("rm-list-item", ListItemComponent);
 register("rm-menu", MenuComponent);
 register("rm-menu-item", MenuItemComponent);
 register("rm-radio", RadioComponent);
@@ -50,6 +53,7 @@ const components = {
     dialog: DialogComponent,
     divider: DividerComponent,
     icon: IconComponent,
+    listItem: ListItemComponent,
     menu: MenuComponent,
     menuItem: MenuItemComponent,
     radio: RadioComponent,
@@ -65,6 +69,7 @@ const components = {
 export {
     components,
     elevation,
-    surfaces,
-    background
+    background,
+    ripple,
+    surfaces
 };
