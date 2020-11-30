@@ -1,7 +1,8 @@
 {
   "name": "riot-material",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "",
+  "main": "dist/index.js",
   "dependencies": {
     "@riot-material/background": "^1.0.0",
     "@riot-material/elevation": "^1.0.1",

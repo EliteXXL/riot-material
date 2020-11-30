@@ -1,10 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [2.0.9] - 2020-11-30
-- update all sub-packages
-- update rollup.config.js
-- update README
+## [2.0.10] - 2020-11-30
+- fix "package.json" entry point
 
 ## [next major] - Unreleased
 - redesign color system
@@ -22,6 +20,11 @@ All notable changes to this project will be documented in this file.
 - implement `pointerController.unbind(id: number)` function to remove the listener with given `id`
 - filterable `rm-select` does not reset value when typed
 - tabbed pages does not unmount page during motion
+
+## [2.0.9] - 2020-11-30
+- update all sub-packages
+- update rollup.config.js
+- update README
 
 ## [2.0.8] - 2020-11-27
 - update rm-tabbed-pages sub-package
