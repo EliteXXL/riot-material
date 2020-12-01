@@ -8,10 +8,13 @@ or download one of the bundled file
 ```js
 /**
  * `dist/index.amd.js`
+ * `dist/index.amd+libs.js`
  * `dist/index.umd.js`
+ * `dist/index.umd+libs.js`
  */
 requirejs.config({
   paths: {
+      // "what-input": "path/to/what-input // if you do not use +libs bundle
       "riot-material": "path/to/riot-material",
    },
 });
@@ -21,15 +24,20 @@ require(['riot-material'], function (riotMaterial) {
 });
 
 /**
- * `dist/index.js`,
- * `dist/index.es.js`,
+ * `dist/index.js`
+ * `dist/index.es.js`
  * npm installation
  */
 import * as riotMaterial from "riot-material";
 ```
 otherwise you can include the script in your project html
 ```html
-<script src="riot-material/index.umd.js" />
+<!-- if you want to use the what-input library elsewhere -->
+<script src="path/to/what-input.umd.js"></script>
+<script src="riot-material/index.umd.js"></script>
+
+<!-- or, if you want to use only riotMaterial -->
+<script src="riot-material/index.umd+libs.js"></script>
 ```
 and access it via
 ```js
@@ -46,7 +54,7 @@ Refer to each sub-package documentation:
 - `components.dialog` **rm-dialog** tag - *Not yet available*
 - `components.divider` **rm-divider** tag - *Not yet available*
 - [`components.icon` **rm-icon** tag](https://github.com/riot-material/rm-icon#documentation)
-- [`components.icon` **rm-list-item** tag](https://github.com/riot-material/rm-list-item#properties)
+- [`components.listItem` **rm-list-item** tag](https://github.com/riot-material/rm-list-item#properties)
 - [`components.menuItem` **rm-menu-item** tag](https://github.com/riot-material/rm-menu-item#properties)
 - [`components.menu` **rm-menu** tag](https://github.com/riot-material/rm-menu#properties)
 - [`components.radio` **rm-radio** tag](https://github.com/riot-material/rm-radio#properties)

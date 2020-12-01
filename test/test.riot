@@ -13,32 +13,32 @@
             <rm-textfield-tests variant={ state.variant }/>
             <div />
             <rm-select label="Select item" variant={ state.variant } disabled={ state.disabled }>
-                <rm-list-item></rm-list-item>
-                <rm-list-item value="0">All</rm-list-item>
-                <rm-list-subheader>Cars</rm-list-subheader>
-                <rm-list-item short-inset label="Hyundai" value="1">Hyundai</rm-list-item>
-                <rm-list-item short-inset label="Fiat" value="2">Fiat</rm-list-item>
-                <rm-list-item short-inset label="BMW" value="3">BMW</rm-list-item>
+                <rm-list-item value="" menu-option></rm-list-item>
+                <rm-list-item value="0" menu-option>All</rm-list-item>
+                <rm-list-item>Cars</rm-list-item>
+                <rm-list-item short-inset label="Hyundai" value="1" menu-option>Hyundai</rm-list-item>
+                <rm-list-item short-inset label="Fiat" value="2" menu-option>Fiat</rm-list-item>
+                <rm-list-item short-inset label="BMW" value="3" menu-option>BMW</rm-list-item>
             </rm-select>
             <rm-select ref="creation" label="Filterable test" variant={ state.variant } filterable oninput={ _update } onchange={ _update } clearable disabled={ state.disabled }>
-                <rm-list-item />
-                <rm-list-item value="0">Prova</rm-list-item>
-                <rm-list-item value="1">Altro</rm-list-item>
-                <rm-list-item value="crea" label={ state.filter } if={ state.filter }>Crea "{ state.filter }"</rm-list-item>
+                <rm-list-item value menu-option/>
+                <rm-list-item value="0" menu-option>Prova</rm-list-item>
+                <rm-list-item value="1" menu-option>Altro</rm-list-item>
+                <rm-list-item value="crea" label={ state.filter } if={ state.filter } menu-option>Crea "{ state.filter }"</rm-list-item>
             </rm-select>
         </custom-tab>
         <div slot="Buttons">
             <rm-button open-overlay="menu-test" variant="unelevated">TEST</rm-button>
             <rm-button disabled>TEST</rm-button>
             <rm-menu id="menu-test">
-                <rm-list-item onclick={ closeMenu }>Aggiungi a...</rm-list-item>
-                <rm-list-item>Condividi</rm-list-item>
+                <rm-list-item onclick={ closeMenu } menu-option>Aggiungi a...</rm-list-item>
+                <rm-list-item menu-option>Condividi</rm-list-item>
                 <rm-divider />
-                <rm-list-item>Disconnetti</rm-list-item>
+                <rm-list-item menu-option>Disconnetti</rm-list-item>
             </rm-menu>
             <rm-menu id="submenu-test">
-                <rm-list-item>Prova</rm-list-item>
-                <rm-list-item>Altro</rm-list-item>
+                <rm-list-item menu-option>Prova</rm-list-item>
+                <rm-list-item menu-option>Altro</rm-list-item>
             </rm-menu>
         </div>
         <custom-tab slot="Page 3">

@@ -1,6 +1,15 @@
 const commonjs = require("@rollup/plugin-commonjs");
 const nodeResolve = require("@rollup/plugin-node-resolve").default;
 
+const plusLibsGlobals = {
+    "riot": "riot"
+};
+const plusLibsExternal = Object.keys(plusLibsGlobals);
+const minusLibsGlobals = {
+    "what-input": "whatInput",
+    ...plusLibsGlobals
+};
+const minusLibsExternal = Object.keys(minusLibsGlobals);
 const globals = {
     "@riot-material/background": "riotMaterial.background",
     "@riot-material/elevation": "riotMaterial.elevation",
@@ -21,7 +30,7 @@ const globals = {
     "@riot-material/rm-textfield": "riotMaterial.components.textfield",
     "@riot-material/rm-textfield-container": "riotMaterial.components.textfieldContainer",
     "@riot-material/surfaces": "riotMaterial.surfaces",
-    "riot": "riot"
+    ...minusLibsGlobals
 };
 const external = Object.keys(globals);
 
@@ -31,7 +40,7 @@ export default [
         external,
         plugins: [
             nodeResolve(),
-            commonjs
+            commonjs()
         ],
         output: [
             {
@@ -47,7 +56,7 @@ export default [
     },
     {
         input: "src/index.js",
-        external: [ "riot" ],
+        external: minusLibsExternal,
         plugins: [
             nodeResolve(),
             commonjs()
@@ -61,9 +70,27 @@ export default [
                 file: "dist/index.umd.js",
                 format: "umd",
                 name: "riotMaterial",
-                globals: {
-                    "riot": "riot"
-                }
+                globals: minusLibsGlobals
+            }
+        ]
+    },
+    {
+        input: "src/index.js",
+        external: plusLibsExternal,
+        plugins: [
+            nodeResolve(),
+            commonjs()
+        ],
+        output: [
+            {
+                file: "dist/index.amd+libs.js",
+                format: "amd"
+            },
+            {
+                file: "dist/index.umd+libs.js",
+                format: "umd",
+                name: "riotMaterial",
+                globals: plusLibsGlobals
             }
         ]
     }
