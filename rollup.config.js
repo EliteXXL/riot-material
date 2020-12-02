@@ -1,5 +1,6 @@
 const commonjs = require("@rollup/plugin-commonjs");
 const nodeResolve = require("@rollup/plugin-node-resolve").default;
+const terser = require("rollup-plugin-terser").terser;
 
 const plusLibsGlobals = {
     "riot": "riot"
@@ -44,11 +45,6 @@ export default [
         ],
         output: [
             {
-                file: "dist/index.js",
-                format: "cjs",
-                exports: "auto"
-            },
-            {
                 file: "dist/index.es.js",
                 format: "es"
             }
@@ -63,11 +59,14 @@ export default [
         ],
         output: [
             {
-                file: "dist/index.amd.js",
-                format: "amd"
+                file: "dist/index.js",
+                format: "umd",
+                name: "riotMaterial",
+                globals: minusLibsGlobals
             },
             {
-                file: "dist/index.umd.js",
+                plugins: [ terser() ],
+                file: "dist/index.min.js",
                 format: "umd",
                 name: "riotMaterial",
                 globals: minusLibsGlobals
@@ -83,11 +82,14 @@ export default [
         ],
         output: [
             {
-                file: "dist/index.amd+libs.js",
-                format: "amd"
+                file: "dist/index+libs.js",
+                format: "umd",
+                name: "riotMaterial",
+                globals: plusLibsGlobals
             },
             {
-                file: "dist/index.umd+libs.js",
+                plugins: [ terser() ],
+                file: "dist/index+libs.min.js",
                 format: "umd",
                 name: "riotMaterial",
                 globals: plusLibsGlobals

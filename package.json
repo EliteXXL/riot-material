@@ -1,8 +1,10 @@
 {
   "name": "riot-material",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
   "dependencies": {
     "@riot-material/background": "^1.0.0",
     "@riot-material/elevation": "^1.0.1",
@@ -27,6 +29,20 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
-    "rollup": "^2.34.0"
-  }
+    "rollup": "^2.34.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "keywords": [
+    "material design",
+    "material",
+    "design",
+    "riotjs",
+    "riot.js",
+    "ui components",
+    "ui"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ]
 }
