@@ -1,3 +1,5 @@
+<img src="logo.svg" width="125">
+
 # [riot](https://riot.js.org/) implementation of [Material Design](https://material.io/)
 ## Installation
 You can install it via nodejs

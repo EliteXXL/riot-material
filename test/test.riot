@@ -6,7 +6,7 @@
         <custom-tab slot="Inputs">
             <rm-select label="Variant" onchange={ onchangeVariant } variant={ state.variant }>
                 <rm-list-item value="flat" menu-option>Flat</rm-list-item>
-                <rm-list-item value="filled" menu-option>Filled</rm-list-item>
+                <rm-list-item value="filled" menu-option selected>Filled</rm-list-item>
                 <rm-list-item value="outlined" menu-option>Outlined</rm-list-item>
             </rm-select>
             <div />
@@ -15,10 +15,11 @@
             <rm-select label="Select item" variant={ state.variant } disabled={ state.disabled }>
                 <rm-list-item value="" menu-option></rm-list-item>
                 <rm-list-item value="0" menu-option>All</rm-list-item>
-                <rm-list-item>Cars</rm-list-item>
-                <rm-list-item short-inset label="Hyundai" value="1" menu-option>Hyundai</rm-list-item>
-                <rm-list-item short-inset label="Fiat" value="2" menu-option>Fiat</rm-list-item>
-                <rm-list-item short-inset label="BMW" value="3" menu-option>BMW</rm-list-item>
+                <rm-list-group label="Cars">
+                    <rm-list-item value="1" menu-option>Hyundai</rm-list-item>
+                    <rm-list-item value="2" menu-option>Fiat</rm-list-item>
+                    <rm-list-item value="3" menu-option>BMW</rm-list-item>
+                </rm-list-item>
             </rm-select>
             <rm-select ref="creation" label="Filterable test" variant={ state.variant } filterable oninput={ _update } onchange={ _update } clearable disabled={ state.disabled }>
                 <rm-list-item value menu-option/>
@@ -40,6 +41,40 @@
                 <rm-list-item menu-option>Prova</rm-list-item>
                 <rm-list-item menu-option>Altro</rm-list-item>
             </rm-menu>
+        </div>
+        <div slot="Lists">
+            <div style="background: white; padding: 8px 0;">
+                <rm-list-item label="Only text"></rm-list-item>
+                <rm-list-item label="With trailing icon">
+                    <rm-button variant="icon" slot="trailing">more_vert</rm-button>
+                </rm-list-item>
+                <rm-list-item label="With leading icon">
+                    <rm-icon slot="leading">home</rm-icon>
+                </rm-list-item>
+                <rm-list-item label="With both leading and trailing icon">
+                    <rm-icon slot="leading">home</rm-icon>
+                    <rm-button variant="icon" slot="trailing">more_vert</rm-button>
+                </rm-list-item>
+                <rm-list-item label="With leading icon and meta text">
+                    <rm-icon slot="leading">home</rm-icon>
+                    <span slot="trailing">Meta</span>
+                </rm-list-item>
+                <rm-list-item label="With avatar">
+                    <rm-circular-avatar slot="leading"></rm-circular-avatar>
+                </rm-list-item>
+                <rm-list-item label="With avatar and trailing icon">
+                    <rm-circular-avatar slot="leading"></rm-circular-avatar>
+                    <rm-button variant="icon" slot="trailing">more_vert</rm-button>
+                </rm-list-item>
+                <rm-list-item label="With image and trailing icon">
+                    <rm-list-image slot="leading"></rm-list-image>
+                    <rm-button variant="icon" slot="trailing">more_vert</rm-button>
+                </rm-list-item>
+                <rm-list-item label="With large image and trailing icon">
+                    <rm-list-image large slot="leading"></rm-list-image>
+                    <rm-button variant="icon" slot="trailing">more_vert</rm-button>
+                </rm-list-item>
+            </div>
         </div>
         <custom-tab slot="Page 3">
             <div style="padding: 8px;">PAGE 3</div>

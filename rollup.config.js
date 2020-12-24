@@ -12,6 +12,7 @@ const minusLibsGlobals = {
 };
 const minusLibsExternal = Object.keys(minusLibsGlobals);
 const globals = {
+    "@riot-material/app-bar-utils": "riotMaterial.appBarUtils",
     "@riot-material/background": "riotMaterial.background",
     "@riot-material/elevation": "riotMaterial.elevation",
     "@riot-material/position-controller": "riotMaterial.positionController",

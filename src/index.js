@@ -2,9 +2,12 @@ import AppBarComponent from "@riot-material/rm-app-bar";
 // import BottomSheetComponent from "@riot-material/rm-bottom-sheet";
 import ButtonComponent from "@riot-material/rm-button";
 import CheckboxComponent from "@riot-material/rm-checkbox";
+import CircularAvatarComponent from "@riot-material/rm-circular-avatar";
 import DialogComponent from "@riot-material/rm-dialog";
 import DividerComponent from "@riot-material/rm-divider";
 import IconComponent from "@riot-material/rm-icon";
+import ListGroupComponent from "@riot-material/rm-list-group";
+import ListImageComponent from "@riot-material/rm-list-image";
 import ListItemComponent from "@riot-material/rm-list-item";
 import MenuComponent from "@riot-material/rm-menu";
 import MenuItemComponent from "@riot-material/rm-menu-item";
@@ -22,6 +25,7 @@ import elevation from "@riot-material/elevation";
 import * as background from "@riot-material/background";
 import * as surfaces from "@riot-material/surfaces";
 import * as ripple from "@riot-material/ripple";
+import * as appBarUtils from "@riot-material/app-bar-utils";
 
 import { register } from "riot";
 
@@ -29,9 +33,12 @@ register("rm-app-bar", AppBarComponent);
 // register("rm-bottom-sheet", BottomSheetComponent);
 register("rm-button", ButtonComponent);
 register("rm-checkbox", CheckboxComponent);
+register("rm-circular-avatar", CircularAvatarComponent);
 register("rm-dialog", DialogComponent);
 register("rm-divider", DividerComponent);
 register("rm-icon", IconComponent);
+register("rm-list-group", ListGroupComponent);
+register("rm-list-image", ListImageComponent);
 register("rm-list-item", ListItemComponent);
 register("rm-menu", MenuComponent);
 register("rm-menu-item", MenuItemComponent);
@@ -50,9 +57,12 @@ const components = {
     // bottomSheet: BottomSheetComponent,
     button: ButtonComponent,
     checkbox: CheckboxComponent,
+    circularAvatar: CircularAvatarComponent,
     dialog: DialogComponent,
     divider: DividerComponent,
     icon: IconComponent,
+    listGroup: ListGroupComponent,
+    listImage: ListImageComponent,
     listItem: ListItemComponent,
     menu: MenuComponent,
     menuItem: MenuItemComponent,
@@ -67,9 +77,10 @@ const components = {
 };
 
 export {
+    appBarUtils,
+    background,
     components,
     elevation,
-    background,
     ripple,
     surfaces
 };
