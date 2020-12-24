@@ -26,6 +26,7 @@ import * as background from "@riot-material/background";
 import * as surfaces from "@riot-material/surfaces";
 import * as ripple from "@riot-material/ripple";
 import * as appBarUtils from "@riot-material/app-bar-utils";
+import * as beforeFocusListener from "@riot-material/before-focus-listener";
 
 import { register } from "riot";
 
@@ -79,6 +80,7 @@ const components = {
 export {
     appBarUtils,
     background,
+    beforeFocusListener,
     components,
     elevation,
     ripple,

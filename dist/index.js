@@ -736,15 +736,24 @@
     };
 
     var BEFORE_FOCUS_CONTROLLER_INSTANCE = Symbol("before-focus-controller-instance");
-    function addListener(element, handler, context) {
-        if (handler === void 0 || typeof handler !== "function") {
+    var WAS_FUNCTION = Symbol("was-function");
+    function addListener(element, handler) {
+        var _a;
+        if (handler === void 0) {
+            throw new Error("invalid handler");
+        }
+        if (typeof handler === "function") {
+            handler = (_a = {},
+                _a[WAS_FUNCTION] = true,
+                _a.handleEvent = handler,
+                _a);
+        }
+        else if (typeof handler !== "object" || !("handleEvent" in handler)) {
             throw new Error("invalid handler");
         }
         var instance = element[BEFORE_FOCUS_CONTROLLER_INSTANCE];
         if (instance) {
-            instance.listeners.push({
-                handler: handler, context: context
-            });
+            instance.listeners.push(handler);
             if (instance.listeners.length === 1) {
                 window.addEventListener("touchstart", instance._window_ontouchstart);
             }
@@ -762,26 +771,45 @@
         function callListeners(event) {
             var stop = false;
             var stopImmediate = false;
-            event.stopPropagation = function () {
-                stop = true;
+            var beforeFocusEvent = {
+                type: "beforefocus",
+                detail: { nativeEvent: event },
+                initEvent: function () { return; },
+                initCustomEvent: function () { return; },
+                get cancelable() { return false; },
+                get bubbles() { return false; },
+                get composed() { return false; },
+                get defaultPrevented() { return event.defaultPrevented; },
+                get currentTarget() { return event.currentTarget; },
+                get eventPhase() { return Event.AT_TARGET; },
+                get cancelBubble() { return false; },
+                get returnValue() { return event.returnValue; },
+                set returnValue(value) { event.returnValue = value; },
+                get isTrusted() { return true; },
+                get srcElement() { return this.currentTarget; },
+                get target() { return this.currentTarget; },
+                get timeStamp() { return event.timeStamp; },
+                composedPath: function () { return []; },
+                preventDefault: function () { event.preventDefault(); },
+                NONE: Event.NONE,
+                BUBBLING_PHASE: Event.BUBBLING_PHASE,
+                CAPTURING_PHASE: Event.CAPTURING_PHASE,
+                AT_TARGET: Event.AT_TARGET,
+                stopPropagation: function () { stop = true; },
+                stopImmediatePropagation: function () { stopImmediate = true; }
             };
-            event.stopImmediatePropagation = function () {
-                stopImmediate = true;
-            };
-            function restore() {
-                delete event.stopPropagation;
-                delete event.stopImmediatePropagation;
-            }
-            instance.listeners.some(function (_a) {
-                var handler = _a.handler, context = _a.context;
-                handler.call(context, event);
+            instance.listeners.some(function (handler) {
+                if (handler[WAS_FUNCTION]) {
+                    handler.handleEvent.call(null, beforeFocusEvent);
+                }
+                else {
+                    handler.handleEvent(beforeFocusEvent);
+                }
                 if (stopImmediate) {
-                    restore();
                     event.stopImmediatePropagation();
                     return true;
                 }
                 if (stop) {
-                    restore();
                     event.stopPropagation();
                     return true;
                 }
@@ -830,7 +858,7 @@
                 }
                 callListeners(event);
             },
-            listeners: [{ handler: handler, context: context }]
+            listeners: [handler]
         };
         element.addEventListener("touchstart", instance.ontouchstart);
         element.addEventListener("touchmove", instance.ontouchmove);
@@ -845,7 +873,7 @@
         }
         var index = -1;
         if (instance.listeners.some(function (listener, i) {
-            if (listener.handler === handler) {
+            if (typeof handler === "function" ? listener.handleEvent === handler : listener === handler) {
                 index = i;
                 return true;
             }
@@ -857,14 +885,30 @@
             }
         }
     }
+    var nativeAddEventListener = HTMLElement.prototype.addEventListener;
+    HTMLElement.prototype.addEventListener = function (type, listener, options) {
+        if (type === "beforefocus") {
+            addListener(this, listener);
+        }
+        else {
+            nativeAddEventListener.call(this, type, listener, options);
+        }
+    };
+    var nativeRemoveEventListener = HTMLElement.prototype.removeEventListener;
+    HTMLElement.prototype.removeEventListener = function (type, listener, options) {
+        if (type === "beforefocus") {
+            removeListener(this, listener);
+        }
+        else {
+            nativeRemoveEventListener.call(this, type, listener, options);
+        }
+    };
 
-    var addListener_1 = addListener;
-    var removeListener_1 = removeListener;
-
-    var dist$1 = /*#__PURE__*/Object.defineProperty({
-    	addListener: addListener_1,
-    	removeListener: removeListener_1
-    }, '__esModule', {value: true});
+    var index_es$1 = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        addListener: addListener,
+        removeListener: removeListener
+    });
 
     var index$3 = {
       'css': `rm-button,[is="rm-button"]{ font-size: 14px; display: inline-block; margin-right: 8px; vertical-align: middle; border-radius: 4px; background: transparent; height: 2.571em; } rm-button button,[is="rm-button"] button{ font-size: inherit; font-weight: inherit; cursor: pointer; border: none; padding: 0 16px; border-radius: inherit; background: inherit; box-sizing: border-box; vertical-align: inherit; width: 100%; height: 100%; color: inherit; outline: none; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; position: relative; } rm-button[dense-padding]:not([dense-padding="false"]) button,[is="rm-button"][dense-padding]:not([dense-padding="false"]) button{ padding: 0 8px; } rm-button button::-moz-focus-inner,[is="rm-button"] button::-moz-focus-inner{ border: none; } rm-button[variant=icon],[is="rm-button"][variant=icon]{ border-radius: 50%; } rm-button[variant=icon] button,[is="rm-button"][variant=icon] button{ padding: 0.5714285714285714em; height: 2.857142857142857em; width: 2.857142857142857em; } rm-button[variant=icon] button rm-icon,[is="rm-button"][variant=icon] button rm-icon{ font-size: 1.7142857142857142em; } rm-button[variant=icon],[is="rm-button"][variant=icon]{ height: unset; } rm-button[variant="unelevated"],[is="rm-button"][variant="unelevated"],rm-button[variant="raised"],[is="rm-button"][variant="raised"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } .rm-black-surface rm-button[variant="unelevated"],.rm-black-surface [is="rm-button"][variant="unelevated"],.rm-black-surface rm-button[variant="raised"],.rm-black-surface [is="rm-button"][variant="raised"]{ background: rgb(255, 255, 255); background: rgb(var(--color-white-surface, 255, 255, 255)); color: rgb(0, 0, 0); color: rgb(var(--color-on-white, 0, 0, 0)); } .rm-dark-surface rm-button[variant="unelevated"],.rm-dark-surface [is="rm-button"][variant="unelevated"],.rm-dark-surface rm-button[variant="raised"],.rm-dark-surface [is="rm-button"][variant="raised"]{ background: rgb(250, 250, 250); background: rgb(var(--color-light-surface, 250, 250, 250)); color: rgb(0, 0, 0); color: rgb(var(--color-on-light, 0, 0, 0)); } .rm-light-surface rm-button[variant="unelevated"],.rm-light-surface [is="rm-button"][variant="unelevated"],.rm-light-surface rm-button[variant="raised"],.rm-light-surface [is="rm-button"][variant="raised"]{ background: rgb(10, 10, 10); background: rgb(var(--color-dark-surface, 10, 10, 10)); color: rgb(255, 255, 255); color: rgb(var(--color-on-dark, 255, 255, 255)); } .rm-white-surface rm-button[variant="unelevated"],.rm-white-surface [is="rm-button"][variant="unelevated"],.rm-white-surface rm-button[variant="raised"],.rm-white-surface [is="rm-button"][variant="raised"]{ background: rgb(0, 0, 0); background: rgb(var(--color-black-surface, 0, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-black, 255, 255, 255)); } rm-button[variant="outlined"] button::before,[is="rm-button"][variant="outlined"] button::before{ content: ""; position: absolute; top: 0; bottom: 0; right: 0; left: 0; border: 1px solid rgba(0, 0, 0, .12); border: 1px solid rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12)); border-radius: inherit; } .rm-black-surface rm-button[variant="outlined"] button::before,.rm-black-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(255, 255, 255, .12); border-color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-dark-surface rm-button[variant="outlined"] button::before,.rm-dark-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(255, 255, 255, .12); border-color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-light-surface rm-button[variant="outlined"] button::before,.rm-light-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(0, 0, 0, .12); border-color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12)); } .rm-white-surface rm-button[variant="outlined"] button::before,.rm-white-surface [is="rm-button"][variant="outlined"] button::before{ border-color: rgba(0, 0, 0, .12); border-color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12)); } rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary, 139, 0, 139)); } .rm-black-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-black, 238, 130, 238)); } .rm-dark-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(238, 130, 238); color: rgb(var(--color-primary-on-dark, 238, 130, 238)); } .rm-light-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-light, 139, 0, 139)); } .rm-white-surface rm-button[color="primary"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="primary"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(139, 0, 139); color: rgb(var(--color-primary-on-white, 139, 0, 139)); } rm-button[color="primary"][variant="raised"],[is="rm-button"][color="primary"][variant="raised"],rm-button[color="primary"][variant="unelevated"],[is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary, 255, 255, 255)); } .rm-black-surface rm-button[color="primary"][variant="raised"],.rm-black-surface [is="rm-button"][color="primary"][variant="raised"],.rm-black-surface rm-button[color="primary"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-black, 238, 130, 238)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="primary"][variant="raised"],.rm-dark-surface [is="rm-button"][color="primary"][variant="raised"],.rm-dark-surface rm-button[color="primary"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(238, 130, 238); background: rgb(var(--color-primary-on-dark, 238, 130, 238)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="primary"][variant="raised"],.rm-light-surface [is="rm-button"][color="primary"][variant="raised"],.rm-light-surface rm-button[color="primary"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-light, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="primary"][variant="raised"],.rm-white-surface [is="rm-button"][color="primary"][variant="raised"],.rm-white-surface rm-button[color="primary"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="primary"][variant="unelevated"]{ background: rgb(139, 0, 139); background: rgb(var(--color-primary-on-white, 139, 0, 139)); color: rgb(255, 255, 255); color: rgb(var(--color-on-primary-on-white, 255, 255, 255)); } rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent, 0, 0, 255)); } .rm-black-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-black, 30, 144, 255)); } .rm-dark-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-dark, 30, 144, 255)); } .rm-light-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-light, 0, 0, 255)); } .rm-white-surface rm-button[color="accent"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="accent"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-white, 0, 0, 255)); } rm-button[color="accent"][variant="raised"],[is="rm-button"][color="accent"][variant="raised"],rm-button[color="accent"][variant="unelevated"],[is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent, 255, 255, 255)); } .rm-black-surface rm-button[color="accent"][variant="raised"],.rm-black-surface [is="rm-button"][color="accent"][variant="raised"],.rm-black-surface rm-button[color="accent"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-black, 30, 144, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="accent"][variant="raised"],.rm-dark-surface [is="rm-button"][color="accent"][variant="raised"],.rm-dark-surface rm-button[color="accent"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-dark, 30, 144, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="accent"][variant="raised"],.rm-light-surface [is="rm-button"][color="accent"][variant="raised"],.rm-light-surface rm-button[color="accent"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-light, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="accent"][variant="raised"],.rm-white-surface [is="rm-button"][color="accent"][variant="raised"],.rm-white-surface rm-button[color="accent"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="accent"][variant="unelevated"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-white, 0, 0, 255)); color: rgb(255, 255, 255); color: rgb(var(--color-on-accent-on-white, 255, 255, 255)); } rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn, 255, 0, 0)); } .rm-black-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 69, 0); color: rgb(var(--color-warn-on-black, 255, 69, 0)); } .rm-dark-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 69, 0); color: rgb(var(--color-warn-on-dark, 255, 69, 0)); } .rm-light-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn-on-light, 255, 0, 0)); } .rm-white-surface rm-button[color="warn"]:not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][color="warn"]:not([variant="raised"]):not([variant="unelevated"]){ color: rgb(255, 0, 0); color: rgb(var(--color-warn-on-white, 255, 0, 0)); } rm-button[color="warn"][variant="raised"],[is="rm-button"][color="warn"][variant="raised"],rm-button[color="warn"][variant="unelevated"],[is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn, 255, 255, 255)); } .rm-black-surface rm-button[color="warn"][variant="raised"],.rm-black-surface [is="rm-button"][color="warn"][variant="raised"],.rm-black-surface rm-button[color="warn"][variant="unelevated"],.rm-black-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 69, 0); background: rgb(var(--color-warn-on-black, 255, 69, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-black, 255, 255, 255)); } .rm-dark-surface rm-button[color="warn"][variant="raised"],.rm-dark-surface [is="rm-button"][color="warn"][variant="raised"],.rm-dark-surface rm-button[color="warn"][variant="unelevated"],.rm-dark-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 69, 0); background: rgb(var(--color-warn-on-dark, 255, 69, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-dark, 255, 255, 255)); } .rm-light-surface rm-button[color="warn"][variant="raised"],.rm-light-surface [is="rm-button"][color="warn"][variant="raised"],.rm-light-surface rm-button[color="warn"][variant="unelevated"],.rm-light-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn-on-light, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-light, 255, 255, 255)); } .rm-white-surface rm-button[color="warn"][variant="raised"],.rm-white-surface [is="rm-button"][color="warn"][variant="raised"],.rm-white-surface rm-button[color="warn"][variant="unelevated"],.rm-white-surface [is="rm-button"][color="warn"][variant="unelevated"]{ background: rgb(255, 0, 0); background: rgb(var(--color-warn-on-white, 255, 0, 0)); color: rgb(255, 255, 255); color: rgb(var(--color-on-warn-on-white, 255, 255, 255)); } rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),[is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-black-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-black-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-dark-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-dark-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-light-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-light-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-white-surface rm-button[disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]),.rm-white-surface [is="rm-button"][disabled]:not([disabled="false"]):not([variant="raised"]):not([variant="unelevated"]){ color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42)); } rm-button[disabled][variant="raised"]:not([disabled="false"]),[is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),rm-button[disabled][variant="unelevated"]:not([disabled="false"]),[is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-black-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-black-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-black-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-black-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12)); color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-dark-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-dark-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-dark-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-dark-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12)); color: rgba(255, 255, 255, .42); color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-light-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-light-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-light-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-light-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-white-surface rm-button[disabled][variant="raised"]:not([disabled="false"]),.rm-white-surface [is="rm-button"][disabled][variant="raised"]:not([disabled="false"]),.rm-white-surface rm-button[disabled][variant="unelevated"]:not([disabled="false"]),.rm-white-surface [is="rm-button"][disabled][variant="unelevated"]:not([disabled="false"]){ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12)); color: rgba(0, 0, 0, .42); color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42)); } rm-button[disabled]:not([disabled="false"]) button,[is="rm-button"][disabled]:not([disabled="false"]) button{ background: transparent; box-shadow: none; cursor: initial; } rm-button[variant=icon][dense],[is="rm-button"][variant=icon][dense]{ margin-right: 0.2857142857142857em; } rm-button[variant=icon][dense] button,[is="rm-button"][variant=icon][dense] button{ height: unset; width: unset; padding: 0; } rm-button[variant]:last-child,[is="rm-button"][variant]:last-child,rm-button:last-child,[is="rm-button"]:last-child{ margin-right: 0; }`,
@@ -948,7 +992,7 @@
             });
             let openOverlay = this.props.openOverlay;
             if (openOverlay) {
-                dist$1.addListener(button, this._onclick = () => {
+                button.addEventListener("beforefocus", this._onclick = () => {
                     let overlay = document.querySelector("#" + openOverlay);
                     if (!overlay) {
                         return;
@@ -966,7 +1010,7 @@
 
         onBeforeUnmount() {
             if (this._onclick) {
-                dist$1.removeListener(this.root.querySelector("button"), this._onclick);
+                this.root.querySelector("button").removeEventListener("beforefocus", this._onclick);
             }
         },
 
@@ -1019,121 +1063,181 @@
         }
       },
 
-      'template': function(template, expressionTypes, bindingTypes, getComponent) {
-        return template('<button expr0="expr0"></button><button expr2="expr2"></button>', [{
-          'type': bindingTypes.IF,
+      'template': function(
+        template,
+        expressionTypes,
+        bindingTypes,
+        getComponent
+      ) {
+        return template(
+          '<button expr0="expr0"></button><button expr2="expr2"></button>',
+          [
+            {
+              'type': bindingTypes.IF,
 
-          'evaluate': function(scope) {
-            return !scope.isIcon();
-          },
+              'evaluate': function(
+                scope
+              ) {
+                return !scope.isIcon();
+              },
 
-          'redundantAttribute': 'expr0',
-          'selector': '[expr0]',
+              'redundantAttribute': 'expr0',
+              'selector': '[expr0]',
 
-          'template': template('<slot expr1="expr1"></slot>', [{
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'style',
+              'template': template(
+                '<slot expr1="expr1"></slot>',
+                [
+                  {
+                    'expressions': [
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'style',
 
-              'evaluate': function(scope) {
-                return scope.props.buttonStyle;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'disabled',
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.props.buttonStyle;
+                        }
+                      },
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'disabled',
 
-              'evaluate': function(scope) {
-                return scope.isDisabled();
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'type',
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.isDisabled();
+                        }
+                      },
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'type',
 
-              'evaluate': function(scope) {
-                return scope.props.type;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'tabindex',
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.props.type;
+                        }
+                      },
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'tabindex',
 
-              'evaluate': function(scope) {
-                return scope.props.tabindex;
-              }
-            }]
-          }, {
-            'type': bindingTypes.SLOT,
-            'attributes': [],
-            'name': 'default',
-            'redundantAttribute': 'expr1',
-            'selector': '[expr1]'
-          }])
-        }, {
-          'type': bindingTypes.IF,
-
-          'evaluate': function(scope) {
-            return scope.isIcon();
-          },
-
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
-
-          'template': template('<rm-icon expr3="expr3"></rm-icon>', [{
-            'expressions': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'disabled',
-
-              'evaluate': function(scope) {
-                return scope.isDisabled();
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'type',
-
-              'evaluate': function(scope) {
-                return scope.props.type;
-              }
-            }, {
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'tabindex',
-
-              'evaluate': function(scope) {
-                return scope.props.tabindex;
-              }
-            }]
-          }, {
-            'type': bindingTypes.TAG,
-            'getComponent': getComponent,
-
-            'evaluate': function(scope) {
-              return 'rm-icon';
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.props.tabindex;
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    'type': bindingTypes.SLOT,
+                    'attributes': [],
+                    'name': 'default',
+                    'redundantAttribute': 'expr1',
+                    'selector': '[expr1]'
+                  }
+                ]
+              )
             },
+            {
+              'type': bindingTypes.IF,
 
-            'slots': [{
-              'id': 'default',
-              'html': '<slot expr4="expr4"></slot>',
+              'evaluate': function(
+                scope
+              ) {
+                return scope.isIcon();
+              },
 
-              'bindings': [{
-                'type': bindingTypes.SLOT,
-                'attributes': [],
-                'name': 'default',
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]'
-              }]
-            }],
+              'redundantAttribute': 'expr2',
+              'selector': '[expr2]',
 
-            'attributes': [{
-              'type': expressionTypes.ATTRIBUTE,
-              'name': 'style',
+              'template': template(
+                '<rm-icon expr3="expr3"></rm-icon>',
+                [
+                  {
+                    'expressions': [
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'disabled',
 
-              'evaluate': function(scope) {
-                return "vertical-align: middle;" + (scope.props.iconStyle || "");
-              }
-            }],
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.isDisabled();
+                        }
+                      },
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'type',
 
-            'redundantAttribute': 'expr3',
-            'selector': '[expr3]'
-          }])
-        }]);
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.props.type;
+                        }
+                      },
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'tabindex',
+
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return scope.props.tabindex;
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    'type': bindingTypes.TAG,
+                    'getComponent': getComponent,
+
+                    'evaluate': function(
+                      scope
+                    ) {
+                      return 'rm-icon';
+                    },
+
+                    'slots': [
+                      {
+                        'id': 'default',
+                        'html': '<slot expr4="expr4"></slot>',
+
+                        'bindings': [
+                          {
+                            'type': bindingTypes.SLOT,
+                            'attributes': [],
+                            'name': 'default',
+                            'redundantAttribute': 'expr4',
+                            'selector': '[expr4]'
+                          }
+                        ]
+                      }
+                    ],
+
+                    'attributes': [
+                      {
+                        'type': expressionTypes.ATTRIBUTE,
+                        'name': 'style',
+
+                        'evaluate': function(
+                          scope
+                        ) {
+                          return "vertical-align: middle;" + (scope.props.iconStyle || "");
+                        }
+                      }
+                    ],
+
+                    'redundantAttribute': 'expr3',
+                    'selector': '[expr3]'
+                  }
+                ]
+              )
+            }
+          ]
+        );
       },
 
       'name': 'rm-button'
@@ -2647,7 +2751,7 @@
       'name': 'rm-menu-item'
     };
 
-    var dist$2 = index$c;
+    var dist$1 = index$c;
 
     var index$d = {
       'css': `rm-radio,[is="rm-radio"]{ position: relative; font: message-box; font-size: 16px; cursor: pointer; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; display: inline-block; margin-right: 8px; outline: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; } rm-radio label,[is="rm-radio"] label{ cursor: inherit; display: inline-block; } rm-radio [ref="circle"],[is="rm-radio"] [ref="circle"]{ height: 1.25em; width: 1.25em; position: relative; display: inline-block; vertical-align: middle; box-sizing: border-box; border-radius: 50%; background: transparent; margin: 0.25em .5em 0.25em 0; outline: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; color: rgb(0, 0, 255); color: rgb(var(--color-accent, 0, 0, 255)); } .rm-black-surface rm-radio [ref="circle"],.rm-black-surface [is="rm-radio"] [ref="circle"]{ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-black, 30, 144, 255)); } .rm-dark-surface rm-radio [ref="circle"],.rm-dark-surface [is="rm-radio"] [ref="circle"]{ color: rgb(30, 144, 255); color: rgb(var(--color-accent-on-dark, 30, 144, 255)); } .rm-light-surface rm-radio [ref="circle"],.rm-light-surface [is="rm-radio"] [ref="circle"]{ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-light, 0, 0, 255)); } .rm-white-surface rm-radio [ref="circle"],.rm-white-surface [is="rm-radio"] [ref="circle"]{ color: rgb(0, 0, 255); color: rgb(var(--color-accent-on-white, 0, 0, 255)); } rm-radio [ref="border"],[is="rm-radio"] [ref="border"]{ transition: border-color linear 100ms; border: 0.125em solid rgba(0, 0, 0, .42); border: 0.125em solid rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-secondary, .42)); height: 100%; width: 100%; box-sizing: border-box; border-radius: inherit; } .rm-black-surface rm-radio [ref="border"],.rm-black-surface [is="rm-radio"] [ref="border"]{ border-color: rgba(255, 255, 255, .42); border-color: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-dark-surface rm-radio [ref="border"],.rm-dark-surface [is="rm-radio"] [ref="border"]{ border-color: rgba(255, 255, 255, .42); border-color: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-secondary, .42)); } .rm-light-surface rm-radio [ref="border"],.rm-light-surface [is="rm-radio"] [ref="border"]{ border-color: rgba(0, 0, 0, .42); border-color: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-secondary, .42)); } .rm-white-surface rm-radio [ref="border"],.rm-white-surface [is="rm-radio"] [ref="border"]{ border-color: rgba(0, 0, 0, .42); border-color: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-secondary, .42)); } rm-radio [ref="radio-circle"],[is="rm-radio"] [ref="radio-circle"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent, 0, 0, 255)); position: absolute; top: 0.3125em; bottom: 0.3125em; right: 0.3125em; left: 0.3125em; text-align: center; transition: transform linear 100ms; transform: scale(0); border-radius: inherit; } .rm-black-surface rm-radio [ref="radio-circle"],.rm-black-surface [is="rm-radio"] [ref="radio-circle"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-black, 30, 144, 255)); } .rm-dark-surface rm-radio [ref="radio-circle"],.rm-dark-surface [is="rm-radio"] [ref="radio-circle"]{ background: rgb(30, 144, 255); background: rgb(var(--color-accent-on-dark, 30, 144, 255)); } .rm-light-surface rm-radio [ref="radio-circle"],.rm-light-surface [is="rm-radio"] [ref="radio-circle"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-light, 0, 0, 255)); } .rm-white-surface rm-radio [ref="radio-circle"],.rm-white-surface [is="rm-radio"] [ref="radio-circle"]{ background: rgb(0, 0, 255); background: rgb(var(--color-accent-on-white, 0, 0, 255)); } rm-radio.rm-checked [ref="radio-circle"],[is="rm-radio"].rm-checked [ref="radio-circle"]{ transform: scale(1); } rm-radio.rm-checked [ref="border"],[is="rm-radio"].rm-checked [ref="border"]{ border-color: rgb(0, 0, 255); border-color: rgb(var(--color-accent, 0, 0, 255)); } .rm-black-surface rm-radio.rm-checked [ref="border"],.rm-black-surface [is="rm-radio"].rm-checked [ref="border"]{ border-color: rgb(30, 144, 255); border-color: rgb(var(--color-accent-on-black, 30, 144, 255)); } .rm-dark-surface rm-radio.rm-checked [ref="border"],.rm-dark-surface [is="rm-radio"].rm-checked [ref="border"]{ border-color: rgb(30, 144, 255); border-color: rgb(var(--color-accent-on-dark, 30, 144, 255)); } .rm-light-surface rm-radio.rm-checked [ref="border"],.rm-light-surface [is="rm-radio"].rm-checked [ref="border"]{ border-color: rgb(0, 0, 255); border-color: rgb(var(--color-accent-on-light, 0, 0, 255)); } .rm-white-surface rm-radio.rm-checked [ref="border"],.rm-white-surface [is="rm-radio"].rm-checked [ref="border"]{ border-color: rgb(0, 0, 255); border-color: rgb(var(--color-accent-on-white, 0, 0, 255)); } rm-radio input,[is="rm-radio"] input{ border: 0; position: absolute; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; outline: 0; -webkit-appearance: none; -moz-appearance: none; }`,
@@ -3184,7 +3288,7 @@
 
             blockedInputs.push(input);
 
-            dist$1.addListener(this.root.firstElementChild, this._onclickFirstChild = event => {
+            this.root.firstElementChild.addEventListener("beforefocus", this._onclickFirstChild = event => {
                 if (this.props.disabled) {
                     return;
                 }
@@ -3198,7 +3302,7 @@
                     this.update({ menuopened: !this.state.menuopened });
                 }
             });
-            dist$1.addListener(this.root.querySelector(".rm-select--arrow"), this._onclickArrow = event => {
+            this.root.querySelector(".rm-select--arrow").addEventListener("beforefocus", this._onclickArrow = event => {
                 if (this.props.disabled) {
                     return;
                 }
@@ -3238,8 +3342,8 @@
             })) {
                 blockedInputs.splice(i, 1);
             }
-            dist$1.removeListener(this.root.firstElementChild, this._onclickFirstChild);
-            dist$1.removeListener(this.root.querySelector(".rm-select--arrow"), this._onclickArrow);
+            this.root.firstElementChild.removeEventListener("beforefocus", this._onclickFirstChild);
+            this.root.querySelector(".rm-select--arrow").removeEventListener("beforefocus", this._onclickArrow);
         },
 
         _manipulated: [],
@@ -3369,7 +3473,7 @@
         getComponent
       ) {
         return template(
-          '<rm-menu expr0="expr0" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr2="expr2"></rm-textfield-container>',
+          '<rm-menu expr162="expr162" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr164="expr164"></rm-textfield-container>',
           [
             {
               'type': bindingTypes.TAG,
@@ -3384,15 +3488,15 @@
               'slots': [
                 {
                   'id': 'default',
-                  'html': '<div ref="rm-select-menu"><slot expr1="expr1"></slot></div>',
+                  'html': '<div ref="rm-select-menu"><slot expr163="expr163"></slot></div>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'default',
-                      'redundantAttribute': 'expr1',
-                      'selector': '[expr1]'
+                      'redundantAttribute': 'expr163',
+                      'selector': '[expr163]'
                     }
                   ]
                 }
@@ -3441,8 +3545,8 @@
                 }
               ],
 
-              'redundantAttribute': 'expr0',
-              'selector': '[expr0]'
+              'redundantAttribute': 'expr162',
+              'selector': '[expr162]'
             },
             {
               'type': bindingTypes.TAG,
@@ -3457,12 +3561,12 @@
               'slots': [
                 {
                   'id': 'input',
-                  'html': '<span slot="input"><input expr3="expr3" class="rm-select--input"/><div expr4="expr4" class="rm-select--label"> </div></span>',
+                  'html': '<span slot="input"><input expr165="expr165" class="rm-select--input"/><div expr166="expr166" class="rm-select--label"> </div></span>',
 
                   'bindings': [
                     {
-                      'redundantAttribute': 'expr3',
-                      'selector': '[expr3]',
+                      'redundantAttribute': 'expr165',
+                      'selector': '[expr165]',
 
                       'expressions': [
                         {
@@ -3518,8 +3622,8 @@
                       ]
                     },
                     {
-                      'redundantAttribute': 'expr4',
-                      'selector': '[expr4]',
+                      'redundantAttribute': 'expr166',
+                      'selector': '[expr166]',
 
                       'expressions': [
                         {
@@ -3538,21 +3642,21 @@
                 },
                 {
                   'id': 'leading',
-                  'html': '<slot expr5="expr5" name="leading" slot="leading"></slot>',
+                  'html': '<slot expr167="expr167" name="leading" slot="leading"></slot>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'leading',
-                      'redundantAttribute': 'expr5',
-                      'selector': '[expr5]'
+                      'redundantAttribute': 'expr167',
+                      'selector': '[expr167]'
                     }
                   ]
                 },
                 {
                   'id': 'trailing',
-                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr6="expr6" variant="icon" class="rm-select--clear" dense></rm-button><slot expr7="expr7" name="trailing"></slot><rm-button expr8="expr8" variant="icon" tabindex="-1" dense></rm-button></span>',
+                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr168="expr168" variant="icon" class="rm-select--clear" dense></rm-button><slot expr169="expr169" name="trailing"></slot><rm-button expr170="expr170" variant="icon" tabindex="-1" dense></rm-button></span>',
 
                   'bindings': [
                     {
@@ -3564,8 +3668,8 @@
                         return scope.isClearable() && scope.root.value;
                       },
 
-                      'redundantAttribute': 'expr6',
-                      'selector': '[expr6]',
+                      'redundantAttribute': 'expr168',
+                      'selector': '[expr168]',
 
                       'template': template(
                         null,
@@ -3618,8 +3722,8 @@
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'trailing',
-                      'redundantAttribute': 'expr7',
-                      'selector': '[expr7]'
+                      'redundantAttribute': 'expr169',
+                      'selector': '[expr169]'
                     },
                     {
                       'type': bindingTypes.TAG,
@@ -3657,8 +3761,8 @@
                         }
                       ],
 
-                      'redundantAttribute': 'expr8',
-                      'selector': '[expr8]'
+                      'redundantAttribute': 'expr170',
+                      'selector': '[expr170]'
                     }
                   ]
                 }
@@ -3717,8 +3821,8 @@
                 }
               ],
 
-              'redundantAttribute': 'expr2',
-              'selector': '[expr2]'
+              'redundantAttribute': 'expr164',
+              'selector': '[expr164]'
             }
           ]
         );
@@ -3854,11 +3958,11 @@
         };
     }
 
-    var dist$3 = positionController;
+    var dist$2 = positionController;
 
     function _interopDefaultLegacy$2 (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-    var positionController__default = /*#__PURE__*/_interopDefaultLegacy$2(dist$3);
+    var positionController__default = /*#__PURE__*/_interopDefaultLegacy$2(dist$2);
 
     const PAGE_INDEX = Symbol("page-index");
 
@@ -4157,7 +4261,7 @@
       'name': 'rm-tabbed-pages'
     };
 
-    var dist$4 = index$g;
+    var dist$3 = index$g;
 
     var index$h = {
       'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; }`,
@@ -4579,11 +4683,11 @@
     riot.register("rm-list-image", index$a);
     riot.register("rm-list-item", index$8);
     riot.register("rm-menu", index$b);
-    riot.register("rm-menu-item", dist$2);
+    riot.register("rm-menu-item", dist$1);
     riot.register("rm-radio", index$d);
     // register("rm-ripple", RippleComponent);
     riot.register("rm-select", index$f);
-    riot.register("rm-tabbed-pages", dist$4);
+    riot.register("rm-tabbed-pages", dist$3);
     // register("rm-tabs", TabsComponent);
     // register("rm-textarea", TextareaComponent);
     riot.register("rm-textfield", index$h);
@@ -4603,11 +4707,11 @@
         listImage: index$a,
         listItem: index$8,
         menu: index$b,
-        menuItem: dist$2,
+        menuItem: dist$1,
         radio: index$d,
         // ripple: RippleComponent,
         select: index$f,
-        tabbedPages: dist$4,
+        tabbedPages: dist$3,
         // tabs: TabsComponent,
         // textarea: TextareaComponent,
         textfield: index$h,
@@ -4616,6 +4720,7 @@
 
     exports.appBarUtils = index;
     exports.background = index$i;
+    exports.beforeFocusListener = index_es$1;
     exports.components = components;
     exports.elevation = dist;
     exports.ripple = index_es;

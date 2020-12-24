@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 2020-12-24
+- update dependencies
+- add beforeFocusListener export
+
 ## [2.1.0] - 2020-12-24
 - add "rm-circular-avatar", "rm-list-group", "rm-list-image"
 - update dependencies
