@@ -3854,10 +3854,12 @@
 
         onBeforeUnmount() {
             this._restoreManipulated();
+            let index;
             if (blockedInputs.some((input, i) => {
+                index = i;
                 return this._input === input;
             })) {
-                blockedInputs.splice(i, 1);
+                blockedInputs.splice(index, 1);
             }
             this.root.firstElementChild.removeEventListener("beforefocus", this._onclickFirstChild);
             this.root.querySelector(".rm-select--arrow").removeEventListener("beforefocus", this._onclickArrow);
