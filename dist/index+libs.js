@@ -2703,12 +2703,14 @@
                 ripple(this._lastHighlighted).start().end();
                 option.click();
             }
-            option.dispatchEvent(new CustomEvent("selected", {
-                detail: {
-                    value: option.getAttribute("value")
-                },
-                bubbles: true, cancelable: false
-            }));
+            else {
+                option.dispatchEvent(new CustomEvent("selected", {
+                    detail: {
+                        value: option.getAttribute("value")
+                    },
+                    bubbles: true, cancelable: false
+                }));
+            }
         },
         _handleClick: function (event) {
             if (!this._lastHighlighted ||

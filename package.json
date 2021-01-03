@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "2.1.9",
+  "version": "2.1.11",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -21,7 +21,7 @@
     "@riot-material/rm-list-group": "^1.0.1",
     "@riot-material/rm-list-image": "^1.0.0",
     "@riot-material/rm-list-item": "^1.1.0",
-    "@riot-material/rm-menu": "^1.0.4",
+    "@riot-material/rm-menu": "^1.0.5",
     "@riot-material/rm-menu-item": "^1.0.1",
     "@riot-material/rm-radio": "^1.0.2",
     "@riot-material/rm-select": "^1.3.0",
