@@ -3178,6 +3178,7 @@
         _onmenuselected(event) {
             this._lastSelectedOption = event.target;
             this.update({ refreshLabel: true, menuopened: false });
+            this.dispatchMenuEvent(event);
         },
 
         onBeforeMount() {
@@ -3515,12 +3516,10 @@
             ;
         },
 
-        dispatchMenuCloseEvent() {
-            this.root.dispatchEvent(new Event("menuclose"));
-        },
-
-        dispatchMenuOpenEvent() {
-            this.root.dispatchEvent(new Event("menuopen"));
+        dispatchMenuEvent(event) {
+            this.root.dispatchEvent(new CustomEvent("menu" + event.type, {
+                detail: { originatingEvent: event }
+            }));
         },
 
         components: {
@@ -3537,7 +3536,7 @@
         getComponent
       ) {
         return template(
-          '<rm-menu expr54="expr54" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr56="expr56"></rm-textfield-container>',
+          '<rm-menu expr0="expr0" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr2="expr2"></rm-textfield-container>',
           [
             {
               'type': bindingTypes.TAG,
@@ -3552,15 +3551,15 @@
               'slots': [
                 {
                   'id': 'default',
-                  'html': '<div ref="rm-select-menu"><slot expr55="expr55"></slot></div>',
+                  'html': '<div ref="rm-select-menu"><slot expr1="expr1"></slot></div>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'default',
-                      'redundantAttribute': 'expr55',
-                      'selector': '[expr55]'
+                      'redundantAttribute': 'expr1',
+                      'selector': '[expr1]'
                     }
                   ]
                 }
@@ -3614,7 +3613,7 @@
                   'evaluate': function(
                     scope
                   ) {
-                    return scope.dispatchMenuOpenEvent;
+                    return scope.dispatchMenuEvent;
                   }
                 },
                 {
@@ -3624,13 +3623,13 @@
                   'evaluate': function(
                     scope
                   ) {
-                    return scope.dispatchMenuCloseEvent;
+                    return scope.dispatchMenuEvent;
                   }
                 }
               ],
 
-              'redundantAttribute': 'expr54',
-              'selector': '[expr54]'
+              'redundantAttribute': 'expr0',
+              'selector': '[expr0]'
             },
             {
               'type': bindingTypes.TAG,
@@ -3645,12 +3644,12 @@
               'slots': [
                 {
                   'id': 'input',
-                  'html': '<span slot="input"><input expr57="expr57" class="rm-select--input"/><div expr58="expr58" class="rm-select--label"> </div></span>',
+                  'html': '<span slot="input"><input expr3="expr3" class="rm-select--input"/><div expr4="expr4" class="rm-select--label"> </div></span>',
 
                   'bindings': [
                     {
-                      'redundantAttribute': 'expr57',
-                      'selector': '[expr57]',
+                      'redundantAttribute': 'expr3',
+                      'selector': '[expr3]',
 
                       'expressions': [
                         {
@@ -3706,8 +3705,8 @@
                       ]
                     },
                     {
-                      'redundantAttribute': 'expr58',
-                      'selector': '[expr58]',
+                      'redundantAttribute': 'expr4',
+                      'selector': '[expr4]',
 
                       'expressions': [
                         {
@@ -3726,21 +3725,21 @@
                 },
                 {
                   'id': 'leading',
-                  'html': '<slot expr59="expr59" name="leading" slot="leading"></slot>',
+                  'html': '<slot expr5="expr5" name="leading" slot="leading"></slot>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'leading',
-                      'redundantAttribute': 'expr59',
-                      'selector': '[expr59]'
+                      'redundantAttribute': 'expr5',
+                      'selector': '[expr5]'
                     }
                   ]
                 },
                 {
                   'id': 'trailing',
-                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr60="expr60" variant="icon" class="rm-select--clear" dense></rm-button><slot expr61="expr61" name="trailing"></slot><rm-button expr62="expr62" variant="icon" tabindex="-1" dense></rm-button></span>',
+                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr6="expr6" variant="icon" class="rm-select--clear" dense></rm-button><slot expr7="expr7" name="trailing"></slot><rm-button expr8="expr8" variant="icon" tabindex="-1" dense></rm-button></span>',
 
                   'bindings': [
                     {
@@ -3752,8 +3751,8 @@
                         return scope.isClearable() && scope.root.value;
                       },
 
-                      'redundantAttribute': 'expr60',
-                      'selector': '[expr60]',
+                      'redundantAttribute': 'expr6',
+                      'selector': '[expr6]',
 
                       'template': template(
                         null,
@@ -3806,8 +3805,8 @@
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'trailing',
-                      'redundantAttribute': 'expr61',
-                      'selector': '[expr61]'
+                      'redundantAttribute': 'expr7',
+                      'selector': '[expr7]'
                     },
                     {
                       'type': bindingTypes.TAG,
@@ -3845,8 +3844,8 @@
                         }
                       ],
 
-                      'redundantAttribute': 'expr62',
-                      'selector': '[expr62]'
+                      'redundantAttribute': 'expr8',
+                      'selector': '[expr8]'
                     }
                   ]
                 }
@@ -3905,8 +3904,8 @@
                 }
               ],
 
-              'redundantAttribute': 'expr56',
-              'selector': '[expr56]'
+              'redundantAttribute': 'expr2',
+              'selector': '[expr2]'
             }
           ]
         );
