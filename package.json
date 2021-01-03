@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -24,7 +24,7 @@
     "@riot-material/rm-menu": "^1.0.3",
     "@riot-material/rm-menu-item": "^1.0.1",
     "@riot-material/rm-radio": "^1.0.2",
-    "@riot-material/rm-select": "^1.0.14",
+    "@riot-material/rm-select": "^1.1.0",
     "@riot-material/rm-tabbed-pages": "^1.0.4",
     "@riot-material/rm-textfield": "^1.0.4",
     "@riot-material/rm-textfield-container": "^1.0.3",

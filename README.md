@@ -9,10 +9,10 @@ npm install riot-material
 or download one of the bundled file
 ```js
 /**
- * `dist/index.amd.js`
- * `dist/index.amd+libs.js`
- * `dist/index.umd.js`
- * `dist/index.umd+libs.js`
+ * `dist/index.js`
+ * `dist/index.min.js`
+ * `dist/index+libs.js`
+ * `dist/index+libs.min.js`
  */
 requirejs.config({
   paths: {
@@ -26,7 +26,6 @@ require(['riot-material'], function (riotMaterial) {
 });
 
 /**
- * `dist/index.js`
  * `dist/index.es.js`
  * npm installation
  */
@@ -36,10 +35,12 @@ otherwise you can include the script in your project html
 ```html
 <!-- if you want to use the what-input library elsewhere -->
 <script src="path/to/what-input.umd.js"></script>
-<script src="riot-material/index.umd.js"></script>
+<script src="riot-material/index.js"></script>
+<!-- <script src="riot-material/index.min.js"></script> -->
 
 <!-- or, if you want to use only riotMaterial -->
-<script src="riot-material/index.umd+libs.js"></script>
+<script src="riot-material/index+libs.js"></script>
+<!-- <script src="riot-material/index+libs.min.js"></script> -->
 ```
 and access it via
 ```js

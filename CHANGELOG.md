@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.5] - 2021-01-03
+- update dependencies
+- update README
+
 ## [2.1.4] - 2020-12-27
 - dist previous version
 
