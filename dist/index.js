@@ -3413,13 +3413,13 @@
         _lastSelected: null,
 
         onBeforeUpdate() {
-            this._restoreManipulated();
+            // this._restoreManipulated();
         },
 
         onUpdated() {
-            this._manipulate();
-            if (this.state.refreshLabel) {
-                HTMLInputElement.prototype.__lookupSetter__("value").call(this.root.querySelector("input"), this.getLabel());
+            // this._manipulate();
+            if (this.state.refreshLabel || document.activeElement !== this._input) {
+                HTMLInputElement.prototype.__lookupSetter__("value").call(this._input, this.getLabel());
                 delete this.state.refreshLabel;
                 delete this.state.filtering;
             }
