@@ -54,7 +54,7 @@ Refer to each sub-package documentation:
 - `components.appBar` **rm-app-bar** tag - *Not yet available*
 - [`components.button` **rm-button** tag](https://github.com/riot-material/rm-button#properties)
 - [`components.checkbox` **rm-checkbox** tag](https://github.com/riot-material/rm-checkbox#properties)
-- `components.dialog` **rm-dialog** tag - *Not yet available*
+- [`components.dialog` **rm-dialog** tag](https://github.com/riot-material/rm-dialog#properties)
 - `components.divider` **rm-divider** tag - *Not yet available*
 - [`components.icon` **rm-icon** tag](https://github.com/riot-material/rm-icon#documentation)
 - [`components.listItem` **rm-list-item** tag](https://github.com/riot-material/rm-list-item#properties)

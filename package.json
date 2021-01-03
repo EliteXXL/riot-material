@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -15,7 +15,7 @@
     "@riot-material/rm-button": "^1.0.5",
     "@riot-material/rm-checkbox": "^1.0.4",
     "@riot-material/rm-circular-avatar": "^1.0.0",
-    "@riot-material/rm-dialog": "^1.0.0",
+    "@riot-material/rm-dialog": "^1.1.1",
     "@riot-material/rm-divider": "^1.0.0",
     "@riot-material/rm-icon": "^1.0.3",
     "@riot-material/rm-list-group": "^1.0.1",
