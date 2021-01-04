@@ -3510,8 +3510,10 @@
                 return;
             }
             if (!this.isMultiple()) {
-                this.getSelected().selected = false;
+                this.getSelected()[0].selected = false;
             }
+            option.selected = true;
+            this._lastSelectedOption = option;
             if (this._mounted) {
                 this.update({ menuopened: this.isMultiple() ? this.state.menuopened : false, refreshLabel: true });
             }
