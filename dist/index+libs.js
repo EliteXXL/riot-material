@@ -3315,7 +3315,7 @@
         onMounted() {
             const circle = this.root.querySelector("[ref=circle]");
             const input = this.root.querySelector("input");
-            const circleRipple = ripple(
+            ripple(
                 circle,
                 {
                     centered: true,
@@ -3683,6 +3683,8 @@
       'name': 'rm-textfield-container'
     };
 
+    // import { __ as __r } from "riot";
+
     const blockedInputs = [];
     window.addEventListener("change", event => {
         if (blockedInputs.some(input => event.target === input)) {
@@ -3691,7 +3693,7 @@
     }, true);
 
     var index$g = {
-      'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; opacity: 0; cursor: default; width: 100%; color: currentColor; } rm-select[filterable]:not([filterable=false]) .rm-select--input,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--input{ opacity: 1; cursor: text; } rm-select .rm-select--label,[is="rm-select"] .rm-select--label{ position: absolute; top: 0; left: 0; font-size: inherit; line-height: inherit; } rm-select[filterable]:not([filterable=false]) .rm-select--label,[is="rm-select"][filterable]:not([filterable=false]) .rm-select--label{ display: none; }`,
+      'css': `rm-select,[is="rm-select"]{ position: relative; } rm-select[filterable],[is="rm-select"][filterable]{ cursor: text; } rm-select[disabled],[is="rm-select"][disabled],rm-select[readonly],[is="rm-select"][readonly]{ cursor: default; } rm-select .rm-select--arrow,[is="rm-select"] .rm-select--arrow{ transition: transform ease-in-out 150ms; transform: rotate(0deg); } rm-select .rm-select--arrow.rm-select--arrow-rotated,[is="rm-select"] .rm-select--arrow.rm-select--arrow-rotated{ transform: rotate(180deg); } rm-select .rm-select--input,[is="rm-select"] .rm-select--input{ display: inline-block; font: inherit; padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 0px; height: 0px; color: currentColor; opacity: 0; cursor: default; position: absolute; left: -1px; top: -1px; } rm-select[filterable] .rm-select--input,[is="rm-select"][filterable] .rm-select--input{ position: static; width: 100%; height: auto; opacity: 1; cursor: text; } rm-select .rm-select--input-wrap,[is="rm-select"] .rm-select--input-wrap{ position: relative; height: 1.25em; overflow: hidden; display: inline-block; vertical-align: top; width: 100px; } rm-select[full-width] .rm-select--input-wrap,[is="rm-select"][full-width] .rm-select--input-wrap{ width: 100%; }`,
 
       'exports': {
         _mounted: false,
@@ -3751,15 +3753,17 @@
                     if (option === this._lastSelectedOption) {
                         return;
                     }
-                    const newOptionComponent = option[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-                    if (newOptionComponent != null) {
-                        newOptionComponent.update({ selected: true });
-                    }
+                    option.selected = true;
+                    // const newOptionComponent = option[__r.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                    // if (newOptionComponent != null) {
+                    //     newOptionComponent.update({ selected: true });
+                    // }
                     if (_lastSelectedOption != null && !this.isMultiple()) {
-                        const lastOptionComponent = _lastSelectedOption[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
-                        if (lastOptionComponent != null) {
-                            lastOptionComponent.update({ selected: false });
-                        }
+                        _lastSelectedOption.selected = false;
+                        // const lastOptionComponent = _lastSelectedOption[__r.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                        // if (lastOptionComponent != null) {
+                        //     lastOptionComponent.update({ selected: false });
+                        // }
                     }
                     _lastSelectedOption = option;
                 },
@@ -3860,7 +3864,7 @@
             blockedInputs.push(input);
 
             this.root.firstElementChild.addEventListener("beforefocus", this._onclickFirstChild = event => {
-                if (this.props.disabled) {
+                if (this.isDisabled() || this.isReadonly()) {
                     return;
                 }
                 if (document.activeElement !== input) {
@@ -3874,13 +3878,16 @@
                 }
             });
             this.root.querySelector(".rm-select--arrow").addEventListener("beforefocus", this._onclickArrow = event => {
-                if (this.props.disabled) {
+                if (this.isDisabled() || this.isReadonly()) {
                     return;
                 }
                 if (this.isFilterable()) {
                     this.update({ menuopened: !this.state.menuopened });
                 }
             });
+
+            this.root.focus = () => input.focus();
+            this.root.blur = () => input.blur();
 
             this._mounted = true;
 
@@ -4045,6 +4052,10 @@
             return this.props.disabled != null && this.props.disabled !== false;
         },
 
+        isReadonly() {
+            return this.props.readonly != null && this.props.readonly !== false;
+        },
+
         isFullWidth() {
             return this.props.fullWidth != null && this.props.fullWidth !== false;
         },
@@ -4094,7 +4105,7 @@
         getComponent
       ) {
         return template(
-          '<rm-menu expr18="expr18" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr20="expr20"></rm-textfield-container>',
+          '<rm-menu expr594="expr594" inherit-width prevent-close-on-click-out prevent-focus keep-highlight></rm-menu><rm-textfield-container expr596="expr596"></rm-textfield-container>',
           [
             {
               'type': bindingTypes.TAG,
@@ -4109,15 +4120,15 @@
               'slots': [
                 {
                   'id': 'default',
-                  'html': '<div ref="rm-select-menu"><slot expr19="expr19"></slot></div>',
+                  'html': '<div ref="rm-select-menu"><slot expr595="expr595"></slot></div>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'default',
-                      'redundantAttribute': 'expr19',
-                      'selector': '[expr19]'
+                      'redundantAttribute': 'expr595',
+                      'selector': '[expr595]'
                     }
                   ]
                 }
@@ -4186,8 +4197,8 @@
                 }
               ],
 
-              'redundantAttribute': 'expr18',
-              'selector': '[expr18]'
+              'redundantAttribute': 'expr594',
+              'selector': '[expr594]'
             },
             {
               'type': bindingTypes.TAG,
@@ -4202,12 +4213,44 @@
               'slots': [
                 {
                   'id': 'input',
-                  'html': '<span slot="input"><input expr21="expr21" class="rm-select--input"/><div expr22="expr22" class="rm-select--label"> </div></span>',
+                  'html': '<span class="rm-select--input-wrap" slot="input"><template expr597="expr597"></template><input expr598="expr598" class="rm-select--input" size="1"/></span>',
 
                   'bindings': [
                     {
-                      'redundantAttribute': 'expr21',
-                      'selector': '[expr21]',
+                      'type': bindingTypes.IF,
+
+                      'evaluate': function(
+                        scope
+                      ) {
+                        return !scope.isFilterable();
+                      },
+
+                      'redundantAttribute': 'expr597',
+                      'selector': '[expr597]',
+
+                      'template': template(
+                        ' ',
+                        [
+                          {
+                            'expressions': [
+                              {
+                                'type': expressionTypes.TEXT,
+                                'childNodeIndex': 0,
+
+                                'evaluate': function(
+                                  scope
+                                ) {
+                                  return scope.getLabel();
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      )
+                    },
+                    {
+                      'redundantAttribute': 'expr598',
+                      'selector': '[expr598]',
 
                       'expressions': [
                         {
@@ -4259,22 +4302,15 @@
                           ) {
                             return scope.isDisabled();
                           }
-                        }
-                      ]
-                    },
-                    {
-                      'redundantAttribute': 'expr22',
-                      'selector': '[expr22]',
-
-                      'expressions': [
+                        },
                         {
-                          'type': expressionTypes.TEXT,
-                          'childNodeIndex': 0,
+                          'type': expressionTypes.ATTRIBUTE,
+                          'name': 'type',
 
                           'evaluate': function(
                             scope
                           ) {
-                            return scope.getLabel();
+                            return scope.isReadonly() ? "hidden" : "text";
                           }
                         }
                       ]
@@ -4283,21 +4319,21 @@
                 },
                 {
                   'id': 'leading',
-                  'html': '<slot expr23="expr23" name="leading" slot="leading"></slot>',
+                  'html': '<slot expr599="expr599" name="leading" slot="leading"></slot>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'leading',
-                      'redundantAttribute': 'expr23',
-                      'selector': '[expr23]'
+                      'redundantAttribute': 'expr599',
+                      'selector': '[expr599]'
                     }
                   ]
                 },
                 {
                   'id': 'trailing',
-                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr24="expr24" variant="icon" class="rm-select--clear" dense></rm-button><slot expr25="expr25" name="trailing"></slot><rm-button expr26="expr26" variant="icon" tabindex="-1" dense></rm-button></span>',
+                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr600="expr600" variant="icon" class="rm-select--clear" dense></rm-button><slot expr601="expr601" name="trailing"></slot><rm-button expr602="expr602" variant="icon" tabindex="-1" dense></rm-button></span>',
 
                   'bindings': [
                     {
@@ -4309,8 +4345,8 @@
                         return scope.isClearable() && scope.root.value;
                       },
 
-                      'redundantAttribute': 'expr24',
-                      'selector': '[expr24]',
+                      'redundantAttribute': 'expr600',
+                      'selector': '[expr600]',
 
                       'template': template(
                         null,
@@ -4363,8 +4399,8 @@
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'trailing',
-                      'redundantAttribute': 'expr25',
-                      'selector': '[expr25]'
+                      'redundantAttribute': 'expr601',
+                      'selector': '[expr601]'
                     },
                     {
                       'type': bindingTypes.TAG,
@@ -4399,11 +4435,21 @@
                               ''
                             );
                           }
+                        },
+                        {
+                          'type': expressionTypes.ATTRIBUTE,
+                          'name': 'disabled',
+
+                          'evaluate': function(
+                            scope
+                          ) {
+                            return scope.isDisabled() || scope.isReadonly();
+                          }
                         }
                       ],
 
-                      'redundantAttribute': 'expr26',
-                      'selector': '[expr26]'
+                      'redundantAttribute': 'expr602',
+                      'selector': '[expr602]'
                     }
                   ]
                 }
@@ -4462,8 +4508,8 @@
                 }
               ],
 
-              'redundantAttribute': 'expr20',
-              'selector': '[expr20]'
+              'redundantAttribute': 'expr596',
+              'selector': '[expr596]'
             }
           ]
         );
@@ -4696,7 +4742,7 @@
                 let tabButton = null;
                 let page;
                 const updatedIndex = this._getUpdatedIndexOf(index);
-                const pageTest = pageContainer.children[updatedIndex];
+                pageContainer.children[updatedIndex];
                 if (updatedIndex >= pageContainer.children.length) {
                     page = pageContainer.appendChild(document.createElement("div"));
                     page[PAGE_INDEX] = index;
@@ -4904,20 +4950,48 @@
 
     var dist$3 = index$h;
 
+    const VALUE = Symbol("value");
+    const IS_MOUNTED = Symbol("is-mounted");
+
     var index$i = {
-      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled]{ cursor: default; } rm-textfield input,[is="rm-textfield"] input{ padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; }`,
+      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled],rm-textfield[readonly],[is="rm-textfield"][readonly],rm-textfield[disabled] input,[is="rm-textfield"][disabled] input,rm-textfield[readonly] input,[is="rm-textfield"][readonly] input{ cursor: default; } rm-textfield .rm-textfield--input,[is="rm-textfield"] .rm-textfield--input{ display: inline-block; font: inherit; padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; } rm-textfield .rm-textfield--input-wrap,[is="rm-textfield"] .rm-textfield--input-wrap{ height: 1.25em; overflow: hidden; display: inline-block; vertical-align: top; width: 100px; } rm-textfield[full-width] .rm-textfield--input-wrap,[is="rm-textfield"][full-width] .rm-textfield--input-wrap{ width: 100%; }`,
 
       'exports': {
-        _input: null,
+        [IS_MOUNTED]: false,
+        [VALUE]: null,
 
         onBeforeMount() {
             Object.defineProperty(this.root, "value", {
                 get: () => {
-                    return this._input ? this._input.value : this.props.value || "";
+                    if (!this[IS_MOUNTED]) {
+                        return this.props.value || "";
+                    }
+                    const tmpValue = this[VALUE];
+                    if (tmpValue != null) {
+                        return tmpValue;
+                    }
+                    const input = this._input;
+                    const value = input ? input.value : this.props.value || "";
+                    // console.log("root.value:", input, value);
+                    return value;
                 },
                 set: value => {
-                    this._input.value = value;
+                    const input = this._input;
+                    if (input == null) {
+                        return;
+                    }
+                    input.value = value;
                     this.update();
+                }
+            });
+            let input = null;
+            Object.defineProperty(this, "_input", {
+                get: () => {
+                    if (input == null || !input.isConnected) {
+                        console.log("wasn't connected:", input != null);
+                        input = this.root.querySelector("input.rm-textfield--input");
+                    }
+                    return input;
                 }
             });
         },
@@ -4926,9 +5000,9 @@
         _onblur: null,
 
         onMounted() {
-            this._input = this.root.querySelector("input");
+            const input = this._input;
             window.addEventListener("focus", this._onfocus = event => {
-                if (event.target !== this._input) {
+                if (event.target !== input) {
                     return;
                 }
                 event.stopImmediatePropagation();
@@ -4936,18 +5010,32 @@
                 this.root.dispatchEvent(new FocusEvent("focus", { bubbles: false, cancelable: false }));
             }, true);
             window.addEventListener("blur", this._onblur = event => {
-                if (event.target !== this._input) {
+                if (event.target !== input) {
                     return;
                 }
                 event.stopImmediatePropagation();
                 this.update({ focused: false });
                 this.root.dispatchEvent(new FocusEvent("blur", { bubbles: false, cancelable: false }));
             }, true);
+
+            this.root.focus = () => input.focus();
+            this.root.blur = () => input.blur();
+
+            this[IS_MOUNTED] = true;
         },
 
         onBeforeUnmount() {
             window.removeEventListener("focus", this._onfocus, true);
             window.removeEventListener("blur", this._onblur, true);
+        },
+
+        onBeforeUpdate() {
+            this[VALUE] = this.root.value;
+        },
+
+        onUpdated() {
+            this._input.value = this[VALUE];
+            this[VALUE] = null;
         },
 
         _oncontainermousedown(event) {
@@ -4977,6 +5065,9 @@
         },
 
         getType() {
+            if (this.isReadonly() || this.isDisabled()) {
+                return "hidden";
+            }
             switch (this.props.type) {
                 case "email": {
                     return "email";
@@ -5014,6 +5105,10 @@
             return this.props.fullWidth != null && this.props.fullWidth !== false;
         },
 
+        isReadonly() {
+            return this.props.readonly != null && this.props.readonly !== false;
+        },
+
         clear() {
             this.root.value = "";
             this.update();
@@ -5046,7 +5141,7 @@
               'slots': [
                 {
                   'id': 'input',
-                  'html': '<input expr1="expr1" slot="input"/>',
+                  'html': '<span class="rm-textfield--input-wrap" slot="input"><input expr1="expr1" class="rm-textfield--input" size="1"/><template expr2="expr2"></template></span>',
 
                   'bindings': [
                     {
@@ -5080,7 +5175,7 @@
                           'evaluate': function(
                             scope
                           ) {
-                            return scope.props.value;
+                            return scope.root.value;
                           }
                         },
                         {
@@ -5092,38 +5187,60 @@
                           ) {
                             return scope.props.name;
                           }
-                        },
-                        {
-                          'type': expressionTypes.ATTRIBUTE,
-                          'name': 'disabled',
-
-                          'evaluate': function(
-                            scope
-                          ) {
-                            return scope.isDisabled();
-                          }
                         }
                       ]
+                    },
+                    {
+                      'type': bindingTypes.IF,
+
+                      'evaluate': function(
+                        scope
+                      ) {
+                        return scope.isDisabled() || scope.isReadonly();
+                      },
+
+                      'redundantAttribute': 'expr2',
+                      'selector': '[expr2]',
+
+                      'template': template(
+                        ' ',
+                        [
+                          {
+                            'expressions': [
+                              {
+                                'type': expressionTypes.TEXT,
+                                'childNodeIndex': 0,
+
+                                'evaluate': function(
+                                  scope
+                                ) {
+                                  return scope.root.value;
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      )
                     }
                   ]
                 },
                 {
                   'id': 'leading',
-                  'html': '<slot expr2="expr2" name="leading" slot="leading"></slot>',
+                  'html': '<slot expr3="expr3" name="leading" slot="leading"></slot>',
 
                   'bindings': [
                     {
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'leading',
-                      'redundantAttribute': 'expr2',
-                      'selector': '[expr2]'
+                      'redundantAttribute': 'expr3',
+                      'selector': '[expr3]'
                     }
                   ]
                 },
                 {
                   'id': 'trailing',
-                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr3="expr3" variant="icon" dense></rm-button><slot expr4="expr4" name="trailing"></slot></span>',
+                  'html': '<span style="white-space: nowrap;" slot="trailing"><rm-button expr4="expr4" variant="icon" dense></rm-button><slot expr5="expr5" name="trailing"></slot></span>',
 
                   'bindings': [
                     {
@@ -5135,8 +5252,8 @@
                         return scope.isClearable() && scope.root.value;
                       },
 
-                      'redundantAttribute': 'expr3',
-                      'selector': '[expr3]',
+                      'redundantAttribute': 'expr4',
+                      'selector': '[expr4]',
 
                       'template': template(
                         null,
@@ -5189,8 +5306,8 @@
                       'type': bindingTypes.SLOT,
                       'attributes': [],
                       'name': 'trailing',
-                      'redundantAttribute': 'expr4',
-                      'selector': '[expr4]'
+                      'redundantAttribute': 'expr5',
+                      'selector': '[expr5]'
                     }
                   ]
                 }
