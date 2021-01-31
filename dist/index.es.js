@@ -24,10 +24,10 @@ export { appBarUtils };
 import { register } from 'riot';
 
 var index = {
-  'css': `rm-circular-avatar,[is="rm-circular-avatar"]{ display: block; height: 40px; width: 40px; border-radius: 50%; background: gray; }`,
+  'css': `rm-list-avatar,[is="rm-list-avatar"]{ display: block; height: 40px; width: 40px; background: gray; } rm-list-avatar[circular],[is="rm-list-avatar"][circular]{ border-radius: 50%; }`,
   'exports': null,
   'template': null,
-  'name': 'rm-circular-avatar'
+  'name': 'rm-list-avatar'
 };
 
 var index$1 = {
@@ -268,10 +268,11 @@ register("rm-app-bar", AppBarComponent);
 // register("rm-bottom-sheet", BottomSheetComponent);
 register("rm-button", ButtonComponent);
 register("rm-checkbox", CheckboxComponent);
-register("rm-circular-avatar", index);
+// register("rm-circular-avatar", CircularAvatarComponent);
 register("rm-dialog", DialogComponent);
 register("rm-divider", DividerComponent);
 register("rm-icon", IconComponent);
+register("rm-list-avatar", index);
 register("rm-list-group", index$1);
 register("rm-list-image", index$2);
 register("rm-list-item", ListItemComponent);
@@ -292,10 +293,11 @@ const components = {
     // bottomSheet: BottomSheetComponent,
     button: ButtonComponent,
     checkbox: CheckboxComponent,
-    circularAvatar: index,
+    // circularAvatar: CircularAvatarComponent,
     dialog: DialogComponent,
     divider: DividerComponent,
     icon: IconComponent,
+    listAvatar: index,
     listGroup: index$1,
     listImage: index$2,
     listItem: ListItemComponent,

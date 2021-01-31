@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2021-01-31
+- replace `rm-circular-avatar` with `rm-list-avatar`
+
 ## [2.1.18] - 2021-01-31
 - update dependencies
 

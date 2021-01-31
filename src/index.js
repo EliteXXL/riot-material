@@ -2,10 +2,11 @@ import AppBarComponent from "@riot-material/rm-app-bar";
 // import BottomSheetComponent from "@riot-material/rm-bottom-sheet";
 import ButtonComponent from "@riot-material/rm-button";
 import CheckboxComponent from "@riot-material/rm-checkbox";
-import CircularAvatarComponent from "@riot-material/rm-circular-avatar";
+// import CircularAvatarComponent from "@riot-material/rm-circular-avatar";
 import DialogComponent from "@riot-material/rm-dialog";
 import DividerComponent from "@riot-material/rm-divider";
 import IconComponent from "@riot-material/rm-icon";
+import ListAvatarComponent from "@riot-material/rm-list-avatar";
 import ListGroupComponent from "@riot-material/rm-list-group";
 import ListImageComponent from "@riot-material/rm-list-image";
 import ListItemComponent from "@riot-material/rm-list-item";
@@ -34,10 +35,11 @@ register("rm-app-bar", AppBarComponent);
 // register("rm-bottom-sheet", BottomSheetComponent);
 register("rm-button", ButtonComponent);
 register("rm-checkbox", CheckboxComponent);
-register("rm-circular-avatar", CircularAvatarComponent);
+// register("rm-circular-avatar", CircularAvatarComponent);
 register("rm-dialog", DialogComponent);
 register("rm-divider", DividerComponent);
 register("rm-icon", IconComponent);
+register("rm-list-avatar", ListAvatarComponent);
 register("rm-list-group", ListGroupComponent);
 register("rm-list-image", ListImageComponent);
 register("rm-list-item", ListItemComponent);
@@ -58,10 +60,11 @@ const components = {
     // bottomSheet: BottomSheetComponent,
     button: ButtonComponent,
     checkbox: CheckboxComponent,
-    circularAvatar: CircularAvatarComponent,
+    // circularAvatar: CircularAvatarComponent,
     dialog: DialogComponent,
     divider: DividerComponent,
     icon: IconComponent,
+    listAvatar: ListAvatarComponent,
     listGroup: ListGroupComponent,
     listImage: ListImageComponent,
     listItem: ListItemComponent,

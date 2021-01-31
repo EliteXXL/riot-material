@@ -1908,13 +1908,6 @@
       'name': 'rm-checkbox'
     };
 
-    var index$5 = {
-      'css': `rm-circular-avatar,[is="rm-circular-avatar"]{ display: block; height: 40px; width: 40px; border-radius: 50%; background: gray; }`,
-      'exports': null,
-      'template': null,
-      'name': 'rm-circular-avatar'
-    };
-
     var style = document.createElement("style");
     style.innerHTML = "\n.rm-black-surface {\n    background: rgb(0, 0, 0);\n    background: rgb(var(--color-black-surface, 0, 0, 0));\n    color: rgb(255, 255, 255);\n    color: rgb(var(--color-on-black, 255, 255, 255));\n}\n.rm-dark-surface {\n    background: rgb(10, 10, 10);\n    background: rgb(var(--color-dark-surface, 10, 10, 10));\n    color: rgb(255, 255, 255);\n    color: rgb(var(--color-on-dark, 255, 255, 255));\n}\n.rm-light-surface {\n    background: rgb(250, 250, 250);\n    background: rgb(var(--color-light-surface, 250, 250, 250));\n    color: rgb(0, 0, 0);\n    color: rgb(var(--color-on-light, 0, 0, 0));\n}\n.rm-white-surface {\n    background: rgb(255, 255, 255);\n    background: rgb(var(--color-white-surface, 255, 255, 255));\n    color: rgb(0, 0, 0);\n    color: rgb(var(--color-on-white, 0, 0, 0));\n}\n";
     document.head.appendChild(style);
@@ -1935,7 +1928,7 @@
     	white: white_1
     }, '__esModule', {value: true});
 
-    var index$6 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.assign(/*#__PURE__*/Object.create(null), surfaces, {
+    var index$5 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.assign(/*#__PURE__*/Object.create(null), surfaces, {
         'default': surfaces,
         black: black_1,
         dark: dark_1,
@@ -1943,7 +1936,7 @@
         white: white_1
     }));
 
-    var index$7 = {
+    var index$6 = {
       'css': `rm-dialog,[is="rm-dialog"]{ position: fixed; display: block; top: 0; bottom: 0; right: 0; left: 0; padding: 40px; background: rgba(0, 0, 0, .42); background: rgba(0, 0, 0, var(--color-opacity-secondary, .42)); box-sizing: border-box; z-index: 100; font-size: 0; text-align: center; } rm-dialog > [ref=aligner],[is="rm-dialog"] > [ref=aligner]{ width: 0; height: 100%; vertical-align: middle; display: inline-block; } rm-dialog > [ref=container],[is="rm-dialog"] > [ref=container]{ width: 100%; font-size: 16px; vertical-align: middle; display: inline-block; max-width: 560px; text-align: initial; } rm-dialog > [ref=container] > [ref=title],[is="rm-dialog"] > [ref=container] > [ref=title]{ min-height: 8px; border-radius: 4px 4px 0 0; } rm-dialog > [ref=container] > [ref=content],[is="rm-dialog"] > [ref=container] > [ref=content]{ overflow: auto; } rm-dialog > [ref=container] > [ref=actions],[is="rm-dialog"] > [ref=container] > [ref=actions]{ min-height: 8px; border-radius: 0 0 4px 4px; }`,
 
       'exports': {
@@ -2141,14 +2134,21 @@
       'name': 'rm-dialog'
     };
 
-    var index$8 = {
+    var index$7 = {
       'css': `rm-divider,[is="rm-divider"]{ display: block; padding: 8px 0; } rm-divider::after,[is="rm-divider"]::after{ content: ""; top: 8px; height: 1px; left: 0; right: 0; display: block; margin-bottom: -1px; background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-background, 0, 0, 0), var(--color-opacity-tertiary, .12)); } .rm-black-surface rm-divider::after,.rm-black-surface [is="rm-divider"]::after{ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-black, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-dark-surface rm-divider::after,.rm-dark-surface [is="rm-divider"]::after{ background: rgba(255, 255, 255, .12); background: rgba(var(--color-on-dark, 255, 255, 255), var(--color-opacity-tertiary, .12)); } .rm-light-surface rm-divider::after,.rm-light-surface [is="rm-divider"]::after{ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-light, 0, 0, 0), var(--color-opacity-tertiary, .12)); } .rm-white-surface rm-divider::after,.rm-white-surface [is="rm-divider"]::after{ background: rgba(0, 0, 0, .12); background: rgba(var(--color-on-white, 0, 0, 0), var(--color-opacity-tertiary, .12)); } rm-divider[inset]:not([inset="false"])::after,[is="rm-divider"][inset]:not([inset="false"])::after{ left: 72px; }`,
       'exports': null,
       'template': null,
       'name': 'rm-divider'
     };
 
-    var rmDivider = index$8;
+    var rmDivider = index$7;
+
+    var index$8 = {
+      'css': `rm-list-avatar,[is="rm-list-avatar"]{ display: block; height: 40px; width: 40px; background: gray; } rm-list-avatar[circular],[is="rm-list-avatar"][circular]{ border-radius: 50%; }`,
+      'exports': null,
+      'template': null,
+      'name': 'rm-list-avatar'
+    };
 
     var index$9 = {
       'css': `rm-list-item,[is="rm-list-item"]{ outline: none; display: block; padding: .5em 1em; line-height: 1.5em; cursor: pointer; user-select: none; } rm-list-item rm-icon,[is="rm-list-item"] rm-icon,rm-list-item .material-icons,[is="rm-list-item"] .material-icons{ margin-right: 16px; } rm-list-item rm-button,[is="rm-list-item"] rm-button{ margin: -8px; vertical-align: top; } rm-list-item.selected,[is="rm-list-item"].selected{ color: rgb(139, 0, 139); color: rgb(var(--color-primary, 139, 0, 139)); } rm-list-item[passive],[is="rm-list-item"][passive]{ cursor: default; }`,
@@ -5406,10 +5406,11 @@
     // register("rm-bottom-sheet", BottomSheetComponent);
     riot.register("rm-button", index$3);
     riot.register("rm-checkbox", index$4);
-    riot.register("rm-circular-avatar", index$5);
-    riot.register("rm-dialog", index$7);
+    // register("rm-circular-avatar", CircularAvatarComponent);
+    riot.register("rm-dialog", index$6);
     riot.register("rm-divider", rmDivider);
     riot.register("rm-icon", index$2);
+    riot.register("rm-list-avatar", index$8);
     riot.register("rm-list-group", index$a);
     riot.register("rm-list-image", index$b);
     riot.register("rm-list-item", index$9);
@@ -5430,10 +5431,11 @@
         // bottomSheet: BottomSheetComponent,
         button: index$3,
         checkbox: index$4,
-        circularAvatar: index$5,
-        dialog: index$7,
+        // circularAvatar: CircularAvatarComponent,
+        dialog: index$6,
         divider: rmDivider,
         icon: index$2,
+        listAvatar: index$8,
         listGroup: index$a,
         listImage: index$b,
         listItem: index$9,
@@ -5455,7 +5457,7 @@
     exports.components = components;
     exports.elevation = dist;
     exports.ripple = index_es;
-    exports.surfaces = index$6;
+    exports.surfaces = index$5;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
