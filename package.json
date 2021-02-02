@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Riot.js implementation of Material Design",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -24,17 +24,17 @@
     "@riot-material/rm-menu": "^1.0.5",
     "@riot-material/rm-menu-item": "^1.0.1",
     "@riot-material/rm-radio": "^1.0.2",
-    "@riot-material/rm-select": "^1.5.0",
+    "@riot-material/rm-select": "^1.5.1",
     "@riot-material/rm-tabbed-pages": "^1.0.4",
     "@riot-material/rm-textfield": "^1.1.0",
     "@riot-material/rm-textfield-container": "^1.0.4",
     "@riot-material/surfaces": "^1.0.0",
-    "riot": "^5.1.4"
+    "riot": "^5.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.1.1",
-    "rollup": "^2.38.2",
+    "rollup": "^2.38.4",
     "rollup-plugin-terser": "^7.0.2"
   },
   "keywords": [
