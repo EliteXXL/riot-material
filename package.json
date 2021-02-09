@@ -1,6 +1,6 @@
 {
   "name": "riot-material",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Riot.js implementation of Material Design",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
