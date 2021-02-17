@@ -4130,14 +4130,10 @@
 
     var dist$2 = positionController;
 
-    function _interopDefaultLegacy$2 (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var positionController__default = /*#__PURE__*/_interopDefaultLegacy$2(dist$2);
-
     const PAGE_INDEX = Symbol("page-index");
 
     var index$h = {
-      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; overflow: hidden; position: relative; width: 1px; height: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div > button,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div > button{ background-color: transparent; border: 0; padding: 12px 16px; font-size: 16px; line-height: 20px; height: 100%; width: 100%; cursor: pointer; outline: none; color: rgb(0, 0, 0); color: rgb(var(--color-on-background, 0, 0, 0)); } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; white-space: initial; }`,
+      'css': `rm-tabbed-pages,[is="rm-tabbed-pages"]{ white-space: nowrap; overflow: hidden; width: 100%; display: block; font-size: 0; transform: scaleY(1); } rm-tabbed-pages > div:first-child,[is="rm-tabbed-pages"] > div:first-child{ overflow: hidden; display: block; width: 100%; } rm-tabbed-pages > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child{ display: block; width: 100%; overflow: auto visible; position: relative; user-select: none; text-align: center; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child{ display: inline-table; font-size: initial; text-align: center; } rm-tabbed-pages:not([centered]) > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"]:not([centered]) > div:first-child > div:first-child > div:first-child,rm-tabbed-pages[centered="false" i] > div:first-child > div:first-child > div:first-child,[is="rm-tabbed-pages"][centered="false" i] > div:first-child > div:first-child > div:first-child{ width: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div{ display: table-cell; overflow: hidden; position: relative; width: 1px; height: 100%; } rm-tabbed-pages > div:first-child > div:first-child > div:first-child > div > button,[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:first-child > div > button{ background-color: transparent; border: 0; padding: 12px 16px; font-size: 16px; line-height: 20px; height: 100%; width: 100%; cursor: pointer; outline: none; color: rgb(0, 0, 0); color: rgb(var(--color-on-background, 0, 0, 0)); } rm-tabbed-pages > div:first-child > div:first-child > div:nth-child(2),[is="rm-tabbed-pages"] > div:first-child > div:first-child > div:nth-child(2){ position: absolute; bottom: 0; left: 0; height: 2px; width: 1px; transition: transform ease-in-out 200ms; transform-origin: left; background: rgb(139, 0, 139); background: rgb(var(--color-primary, 139, 0, 139)); } rm-tabbed-pages > div:nth-child(2),[is="rm-tabbed-pages"] > div:nth-child(2){ overflow: hidden; max-height: 21474836px; transition: transform ease-in-out 200ms; } rm-tabbed-pages > div:nth-child(2) > *,[is="rm-tabbed-pages"] > div:nth-child(2) > *{ display: inline-block; width: 100%; vertical-align: top; transition: transform ease-in-out 200ms; font-size: initial; white-space: initial; }`,
 
       'exports': {
         onMounted() {
@@ -4155,7 +4151,7 @@
                 window.requestAnimationFrame(frame);
             };
             window.requestAnimationFrame(frame);
-            positionController__default['default'](this.root.children[1])
+            dist$2(this.root.children[1])
             .setSelectedIndex(this.getSelectedIndex())
             .on("positionchanged", event => this.update({ instant: true }))
             .on("positionapplied", event => {
@@ -4197,7 +4193,7 @@
             this._hiddenTabs = [];
             this.slots.forEach((slot, index) => {
                 if (slot.bindings.some(binding => {
-                    if (binding.type !== 1 || binding.evaluate(Object.create(this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]))) {
+                    if (binding.type !== 1 || binding.evaluate(Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]))) {
                         return false;
                     }
 
@@ -4206,11 +4202,11 @@
                     if (page && page[PAGE_INDEX] === index) {
                         tabContainer.removeChild(tabContainer.children[updatedIndex]);
                         // unmount page at hidden index
-                        const instance = page[riot__default['default'].__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                        const instance = page[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                         if (instance != null) {
                             instance.unmount(
-                                Object.create(this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]),
-                                this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]
+                                Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                                this[riot.__.globals.PARENT_KEY_SYMBOL]
                             );
                         }
                         pageContainer.removeChild(page);
@@ -4240,6 +4236,7 @@
                 page.style.transition = this.state.instant || updatedSelectedIndex !== currentlySelectedIndex ? "none" : "";
                 page.style.transform = "translateX(-" + ((updatedSelectedIndex + this.getPosition()) * 100) + "%)";
                 page.style.visibility = updatedSelectedIndex === updatedIndex ? "visible" : "hidden";
+                page.style.maxHeight = updatedSelectedIndex === updatedIndex ? "" : "0px";
 
                 if (tabButton != null) {
                     const button = tabButton.appendChild(document.createElement("button"));
@@ -4247,18 +4244,18 @@
                         this.setSelectedIndex(this._getUpdatedIndexOf(index));
                     });
                     button.innerText = slot.id;
-                    ripple$1.ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
+                    ripple(button, { detectLabel: false, color: "currentColor", instantHighlight: true });
                 }
             });
             const newlySelectedIndex = this._getUpdatedIndexOf(currentlyRawSelectedIndex);
             if (currentlySelectedIndex !== newlySelectedIndex) {
                 this.state.selectedIndex = newlySelectedIndex;
-                positionController__default['default'](this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
+                dist$2(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
                 this._updateIndicator(true);
             }
 
             // update positionController length
-            positionController__default['default'](this.root.children[1]).setLength(this.getLength());
+            dist$2(this.root.children[1]).setLength(this.getLength());
 
             // set indicator to correct position and size
             this._updateIndicator(!update || this.state.instant);
@@ -4275,17 +4272,17 @@
                 const selectedIndex = this.getSelectedIndex();
                 const slot = this._getSlotAt(selectedIndex);
                 const el = pageContainer.children[selectedIndex];
-                let instance = el[riot__default['default'].__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
+                let instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY];
                 if (instance == null) {
-                    instance = el[riot__default['default'].__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot__default['default'].__.DOMBindings.template(slot.html, slot.bindings);
+                    instance = el[riot.__.globals.DOM_COMPONENT_INSTANCE_PROPERTY] = riot.__.DOMBindings.template(slot.html, slot.bindings);
                     instance.mount(
-                        el, Object.create(this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]),
-                        this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]
+                        el, Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                        this[riot.__.globals.PARENT_KEY_SYMBOL]
                     );
                 } else if (update && !this.state.skipUpdate) {
                     instance.update(
-                        Object.create(this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]),
-                        this[riot__default['default'].__.globals.PARENT_KEY_SYMBOL]
+                        Object.create(this[riot.__.globals.PARENT_KEY_SYMBOL]),
+                        this[riot.__.globals.PARENT_KEY_SYMBOL]
                     );
                 }
             }
@@ -4352,7 +4349,7 @@
                 return;
             }
             this.update({ selectedIndex: index });
-            positionController__default['default'](this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
+            dist$2(this.root.children[1]).setSelectedIndex(this.getSelectedIndex());
         },
 
         _getIndicatorLeft() {
@@ -4417,11 +4414,16 @@
         },
 
         getPosition() {
-            return positionController__default['default'](this.root.children[1]).getPosition();
+            return dist$2(this.root.children[1]).getPosition();
         }
       },
 
-      'template': function(template, expressionTypes, bindingTypes, getComponent) {
+      'template': function(
+        template,
+        expressionTypes,
+        bindingTypes,
+        getComponent
+      ) {
         return template(
           '<div style="transform: scaleY(1);"><div><div></div><div></div></div></div><div></div>',
           []
@@ -4430,8 +4432,6 @@
 
       'name': 'rm-tabbed-pages'
     };
-
-    var dist$3 = index$h;
 
     const VALUE = Symbol("value");
     const IS_MOUNTED = Symbol("is-mounted");
@@ -4900,7 +4900,7 @@
     riot.register("rm-radio", index$e);
     // register("rm-ripple", RippleComponent);
     riot.register("rm-select", index$g);
-    riot.register("rm-tabbed-pages", dist$3);
+    riot.register("rm-tabbed-pages", index$h);
     // register("rm-tabs", TabsComponent);
     // register("rm-textarea", TextareaComponent);
     riot.register("rm-textfield", index$i);
@@ -4925,7 +4925,7 @@
         radio: index$e,
         // ripple: RippleComponent,
         select: index$g,
-        tabbedPages: dist$3,
+        tabbedPages: index$h,
         // tabs: TabsComponent,
         // textarea: TextareaComponent,
         textfield: index$i,
