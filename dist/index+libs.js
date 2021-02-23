@@ -4954,7 +4954,7 @@
     const IS_MOUNTED = Symbol("is-mounted");
 
     var index$i = {
-      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled],rm-textfield[readonly],[is="rm-textfield"][readonly],rm-textfield[disabled] input,[is="rm-textfield"][disabled] input,rm-textfield[readonly] input,[is="rm-textfield"][readonly] input{ cursor: default; } rm-textfield .rm-textfield--input,[is="rm-textfield"] .rm-textfield--input{ display: inline-block; font: inherit; padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; opacity: 0; transition: opacity linear 150ms; } rm-textfield .rm-textfield--input-focused,[is="rm-textfield"] .rm-textfield--input-focused{ opacity: 1; } rm-textfield .rm-textfield--input-wrap,[is="rm-textfield"] .rm-textfield--input-wrap{ height: 1.25em; overflow: hidden; display: inline-block; vertical-align: top; width: 100px; } rm-textfield[full-width] .rm-textfield--input-wrap,[is="rm-textfield"][full-width] .rm-textfield--input-wrap{ width: 100%; }`,
+      'css': `rm-textfield,[is="rm-textfield"]{ cursor: text; } rm-textfield[disabled],[is="rm-textfield"][disabled],rm-textfield[readonly],[is="rm-textfield"][readonly],rm-textfield[disabled] input,[is="rm-textfield"][disabled] input,rm-textfield[readonly] input,[is="rm-textfield"][readonly] input{ cursor: default; } rm-textfield .rm-textfield--input,[is="rm-textfield"] .rm-textfield--input{ display: inline-block; font: inherit; padding: 0; font-size: inherit; line-height: inherit; border: 0; background: none; outline: none; width: 100%; color: currentColor; opacity: 0; transition: opacity linear 150ms; } rm-textfield .rm-textfield--input-visible,[is="rm-textfield"] .rm-textfield--input-visible{ opacity: 1; } rm-textfield .rm-textfield--input-wrap,[is="rm-textfield"] .rm-textfield--input-wrap{ height: 1.25em; overflow: hidden; display: inline-block; vertical-align: top; width: 100px; } rm-textfield[full-width] .rm-textfield--input-wrap,[is="rm-textfield"][full-width] .rm-textfield--input-wrap{ width: 100%; }`,
 
       'exports': {
         [IS_MOUNTED]: false,
@@ -5156,7 +5156,7 @@
                           ) {
                             return [
                               'rm-textfield--input',
-                              scope.state.focused ? ' rm-textfield--input-focused' : ''
+                              scope.state.focused || scope.root.value ? ' rm-textfield--input-visible' : ''
                             ].join(
                               ''
                             );
