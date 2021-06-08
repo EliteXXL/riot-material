@@ -23,7 +23,7 @@ import * as appBarUtils from '@riot-material/app-bar-utils';
 export { appBarUtils };
 import { register } from 'riot';
 
-var index = {
+var index$2 = {
   'css': `rm-list-avatar,[is="rm-list-avatar"]{ display: block; height: 40px; width: 40px; background: gray; } rm-list-avatar[circular],[is="rm-list-avatar"][circular]{ border-radius: 50%; }`,
   'exports': null,
   'template': null,
@@ -82,7 +82,7 @@ var index$1 = {
   'name': 'rm-list-group'
 };
 
-var index$2 = {
+var index = {
   'css': `rm-list-image,[is="rm-list-image"]{ display: block; height: 56px; width: 56px; background: gray; } rm-list-image[large],[is="rm-list-image"][large]{ width: 100px; margin-left: -16px; }`,
   'exports': null,
   'template': null,
@@ -272,9 +272,9 @@ register("rm-checkbox", CheckboxComponent);
 register("rm-dialog", DialogComponent);
 register("rm-divider", DividerComponent);
 register("rm-icon", IconComponent);
-register("rm-list-avatar", index);
+register("rm-list-avatar", index$2);
 register("rm-list-group", index$1);
-register("rm-list-image", index$2);
+register("rm-list-image", index);
 register("rm-list-item", ListItemComponent);
 register("rm-menu", MenuComponent);
 register("rm-menu-item", MenuItemComponent);
@@ -297,9 +297,9 @@ const components = {
     dialog: DialogComponent,
     divider: DividerComponent,
     icon: IconComponent,
-    listAvatar: index,
+    listAvatar: index$2,
     listGroup: index$1,
-    listImage: index$2,
+    listImage: index,
     listItem: ListItemComponent,
     menu: MenuComponent,
     menuItem: MenuItemComponent,
